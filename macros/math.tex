@@ -1,0 +1,282 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%   Identification
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\NeedsTeXFormat{LaTeX2e}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%   Preliminary declarations
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\RequirePackage{bm} % correct bold symbols, like \bm
+%\RequirePackage{amsmath}
+%\RequirePackage{amsfonts}
+%\RequirePackage{amssymb}
+%\RequirePackage{mathrsfs}
+%\RequirePackage{dsfont} % double stroke symbols like IR
+%\RequirePackage[single]{accents} % own accents 
+%\RequirePackage{exscale} % Scaling of Math Symbols?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%   Options
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%   More declarations
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%------------------------------------------------------------
+% Mathematical Formulae
+%------------------------------------------------------------
+\newcommand{\rv}[1]{\ensuremath{{\boldsymbol{#1}}}}
+\renewcommand{\vec}[1]{\ensuremath{{\underline{#1}}}}
+\newcommand{\rvec}[1]{\ensuremath{{\boldsymbol{\underline{#1}}}}}
+\newcommand{\mat}[1]{{\ensuremath{{\mathbf{#1}}}}}
+
+\newcommand{\Menge}[1]{{\mathcal{#1}}}
+\newcommand{\SquareRoot}[1]{{\mbox{\bfseries\sffamily #1}}}
+\newcommand{\MatrixMenge}[2]{{\mathcal{M}}_{#1#2}}
+\newcommand{\intndim}{\ds\int_{-\infty}^\infty \dots \int_{-\infty}^\infty}
+\newcommand{\Eye}{\mat{I}}
+
+% operators (in alphabetical order):
+\renewcommand{\arg}{\operatorname*{arg}}
+%\DeclareMathOperator*{\argmin}{arg\,min}
+%\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\argmin}[1]{\mathop{\mathrm{arg}\; \min_{#1}}}
+\newcommand{\argmax}[1]{\mathop{\mathrm{arg}\; \max_{#1}}}
+\DeclareMathOperator{\col}{col}
+\newcommand{\dd}{\operatorname{d}\!}
+%\def\d{\ensuremath{\operatorname{d}}} % for \int f(x)\d x or \d y / \d y
+%\renewcommand{\d}{\ensuremath{\text{d}}}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Proj}{proj}
+\renewcommand{\Pr}{\operatorname{Pr}} 
+\DeclareMathOperator{\rang}{rang}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\jj}{j}% complex unit
+\DeclareMathOperator{\rect}{rect}
+\def\T{^\mathrm{T}} % transpose
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator*{\Var}{Var} 
+\renewcommand{\arctan}{\operatorname{arctan}}
+\newcommand{\atann}{\operatorname{arctan2}}
+%\DeclareMathOperator{\atan}{atan}
+\def\atan2{\operatorname{atan2}}
+\DeclareMathOperator{\pot}{pot}
+
+\newcommand{\MatrixTyp}[2]{\Menge{M}_{#1, #2}}
+\newcommand{\FromTo}[2]{$#1 = 1,\, \ldots,\, #2$}
+\newcommand{\LMInd}{{\operatorname{LM}}}
+
+%---------------------------------------------------------------------
+% Abbreviations
+%---------------------------------------------------------------------
+
+\def\({\left(}
+\def\){\right)}
+\def\[{\left[}
+\def\]{\right]}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\ns}{\textstyle}
+
+\newcommand{\NewB}{\ensuremath{\mathds{R}}}
+\newcommand{\NewC}{\ensuremath{\mathds{C}}}
+\newcommand{\NewN}{\ensuremath{\mathds{N}}}
+\newcommand{\NewQ}{\ensuremath{\mathds{Q}}}
+\newcommand{\NewR}{\ensuremath{\mathds{R}}}
+\newcommand{\NewZ}{\ensuremath{\mathds{Z}}}
+\newcommand{\IR}{\NewR}
+\newcommand{\IN}{\NewN}
+\newcommand{\IZ}{\NewZ}
+\newcommand{\IC}{\NewC}
+
+\newcommand{\Gauss}{{\mathcal{N}}}
+
+\setcounter{MaxMatrixCols}{20} %Fuer ams umgebung
+
+
+%--------------------------------------------------------------------------
+%Einheiten mit korrekten Leerzeichen
+%Usage: \Meter{\micro}{10} results $10\mu m$ 
+\newcommand{\Meter}[2][]{\unit{#2}#1\meter} 
+\newcommand{\Volt}[2][]{\unit{#2}#1\volt} 
+\newcommand{\Hertz}[2][]{\unit{#2}#1\hertz} 
+\newcommand{\Second}[2][]{\unit{#2}#1\second} 
+\newcommand{\Pascal}[2][]{\unit{#2}#1\pascal} 
+\newcommand{\Euro}[2][]{\unit{#2}#1\euro}
+
+\newcommand{\nm}[1] {\Meter[\nano]{#1}}
+\newcommand{\mum}[1]{\Meter[\micro]{#1}}
+\newcommand{\mm}[1] {\Meter[\milli]{#1}}
+\newcommand{\cm}[1] {\Meter[\centi]{#1}}
+\newcommand{\mV}[1] {\Volt[\milli]{#1}}
+\newcommand{\ms}[1] {\Second[\milli]{#1}}
+\newcommand{\KHz}[1] {\Hertz[\kilo]{#1}}
+
+%--------------------------- Operators ---------------------------
+\def\TJ{(TJ)}
+\def\TkJ{(T^kJ)}
+\def\TJp{(T_\pi J)}
+\def\TkJp{(T_\pi^k J)}
+\def\vTJ{T  \vec J}
+\def\vTkJ{T^k\vec J}
+\def\vTJp{T_\pi \vec J}
+\def\vTkJp{T_\pi^k \vec J}
+
+%------------------------ Random variables ---------------------------
+\def\v{\rv v}
+\def\w{\rv w}
+\def\x{\rv x}
+\def\y{\rv y}
+\def\z{\rv z}
+
+%---------------------------- Vectors --------------------------------
+\def\vdel{\vec \delta}
+\def\veta{\vec \eta}
+\def\vOmega{\vec \Omega}
+\def\vsig{\vec \sigma}
+\def\va{\vec a}
+\def\vb{\vec b}
+\def\vc{\vec c}
+\def\ve{\vec e}
+\def\vg{\vec g}
+\def\vh{\vec h}
+\def\vmu{\vec \mu}
+\def\vn{\vec n}
+\def\vpi{\vec \pi}
+\def\vu{\vec u}
+\def\vv{\vec v}
+\def\vw{\vec w}
+\def\vx{\vec x}
+\def\vy{\vec y}
+\def\vz{\vec z}
+\def\vxi{\vec \xi}
+\def\vB{\vec B}
+\def\vF{\vec F}
+\def\vJ{\vec J}
+\def\vM{\vec M}
+\def\vP{\vec P}
+\def\vX{\vec X}
+
+%------------------------- Random vectors ----------------------------
+\def\rvn{\rvec n}
+\def\rvv{\rvec v}
+\def\rvw{\rvec w}
+\def\rvx{\rvec x}
+\def\rvy{\rvec y}
+\def\rvz{\rvec z}
+\def\rvhz{\rvec{\hat z}}
+\def\rvxi{\rvec \xi}
+\def\rvX{\rvec X}
+
+%---------------------------- Matrices -------------------------------
+\def\A{\mat A}
+\def\B{\mat B}
+\def\C{\mat C}
+\def\D{\mat D}
+\def\mE{\mat E}
+\def\F{\mat F}
+\def\H{\mat H}
+\def\I{\mat I}
+\def\K{\mat K}
+\def\L{\mat L}
+\def\M{\mat M}
+\def\P{\mat P}
+\def\Q{\mat Q}
+\def\R{\mat R}
+\def\V{\mat V}
+\def\W{\mat W}
+
+%------------------------------ Mean ---------------------------------
+\def\ha{\hat a}
+\def\hv{\hat v}
+\def\hw{\hat w}
+\def\hx{\hat x}
+\def\hy{\hat y}
+\def\hz{\hat z}
+\def\hva{\hat{\vec a}}
+\def\hvv{\hat{\vec v}}
+\def\hvw{\hat{\vec w}}
+\def\hvx{\hat{\vec x}}
+\def\hvy{\hat{\vec y}}
+\def\hvz{\hat{\vec z}}
+\def\hvX{\hat{\vec X}}
+
+%------------------------------ Sets ---------------------------------
+\def\SA{\mathcal A}
+\def\SB{\mathcal B}
+\def\SE{\mathcal E}
+\def\SF{\mathcal F}
+\def\SG{\mathcal G}
+\def\SI{\mathcal I}
+\def\SL{\mathcal L}
+\def\SM{\mathcal M}
+\def\SN{\mathcal N}
+\def\SO{\mathcal O}
+\def\SP{\mathcal P}
+\def\SS{\mathcal S}
+\def\SU{\mathcal U}
+\def\SV{\mathcal V}
+\def\SW{\mathcal W}
+\def\SX{\mathcal X}
+\def\SY{\mathcal Y}
+\def\SZ{\mathcal Z}
+
+%------------------------------ Misc ---------------------------------
+\def\ii{^{(i)}}
+\def\ij{^{(j)}}
+\def\G{G(\veta, \gamma)}
+
+%--------------------------- Densities -------------------------------
+\def\fc{\tilde f(y|x)}
+\def\fvc{\tilde f(\vy|\vx)}
+\def\fcxy{f(x|y)}
+\def\fcvxy{f(\vx|\vy)}
+\def\fcyx{f(y|x)}
+\def\fcvyx{f(\vy|\vx)}
+\def\fija{f_{ij}(a)}
+\def\fijak{f_{ij}^k(a)}
+\def\fh{f(y, x; \veta)}
+\def\fvh{f(\vy, \vx; \veta)}
+\def\fkex{f_k^e(x_k)}
+\def\fkevx{f_k^e(\vx_k)}
+\def\fkpx{f_{k}^p(x_{k})}
+\def\fkkpx{f_{k+1}^p(x_{k+1})}
+\def\fkpvx{f_{k}^p(\vx_{k})}
+\def\fkkpvx{f_{k+1}^p(\vx_{k+1})}
+\def\ftxa{f(x_{k+1}|x_k, a_k)}
+\def\ftvxa{f(\vx_{k+1}|\vx_k, \va_k)}
+\def\fkv{f_k^v(v_k)}
+\def\fkvv{f_k^v(\vv_k)}
+\def\fkw{f_k^w(w_k)}
+\def\fkvw{f_k^w(\vw_k)}
+\def\fnex{f_n^e(x_n)}
+\def\fnevx{f_n^e(\vx_n)}
+\def\fnpx{f_{n}^p(x_{n})}
+\def\fnnpx{f_{n+1}^p(x_{n+1})}
+\def\fnpvx{f_{n}^p(\vx_{n})}
+\def\fnnpx{f_{n+1}^p(\vx_{n+1})}
+\def\fx{f(x)}
+\def\fxy{f(x,y)}
+\def\fvx{f(\vx)}
+\def\fvxy{f(\vx,\vy)}
+\def\fy{f(y)}
+\def\fvy{f(\vy)}
+
+%--------------------------- Distributions ---------------------------
+\def\Fc{\tilde{F}(y|x)}
+\def\Fh{F(y, x; \veta)}

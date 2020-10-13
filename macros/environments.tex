@@ -1,0 +1,33 @@
+
+%------------------------------ Theorems ------------------------------------
+\theoremheaderfont{\normalfont\bfseries\sffamily}
+\theoremstyle{plain}
+{\theorembodyfont{\itshape} \newtheorem{theorem}     {Satz}[chapter]}
+{\theorembodyfont{\itshape} \newtheorem{lemma}       {Lemma}[chapter]}
+{\theorembodyfont{\itshape}\newtheorem{corollary}   {Korollar}[chapter]}
+%{\theorembodyfont{\sffamily}\newtheorem{example}     {Beispiel}[chapter]}
+{\theorembodyfont{\normalfont} \newtheorem{remark}      {\sffamily Remark}[chapter]}
+{\theorembodyfont{\itshape}\newtheorem{definition}  {Definition}[chapter]}
+{\theorembodyfont{\itshape}\newtheorem{axiom}  {Axiom}[chapter]}
+%\theoremheaderfont{\scshape\normalsize}
+%\theoremstyle{plain}
+%{\theorembodyfont{\normalfont\small} \newtheorem{Proof}	{Proof}}
+\newenvironment{proof}
+{\noindent{\scshape Beweis.}}
+{\hspace*{\fill}$\square$\bigskip}
+
+\makeatletter 
+\def\ifEmpty#1{\def\@temp{#1}\ifx\@temp\@empty} 
+\makeatother
+
+\newcounter{example}[chapter]
+\renewcommand{\theexample}{\thechapter.\arabic{example}}
+\newenvironment{example}[1][]
+{\refstepcounter{example}\par\bigskip\noindent%
+   {\normalfont\bfseries\sffamily Beispiel~\theexample~\ifEmpty{#1}\else(#1)\fi} \sffamily}
+{\hspace*{\fill}$\blacksquare$\smallskip\smallskip}
+
+\newenvironment{principle}[1][]
+{\par\bigskip\noindent%
+   {\normalfont\bfseries\sffamily \ifEmpty{#1}\else#1\fi} \itshape}
+{\smallskip\smallskip}

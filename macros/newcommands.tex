@@ -1,0 +1,16 @@
+\algrenewcommand{\algorithmiccomment}[1]{\hfill// #1}
+
+\newcommand{\emphc}[1]{\comment{\normalfont\marginfont #1}\emph{#1}}
+
+% Hervorheben & Index
+\newcommand{\emphi}[2][]{%
+	\emph{#2}%
+	\ifthenelse{\isempty{#1}}{\index{#2}}{\index{#1}}%
+}
+
+% Hervorheben, Index & Marginalkommentar
+\newcommand{\emphci}[2][]{%
+	\comment{\normalfont\marginfont #2}%
+	\emph{#2}%
+	\ifthenelse{\isempty{#1}}{\index{#2}}{\index{#1}}%
+}
