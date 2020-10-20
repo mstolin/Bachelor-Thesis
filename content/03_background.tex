@@ -1,0 +1,50 @@
+\chapter{Background}
+\label{sec:demo}
+%
+In this chapter bla bla
+
+\section{Autonomic computing}
+Autonomic computing is an architecture for computing systems to enable the ability to manage themselves in accordance to high level objectives configured by administrators \cite{Kephart2003VisionComputing}. 
+These computing systems dynamically adapt to demands and conditions of the workload \cite{Kephart2003VisionComputing}.
+The four main attributes of autonomic computing are self-configuring, self-healing, self-optimizing and self-protecting  \
+. The autonomic computing architecture consists of an autonomic manager and managed resources.
+% Autonomic manager, managed resources and knowledge source <- the architecture
+
+\subsection{Autonomic manager}
+The autonomic manager implements an intelligent control-loop to collect system metrics and acts according to the collected details. It can only make adjustments within it`s own scope and uses policies to make decisions of what actions have to be
+executed to accommodate the objectives.
+To be self-managing, the autonomic manager has to implement the following four automated functions.
+
+\begin{enumerate}
+\item \textbf{Monitor}
+- The monitor function is responsible to collect the needed metrics from all managed resources and applies aggregation and filter
+operations to the collected data. After that the function reports the metrics.
+
+\item \textbf{Analyze}
+- To determine if changes have to be made to the computing system, the collected data has to be analyzed.
+
+\item \textbf{Plan}
+- If changes have to be made, an appropriate change plan has to be generated. A change plan consists of actions that are needed to achieve the configured goals and objectives. The change plan needs to be forwarded to the execute function.
+
+\item \textbf{Execute}
+- The execute function applies all necessary changes to the computing system.
+
+\end{enumerate}
+
+Multiple autonomic manager can exist in an autonomic computing environment to perform only certain parts. For example, 
+there can be one autonomic manager which is responsible to monitor and analyze the system and another autonomic manager 
+to plan and execute. To create a complete and closed control-loop multiple autonomic manager can be composed together.
+
+\section{Docker}
+
+
+\section{Apache Spark}
+
+
+\section{Prometheus}
+
+
+\section{NVIDIA RAPIDS}
+
+
+\section{Gitlab CI/CD}
