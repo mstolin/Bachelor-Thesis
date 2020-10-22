@@ -6,9 +6,19 @@
 \contentsline {chapter}{\numberline {2}Related Work}{3}{chapter.2}% 
 \contentsline {chapter}{\numberline {3}Background}{5}{chapter.3}% 
 \contentsline {section}{\numberline {3.1}Autonomic computing}{5}{section.3.1}% 
-\contentsline {subsection}{\numberline {3.1.1}Autonomic manager}{5}{subsection.3.1.1}% 
+\contentsline {subsection}{\numberline {3.1.1}Managed resources}{5}{subsection.3.1.1}% 
+\contentsline {subsection}{\numberline {3.1.2}Autonomic manager}{6}{subsection.3.1.2}% 
 \contentsline {section}{\numberline {3.2}Docker}{6}{section.3.2}% 
 \contentsline {section}{\numberline {3.3}Apache Spark}{6}{section.3.3}% 
-\contentsline {section}{\numberline {3.4}Prometheus}{6}{section.3.4}% 
-\contentsline {section}{\numberline {3.5}NVIDIA RAPIDS}{6}{section.3.5}% 
-\contentsline {section}{\numberline {3.6}Gitlab CI/CD}{6}{section.3.6}% 
+\contentsline {subsection}{\numberline {3.3.1}Spark programming model}{7}{subsection.3.3.1}% 
+\contentsline {paragraph}{Resilient distributed datasets:}{7}{paragraph*.5}% 
+\contentsline {paragraph}{Spark structured API:}{7}{paragraph*.6}% 
+\contentsline {paragraph}{Spark Catalyst:}{8}{paragraph*.7}% 
+\contentsline {paragraph}{Structured API execution}{8}{paragraph*.8}% 
+\contentsline {subsection}{\numberline {3.3.2}Cluster modes}{8}{subsection.3.3.2}% 
+\contentsline {subsection}{\numberline {3.3.3}Spark application implementation}{8}{subsection.3.3.3}% 
+\contentsline {section}{\numberline {3.4}Prometheus}{8}{section.3.4}% 
+\contentsline {section}{\numberline {3.5}NVIDIA RAPIDS}{8}{section.3.5}% 
+\contentsline {section}{\numberline {3.6}Gitlab CI/CD}{8}{section.3.6}% 
+\contentsline {section}{\numberline {3.7}K-MEANS}{8}{section.3.7}% 
+\contentsline {section}{\numberline {3.8}Naive Bayes Classifier}{8}{section.3.8}% 
