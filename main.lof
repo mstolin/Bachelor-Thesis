@@ -2,3 +2,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite {Hien2018Spark}.\relax }}{8}{figure.caption.8}% 
+\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces Overview of a Spark cluster architecture - Source: Authors own model, based on \cite {Apache2020Spark}.\relax }}{8}{figure.caption.9}% 
+\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Spark`s cluster mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{9}{figure.caption.13}% 
+\contentsline {figure}{\numberline {\relax 3.4}{\ignorespaces Spark`s client mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{10}{figure.caption.14}% 

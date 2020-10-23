@@ -14,11 +14,16 @@
 \contentsline {paragraph}{Resilient distributed datasets:}{7}{paragraph*.5}% 
 \contentsline {paragraph}{Spark structured API:}{7}{paragraph*.6}% 
 \contentsline {paragraph}{Spark Catalyst:}{8}{paragraph*.7}% 
-\contentsline {paragraph}{Structured API execution}{8}{paragraph*.8}% 
-\contentsline {subsection}{\numberline {3.3.2}Cluster modes}{8}{subsection.3.3.2}% 
-\contentsline {subsection}{\numberline {3.3.3}Spark application implementation}{8}{subsection.3.3.3}% 
-\contentsline {section}{\numberline {3.4}Prometheus}{8}{section.3.4}% 
-\contentsline {section}{\numberline {3.5}NVIDIA RAPIDS}{8}{section.3.5}% 
-\contentsline {section}{\numberline {3.6}Gitlab CI/CD}{8}{section.3.6}% 
-\contentsline {section}{\numberline {3.7}K-MEANS}{8}{section.3.7}% 
-\contentsline {section}{\numberline {3.8}Naive Bayes Classifier}{8}{section.3.8}% 
+\contentsline {subsection}{\numberline {3.3.2}Spark application architecture}{8}{subsection.3.3.2}% 
+\contentsline {paragraph}{Spark driver:}{8}{paragraph*.10}% 
+\contentsline {paragraph}{Spark Executor:}{9}{paragraph*.11}% 
+\contentsline {paragraph}{Cluster manager:}{9}{paragraph*.12}% 
+\contentsline {subsection}{\numberline {3.3.3}Spark application implementation}{10}{subsection.3.3.3}% 
+\contentsline {subsection}{\numberline {3.3.4}spark-submit}{11}{subsection.3.3.4}% 
+\contentsline {section}{\numberline {3.4}Prometheus}{11}{section.3.4}% 
+\contentsline {section}{\numberline {3.5}NVIDIA RAPIDS}{11}{section.3.5}% 
+\contentsline {section}{\numberline {3.6}Gitlab CI/CD}{11}{section.3.6}% 
+\contentsline {section}{\numberline {3.7}K-MEANS}{11}{section.3.7}% 
+\contentsline {section}{\numberline {3.8}Naive Bayes Classifier}{11}{section.3.8}% 
+\contentsline {section}{\numberline {3.9}Scaling heat}{11}{section.3.9}% 
+\contentsline {section}{\numberline {3.10}KHP}{11}{section.3.10}% 
