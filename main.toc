@@ -19,11 +19,15 @@
 \contentsline {paragraph}{Spark Executor:}{9}{paragraph*.11}% 
 \contentsline {paragraph}{Cluster manager:}{9}{paragraph*.12}% 
 \contentsline {subsection}{\numberline {3.3.3}Spark application implementation}{10}{subsection.3.3.3}% 
-\contentsline {subsection}{\numberline {3.3.4}spark-submit}{11}{subsection.3.3.4}% 
+\contentsline {subsection}{\numberline {3.3.4}Spark standalone cluster deployment}{11}{subsection.3.3.4}% 
 \contentsline {section}{\numberline {3.4}Prometheus}{11}{section.3.4}% 
-\contentsline {section}{\numberline {3.5}NVIDIA RAPIDS}{11}{section.3.5}% 
-\contentsline {section}{\numberline {3.6}Gitlab CI/CD}{11}{section.3.6}% 
-\contentsline {section}{\numberline {3.7}K-MEANS}{11}{section.3.7}% 
-\contentsline {section}{\numberline {3.8}Naive Bayes Classifier}{11}{section.3.8}% 
-\contentsline {section}{\numberline {3.9}Scaling heat}{11}{section.3.9}% 
-\contentsline {section}{\numberline {3.10}KHP}{11}{section.3.10}% 
+\contentsline {subsection}{\numberline {3.4.1}Prometheus architecture}{11}{subsection.3.4.1}% 
+\contentsline {paragraph}{Prometheus server:}{11}{paragraph*.17}% 
+\contentsline {paragraph}{Alertmanager}{12}{paragraph*.18}% 
+\contentsline {subsection}{\numberline {3.4.2}Monitoring Docker container}{12}{subsection.3.4.2}% 
+\contentsline {section}{\numberline {3.5}NVIDIA RAPIDS}{12}{section.3.5}% 
+\contentsline {section}{\numberline {3.6}Gitlab CI/CD}{12}{section.3.6}% 
+\contentsline {section}{\numberline {3.7}K-MEANS}{12}{section.3.7}% 
+\contentsline {section}{\numberline {3.8}Naive Bayes Classifier}{12}{section.3.8}% 
+\contentsline {section}{\numberline {3.9}Scaling heat}{12}{section.3.9}% 
+\contentsline {section}{\numberline {3.10}KHP}{12}{section.3.10}% 
