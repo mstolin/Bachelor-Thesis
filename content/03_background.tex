@@ -185,7 +185,7 @@ The local mode starts a Spark application on a single computer \cite{Chambers201
 % Short intro
 The concept of a Spark application consists of calling transformations and actions. A transformation creates a DataFrame or a Dataset, the logical data structures of a Spark application. The computation of a Spark application gets processed when an action gets called in the application. The transformations of a Spark application build up a directed acyclic graph (DAG) of instructions. By calling an action, the DAG will break down into stages and tasks to create a single job for execution \cite{Chambers2018Spark}.
 % Show example application
-\begin{lstlisting}[frame=single, caption=Example of a Python 3 Spark application, captionpos=b]
+\begin{lstlisting}[frame=single, label=lst:spark_python_example, caption=Example of a Python3 Spark application, captionpos=b]
 # Initialize a SparkSession
 sparkSession = SparkSession\
     .builder\
@@ -199,13 +199,92 @@ dataframe = dataframe.filter(dataframe.id % 2 == 0)
 count = dataframe.count()
 \end{lstlisting}
 % Explain a spark application on top of an example
-LISTING XYZ demonstrates how a Spark application can be implemented. At first a SparkSession gets initialized. Each Spark application must include a SparkSession to BLA BLA \cite{Chambers2018Spark}. After that, a DataFrame gets created with the range transformation to include each number from 1 to 1000 in the DataFrame. Next, a filter transformation is applied on the DataFrame to sort out any odd number. At the end, the number of rows gets saved in a variable with the count action.
+\ref{lst:spark_python_example} demonstrates an example implementation of a Spark application. At first a SparkSession gets initialized. Each Spark application must include a SparkSession to initialize the application driver and executors  \cite{Chambers2018Spark}. In Addition, the SparkSession provides an API for data-processing logic and configuration of the Spark application \cite{Hien2018Spark}. After that, a DataFrame gets created with the range transformation to include each number from 1 to 1000 in the DataFrame. Next, a filter transformation is applied on the DataFrame to sort out any odd number. At the end, the number of rows gets saved in a variable with the count action.
+\todo{Create listing macro}
 
 
-\subsection{spark-submit}
+
+% How to submit
+\todo{Tabelle von Luu18 vll als Anhang(Table 2-1 Subdirectories Inside the spark-2.1.1-bin-hadoop2.7 Directory)}
+The Spark framework provides a spark-submit executable to launch a Spark application inside a cluster.
+% Show example submit
+\begin{lstlisting}[frame=single, label=lst:spark_submit_example, caption=Execution of a Spark Python application using the spark-submit executable, captionpos=b]
+$SPARK_HOME/bin/spark-submit \
+    --master spark://spark-master:7077 \
+    application.py
+\end{lstlisting}
+% Explain
+\ref{lst:spark_submit_example} provides an example how the spark-submit executable can be used to launch a Spark Python application.
+
+
+\subsection{Spark standalone cluster deployment}
+% Why only standalone
+\todo{Why only standalone}
+% What is a standalone cluster
+The standalone mode is a basic cluster-manager build specifically for Spark. It is developed to only run Spark but supports workloads at large scale \cite{Chambers2018Spark}.
+
+% How can we create a cluster
+Spark provides build-in scripts to start a master node and worker nodes in standalone mode. ABC demonstrates how a master node and worker node gets launched using the build-in scripts.
+% NE ALTER !, schon erwähnen start-master und start-worker
 
 
 \section{Prometheus}
+% What is Prometheus
+Prometheus is an open-source monitoring and alerting system that stores all data as time-series in a time-series database (TSDB) \cite{Prom2020Docs}. It follows the pull-based approach to scrape metrics from hosts and services \cite{Bastos2019Prom}.
+% What is monitoring and why is it important
+A monitoring system keeps track of the health status of components in a computing cluster. Because of the complexity of modern computing clusters, the effort is to high to observe components manually \cite{Bastos2019Prom}.
+% BESCHREIBEN WAS METRICS SIND UND ALERTS !!!!!
+
+% Pull-based image
+\begin{figure}[h]%
+\centering
+\includegraphics[scale=0.25]{images/03_background/prom_pull-based}%
+\caption{Pull-based approach to scrape metrics - Source: Authors own model, based on \cite{Bastos2019Prom}.}%
+\label{fig:prom_pull-based}%
+\end{figure}
+
+As \Fig{fig:prom_pull-based} demonstrates, a pull-based monitoring system scrapes metrics from services which make metrics available for the monitoring system. In this case, the monitoring system needs a list of all hosts and services to monitor \cite{Bastos2019Prom}.
+
+
+\subsection{Prometheus architecture}
+
+% Architecture image
+\begin{figure}[h]%
+\centering
+\includegraphics[scale=0.25]{images/03_background/prom_architecture}%
+\caption{Prometheus high-level architecture - Source: Authors own model, based on \cite{Prom2020Docs, Bastos2019Prom}.}%
+\label{fig:prom_architecture}%
+\end{figure}
+
+% High level architecture
+\Fig{fig:prom_architecture} illustrates the high-level architecture of Prometheus.
+% Description of components
+The Prometheus ecosystem provides multiple components. Components can be optional, depending on the monitoring needs of the environment \cite{Bastos2019Prom}. The main components of a Prometheus system consist of Prometheus server, Alertmanager, service discovery, exporters and visualization \cite{Prom2020Docs}.
+
+
+\paragraph{Prometheus server:} The Prometheus server is the main component of a Prometheus system. It is responsible to collect metrics as time-series data from targets and stores the collected data in the built-in TSDB. Additionally, the Prometheus server triggers alerts to the Alertmanager if a configured condition becomes true \cite{Prom2020Docs, Bastos2019Prom}.
+
+
+\paragraph{Alertmanager:}
+If an alerting condition becomes true, the Prometheus server generates and alert and pushes it to the Alertmanager. The Alertmanager routes the alert to the specific integration.
+% What is an integration
+An integration
+% Custom integrations
+
+
+\paragraph{Service discovery:}
+As mentioned before, Prometheus follows a pull-based approach to scrap metrics from targets and needs to know about the target hosts and services. ..... Therefore a an automated service-discovery is needed ... % Besser formulieren
+
+
+\paragraph{Exporters:}
+
+
+\paragraph{Visualization:}
+
+
+\subsection{Monitoring Docker container}
+% How can Prometheus be used with Docker (cAdvisor)
+% Auch auf andere Technologien eingehen -> Measuring DockerPerformance What a Mess!!!
 
 
 \section{NVIDIA RAPIDS}
