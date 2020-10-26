@@ -1,4 +1,4 @@
-\babel@toc {ngerman}{}
+\babel@toc {english}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -13,16 +13,8 @@
  ]{scrbook} % Classes: scrartcl, scrreprt, scrbook
 
 % Encoding der Dateien (sonst funktionieren Umlaute nicht)
-% Fuer Linux -> utf8
-% Fuer Windows, alte Linux Distributionen -> latin1
-% Empfohlen latin1, da einige Pakete mit utf8 Zeichen nicht
-% funktionieren, z.B: listings, soul.
-\usepackage[latin1]{inputenc}
 \usepackage{listings}
-%\usepackage[ansinew]{inputenc}
-%\usepackage[utf8]{inputenc}
-%\usepackage{ucs}
-%\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
 
 %%% Preambel
 \input{preambel/settings}
@@ -35,12 +27,8 @@
 \input{macros/newcommands}
 %\input{macros/TableCommands}
 \input{macros/tikz}
-
-
-
 %%% Silbentrennung
 \input{preambel/Hyphenation}
-
 
 %%% Wasserzeichen "Entwurf"
 \draft{%

@@ -5,7 +5,7 @@
 % ========================================================================
 
 % Strukturierung dieser Praeambel:
-%    1.  Pakete die vor anderen geladen werden müssen
+%    1.  Pakete die vor anderen geladen werden mï¿½ssen
 %        (calc, babel, xcolor, graphicx, amsmath, pst-pdf, ragged2e, ...)
 %    2.  Schriften
 %    3.  Mathematik (dsfont, mathtools, fixmath, onlyamsmath, braket,
@@ -55,8 +55,7 @@
 % Languagesetting
 \usepackage[
 %	german,
-	ngerman,
-%	english,
+	english,
 %	french,
 ]{babel}
 
@@ -76,7 +75,7 @@
 ]{graphicx}
 \graphicspath{{./images/}}
 
-% Für Wasserzeichen
+% Fï¿½r Wasserzeichen
 \usepackage{eso-pic}
 
 %%% Doc: ftp://tug.ctan.org/pub/tex-archive/macros/latex/contrib/oberdiek/epstopdf.pdf
@@ -108,7 +107,7 @@
    %fleqn,     % Position equations at a fixed indent from the left margin
    			  % rather than centered in the text column.
 ]{amsmath} %
-% eqnarray nicht zusammen mit amsmath benutzen, siehe l2tabu.pdf für
+% eqnarray nicht zusammen mit amsmath benutzen, siehe l2tabu.pdf fï¿½r
 % Hintergruende.
 
 %%% Doc: http://www.ctan.org/tex-archive/macros/latex/contrib/pst-pdf/pst-pdf-DE.pdf
@@ -118,23 +117,23 @@
 %
 %\usepackage[%
 %   %active,       % Aktiviert den Extraktionsmodus (DVI-Ausgabe). Die explizite Angabe ist
-%                  % normalerweise unnötig (Standard im LATEX-Modus).
-%   %inactive,     % Das Paket wird deaktiviert, Zuätzlich werden die Pakete pstricks und
+%                  % normalerweise unnï¿½tig (Standard im LATEX-Modus).
+%   %inactive,     % Das Paket wird deaktiviert, Zuï¿½tzlich werden die Pakete pstricks und
 %                  % graphicx geladen
 %   nopstricks,    % Das Paket pstricks wird nicht geladen.
-%   %draft,        % Im pdfLATEX-Modus werden aus der Containerdatei eingefügte Grafiken nur
+%   %draft,        % Im pdfLATEX-Modus werden aus der Containerdatei eingefï¿½gte Grafiken nur
 %                  % als Rahmen dargestellt.
-%   %final,        % Im pdfLATEX-Modus werden aus der Containerdatei eingefügte Grafiken
-%                  % vollständig dargestellt (Standard).
+%   %final,        % Im pdfLATEX-Modus werden aus der Containerdatei eingefï¿½gte Grafiken
+%                  % vollstï¿½ndig dargestellt (Standard).
 %   %tightpage,    % Die Abmessung Grafiken in der Containerdatei entsprechen denen der
-%                  % zugehörigen TEX-Boxen (Standard).
+%                  % zugehï¿½rigen TEX-Boxen (Standard).
 %   %notightpage,  % die Grafiken in der Containerdatei nehmen
-%                  % mindestens die Größe des gesamten Blattes einnehmen.
-%   %displaymath,  % Es werden zusätzlich die mathematischen Umgebungen displaymath,
-%                  % eqnarray und $$ extrahiert und im pdf-Modus als Grafik eingefügt.
+%                  % mindestens die Grï¿½ï¿½e des gesamten Blattes einnehmen.
+%   %displaymath,  % Es werden zusï¿½tzlich die mathematischen Umgebungen displaymath,
+%                  % eqnarray und $$ extrahiert und im pdf-Modus als Grafik eingefï¿½gt.
 %]{pst-pdf}
 %
-% Notwendiger Bugfix für natbib Paket bei Benutzung von pst-pdf (Version <= v1.1o)
+% Notwendiger Bugfix fï¿½r natbib Paket bei Benutzung von pst-pdf (Version <= v1.1o)
 \IfPackageLoaded{pst-pdf}{
    \providecommand\makeindex{}
    \providecommand\makeglossary{}
@@ -268,8 +267,8 @@
 %
 %%% General Doc: http://www.ctan.org/tex-archive/info/symbols/comprehensive/symbols-a4.pdf
 %
-%% Symbole für Mathematiksatz
-%\usepackage{mathrsfs} %% Schreibschriftbuchstaben für den Mathematiksatz (nur Großbuchstaben)
+%% Symbole fï¿½r Mathematiksatz
+%\usepackage{mathrsfs} %% Schreibschriftbuchstaben fï¿½r den Mathematiksatz (nur Groï¿½buchstaben)
 %\usepackage{dsfont}   %% Double Stroke Fonts
 %\usepackage[mathcal]{euscript} %% adds euler mathcal font
 %\usepackage{amssymb}
@@ -400,7 +399,7 @@
 %%% Verweise =============================================================
 %
 %%% Doc: Documentation inside dtx File
-\usepackage[ngerman]{varioref} % Intelligente Querverweise
+\usepackage[english]{varioref} % Intelligente Querverweise
 
 %%% Listen ===============================================================
 %
@@ -761,8 +760,7 @@
 
 %%% Doc: ftp://tug.ctan.org/pub/tex-archive/macros/latex/contrib/nomencl/nomencl.pdf
 \usepackage[%
-	german,
-	%english
+	english
 ]{nomencl}[2005/09/22]
 
 \usepackage[
@@ -839,13 +837,13 @@
 \makeatletter
 \IfPackageLoaded{framed}{%
    \IfPackageLoaded{marginnote}{%
-      \begingroup
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\begingroup
          \g@addto@macro\framed{%
-            \let\marginnoteleftadjust\FrameSep
-               \let\marginnoterightadjust\FrameSep
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   \let\marginnoteleftadjust\FrameSep
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   \let\marginnoterightadjust\FrameSep
          }
       \makeatother
-  }
+ï¿½ }
 }
 \makeatother
 
@@ -1001,21 +999,21 @@
 }
 
 % BCOR
-%    current  % Satzspiegelberechnung mit dem aktuell gültigen BCOR-Wert erneut
-%             % durchführen.
+%    current  % Satzspiegelberechnung mit dem aktuell gï¿½ltigen BCOR-Wert erneut
+%             % durchfï¿½hren.
 % DIV
-%    calc     % Satzspiegelberechnung einschließlich Ermittlung eines guten
-%             % DIV-Wertes erneut durchführen.
+%    calc     % Satzspiegelberechnung einschlieï¿½lich Ermittlung eines guten
+%             % DIV-Wertes erneut durchfï¿½hren.
 %    classic  % Satzspiegelberechnung nach dem
 %             % mittelalterlichen Buchseitenkanon
-%             % (Kreisberechnung) erneut durchführen.
-%    current  % Satzspiegelberechnung mit dem aktuell gültigen DIV-Wert erneut
-%             % durchführen.
-%    default  % Satzspiegelberechnung mit dem Standardwert für das aktuelle
-%             % Seitenformat und die aktuelle Schriftgröße erneut durchführen.
+%             % (Kreisberechnung) erneut durchfï¿½hren.
+%    current  % Satzspiegelberechnung mit dem aktuell gï¿½ltigen DIV-Wert erneut
+%             % durchfï¿½hren.
+%    default  % Satzspiegelberechnung mit dem Standardwert fï¿½r das aktuelle
+%             % Seitenformat und die aktuelle Schriftgrï¿½ï¿½e erneut durchfï¿½hren.
 %             % Falls kein Standardwert existiert calc anwenden.
 %    last     % Satzspiegelberechnung mit demselben DIV -Argument, das beim
-%             % letzten Aufruf angegeben wurde, erneut durchführen
+%             % letzten Aufruf angegeben wurde, erneut durchfï¿½hren
 
 
 %\usepackage[colorgrid,texcoord,gridunit=mm]{showframe}
@@ -1043,7 +1041,7 @@
 \definecolor{pdflinkcolor}{rgb}{0,0,0.6}
 \definecolor{pdfcitecolor}{rgb}{0,0,0.6}
 
-%% PDF-Linkfarben auf schwarz für den Druck:
+%% PDF-Linkfarben auf schwarz fï¿½r den Druck:
 % \definecolor{pdfurlcolor}{rgb}{0,0,0}
 % \definecolor{pdffilecolor}{rgb}{0,0,0}
 % \definecolor{pdflinkcolor}{rgb}{0,0,0}
@@ -1111,14 +1109,14 @@
 \IfElseChapterDefined{
    % Oben aussen: Kapitel und Section
    % Unten aussen: Seitenzahl
-   % \ohead{\headmark} % Oben außen: Setzt Kapitel und Section automatisch
+   % \ohead{\headmark} % Oben auï¿½en: Setzt Kapitel und Section automatisch
    % \ofoot[\pagemark]{\pagemark}
    % oder...
    % Oben aussen: Seitenzahlen
    % Oben innen: Kapitel und Section
    \ohead{\pagemark}
    \ihead{\headmark}
-   %\ofoot[\pagemark]{} % Außen unten: Seitenzahlen bei plain
+   %\ofoot[\pagemark]{} % Auï¿½en unten: Seitenzahlen bei plain
 }{
    \cfoot[\pagemark]{\pagemark} % Mitte unten: Seitenzahlen bei plain
 }
@@ -1137,10 +1135,10 @@
 % \rofoot[scrplain-rechts-ungerade]{scrheadings-rechts-ungerade}
 % \ihead[scrplain-innen]{scrheadings-innen}
 % \chead[scrplain-zentriert]{scrheadings-zentriert}
-% \ohead[scrplain-außen]{scrheadings-außen}
+% \ohead[scrplain-auï¿½en]{scrheadings-auï¿½en}
 % \ifoot[scrplain-innen]{scrheadings-innen}
 % \cfoot[scrplain-zentriert]{scrheadings-zentriert}
-% \ofoot[scrplain-außen]{scrheadings-außen}
+% \ofoot[scrplain-auï¿½en]{scrheadings-auï¿½en}
 
 
 %\usepackage{lastpage} % Stellt 'LastPage' zur Verfuegung
@@ -1159,9 +1157,9 @@
    							  %	 Seitenkopf
    \setheadsepline{.4pt}[\color{black}]
                          % modifiziert die Parameter fuer die Linie zwischen
-                         % Kopf und Textkörper
+                         % Kopf und Textkï¿½rper
    %\setfootsepline{}    % modifiziert die Parameter fuer die Linie zwischen
-   							 % Text und Fuß
+   							 % Text und Fuï¿½
    %\setfootbotline{}    % modifiziert die Parameter fuer die Linie unter dem
    							 % Seitenfuss
 }
@@ -1173,7 +1171,7 @@
 % Breite von Kopf und Fusszeile einstellen
 % \setheadwidth[Verschiebung]{Breite}
 % \setfootwidth[Verschiebung]{Breite}
-% mögliche Werte
+% mï¿½gliche Werte
 % paper - die Breite des Papiers
 % page - die Breite der Seite
 % text - die Breite des Textbereichs
@@ -1202,7 +1200,7 @@
 \setlength{\dimen\footins}{10\baselineskip} % Beschraenkt den Platz von Fussnoten auf 10 Zeilen
 
 \interfootnotelinepenalty=10000 % Verhindert das Fortsetzen von
-                                % Fussnoten auf der gegenüberligenden Seite
+                                % Fussnoten auf der gegenï¿½berligenden Seite
 
 
 %% Schriften (Sections )==================================================
@@ -1302,7 +1300,7 @@
 %   {1pc}                             % sep (from chapternumber)
 %   {\vspace{1pc}}                    % {before}[after] (before chaptertitle and after)
 % --------------------------------
-%--> Kapitel + Nummer + Trennlinie + Name (richtsbündig)
+%--> Kapitel + Nummer + Trennlinie + Name (richtsbï¿½ndig)
 \titleformat{\chapter}[display]	% {command}[shape]
   {\usekomafont{chapter} \LARGE \color{black}}	% format
   {  										% label
@@ -1471,13 +1469,13 @@
 % \mtcsetfont{minitoc}{subsection}{\small\SectionFontStyle}
 % \mtcsetfont{minitoc}{subsubsection}{\small\SectionFontStyle}
 %}{
-% \usepackage{minitoc}
-% \setlength{\stcindent}{0pt} %default
-% \setcounter{secttocdepth}{2} %default
-% \mtcsettitlefont{secttoc}{\SectionFontStyle}
-% \mtcsetfont{secttoc}{*}{\small\SectionFontStyle}%
-% \mtcsetfont{secttoc}{subsection}{\small\SectionFontStyle}
-% \mtcsetfont{secttoc}{subsubsection}{\small\SectionFontStyle}
+%ï¿½\usepackage{minitoc}
+%ï¿½\setlength{\stcindent}{0pt} %default
+%ï¿½\setcounter{secttocdepth}{2} %default
+%ï¿½\mtcsettitlefont{secttoc}{\SectionFontStyle}
+%ï¿½\mtcsetfont{secttoc}{*}{\small\SectionFontStyle}%
+%ï¿½\mtcsetfont{secttoc}{subsection}{\small\SectionFontStyle}
+%ï¿½\mtcsetfont{secttoc}{subsubsection}{\small\SectionFontStyle}
 %}
 
 % Packages that MUST be loaded before minitoc !
@@ -1625,7 +1623,7 @@
 \LoadPackagesNow % (ltxtable, tabularx)
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-% Zusätzliche Pakete
+% Zusï¿½tzliche Pakete
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 %%% Doc: ftp://tug.ctan.org/pub/tex-archive/macros/latex/contrib/hyphenat/hyphenat.pdf
 % According to documentation the font warnings can be ignored
