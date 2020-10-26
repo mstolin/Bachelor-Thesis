@@ -230,10 +230,11 @@ Spark provides build-in scripts to start a master node and worker nodes in stand
 
 \section{Prometheus}
 % What is Prometheus
-Prometheus is an open-source monitoring and alerting system that stores all data as time-series in a time-series database (TSDB) \cite{Prom2020Docs}. It follows the pull-based approach to scrape metrics from hosts and services \cite{Bastos2019Prom}.
-% What is monitoring and why is it important
-A monitoring system keeps track of the health status of components in a computing cluster. Because of the complexity of modern computing clusters, the effort is to high to observe components manually \cite{Bastos2019Prom}.
-% BESCHREIBEN WAS METRICS SIND UND ALERTS !!!!!
+Prometheus is an open-source monitoring and alerting system \cite{Prom2020Docs}.
+% Time-series format + PromQL
+To collect and store data, Prometheus supports a multi-dimensional key-value pair based data model which can be analyzed in real-time using the PromQL query language \cite{Pandey2020Monitoring}.
+% Pull-based approach
+It follows the pull-based approach to scrape metrics from hosts and services \cite{Bastos2019Prom}.
 
 % Pull-based image
 \begin{figure}[h]%
@@ -243,10 +244,18 @@ A monitoring system keeps track of the health status of components in a computin
 \label{fig:prom_pull-based}%
 \end{figure}
 
+% Describe figure
 As \Fig{fig:prom_pull-based} demonstrates, a pull-based monitoring system scrapes metrics from services which make metrics available for the monitoring system. In this case, the monitoring system needs a list of all hosts and services to monitor \cite{Bastos2019Prom}.
 
 
+% What is monitoring and why is it important
+A monitoring system keeps track of the health status of components in a computing cluster. Because of the complexity of modern computing clusters, the effort is to high to observe components manually \cite{Bastos2019Prom}.
+% BESCHREIBEN WAS METRICS SIND UND ALERTS !!!!!
+
+
 \subsection{Prometheus architecture}
+
+\todo{Bilder für components}
 
 % Architecture image
 \begin{figure}[h]%
@@ -259,32 +268,41 @@ As \Fig{fig:prom_pull-based} demonstrates, a pull-based monitoring system scrape
 % High level architecture
 \Fig{fig:prom_architecture} illustrates the high-level architecture of Prometheus.
 % Description of components
-The Prometheus ecosystem provides multiple components. Components can be optional, depending on the monitoring needs of the environment \cite{Bastos2019Prom}. The main components of a Prometheus system consist of Prometheus server, Alertmanager, service discovery, exporters and visualization \cite{Prom2020Docs}.
+The Prometheus ecosystem provides multiple components. Components can be optional, depending on the monitoring needs of the environment \cite{Bastos2019Prom}. The main components of a Prometheus system are Prometheus server, Alertmanager, service discovery, exporters, Pushgateway and visualization tools \cite{Prom2020Docs}.
 
 
-\paragraph{Prometheus server:} The Prometheus server is the main component of a Prometheus system. It is responsible to collect metrics as time-series data from targets and stores the collected data in the built-in TSDB. Additionally, the Prometheus server triggers alerts to the Alertmanager if a configured condition becomes true \cite{Prom2020Docs, Bastos2019Prom}.
+\paragraph{Prometheus server:} 
+The Prometheus server is the main component of a Prometheus system. It is responsible to collect metrics as time-series data from targets and stores the collected data in the built-in TSDB \cite{Bastos2019Prom}. Prometheus uses the concept of scraping to collect metrics from a target. A target host has to expose an endpoint to make metrics available in the Prometheus data format \cite{Pandey2020Monitoring}. Additionally, the Prometheus server triggers alerts to the Alertmanager if a configured condition becomes true \cite{Prom2020Docs}.
 
 
 \paragraph{Alertmanager:}
-If an alerting condition becomes true, the Prometheus server generates and alert and pushes it to the Alertmanager. The Alertmanager routes the alert to the specific integration.
-% What is an integration
-An integration
-% Custom integrations
+If an alerting rule becomes true, the Prometheus server generates an alert and pushes it to the Alertmanager. The Alertmanager generates notifications from the received alerts. A notification can take multiple forms like emails or chat messages. Webhooks can be implemented to trigger custom notifications \cite{Bastos2019Prom}.
 
 
 \paragraph{Service discovery:}
-As mentioned before, Prometheus follows a pull-based approach to scrap metrics from targets and needs to know about the target hosts and services. ..... Therefore a an automated service-discovery is needed ... % Besser formulieren
+As mentioned before, Prometheus follows a pull-based approach to fetch metrics from a target. To know about all targets, Prometheus needs a list of the corresponding hosts. The service discovery manages the complexity of maintaining a list of hosts manually in an changing infrastructure \cite{Bastos2019Prom}.
 
 
 \paragraph{Exporters:}
+If an application does not support an endpoint for Prometheus, an exporter can be used to fetch metrics and make them available to the Prometheus server. An exporter is a monitoring agent running on a target host that fetches metric from the host and exports them to the Prometheus server \cite{Pandey2020Monitoring}.
+
+
+\paragraph{Pushgateway:}
+If a target is not designed to be scraped, metrics can be pushed against the Pushgateway\cite{Prom2020Docs}. The Pushgateway converts the data into the Prometheus data format and passes them to the Prometheus server \cite{Pandey2020Monitoring}.
 
 
 \paragraph{Visualization:}
+Prometheus supports various tools for virtualization of the scraped data. Grafana\footnote{Grafana: The open observability platform - https://grafana.com/} is one of the widely used tools for this occasion.
+
+
+%\subsection{Creating alerts}
+% Beschreiben wie man das mach in der yml datei
 
 
 \subsection{Monitoring Docker container}
 % How can Prometheus be used with Docker (cAdvisor)
 % Auch auf andere Technologien eingehen -> Measuring DockerPerformance What a Mess!!!
+\todo{Wahrscheinlich erst nach der implementation}
 
 
 \section{NVIDIA RAPIDS}
