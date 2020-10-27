@@ -20,18 +20,22 @@
 \contentsline {paragraph}{Cluster manager:}{9}{paragraph*.12}% 
 \contentsline {subsection}{\numberline {3.3.3}Spark application implementation}{10}{subsection.3.3.3}% 
 \contentsline {subsection}{\numberline {3.3.4}Spark standalone cluster deployment}{11}{subsection.3.3.4}% 
-\contentsline {section}{\numberline {3.4}Prometheus}{11}{section.3.4}% 
-\contentsline {subsection}{\numberline {3.4.1}Prometheus architecture}{11}{subsection.3.4.1}% 
-\contentsline {paragraph}{Prometheus server:}{11}{paragraph*.17}% 
-\contentsline {paragraph}{Alertmanager:}{12}{paragraph*.18}% 
-\contentsline {paragraph}{Service discovery:}{12}{paragraph*.19}% 
-\contentsline {paragraph}{Exporters:}{12}{paragraph*.20}% 
-\contentsline {paragraph}{Pushgateway:}{12}{paragraph*.21}% 
-\contentsline {paragraph}{Visualization:}{13}{paragraph*.22}% 
-\contentsline {subsection}{\numberline {3.4.2}Monitoring Docker container}{13}{subsection.3.4.2}% 
-\contentsline {section}{\numberline {3.5}NVIDIA RAPIDS}{13}{section.3.5}% 
-\contentsline {section}{\numberline {3.6}Gitlab CI/CD}{13}{section.3.6}% 
-\contentsline {section}{\numberline {3.7}K-MEANS}{13}{section.3.7}% 
-\contentsline {section}{\numberline {3.8}Naive Bayes Classifier}{13}{section.3.8}% 
-\contentsline {section}{\numberline {3.9}Scaling heat}{13}{section.3.9}% 
-\contentsline {section}{\numberline {3.10}KHP}{13}{section.3.10}% 
+\contentsline {section}{\numberline {3.4}RAPIDS accelerator for Apache Spark}{11}{section.3.4}% 
+\contentsline {subsection}{\numberline {3.4.1}Extension of the Spark programming model}{11}{subsection.3.4.1}% 
+\contentsline {subsection}{\numberline {3.4.2}GPU aware scheduling}{11}{subsection.3.4.2}% 
+\contentsline {section}{\numberline {3.5}Prometheus}{12}{section.3.5}% 
+\contentsline {subsection}{\numberline {3.5.1}Prometheus architecture}{12}{subsection.3.5.1}% 
+\contentsline {paragraph}{Prometheus server:}{13}{paragraph*.18}% 
+\contentsline {paragraph}{Alertmanager:}{13}{paragraph*.19}% 
+\contentsline {paragraph}{Service discovery:}{13}{paragraph*.20}% 
+\contentsline {paragraph}{Exporters:}{13}{paragraph*.21}% 
+\contentsline {paragraph}{Pushgateway:}{13}{paragraph*.22}% 
+\contentsline {paragraph}{Visualization:}{14}{paragraph*.23}% 
+\contentsline {subsection}{\numberline {3.5.2}Monitoring Docker container}{14}{subsection.3.5.2}% 
+\contentsline {section}{\numberline {3.6}Gitlab CI/CD}{14}{section.3.6}% 
+\contentsline {section}{\numberline {3.7}K-MEANS}{14}{section.3.7}% 
+\contentsline {section}{\numberline {3.8}Naive Bayes Classifier}{14}{section.3.8}% 
+\contentsline {section}{\numberline {3.9}Scaling heat}{14}{section.3.9}% 
+\contentsline {section}{\numberline {3.10}KHP}{14}{section.3.10}% 
+\contentsline {chapter}{\numberline {4}Spark cluster implementation}{15}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Cluster architecture}{15}{section.4.1}% 
