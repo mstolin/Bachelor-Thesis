@@ -1,5 +1,5 @@
 \chapter{Background}
-\label{sec:demo}
+\label{sec:background}
 %
 In this chapter bla bla
 \todo{Describe Chapter}
@@ -64,17 +64,23 @@ there can be one autonomic manager which is responsible to monitor and analyze t
 to plan and execute. To create a complete and closed control-loop, multiple autonomic manager can be composed together.
 
 
+% ====
+% Docker
+% ====
 \section{Docker}
 
 
+% ====
+% Apache Spark
+% ====
 \section{Apache Spark}
 Apache Spark is an open-source computing framework for parallel data processing on a large computer cluster. Spark manages the available resources and distributes computation tasks across a cluster to perform big-data processing operations at large scale \cite{Chambers2018Spark}. Before Spark was developed, Hadoop MapReduce \cite{Dean2010MapReduce} was the framework of choice for parallel operations on a computer cluster \cite{Zaharia2010Spark}. Spark accomplished to outperform Hadoop by 10x for iterative Machine Learning \cite{Zaharia2010Spark}. It is implemented in Scala\footnote{Scala programming language. https://www.scala-lang.org/}, a JVM-based language and provides a programming interface for Scala, Java\footnote{Java programming language. https://www.oracle.com/java/}, Python\footnote{Python programming language. https://www.python.org/} and R\footnote{R programming language. https://www.r-project.org/}. In addition, Spark includes an interactive SQL shell and libraries to implement Machine Learning and streaming applications \cite{Chambers2018Spark}.
 It was developed in 2009 as the Spark research project at UC Berkeley and became an Apache Software Foundation project in 2013 \cite{Chambers2018Spark}. 
 
-%  MASTER SLAVE 
 
 \subsection{Spark programming model}
-
+\label{sec:spark_programming_model}
+% Explain RDDs
 Spark provides resilient distributed datasets (RDDs) as the main abstractation for parallel operations \cite{Zaharia2010Spark}. Core types of Spark`s higher-level structured API are built on top of RDDs \cite{Chambers2018Spark} and will automatically be optimized by Spark`s Catalyst optimizer to run operations quick and efficient \cite{Hien2018Spark}.
 \todo{Master-Slave Architektur + Bild}
 
@@ -199,7 +205,7 @@ dataframe = dataframe.filter(dataframe.id % 2 == 0)
 count = dataframe.count()
 \end{lstlisting}
 % Explain a spark application on top of an example
-\ref{lst:spark_python_example} demonstrates an example implementation of a Spark application. At first a SparkSession gets initialized. Each Spark application must include a SparkSession to initialize the application driver and executors  \cite{Chambers2018Spark}. In Addition, the SparkSession provides an API for data-processing logic and configuration of the Spark application \cite{Hien2018Spark}. After that, a DataFrame gets created with the range transformation to include each number from 1 to 1000 in the DataFrame. Next, a filter transformation is applied on the DataFrame to sort out any odd number. At the end, the number of rows gets saved in a variable with the count action.
+\Lst{lst:spark_python_example} demonstrates an example implementation of a Spark application. At first a SparkSession gets initialized. Each Spark application must include a SparkSession to initialize the application driver and executors  \cite{Chambers2018Spark}. In Addition, the SparkSession provides an API for data-processing logic and configuration of the Spark application \cite{Hien2018Spark}. After that, a DataFrame gets created with the range transformation to include each number from 1 to 1000 in the DataFrame. Next, a filter transformation is applied on the DataFrame to sort out any odd number. At the end, the number of rows gets saved in a variable with the count action.
 \todo{Create listing macro}
 
 
@@ -214,7 +220,7 @@ $SPARK_HOME/bin/spark-submit \
     application.py
 \end{lstlisting}
 % Explain
-\ref{lst:spark_submit_example} provides an example how the spark-submit executable can be used to launch a Spark Python application.
+\Lst{lst:spark_submit_example} provides an example how the spark-submit executable can be used to launch a Spark Python application.
 
 
 \subsection{Spark standalone cluster deployment}
@@ -228,6 +234,44 @@ Spark provides build-in scripts to start a master node and worker nodes in stand
 % NE ALTER !, schon erwähnen start-master und start-worker
 
 
+% ====
+% NVIDIA RAPIDS
+% ====
+\section{RAPIDS accelerator for Apache Spark}
+% Explain
+The RAPIDS accelerator for Apache Spark is a plugin suite to enable GPU acceleration for computing operations on Apache Spark 3.x \cite{SparkRapids2020Docs}. 
+% What it does
+To accelerate computing operations, it uses the RAPIDS\footnote{Open GPU Data Science - https://rapids.ai/} libraries \cite{SparkRapids2020Docs} and extends the Spark programming model (see \SubSec{sec:spark_programming_model}) \cite{Mcdonald2020SparkRapids}.
+
+\subsection{Extension of the Spark programming model}
+% How does it extends DataFrame and SQL
+The plugin suite extends the Spark programming model with a new DataFrame based on Apache Arrow\cite{ApacheArrow2020Docs} data structures and the Catalyst optimizer to generate GPU-aware query plans \cite{Mcdonald2020SparkRapids}.
+
+
+% What is Apache Arrow
+Apache arrow is a data platform to build high performance applications that work with large dataset`s and to improve analytic algorithms. A component of Apache Arrow is the Arrow Columnar Format, an in-memory data structure specification for efficient analytic operations on GPUs and CPUs \cite{ApacheArrow2020Docs}.
+
+
+% How do DataFrames and SQL use RAPIDS
+Spark`s DataFrame and SQL use the RAPIDS APIs to run tranformations and actions on a GPU.
+% How does the Catalyst create GPU aware plans
+The Spark Catalyst optimizer identifies operator in a query plan that are supported by the RAPIDS APIs. To execute the query plan, these operators can be scheduled on a GPU within the Spark cluster \cite{Mcdonald2020SparkRapids}. If operators are not supported by the RAPIDS APIs, a physical plan for CPUs will be generated by the Catalyst optimizer to execute RDD operations \cite{Mcdonald2020SparkRapids}. \Fig{fig:rapids_query_plan} illustrates, how a query plan gets optimized with the RAPIDS accelerator for Spark enabled.
+
+% RAPIDS query plan image
+\begin{figure}[h]%
+\centering
+\includegraphics[scale=0.25]{images/03_background/rapids_query_plan}%
+\caption{Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite{Mcdonald2020SparkRapids}.}%
+\label{fig:rapids_query_plan}%
+\end{figure}
+
+
+\subsection{GPU aware scheduling}
+
+
+% ====
+% Prometheus
+% ====
 \section{Prometheus}
 % What is Prometheus
 Prometheus is an open-source monitoring and alerting system \cite{Prom2020Docs}.
@@ -240,17 +284,20 @@ It follows the pull-based approach to scrape metrics from hosts and services \ci
 \begin{figure}[h]%
 \centering
 \includegraphics[scale=0.25]{images/03_background/prom_pull-based}%
-\caption{Pull-based approach to scrape metrics - Source: Authors own model, based on \cite{Bastos2019Prom}.}%
+\caption{Pull-based approach to scrape metrics - Source: \cite{Bastos2019Prom}.}%
 \label{fig:prom_pull-based}%
 \end{figure}
 
 % Describe figure
-As \Fig{fig:prom_pull-based} demonstrates, a pull-based monitoring system scrapes metrics from services which make metrics available for the monitoring system. In this case, the monitoring system needs a list of all hosts and services to monitor \cite{Bastos2019Prom}.
+As \Fig{fig:prom_pull-based} demonstrates, a pull-based monitoring system scrapes metrics from services which makes them available for the monitoring system. In this case, the monitoring system needs a list of all hosts and services to monitor \cite{Bastos2019Prom}.
 
 
 % What is monitoring and why is it important
 A monitoring system keeps track of the health status of components in a computing cluster. Because of the complexity of modern computing clusters, the effort is to high to observe components manually \cite{Bastos2019Prom}.
-% BESCHREIBEN WAS METRICS SIND UND ALERTS !!!!!
+
+
+% What are metrics
+A metric is an observed property of software or hardware, e.g. the usage of a CPU core. To measure metrics, data-point`s will be recorded at a fixed time interval. A data-point is a pair of a value and a timestamp. The combination of multiple data-point`s is called a time-series \cite{Turnbull2016Monitoring}.
 
 
 \subsection{Prometheus architecture}
@@ -303,9 +350,6 @@ Prometheus supports various tools for virtualization of the scraped data. Grafan
 % How can Prometheus be used with Docker (cAdvisor)
 % Auch auf andere Technologien eingehen -> Measuring DockerPerformance What a Mess!!!
 \todo{Wahrscheinlich erst nach der implementation}
-
-
-\section{NVIDIA RAPIDS}
 
 
 \section{Gitlab CI/CD}
