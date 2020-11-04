@@ -2,11 +2,17 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite {Hien2018Spark}.\relax }}{8}{figure.caption.8}% 
-\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces Overview of a Spark cluster architecture - Source: Authors own model, based on \cite {Apache2020Spark}.\relax }}{8}{figure.caption.9}% 
-\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Spark`s cluster mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{9}{figure.caption.13}% 
-\contentsline {figure}{\numberline {\relax 3.4}{\ignorespaces Spark`s client mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{10}{figure.caption.14}% 
-\contentsline {figure}{\numberline {\relax 3.5}{\ignorespaces Query plan execution with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite {Mcdonald2020SparkRapids}.\relax }}{12}{figure.caption.15}% 
-\contentsline {figure}{\numberline {\relax 3.6}{\ignorespaces Pull-based approach to scrape metrics - Source: \cite {Bastos2019Prom}.\relax }}{12}{figure.caption.16}% 
-\contentsline {figure}{\numberline {\relax 3.7}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Bastos2019Prom}.\relax }}{13}{figure.caption.17}% 
+\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Docker architecture - Source: Authors own model, based on \cite {Docker2020Docs}.\relax }}{7}{figure.caption.5}% 
+\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces Docker basic container structure - Source: Authors own model, based on \cite {Bullington2020Docker}.\relax }}{8}{figure.caption.9}% 
+\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite {Hien2018Spark}.\relax }}{10}{figure.caption.13}% 
+\contentsline {figure}{\numberline {\relax 3.4}{\ignorespaces Overview of a Spark cluster architecture - Source: Authors own model, based on \cite {Apache2020Spark}.\relax }}{11}{figure.caption.14}% 
+\contentsline {figure}{\numberline {\relax 3.5}{\ignorespaces Spark`s cluster mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{12}{figure.caption.18}% 
+\contentsline {figure}{\numberline {\relax 3.6}{\ignorespaces Spark`s client mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{12}{figure.caption.19}% 
+\contentsline {figure}{\numberline {\relax 3.7}{\ignorespaces Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite {Mcdonald2020SparkRapids}.\relax }}{14}{figure.caption.20}% 
+\contentsline {figure}{\numberline {\relax 3.8}{\ignorespaces Pull-based approach to scrape metrics - Source: \cite {Bastos2019Prom}.\relax }}{14}{figure.caption.21}% 
+\contentsline {figure}{\numberline {\relax 3.9}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Bastos2019Prom}.\relax }}{15}{figure.caption.22}% 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
 \addvspace {10\p@ }
