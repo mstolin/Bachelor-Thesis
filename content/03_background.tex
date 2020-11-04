@@ -4,9 +4,11 @@
 In this chapter bla bla
 \todo{Describe Chapter}
 
-% ====
+% ===========================================
+% ===========================================
 % Autonomic computing
-% ====
+% ===========================================
+% ===========================================
 \section{Autonomic computing}
 Autonomic computing is an architecture for computing systems to enable the ability to manage themselves in accordance to high level objectives configured by administrators \cite{Kephart2003VisionComputing}. 
 These computing systems dynamically adapt to demands and conditions of the workload \cite{Kephart2003VisionComputing}.
@@ -64,15 +66,98 @@ there can be one autonomic manager which is responsible to monitor and analyze t
 to plan and execute. To create a complete and closed control-loop, multiple autonomic manager can be composed together.
 
 
-% ====
+% ===========================================
+% ===========================================
 % Docker
-% ====
+% ===========================================
+% ===========================================
 \section{Docker}
+% Short docker intro
+Docker is an open-source platform that enables containerization of applications. Containerization is a technology to package, ship and run applications and their environment in individual containers.
+% Make clear
+Docker is not a container technology itself, it hides the complexity of working with container technologies directly and instead provides an abstraction and the tools to work with containers \cite{Nickoloff2019Docker, Bullington2020Docker, Potdar2020Docker}.
 
 
-% ====
+\subsection{Docker architecture}
+
+% Architecture figure
+\begin{figure}[h]%
+\centering
+\includegraphics[scale=0.5]{images/03_background/docker_architecture}%
+\caption{Docker architecture - Source: Authors own model, based on \cite{Docker2020Docs}.}%
+\label{fig:spark_docker_architecture}%
+\end{figure}
+
+% Explain figure
+\Fig{fig:spark_docker_architecture} illustrates the client server architecture of Docker which consists of of a Docker client, the Docker deamon and a registry.
+
+
+\paragraph{Docker client:} The Docker client is an interface for the user to send commands to the Docker deamon \cite{Docker2020Docs}.
+
+
+\paragraph{Docker deamon:} The Docker deamon manages all containers running on the host system and handles the containers resources, networks and volumes \cite{Bullington2020Docker}.
+
+
+\paragraph{Docker Registry:} A Docker registry stores images. Images can be pushed to a public or private registry and pulled from it to build a container \cite{Docker2020Docs}.
+
+
+\subsection{Docker image}
+% What is an image
+An Image is a snapshot of the environment that is needed to run an application in a Docker container. The environment consists of all files, libraries and configurations that are needed for the application to run properly \cite{Docker2020Docs, Nickoloff2019Docker}.
+% How to create an image
+Images can be created from existing containers or from executing a build script called Dockerfile. A Dockerfile is a text file consisting of instructions for building an image. The Docker image builder executes the instructions of a Dockerfile from top to bottom \cite{Nickoloff2019Docker}.
+
+% Dockerfile example
+\begin{lstlisting}[frame=single, label=lst:docker_dockerfile, caption=Example of a Dockerfile, captionpos=b]
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y git
+
+ENTRYPOINT ["git"]
+\end{lstlisting}
+
+% Example Dockerfile example
+\Lst{lst:docker_dockerfile} provides an example of a Dockerfile with three instructions.
+\begin{enumerate}
+\item \texttt{FROM ubuntu:latest} - This image is build on top of the latest Ubuntu image. Dockerfiles have to start with a \texttt{FROM} instruction \cite{Nickoloff2019Docker}.
+\item \texttt{RUN apt-get update \&\& apt-get install -y git} - Update the package manager and install Git.
+\item \texttt{ENTRYPOINT ["git"]} - Set the git command as the entrypoint of this image.
+\end{enumerate}
+
+% How to build an image
+\todo{Vielleicht noch erklären wie Images mit Docker build erstellt werden.}
+
+
+\subsection{Docker Container}
+% What are containers
+A container is an execution environment running on the host-system kernel.
+
+% Container image
+\begin{figure}[h]%
+\centering
+\includegraphics[scale=0.8]{images/03_background/docker_basic_container_structure}%
+\caption{Docker basic container structure - Source: Authors own model, based on \cite{Bullington2020Docker}.}%
+\label{fig:docker_container_struct}%
+\end{figure}
+
+% Container advantages
+The advantage of a container is its lightweight nature. As illustrated in \Fig{fig:docker_container_struct}, containers take advantage of OS-level virtualization instead of hardware-virtualization without the need of a hypervisor \cite{Docker2020Docs, Nickoloff2019Docker}. Containers share the resources of the host-system instead of using reserved resources \cite{Bullington2020Docker}. Multiple containers can run on the host-system kernel and are by default isolated from each other \cite{Docker2020Docs}.
+% Docker container
+In Docker, a container is a runnable unit of an image and is used for distributing and testing applications. A container can be configured to expose certain resources to the host system, e.g. network ports \cite{Bullington2020Docker}.
+
+
+\subsection{Docker Compose}
+% What is compose
+Docker Compose is a tool to run multi-container applications on a single host. A multi-container application consists of a stack of services, where each service is deployed as a container \cite{Bullington2020Docker, Docker2020Docs}.
+% How does compose works
+Services can be configured in a YAML\footnote{YAML Ain't Markup Language - https://yaml.org/} file called \textit{docker-compose.yml}. This file defines the requirements of each service and determines how a service communicates to other services \cite{Kane2018DockerUp}.
+
+
+% ===========================================
+% ===========================================
 % Apache Spark
-% ====
+% ===========================================
+% ===========================================
 \section{Apache Spark}
 Apache Spark is an open-source computing framework for parallel data processing on a large computer cluster. Spark manages the available resources and distributes computation tasks across a cluster to perform big-data processing operations at large scale \cite{Chambers2018Spark}. Before Spark was developed, Hadoop MapReduce \cite{Dean2010MapReduce} was the framework of choice for parallel operations on a computer cluster \cite{Zaharia2010Spark}. Spark accomplished to outperform Hadoop by 10x for iterative Machine Learning \cite{Zaharia2010Spark}. It is implemented in Scala\footnote{Scala programming language. https://www.scala-lang.org/}, a JVM-based language and provides a programming interface for Scala, Java\footnote{Java programming language. https://www.oracle.com/java/}, Python\footnote{Python programming language. https://www.python.org/} and R\footnote{R programming language. https://www.r-project.org/}. In addition, Spark includes an interactive SQL shell and libraries to implement Machine Learning and streaming applications \cite{Chambers2018Spark}.
 It was developed in 2009 as the Spark research project at UC Berkeley and became an Apache Software Foundation project in 2013 \cite{Chambers2018Spark}. 
@@ -81,7 +166,7 @@ It was developed in 2009 as the Spark research project at UC Berkeley and became
 \subsection{Spark programming model}
 \label{sec:spark_programming_model}
 % Explain RDDs
-Spark provides resilient distributed datasets (RDDs) as the main abstractation for parallel operations \cite{Zaharia2010Spark}. Core types of Spark`s higher-level structured API are built on top of RDDs \cite{Chambers2018Spark} and will automatically be optimized by Spark`s Catalyst optimizer to run operations quick and efficient \cite{Hien2018Spark}.
+Spark provides resilient distributed datasets (RDDs) as the main abstraction for parallel operations \cite{Zaharia2010Spark}. Core types of Spark`s higher-level structured API are built on top of RDDs \cite{Chambers2018Spark} and will automatically be optimized by Spark`s Catalyst optimizer to run operations quick and efficient \cite{Hien2018Spark}.
 \todo{Master-Slave Architektur + Bild}
 
 
@@ -234,14 +319,16 @@ Spark provides build-in scripts to start a master node and worker nodes in stand
 % NE ALTER !, schon erwähnen start-master und start-worker
 
 
-% ====
+% ===========================================
+% ===========================================
 % NVIDIA RAPIDS
-% ====
+% ===========================================
+% ===========================================
 \section{RAPIDS accelerator for Apache Spark}
 % Explain
 The RAPIDS accelerator for Apache Spark is a plugin suite to enable GPU acceleration for computing operations on Apache Spark 3.x \cite{SparkRapids2020Docs}. 
 % What it does
-To accelerate computing operations, it uses the RAPIDS\footnote{Open GPU Data Science - https://rapids.ai/} libraries \cite{SparkRapids2020Docs} and extends the Spark programming model (see \SubSec{sec:spark_programming_model}) \cite{Mcdonald2020SparkRapids}.
+To accelerate computing operations, it uses the RAPIDS\footnote{Open GPU Data Science - https://rapids.ai/} libraries and extends the Spark programming model (see \SubSec{sec:spark_programming_model}) \cite{SparkRapids2020Docs, Mcdonald2020SparkRapids}.
 
 \subsection{Extension of the Spark programming model}
 % How does it extends DataFrame and SQL
@@ -264,9 +351,6 @@ The Spark Catalyst optimizer identifies operator in a query plan that are suppor
 \caption{Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite{Mcdonald2020SparkRapids}.}%
 \label{fig:rapids_query_plan}%
 \end{figure}
-
-
-\subsection{GPU aware scheduling}
 
 
 % ====
@@ -352,16 +436,41 @@ Prometheus supports various tools for virtualization of the scraped data. Grafan
 \todo{Wahrscheinlich erst nach der implementation}
 
 
-\section{Gitlab CI/CD}
+% ===========================================
+% ===========================================
+% Gitlab CI/CD
+% ===========================================
+% ===========================================
+\section{Gitlab}
 
 
+% ===========================================
+% ===========================================
+% K-MEANS
+% ===========================================
+% ===========================================
 \section{K-MEANS}
 
 
+% ===========================================
+% ===========================================
+% Bayes
+% ===========================================
+% ===========================================
 \section{Naive Bayes Classifier}
 
 
+% ===========================================
+% ===========================================
+% Scaling heat
+% ===========================================
+% ===========================================
 \section{Scaling heat}
 
 
+% ===========================================
+% ===========================================
+% KHP
+% ===========================================
+% ===========================================
 \section{KHP}
