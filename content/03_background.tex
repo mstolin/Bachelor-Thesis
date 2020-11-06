@@ -10,6 +10,112 @@ In this chapter bla bla
 % ===========================================
 % ===========================================
 \section{Autonomic computing}
+% What is autonomic computing
+Autonomic computing is the ability of an IT infrastructure to automatically manage itself in accordance to high level objectives defined by administrators \cite{Kephart2003VisionComputing}.
+% Why
+Autonomic computing gives an IT infrastructure the flexibility to adapt dynamic requirements quickly and effectively to meet the challenges of modern business needs \cite{Murch2004Autonomic}. Therefore, autonomic computing environments can reduce operating costs, lower failure rates, make systems more secure and quickly respond to business needs \cite{Jacob2004AutonomicSolution}.
+
+
+% What does it need
+Computing systems need to obtain a detailed knowledge of it`s environment and how to extend it`s resources to be truly autonomic \cite{Murch2004Autonomic}.
+% The 4 basic elements
+An autonomic computing system is defined by four elements:
+\begin{itemize}
+\item \textbf{Self-configuring:}
+Self-configuring refers to the ability of an IT environment to adapt dynamically to system changes and to be able to deploy new components automatically. Therefore, the system needs to understand and control the characteristics of a configurable item \cite{Murch2004Autonomic, Kephart2003VisionComputing}.
+
+\item \textbf{Self-optimizing:}
+To ensure given goals and objectives, a self-optimizing environment has the ability to efficiently maximize resource allocation and utilization \cite{Jacob2004AutonomicSolution}. To accomplish this requirement, the environment has to monitor all resources to determine if an action is needed \cite{Murch2004Autonomic}.
+
+\item \textbf{Self-healing:}
+Self-healing environments are able to detect problematic operations and then perform policy-based actions to ensure that the systems health is stable \cite{Kephart2003VisionComputing, Jacob2004AutonomicSolution}. The policies of the actions have to be defined and should be executed without disrupting the system \cite{Kephart2003VisionComputing, Jacob2004AutonomicSolution}.
+
+\item \textbf{Self-protecting:}
+The environment must identify unauthorized access and threats to the system and automatically protect itself taking appropriate actions during its runtime \cite{Kephart2003VisionComputing, Jacob2004AutonomicSolution}.
+\end{itemize}
+
+
+\subsection{Autonomic computing concept}
+
+% Concept figure
+\begin{figure}[h]%
+\centering
+\includegraphics[scale=1]{images/03_background/ac_concept}%
+\caption{Autonomic computing concept - Source: Authors own model, based on \cite{Jacob2004AutonomicSolution}.}%
+\label{fig:ac_concept}%
+\end{figure}
+
+% Figure + short description
+\Fig{fig:ac_concept} demonstrates the main concept of an autonomic computing environment. The autonomic computing architecture relies on monitoring sensors and an adoption engine (autonomic manager) to manage resources in the environment \cite{Goscinski2011CloudComputing}.
+% About the environment
+In an autonomic computing environment, all components have to communicate to each other and can manage themselves. Appropriate decisions will be made by an autonomic manager that knows the given policies \cite{Jacob2004AutonomicSolution}.
+
+% Control loop figure
+\begin{figure}[h]%
+\centering
+\includegraphics[scale=1]{images/03_background/ac_control_loop}%
+\caption{The control-loop concept - Source: Authors own model, based on \cite{Murch2004Autonomic}.}%
+\label{fig:ac_control_loop}%
+\end{figure}
+
+% Explain control loop
+The core element of the autonomic architecture is the control-loop. \Fig{fig:ac_control_loop} illustrates the concept of a control-loop. The control-loop collects details about resources through monitoring and makes decisions based on analysis of the collected details to adjust the system if needed \cite{Murch2004Autonomic}.
+
+
+\subsection{Managed resources}
+
+% Figure
+\begin{figure}[h]%
+\centering
+\includegraphics[scale=1]{images/03_background/ac_managed_resource}%
+\caption{Managed resource - Source: Authors own model, based on \cite{Jacob2004AutonomicSolution}.}%
+\label{fig:ac_managed_resource}%
+\end{figure}
+
+% Explanation
+A managed resource is a single component or a combination of components in the autonomic computing environment \cite{Murch2004Autonomic, Jacob2004AutonomicSolution}. A component can be a hardware or software component, e.g. a database, a server, an application or a different entity \cite{Kephart2003VisionComputing}.
+% Sensors and Effectors
+They are controlled by their sensors and effectors, as illustrated in \Fig{fig:ac_managed_resource}. Sensors are used to collect information about the state of the resource and effectors can be used to change the state of the resource \cite{Jacob2004AutonomicSolution}. The combination of sensors and effectors is called a touchpoint, which provides an interface for communication with the autonomic manager \cite{Kephart2003VisionComputing}.
+% Scalability
+The ability to manage and control managed resources make them highly scalable \cite{Murch2004Autonomic}.
+
+
+\subsection{Autonomic manager}
+
+% Figure
+\begin{figure}[h]%
+\centering
+\includegraphics[scale=1]{images/03_background/ac_autonomic_manager}%
+\caption{Autonomic manager - Source: Authors own model, based on \cite{Jacob2004AutonomicSolution}.}%
+\label{fig:ac_manager}%
+\end{figure}
+
+% WHat is the autonomic manager
+The autonomic manager implements the control-loop to collect, aggregate, filter and report system metrics from the managed resources. It can only make adjustments within it`s own scope and uses predefined policies to make decisions of what actions have to be executed to accommodate the goals and objectives\cite{Murch2004Autonomic, Kephart2003VisionComputing}.
+% Knowledge
+In addition, the autonomic manager gains knowledge through analyzing the managed resources \cite{Murch2004Autonomic}.
+% MAPE-K
+The autonomic computing concept digests the MAPE-K model to implement an autonomic manager, as illustrated in \Fig{fig:ac_manager} \cite{Goscinski2011CloudComputing}.
+
+\begin{itemize}
+\item \textbf{Monitor:}
+- The monitor function is responsible to collect the needed metrics from all managed resources and applies aggregation and filter
+operations to the collected data. After that the function reports the metrics.
+
+\item \textbf{Analyze:}
+- To determine if changes have to be made to the computing system, the collected data has to be analyzed.
+
+\item \textbf{Plan:}
+- If changes have to be made, an appropriate change plan has to be generated. A change plan consists of actions that are needed to achieve the configured goals and objectives. The change plan needs to be forwarded to the execute function.
+
+\item \textbf{Execute:}
+- The execute function applies all necessary changes to the computing system.
+
+\end{itemize}
+
+
+
+
 Autonomic computing is an architecture for computing systems to enable the ability to manage themselves in accordance to high level objectives configured by administrators \cite{Kephart2003VisionComputing}. 
 These computing systems dynamically adapt to demands and conditions of the workload \cite{Kephart2003VisionComputing}.
 An intelligent control-loop is responsible to collect all important details of the computing system and make decision according to the collected details. To automate the tasks, the intelligent control-loop is organized into four categories:
@@ -72,6 +178,7 @@ to plan and execute. To create a complete and closed control-loop, multiple auto
 % ===========================================
 % ===========================================
 \section{Docker}
+\todo{Mehr zum Thema DevOps}
 % Short docker intro
 Docker is an open-source platform that enables containerization of applications. Containerization is a technology to package, ship and run applications and their environment in individual containers.
 % Make clear
@@ -151,6 +258,7 @@ In Docker, a container is a runnable unit of an image and is used for distributi
 Docker Compose is a tool to run multi-container applications on a single host. A multi-container application consists of a stack of services, where each service is deployed as a container \cite{Bullington2020Docker, Docker2020Docs}.
 % How does compose works
 Services can be configured in a YAML\footnote{YAML Ain't Markup Language - https://yaml.org/} file called \textit{docker-compose.yml}. This file defines the requirements of each service and determines how a service communicates to other services \cite{Kane2018DockerUp}.
+\todo{Beispiel docker-compose}
 
 
 % ===========================================
