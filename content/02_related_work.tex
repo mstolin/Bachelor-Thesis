@@ -1,5 +1,80 @@
 \chapter{Related Work}
-\label{sec:demo}
+\label{sec:related}
 %
+
+This chapter provides background information about ...
+\todo{Describe Chapter}
+
+
+% ===========================================
+% ===========================================
+% Technologies
+% ===========================================
+% ===========================================
+\section{State-of-the-art technologies}
+
+
+% ===========================================
+% ===========================================
+% Scalable container
+% ===========================================
+% ===========================================
+\section{Scalable container architectures}
+% State of the art monitoring
+Dynamic scaling of containerized application is an active area of research. In recent years containerized applications have been used efficiently and many research works focused on creating a infrastructure with state-of-the-art monitoring tools for measuring container performance and the ability to dynamically scale. %Other work published about auto-scaling policies
+
+
+% Delivering elastic ...
+Barna et al. \cite{Barna2017ElasticContainerApps} proposed a development approach for an autonomic management system for containerized applications enabling DevOps\footnote{DEVOPS BLA BLA}.
+% The goal
+The goal of this work was to monitor the performance of the system under low or high workload by using an autonomic management architecture to create a model to determine necessary scaling actions. They proposed the Scaling Heat Algorithm to determine if the container environment has to perform a scale-out or scale-in action. In addition DEVOPS
+% Results
+It was observed, that the resulting model makes accurate scaling decisions with an error rate less than 10\%.
+
+
+% Automated Deployment of a Spark Cluster with Machine Learning Algorithm Integration
+Fernández et al. \cite{Fernandez2020AutomatedDeploySpark} introduced LadonSpark, a solution to automate the deployment process of an Apache Spark cluster.
+% The goal
+The objective of LadonSpark is a method for deploying and configuring an Apache Spark Cluster as a task.
+
+
+% Application deployment using containers with auto-scaling for microservices in cloud environment
+Srirama et al. \citep{Srirama2020AppDeplyCont} designed a heuristic-based auto-scaling strategy for container-based microservices in a cloud environment.
+% The goal
+The purpose of the auto-scaling strategy was to balance the overall resource utilization across microservices in the environment.
+% Results
+The proposed auto-scaling strategy performed better results than state-of-the-art algorithms in processing time, processing cost and resource utilization. The processing cost of microservices could be reduced by 12-20\% and the CPU and memory utilization of cloud-servers have been maximized by 9-15\% and 10-18\%.
+
+
+% ===========================================
+% ===========================================
+% GPU Stuff
+% ===========================================
+% ===========================================
+\section{Heterogenous GPU aware Spark systems}
+% Why is GPU needed
+Apache Spark is a computing framework that distributes tasks on multiple CPU cores. Data and compute intensive applications profit from GPU acceleration. Therefore, various research projects took effort to bring GPU acceleration to Apache Spark.
+
+
+% HeteroSpark
+Li et al. \cite{Li2015HeteroSpark} created a GPU-accelerated heterogeneous architecture called HeteroSpark to integrate with Apache Spark.
+% The goal
+HeteroSpark contributes to enable data parallelism for data and compute intensive applications running on Apache Spark. To be able to enable or disable GPU acceleration, HeteroSpark provides a plug-n-play design.
+% Results
+Overall, HeteroSpark is able to achieve a 18x speed-up for various Machine Learning applications running on Apache Spark.
+
+
+% HetSpark
+Klodjan et al. \cite{Klodjan2018HetSpark} introduced HetSpark a heterogeneous modification of Apache Spark.
+% The goal
+HetSpark extends Apache Spark with two executors, a GPU accelerated executor and a commodity class. The GPU accelerated executor is based on VineTalk\cite{Mavridis2017VineTalk} for GPU acceleration.
+% Results
+The authors observed, that for compute intensive tasks GPU accelerated executers are preferable while for linear tasks CPU-only accelerators should be used.
+
+
+% Spark-GPU
+Yuan et al. \cite{Yuan2016SparkGPU} proposed SparkGPU to enable parallel processing with GPUs in Apache Spark and contributes to achieve high performance and high throughput in Apache Spark applications.
+SparkGPU extends Apache Sparks to determine the suitability of parallel-processing for a task to enable task scheduling between CPU and GPU. 
+SparkGPU accomplished to improve the performance of machine learning algorithms up to 16.13x and SQL query execution performance up to 4.83x.
 
 
