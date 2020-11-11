@@ -22,16 +22,16 @@ Computing systems need to obtain a detailed knowledge of it`s environment and ho
 An autonomic computing system is defined by four elements:
 \begin{itemize}
 \item \textbf{Self-configuring:}
-Self-configuring refers to the ability of an IT environment to adapt dynamically to system changes and to be able to deploy new components automatically. Therefore, the system needs to understand and control the characteristics of a configurable item \cite{Murch2004Autonomic, Kephart2003VisionComputing}.
+Self-configuring refers to the ability of an IT environment to adapt dynamically to system changes and to be able to deploy new components automatically. Therefore, the system needs to understand and control the characteristics of a configurable item \cite{Murch2004Autonomic, Sinreich2006AnAB}.
 
 \item \textbf{Self-optimizing:}
 To ensure given goals and objectives, a self-optimizing environment has the ability to efficiently maximize resource allocation and utilization \cite{Jacob2004AutonomicSolution}. To accomplish this requirement, the environment has to monitor all resources to determine if an action is needed \cite{Murch2004Autonomic}.
 
 \item \textbf{Self-healing:}
-Self-healing environments are able to detect problematic operations and then perform policy-based actions to ensure that the systems health is stable \cite{Kephart2003VisionComputing, Jacob2004AutonomicSolution}. The policies of the actions have to be defined and should be executed without disrupting the system \cite{Kephart2003VisionComputing, Jacob2004AutonomicSolution}.
+Self-healing environments are able to detect problematic operations and then perform policy-based actions to ensure that the systems health is stable \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}. The policies of the actions have to be defined and should be executed without disrupting the system \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}.
 
 \item \textbf{Self-protecting:}
-The environment must identify unauthorized access and threats to the system and automatically protect itself taking appropriate actions during its runtime \cite{Kephart2003VisionComputing, Jacob2004AutonomicSolution}.
+The environment must identify unauthorized access and threats to the system and automatically protect itself taking appropriate actions during its runtime \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}.
 \end{itemize}
 
 
@@ -73,9 +73,9 @@ The core element of the autonomic architecture is the control-loop. \Fig{fig:ac_
 \end{figure}
 
 % Explanation
-A managed resource is a single component or a combination of components in the autonomic computing environment \cite{Murch2004Autonomic, Jacob2004AutonomicSolution}. A component can be a hardware or software component, e.g. a database, a server, an application or a different entity \cite{Kephart2003VisionComputing}.
+A managed resource is a single component or a combination of components in the autonomic computing environment \cite{Murch2004Autonomic, Jacob2004AutonomicSolution}. A component can be a hardware or software component, e.g. a database, a server, an application or a different entity \cite{Sinreich2006AnAB}.
 % Sensors and Effectors
-They are controlled by their sensors and effectors, as illustrated in \Fig{fig:ac_managed_resource}. Sensors are used to collect information about the state of the resource and effectors can be used to change the state of the resource \cite{Jacob2004AutonomicSolution}. The combination of sensors and effectors is called a touchpoint, which provides an interface for communication with the autonomic manager \cite{Kephart2003VisionComputing}.
+They are controlled by their sensors and effectors, as illustrated in \Fig{fig:ac_managed_resource}. Sensors are used to collect information about the state of the resource and effectors can be used to change the state of the resource \cite{Jacob2004AutonomicSolution}. The combination of sensors and effectors is called a touchpoint, which provides an interface for communication with the autonomic manager \cite{Sinreich2006AnAB}.
 % Scalability
 The ability to manage and control managed resources make them highly scalable \cite{Murch2004Autonomic}.
 
@@ -91,7 +91,7 @@ The ability to manage and control managed resources make them highly scalable \c
 \end{figure}
 
 % WHat is the autonomic manager
-The autonomic manager implements the control-loop to collect, aggregate, filter and report system metrics from the managed resources. It can only make adjustments within it`s own scope and uses predefined policies to make decisions of what actions have to be executed to accommodate the goals and objectives\cite{Murch2004Autonomic, Kephart2003VisionComputing}.
+The autonomic manager implements the control-loop to collect, aggregate, filter and report system metrics from the managed resources. It can only make adjustments within it`s own scope and uses predefined policies to make decisions of what actions have to be executed to accommodate the goals and objectives \cite{Murch2004Autonomic, Sinreich2006AnAB}.
 % Knowledge
 In addition, the autonomic manager gains knowledge through analyzing the managed resources \cite{Murch2004Autonomic}.
 % MAPE-K
@@ -99,78 +99,20 @@ The autonomic computing concept digests the MAPE-K model to implement an autonom
 
 \begin{itemize}
 \item \textbf{Monitor:}
-- The monitor function is responsible to collect the needed metrics from all managed resources and applies aggregation and filter
-operations to the collected data. After that the function reports the metrics.
+The monitor phase is responsible to collect the needed metrics from all managed resources and applies aggregation and filter operations to the collected data \cite{Sinreich2006AnAB}.
 
 \item \textbf{Analyze:}
-- To determine if changes have to be made to the computing system, the collected data has to be analyzed.
+The autonomic manager has to gain knowledge to determine if changes have to made to the environment \cite{Sinreich2006AnAB}. To predict future situations, the autonomic manager can model complex situation given the collected knowledge \cite{Jacob2004AutonomicSolution}.
 
 \item \textbf{Plan:}
-- If changes have to be made, an appropriate change plan has to be generated. A change plan consists of actions that are needed to achieve the configured goals and objectives. The change plan needs to be forwarded to the execute function.
+Plans have to be structured to achieve defined goals and objectives. A plan consists of policy-based actions \cite{Jacob2004AutonomicSolution, Sinreich2006AnAB}.
 
 \item \textbf{Execute:}
-- The execute function applies all necessary changes to the computing system.
-
+The execute phase applies all necessary changes to the computing system \cite{Sinreich2006AnAB}.
 \end{itemize}
 
-
-
-
-Autonomic computing is an architecture for computing systems to enable the ability to manage themselves in accordance to high level objectives configured by administrators \cite{Kephart2003VisionComputing}. 
-These computing systems dynamically adapt to demands and conditions of the workload \cite{Kephart2003VisionComputing}.
-An intelligent control-loop is responsible to collect all important details of the computing system and make decision according to the collected details. To automate the tasks, the intelligent control-loop is organized into four categories:
-
-\begin{itemize}
-\item \textbf{Self-configuring}
-- Components in the environment have to adapt dynamically to system changes using policies. For example, deploying or removing new components.
-
-\item \textbf{Self-healing}
-- If system errors have being detected, the control-loop has to perform policy-based actions without disrupting the 
-environment.
-
-\item \textbf{Self-optimizing}
-- The control-loop has to monitor the resources and should adapt to changes dynamically.
-
-\item \textbf{Self-protecting}
-- Detection and protection against threats.
-
-\end{itemize}
-
- An autonomic computing environment consists of an autonomic manager, managed-resources and a knowledge-base.
- % As shown in figure ...
- 
-\subsection{Managed resources}
-Managed resources are software or hardware components in the computing environment. For example, a managed resource 
-can be a database, service, application, server or different entity. Each managed resource implements an interface to enable 
-the autonomic manager to communicate with the managed resource. 
-
-These interface are called touchpoints.
-
-\subsection{Autonomic manager}
-The autonomic manager implements an intelligent control-loop to collect system metrics from the managed resources and acts according to the collected details. It can only make adjustments within it`s own scope and uses policies to make decisions of what actions have to be
-executed to accommodate the objectives.
-To be self-managing, the autonomic manager has to implement the following four automated functions.
-
-\begin{itemize}
-\item \textbf{Monitor}
-- The monitor function is responsible to collect the needed metrics from all managed resources and applies aggregation and filter
-operations to the collected data. After that the function reports the metrics.
-
-\item \textbf{Analyze}
-- To determine if changes have to be made to the computing system, the collected data has to be analyzed.
-
-\item \textbf{Plan}
-- If changes have to be made, an appropriate change plan has to be generated. A change plan consists of actions that are needed to achieve the configured goals and objectives. The change plan needs to be forwarded to the execute function.
-
-\item \textbf{Execute}
-- The execute function applies all necessary changes to the computing system.
-
-\end{itemize}
-
-Multiple autonomic manager can exist in an autonomic computing environment to perform only certain parts. For example, 
-there can be one autonomic manager which is responsible to monitor and analyze the system and another autonomic manager 
-to plan and execute. To create a complete and closed control-loop, multiple autonomic manager can be composed together.
-
+% Multiple manager
+Multiple autonomic manager can exist in an autonomic computing environment to perform only certain parts. For example, there can be one autonomic manager which is responsible to monitor and analyse the system and another autonomic manager to plan and execute. To create a complete and closed control-loop, multiple autonomic manager can be composed together \cite{Sinreich2006AnAB}.
 
 % ===========================================
 % ===========================================
