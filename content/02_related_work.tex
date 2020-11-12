@@ -8,42 +8,26 @@ This chapter provides background information about ...
 
 % ===========================================
 % ===========================================
-% Technologies
-% ===========================================
-% ===========================================
-\section{State-of-the-art technologies}
-
-
-% ===========================================
-% ===========================================
 % Scalable container
 % ===========================================
 % ===========================================
 \section{Scalable container architectures}
 % State of the art monitoring
-Dynamic scaling of containerized application is an active area of research. In recent years containerized applications have been used efficiently and many research works focused on creating a infrastructure with state-of-the-art monitoring tools for measuring container performance and the ability to dynamically scale. %Other work published about auto-scaling policies
+In recent years, container technologies have been used efficiently in complex IT environments. Dynamic scaling of containerized applications is an active area of research. The studied research can be divided in two parts. First, Barna et al. \cite{Barna2017ElasticContainerApps} primarily focused on a design for an auto-scaling architecture of containers with state-of-the-art technologies. Second, Srirama et al. \citep{Srirama2020AppDeplyCont} researched auto-scaling algorithm and policies for efficient resource utilization and cost reducing.
 
 
 % Delivering elastic ...
-Barna et al. \cite{Barna2017ElasticContainerApps} proposed a development approach for an autonomic management system for containerized applications enabling DevOps\footnote{DEVOPS BLA BLA}.
-% The goal
-The goal of this work was to monitor the performance of the system under low or high workload by using an autonomic management architecture to create a model to determine necessary scaling actions. They proposed the Scaling Heat Algorithm to determine if the container environment has to perform a scale-out or scale-in action. In addition DEVOPS
-% Results
-It was observed, that the resulting model makes accurate scaling decisions with an error rate less than 10\%.
-
-
-% Automated Deployment of a Spark Cluster with Machine Learning Algorithm Integration
-Fernández et al. \cite{Fernandez2020AutomatedDeploySpark} introduced LadonSpark, a solution to automate the deployment process of an Apache Spark cluster.
-% The goal
-The objective of LadonSpark is a method for deploying and configuring an Apache Spark Cluster as a task.
+Barna et al. \cite{Barna2017ElasticContainerApps} proposed an autonomic scaling architecture approach for containerized microservices. Their approach focused on creating an autonomic management system, following the autonomic computing concept \cite{Kephart2003VisionComputing}, using a self-tuning performance model. The demonstrated architecture frequently monitors the environment and gathers performance metrics from components. It has the ability to analyze the data and dynamically scale components. In addition, to determine if a scaling action is needed, they proposed the \textit{Scaling Heat Algorithm}. The Scaling Heat Algorithm is used to prevent unnecessary scaling actions, which can throw the environment temporarily off.
 
 
 % Application deployment using containers with auto-scaling for microservices in cloud environment
-Srirama et al. \citep{Srirama2020AppDeplyCont} designed a heuristic-based auto-scaling strategy for container-based microservices in a cloud environment.
-% The goal
-The purpose of the auto-scaling strategy was to balance the overall resource utilization across microservices in the environment.
+Srirama et al. \citep{Srirama2020AppDeplyCont} designed a heuristic-based auto-scaling strategy for container-based microservices in a cloud environment. The purpose of the auto-scaling strategy was to balance the overall resource utilization across microservices in the environment.
 % Results
 The proposed auto-scaling strategy performed better results than state-of-the-art algorithms in processing time, processing cost and resource utilization. The processing cost of microservices could be reduced by 12-20\% and the CPU and memory utilization of cloud-servers have been maximized by 9-15\% and 10-18\%.
+
+
+% Auto-scaling of Containers: the Impact of Relative and Absolute Metrics
+Casalicchio et al. \cite{Casalicchio2017AutoScaleCont} focused on the difference of absolute and relative metrics for container-based auto-scaling algorithms. They analysed the mechanism of the \textit{Kubernetes Horizontal Pod Auto-scaling} (KHPA) algorithm and proposed a new auto-scaling algorithm based on KHPA using absolute metrics called \textit{KHPA-A}. The results showed, that KHPA-A can reduce response time between 0.5x and 0.66x compared to KHPA. In addition, their work proposed an architecture using cAdvisor for collecting container performance metrics, Prometheus for monitoring, alerting and storing time-series data and Grafana for visualizing metrics.
 
 
 % ===========================================
@@ -53,13 +37,13 @@ The proposed auto-scaling strategy performed better results than state-of-the-ar
 % ===========================================
 \section{Heterogenous GPU aware Spark systems}
 % Why is GPU needed
-Apache Spark is a computing framework that distributes tasks on multiple CPU cores. Data and compute intensive applications profit from GPU acceleration. Therefore, various research projects took effort to bring GPU acceleration to Apache Spark.
+Apache Spark is a computing framework that distributes tasks between CPU cores. Data and compute intensive applications profit from GPU acceleration. Therefore, various research projects took effort to bring GPU acceleration to Apache Spark.
 
 
 % HeteroSpark
-Li et al. \cite{Li2015HeteroSpark} created a GPU-accelerated heterogeneous architecture called HeteroSpark to integrate with Apache Spark.
-% The goal
-HeteroSpark contributes to enable data parallelism for data and compute intensive applications running on Apache Spark. To be able to enable or disable GPU acceleration, HeteroSpark provides a plug-n-play design.
+Li et al. \cite{Li2015HeteroSpark} developed a middleware framework called \textit{HeteroSpark} to enable GPU acceleration on Apache Spark worker nodes. HeteroSpark listens for function calls in Spark applications and invokes the GPU kernel for acceleration. For communication between CPU and GPU, HeteroSpark uses the Java RMI\footnote{Java Remote Method Invocation} API to send data from the CPU JVM to the GPU JVM for execution.
+% Design
+The design provides a plug-n-play approach and an API for the user to call functions with GPU support.
 % Results
 Overall, HeteroSpark is able to achieve a 18x speed-up for various Machine Learning applications running on Apache Spark.
 
