@@ -46,13 +46,28 @@
 \contentsline {section}{\numberline {3.8}Naive Bayes Classifier}{18}{section.3.8}% 
 \contentsline {section}{\numberline {3.9}Scaling heat}{18}{section.3.9}% 
 \contentsline {section}{\numberline {3.10}KHP}{18}{section.3.10}% 
-\contentsline {chapter}{\numberline {4}Design}{19}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Cluster architecture}{19}{section.4.1}% 
-\contentsline {chapter}{\numberline {5}Implementation}{21}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Cluster architecture}{21}{section.5.1}% 
-\contentsline {chapter}{\numberline {6}Evaluation}{23}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Cluster architecture}{23}{section.6.1}% 
-\contentsline {chapter}{\numberline {7}Outlook}{25}{chapter.7}% 
-\contentsline {section}{\numberline {7.1}Cluster architecture}{25}{section.7.1}% 
-\contentsline {chapter}{\numberline {8}Conclusion}{27}{chapter.8}% 
-\contentsline {section}{\numberline {8.1}Cluster architecture}{27}{section.8.1}% 
+\contentsline {chapter}{\numberline {4}Conceptual Design}{19}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Cluster Architecture}{19}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}DevOps Process}{19}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}Autonomic Manager}{19}{section.4.3}% 
+\contentsline {subsection}{\numberline {4.3.1}Workflow}{20}{subsection.4.3.1}% 
+\contentsline {subsection}{\numberline {4.3.2}Design}{20}{subsection.4.3.2}% 
+\contentsline {section}{\numberline {4.4}Auto-Scaler}{21}{section.4.4}% 
+\contentsline {subsection}{\numberline {4.4.1}Configuration}{21}{subsection.4.4.1}% 
+\contentsline {subsubsection}{General properties}{21}{subsubsection*.36}% 
+\contentsline {subsubsection}{Apache Spark worker properties}{21}{subsubsection*.37}% 
+\contentsline {subsubsection}{Prometheus properties}{21}{subsubsection*.38}% 
+\contentsline {subsection}{\numberline {4.4.2}Analyze}{21}{subsection.4.4.2}% 
+\contentsline {subsection}{\numberline {4.4.3}Plan}{21}{subsection.4.4.3}% 
+\contentsline {subsection}{\numberline {4.4.4}Scaling}{21}{subsection.4.4.4}% 
+\contentsline {section}{\numberline {4.5}Metrics}{22}{section.4.5}% 
+\contentsline {subsection}{\numberline {4.5.1}CPU Utilization}{22}{subsection.4.5.1}% 
+\contentsline {subsection}{\numberline {4.5.2}GPU Utilization}{22}{subsection.4.5.2}% 
+\contentsline {chapter}{\numberline {5}Implementation}{23}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Cluster architecture}{23}{section.5.1}% 
+\contentsline {chapter}{\numberline {6}Evaluation}{25}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Cluster architecture}{25}{section.6.1}% 
+\contentsline {chapter}{\numberline {7}Outlook}{27}{chapter.7}% 
+\contentsline {section}{\numberline {7.1}Cluster architecture}{27}{section.7.1}% 
+\contentsline {chapter}{\numberline {8}Conclusion}{29}{chapter.8}% 
+\contentsline {section}{\numberline {8.1}Cluster architecture}{29}{section.8.1}% 
