@@ -52,14 +52,14 @@
 \contentsline {section}{\numberline {4.3}Autonomic Manager}{19}{section.4.3}% 
 \contentsline {subsection}{\numberline {4.3.1}Workflow}{20}{subsection.4.3.1}% 
 \contentsline {subsection}{\numberline {4.3.2}Design}{20}{subsection.4.3.2}% 
-\contentsline {section}{\numberline {4.4}Auto-Scaler}{21}{section.4.4}% 
+\contentsline {section}{\numberline {4.4}Auto-Scaler}{20}{section.4.4}% 
 \contentsline {subsection}{\numberline {4.4.1}Configuration}{21}{subsection.4.4.1}% 
 \contentsline {subsubsection}{General properties}{21}{subsubsection*.36}% 
 \contentsline {subsubsection}{Apache Spark worker properties}{21}{subsubsection*.37}% 
 \contentsline {subsubsection}{Prometheus properties}{21}{subsubsection*.38}% 
 \contentsline {subsection}{\numberline {4.4.2}Analyze}{21}{subsection.4.4.2}% 
-\contentsline {subsection}{\numberline {4.4.3}Plan}{21}{subsection.4.4.3}% 
-\contentsline {subsection}{\numberline {4.4.4}Scaling}{21}{subsection.4.4.4}% 
+\contentsline {subsection}{\numberline {4.4.3}Plan}{22}{subsection.4.4.3}% 
+\contentsline {subsection}{\numberline {4.4.4}Scaling}{22}{subsection.4.4.4}% 
 \contentsline {section}{\numberline {4.5}Metrics}{22}{section.4.5}% 
 \contentsline {subsection}{\numberline {4.5.1}CPU Utilization}{22}{subsection.4.5.1}% 
 \contentsline {subsection}{\numberline {4.5.2}GPU Utilization}{22}{subsection.4.5.2}% 

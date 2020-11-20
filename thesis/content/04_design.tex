@@ -78,11 +78,19 @@ The autonomic manager will be compose by several components to build a manager. 
 
 
 \section{Auto-Scaler}
-% How is the autonimic manager configurated
-% What components does the auto-scaler consist of? Configuration, Analyze, Plan
+% What is the Auto-Scaler
+The Auto-Scaler is a component of the the Autonomic Manager and is responsible for the Analyze, Plan and Execution phase.
+% Complete autonomic manager
+Together with cAdvisor and Prometheus, the Auto-Scaler builds a complete Autonomic Manager according to the architecture demonstrated in \SubSec{subsec:background-autonomic_computing-autonomic_manager}.
+% controll loop
+In addition, the Auto-Scaler implements the control-loop which is responsible to make adjustments in the environment.
+
+% HIER NOCH BILD VON SCALER WIE MIT DER MAPE ARCH
+
 
 \subsection{Configuration}
-The Auto-Scaler needs specific configuration properties to be able to collect the correct metric from Prometheus and deploy new Apache Spark worker container in the environment. The following are properties that have to be defined to ensure that the Auto-Scaler is able to collect meaningful metrics and scale Apache Spark worker as expected.
+\label{subsec:design-auto_scaler-configuration}
+The Auto-Scaler needs specific configuration properties to be able to collect the correct metrics from Prometheus and deploy new Apache Spark worker container in the environment. The following are properties that have to be defined to ensure that the Auto-Scaler is able to collect meaningful metrics and scale Apache Spark worker as expected.
 
 \subsubsection{General properties}
 
@@ -99,7 +107,7 @@ The Auto-Scaler needs specific configuration properties to be able to collect th
 
 \item \textbf{Worker thresholds:} The minimum and maximum number of concurrent Spark worker should be defined. To avoid the cold start effect, the minimum amount of worker should be 1. \todo{CHeck nochmal den Cold Start effekt}
 
-\item \textbf{Apache Spark master URI:} To distribute the workload across all Spark Worker, all Spark Worker need to communicate with the Spark master. The Spark master URI starts with \textit{spark://}.
+\item \textbf{Apache Spark master URI:} To distribute the workload across all Spark Worker, all Spark Worker need to communicate with the Spark master.
 \end{itemize}
 
 \subsubsection{Prometheus properties}
@@ -112,16 +120,20 @@ The Auto-Scaler needs specific configuration properties to be able to collect th
 
 
 \subsection{Analyze}
+% Short intro to analyze phase
+In order to determine if a scaling-action is necessary, the Auto-Scaler has to analyze the collected metrics. 
 % Hier scaling heat algorithmus bla bla
+The Auto-Scaler will use the Scaling Heat algorithm (described in Section BLA) to analyze metrics.
 
 \subsection{Plan}
-% Hier KHPA Algorithmus
-
-\subsection{Scaling}
-% There are threshold defined over and under utilization
-% There are min and max thresholds of worker defined
-
-If the CPU Utilization goes above 80\%, it means the cluster is overloaded. If the Utilization is less than 20\% the cluster is underutilized.
+% Short intro
+If a scaling-action is necessary, Spark worker container have to be created or removed from the environment. 
+% MinMax CPU GPU utilization
+The percentage of minimum and maximum CPU and GPU utilization across all Spark worker have to defined (described in \SubSec{subsec:design-auto_scaler-configuration}). These are the goals that the Auto-Scaler tries to achieve.
+% MinMax Spark Worker
+In addition, the minimum and maximum amount of concurrent Spark Worker have to be set (described in \SubSec{subsec:design-auto_scaler-configuration}) to guarantee that not too many or less Spark Worker are running at the same time HIER IST SEHR SCHWAMMIG; GUCK MAL IN DIE PAPER.
+%
+To achieve the defined goals of CPU and GPU utilization as well as ensure that the minimum and maximum number of concurrent Spark worker is observed, the Auto-Scaler will use the KHPA algorithm (described in Section BLA).
 
 
 % ===========================================
