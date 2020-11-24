@@ -48,26 +48,28 @@
 \contentsline {section}{\numberline {3.10}KHP}{18}{section.3.10}% 
 \contentsline {chapter}{\numberline {4}Conceptual Design}{19}{chapter.4}% 
 \contentsline {section}{\numberline {4.1}Cluster Architecture}{19}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}DevOps Process}{19}{section.4.2}% 
-\contentsline {section}{\numberline {4.3}Autonomic Manager}{19}{section.4.3}% 
+\contentsline {section}{\numberline {4.2}Apache Spark Cluster}{20}{section.4.2}% 
+\contentsline {subsection}{\numberline {4.2.1}Computing Environment}{20}{subsection.4.2.1}% 
+\contentsline {subsection}{\numberline {4.2.2}Spark Submit}{20}{subsection.4.2.2}% 
+\contentsline {section}{\numberline {4.3}Autonomic Manager}{20}{section.4.3}% 
 \contentsline {subsection}{\numberline {4.3.1}Workflow}{20}{subsection.4.3.1}% 
-\contentsline {subsection}{\numberline {4.3.2}Design}{20}{subsection.4.3.2}% 
-\contentsline {section}{\numberline {4.4}Auto-Scaler}{20}{section.4.4}% 
-\contentsline {subsection}{\numberline {4.4.1}Configuration}{21}{subsection.4.4.1}% 
-\contentsline {subsubsection}{General properties}{21}{subsubsection*.36}% 
-\contentsline {subsubsection}{Apache Spark worker properties}{21}{subsubsection*.37}% 
-\contentsline {subsubsection}{Prometheus properties}{21}{subsubsection*.38}% 
-\contentsline {subsection}{\numberline {4.4.2}Analyze}{21}{subsection.4.4.2}% 
-\contentsline {subsection}{\numberline {4.4.3}Plan}{22}{subsection.4.4.3}% 
-\contentsline {subsection}{\numberline {4.4.4}Scaling}{22}{subsection.4.4.4}% 
-\contentsline {section}{\numberline {4.5}Metrics}{22}{section.4.5}% 
-\contentsline {subsection}{\numberline {4.5.1}CPU Utilization}{22}{subsection.4.5.1}% 
-\contentsline {subsection}{\numberline {4.5.2}GPU Utilization}{22}{subsection.4.5.2}% 
-\contentsline {chapter}{\numberline {5}Implementation}{23}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Cluster architecture}{23}{section.5.1}% 
-\contentsline {chapter}{\numberline {6}Evaluation}{25}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Cluster architecture}{25}{section.6.1}% 
-\contentsline {chapter}{\numberline {7}Outlook}{27}{chapter.7}% 
-\contentsline {section}{\numberline {7.1}Cluster architecture}{27}{section.7.1}% 
-\contentsline {chapter}{\numberline {8}Conclusion}{29}{chapter.8}% 
-\contentsline {section}{\numberline {8.1}Cluster architecture}{29}{section.8.1}% 
+\contentsline {subsection}{\numberline {4.3.2}Design}{21}{subsection.4.3.2}% 
+\contentsline {section}{\numberline {4.4}Auto-Scaler}{22}{section.4.4}% 
+\contentsline {subsection}{\numberline {4.4.1}Configuration}{22}{subsection.4.4.1}% 
+\contentsline {subsubsection}{General properties}{22}{subsubsection*.36}% 
+\contentsline {subsubsection}{Utilization thresholds}{22}{subsubsection*.37}% 
+\contentsline {subsubsection}{Apache Spark worker properties}{22}{subsubsection*.38}% 
+\contentsline {subsubsection}{Prometheus properties}{23}{subsubsection*.39}% 
+\contentsline {subsection}{\numberline {4.4.2}Analyze}{23}{subsection.4.4.2}% 
+\contentsline {subsection}{\numberline {4.4.3}Plan}{23}{subsection.4.4.3}% 
+\contentsline {section}{\numberline {4.5}Metrics}{23}{section.4.5}% 
+\contentsline {subsection}{\numberline {4.5.1}CPU Utilization}{23}{subsection.4.5.1}% 
+\contentsline {subsection}{\numberline {4.5.2}GPU Utilization}{24}{subsection.4.5.2}% 
+\contentsline {chapter}{\numberline {5}Implementation}{25}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Cluster architecture}{25}{section.5.1}% 
+\contentsline {chapter}{\numberline {6}Evaluation}{27}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Cluster architecture}{27}{section.6.1}% 
+\contentsline {chapter}{\numberline {7}Outlook}{29}{chapter.7}% 
+\contentsline {section}{\numberline {7.1}Cluster architecture}{29}{section.7.1}% 
+\contentsline {chapter}{\numberline {8}Conclusion}{31}{chapter.8}% 
+\contentsline {section}{\numberline {8.1}Cluster architecture}{31}{section.8.1}% 
