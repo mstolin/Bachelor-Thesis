@@ -1,7 +1,64 @@
 \chapter{Introduction}
 \label{sec:introduction}
+
+\section{Distributed Computing}
+% Short intro to distributed computing
+Performing ETL applications on a single machine, limits the scale and performance of the application. Given this limitation, the idea of distributed computing evolved, where multiple machines with commodity hardware form a cluster to utilize their resources to solve high complex problems \cite{Ganelin2016Spark}.
+% Why is distributed computing so useful
+% Hier das Zitat von Thomas Davenport, RAPIDS Paper !!!
+
+% Evolution of distributed computing
+Several companies utilized the idea of distributed computing to solve some of their business problems. 
+% MapReduce
+Google developed the MapReduce \cite{Dean2004MapReduce} framework. MapReduce gave the opportunity to solve massive complex problems in parallel on a cluster of single machines.
+% Hadoop
+Yahoo published an ecosystem platform for distributed computing called Hadoop QUELLE. Hadoop contributed to create a cluster to process massive amounts of data in parallel.
+% Apache Spark
+Implementing data pipelines requires to chain multiple MapReduce jobs together. This causes a huge amount of writing and reading operation to the disk with bad impact on the overall performance. Another framework called Apache Spark was developed to simplify writing and executing parallel application at scale while keeping the benefits of MapReduce`s scalability and fault-tolerant data processing. Apache Spark provides a performance improve of 10x in iterative Machine Learning algorithms over MapReduce \cite{Zaharia2010Spark} and has evolved as a replacement for MapReduce as the distributed computing framework of choice.
+
+
+\section{Data Processing Acceleration with GPUs}
+% Spark only knows about CPUs
+Apache Spark only knows about CPUs. It performs its application on several CPU cores to enable parallization.
+% About CPU
+A CPU is build of multiple cores which are optimized for sequential serial processing QUELLE.
+% About GPU
+On the other hand, the architecture of a Graphical Process Unit (GPU) consists of a huge amount of smaller and more efficient cores which are optimized for darallel data processing (handling multiple tasks simoultaneously). In general, GPUs process data at a much faster rate than CPUs are capable.
+
+
+\section{Auto-Scaling}
+% Short intro to auto-scaling
+Adjusting the resources in a computing environment is not an easy task. To do it manually, a system administrator needs deep knowledge about hte environment and has to watch performance spikes regualarly. This is a resource wasting process. In an optimal way, an automized process would watch the computing enviroment, analyze perofmrance metrcis and automatically add or remove resource to optimize the performance and cost. This process is called an Auto-Scaler.
+
+
+% Why is auto-scaling needed
+Hiring experts to manually watching an application and scaling an computing environment is a waste of reources and cost.
+% Benefits of auto-scaling
+AN Auto-Scaler takes care of watching the environment and adding and removing resources to the computing needs. An Auto-Scaler can be configured to take care of optimal resource allocation and keeping the cost of running low.
+
+
+% How can auto-scaling be achieved (Horizontal and vertical)
+Auto-scaling a computing environment can be achieved with two different scaling approaches: Vertical-scaling and horizontal-scaling.
+% Vertical scaling
+Vertical scaling refers to adjusting the hardware resources of an individual node in the environment. Hardware adjustments can include adding (scale-up) or removing (scale-down) resources like memory or CPU cores \cite{Wilder2012CloudPatterns}. By adding more powerful resources to a node, a node can take more throughput and perform more specialized tasks \cite{Abbott2015ScalabilityArt}.
+% Horizontal scaling
+Adjusting the nodes in a computing environment is referred to horizontal scaling \cite{Wilder2012CloudPatterns}. Increasing the number of nodes in an environment, increases the overall computing capacity and in addition, the workload can be distributed across all nodes \cite{Wilder2012CloudPatterns, Abbott2015ScalabilityArt}.
+% Not exclusive
+Both scaling approaches are not exclusive. A computing environment can be designed to scale vertically, horizontally or both \cite{Wilder2012CloudPatterns}.
+% Why horizontal scaling is preferred
+Vertical scaling is limited by the maximum hardware capacity. In addition, a point can be reached where more powerful hardware resources become unaffordable or are not available \cite{Abbot2011ScalabilityRules}.  Therefore, horizontal scaling is the preferred approach to enable auto-scaling.
+
+
+\section{DevOps}
+
+
+
+
+
+%Why compution is important, How to improve computation via GPU, what about (horizontal) auto-scaling, (DevOps??)
+
 %
-\todo{EVTL DATUM AUF NOVEMBER ÄNDERN; WEGEN STARTDATUM!! in den online quellen}
+%\todo{EVTL DATUM AUF NOVEMBER ÄNDERN; WEGEN STARTDATUM!! in den online quellen}
 
 %Complex computation operations rely on a IT infrastructure that is able to perform operations on scale. Computing systems that automatically adapt to demands and conditions of the workload serve the needs of
 %highly scaled computing systems QUELLE. The microservice architecture is a technique to divide a big application into independent services. Each single service only serves one business task of the application QUELLE. In recent years, container applications have become popular to deploy microservices and visualize the needed resources for performing complex operations QUELLE. A container is a single unit that serves the 
@@ -16,13 +73,13 @@
 
 
 % Start
-Storing huge amounts of data has become inexpensive in recent years, but processing it, requires 
-parallel computations on clusters with multiple machines \cite{Chambers2018Spark}. Complex 
-computation operations rely on a IT infrastructure with the ability to perform operations on scale. 
+%Storing huge amounts of data has become inexpensive in recent years, but processing it, requires 
+%parallel computations on clusters with multiple machines \cite{Chambers2018Spark}. Complex 
+%computation operations rely on a IT infrastructure with the ability to perform operations on scale. 
 %Scalability is the ability of a system to grow in accordance of the amount of work \cite{TakadaDistr}.
 
 % Sachen aus autonomic computing
-In order to achieve high scalability, computing systems need to adapt dynamically to demands and conditions of the workload.
+%In order to achieve high scalability, computing systems need to adapt dynamically to demands and conditions of the workload.
 
 
 % Technologies
@@ -41,7 +98,14 @@ In order to achieve high scalability, computing systems need to adapt dynamicall
 % In addition to elasticity
 %Another aspect to improve complex computation operations is GPU acceleration. GPU accelerations has been an on-going %research area in the recent years.
 
-\section{Problem statement}
+\section{Problem Statement}
+% Ein problem is, wie GPUs im CLuster verbinden -> Siehe RAPIDS paper für Formulierung
+% Wie automatisiert motoren (Perf metrics sammeln)
+% Wie automatisiert und effizient scalieren
+
+
+
+
 
 %% Struktur
 % Möglichkeit IT resourcen automatisch nach bedarf zu skalieren
@@ -51,10 +115,10 @@ In order to achieve high scalability, computing systems need to adapt dynamicall
 %when performance peaks and fluctuations occur.
 
 % Dynamisch auf performance spitzen reagieren
-ETL \footnote{Extract transform load} operations are compute-intensive. During the execution of analytic applications, performance thresholds can be reached and
-the computing system can become out-of-order. 
+%ETL \footnote{Extract transform load} operations are compute-intensive. During the execution of analytic applications, performance thresholds can be reached and
+%the computing system can become out-of-order. 
 
-In addition, many algorithms profit from data-parallelism. % Das ha mehr mit SPark zu tun
+%In addition, many algorithms profit from data-parallelism. % Das ha mehr mit SPark zu tun
 
 %If performance thresholds are reached and the IT environment can`t adapt 
 %dynamically to the usage demand, the environment can look temporarily out-of-order. 
@@ -63,6 +127,26 @@ In addition, many algorithms profit from data-parallelism. % Das ha mehr mit SPa
 % Mit GPU ETLs beschleunigen
 %In addition, algorithms do profit from data-parallelism. 
 
-\section{Research questions}
+\section{Research Questions}
+% Whats the goal of this thesis
+The goal of this thesis is to implement a computing environment to perform machine learning applications distributed. The environment should be able to scale itself automatically in accordance to the workload caused by performing the Machine Learning applications. In addition, the Machine Learning application should be performed automatically in a DevOps process. To address the goal of this research work, the following two research question will be investigated:
 
-\section{Thesis structure}
+
+% RQ1
+\paragraph{}
+\textit{Is it possible to extend the number of Spark Worker in accordance to performance?}
+
+
+% 
+This thesis investigates approaches to implement an Auto-Scaler that is able to add and remove Spark worker instances automatically in accordance to the workload. The Auto-Scaler needs to monitor the performance of the environment periodically and should make decisions according on that.
+
+
+% RQ2
+\paragraph{Can we accelerate Machine Learning algorithms execution with GPU support?}
+%
+Apache Spark runs on CPU only.  In this thesis, a way will be investigated to enable GPU acceleration for Apache Spark applications.
+
+
+\section{Thesis Structure}
+
+\section{Research Methodologies}
