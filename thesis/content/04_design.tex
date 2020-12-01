@@ -35,7 +35,7 @@ All Spark components run in a single isolated Docker network.
 Computing environment consists only of Apache Spark Master and Spark worker. All Spark components are deplyed in standalone mode and each is a single container in the same Docker network. The Apache Spark master distributed the workload of an application across all available spark worker.
 
 \subsection{Spark Submit}
-Spark submit is a single component in the APache Spark cluster. It is a Apache Spark submit runtime running in a single Docker container. Whenever a Saprk application needs to be executed, a Spark submit container gets deployed in the Apache Saprk and submits the application to the Spark master. After completion, the Spark submit container gets removed automatically.
+Spark submit is a single component in the Apache Spark cluster. It is a Apache Spark submit runtime running in a single Docker container. Whenever a Saprk application needs to be executed, a Spark submit container gets deployed in the Apache Saprk and submits the application to the Spark master. After completion, the Spark submit container gets removed automatically.
 
 
 % ===========================================
@@ -49,7 +49,7 @@ The autonomic manager is implemented according to the MAPE architecture (introdu
 % Process figure
 \begin{figure}[h]%
 \centering
-\includegraphics[scale=0.65]{images/04_conceptual_design/autonomic_manager/autonomic_manager_workflow}%
+\includegraphics[scale=0.50]{images/04_conceptual_design/autonomic_manager/autonomic_manager_workflow}%
 \caption{Scaling process UML activity model - Source: Authors own model.}%
 \label{fig:am-workflow}%
 \end{figure}
@@ -106,7 +106,7 @@ Together with cAdvisor and Prometheus, the Auto-Scaler builds a complete Autonom
 % controll loop
 In addition, the Auto-Scaler implements the control-loop which is responsible to make adjustments in the environment.
 % Communication
-Since Prometheus collects and stores available metrics from cAdvisor, the Auto-Scaler has not to communicate with cAdvisor.
+Since Prometheus collects and stores available metrics from cAdvisor,  the Auto-Scaler has not to communicate with cAdvisor.
 
 % HIER NOCH BILD VON SCALER WIE MIT DER MAPE ARCH
 
@@ -119,12 +119,24 @@ The Auto-Scaler needs specific configuration properties to be able to collect th
 
 \begin{itemize}
 \item \textbf{Interval seconds:} The number of seconds when the loop has to repeat needs to be defined.
+
+\item \textbf{Cooldown period:} The duration in seconds,  the Auto-Scaler has to wait after a scaling action was performed.
+
+\item \textbf{Recurrence factor:} To prevent to many scaling actions,  the autonomic manager should only execute a scaling action,  if the utilization thresholds is violated \textit{n} times.
+
+\item \textbf{Prometheus URL:} The Auto-Scaler will fetch the configured metrics from the Prometheus REST API.
 \end{itemize}
 
-\subsubsection{Utilization thresholds}
+\subsubsection{Metrics}
+
+To support to analyze multiple metrics, the user should be able to create a dynamic list if metrics. Each metric needs to have a variety of properties configured.
 
 \begin{itemize}
-\item \textbf{CPU/GPU utilization thresholds:} To determine if a scaling action is needed, the scaling heat algorithm needs the minimum and maximum CPU/GPU utilization defined by an administrator.
+\item \textbf{Target utilization:} The relative target utilization of a metrics needs to be defined to calculate the number of Spark worker to add or to remove to reach the defined goal.
+
+\item \textbf{Utilization thresholds:} To determine if a scaling action is needed, the scaling heat algorithm needs the minimum and maximum utilization defined by an administrator.
+
+\item \textbf{Query:} A PromQL query needs to be defined to collect the metric for all Spark Worker.
 \end{itemize}
 
 \subsubsection{Apache Spark worker properties}
@@ -134,47 +146,37 @@ The Auto-Scaler needs specific configuration properties to be able to collect th
 
 \item \textbf{Worker network:} To establish communication between all Spark worker and the Spark master, all new Spark worker container should be in the same network.
 
-\item \textbf{Worker thresholds:} The minimum and maximum number of concurrent Spark worker should be defined. To avoid the cold start effect, the minimum amount of worker should be 1. \todo{CHeck nochmal den Cold Start effekt}
+\item \textbf{Worker thresholds:} The minimum and maximum number of concurrent Spark worker should be defined. To avoid the cold start effect, the minimum amount of worker should be 1. 
 
 \item \textbf{Apache Spark master URI:} To distribute the workload across all Spark Worker, all Spark Worker need to communicate with the Spark master.
-\end{itemize}
-
-\subsubsection{Prometheus properties}
-
-\begin{itemize}
-\item \textbf{Prometheus URL:} The Auto-Scaler will collect the configured metrics from Prometheus REST API.
-
-\item \textbf{Prometheus query:} A PromQL query needs to be defined to collect specific metrics for CPU utilization calculation. 
 \end{itemize}
 
 
 \subsection{Analyze}
 % Short intro to analyze phase
-In order to determine if a scaling-action is necessary, the Auto-Scaler has to analyze the collected metrics. 
+In order to determine if a scaling-action is necessary, the Auto-Scaler has to process the collected metrics. 
 % How to analyze
-During each period, the Auto-scaler queries the time-series database from Prometheus with the configured query to get the CPU and GPU utilization metrics. The configured query will be send to the Prometheus API.
+During each period, the Auto-scaler queries the Prometheus time-series database with the configured queries to get all needed metrics. 
 % Determine if scaling is needed
 After the metrics are received, the Auto-Scaler determines if a scaling action is needed using the Scaling Heat algorithm (introduced in Section AB). If scaling is not necessary, the Auto-Scaler continues to collect metrics from Prometheus.
 
+
 \subsection{Plan}
 % Short intro
-If a scaling-action is necessary, the Auto-Scaler will create a scaling plan to accommodate the defined goals and objectives.
-
+If a scaling-action is necessary, the Auto-Scaler is responsible to plan how to scale the number of Spark worker to satisfy the defined utilization goals.
+% What is a scaling plan
 A scaling plan consists of instructions to add or remove Spark worker which will be send to the Docker engine.
+% Calculating Spark worker
+To calculate the number of Spark worker, needed to accomplish the defined target utilization, the Auto-Scaler uses the \textit{Kubernetes Horizontal Pod Auto-Scaling} algorithm. In addition, the Auto-Scaler needs to check if the estimated number of Spark worker fall bellow the minimum threshold or exceed the maximum threshold of concurrent Spark worker.
 
-To determine how many Spark worker needs to be added, the Auto-Scaler uses the KHPA algorithm (introduced in Section BC). Before a scaling plan will be executed, the Auto-Scaler needs to check the maximum limit of Spark worker to prevent an overflow.
 
-% Downscaling 
-% Cooldown phase
-
-% Goals
-The goals and objectives which need to be achieved, are defined in the Auto-Scaler configuration (described in \SubSec{subsec:design-auto_scaler-configuration}).
-% MinMax CPU GPU utilization
-The percentage of minimum and maximum CPU and GPU utilization across all Spark worker have to defined (described in \SubSec{subsec:design-auto_scaler-configuration}). These are the goals that the Auto-Scaler tries to achieve.
-% MinMax Spark Worker
-In addition, the minimum and maximum amount of concurrent Spark Worker have to be set (described in \SubSec{subsec:design-auto_scaler-configuration}) to guarantee that not too many or less Spark Worker are running at the same time HIER IST SEHR SCHWAMMIG; GUCK MAL IN DIE PAPER.
-%
-To achieve the defined goals of CPU and GPU utilization as well as ensure that the minimum and maximum number of concurrent Spark worker is observed, the Auto-Scaler will use the KHPA algorithm (described in Section BLA).
+\subsection{Execute}
+% Short intro
+After a scaling plan has been created, the Auto-Scaler needs to send the instructions to the Docker engine.
+% Cooldown
+After scaling the environment, it needs time for changes to take effect. Therefore a cooldown period will be activated after each scaling action.
+% Whats happens
+During the cooldown period, no scaling actions will be forwarded to the Docker engine.
 
 
 % ===========================================
