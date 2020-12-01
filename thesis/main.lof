@@ -1,24 +1,24 @@
 \babel@toc {english}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax 2.1}{\ignorespaces Autonomic computing concept - Source: Authors own model, based on \cite {Jacob2004AutonomicSolution}.\relax }}{6}{figure.caption.7}% 
+\contentsline {figure}{\numberline {\relax 2.2}{\ignorespaces The control-loop concept - Source: Authors own model, based on \cite {Murch2004Autonomic}.\relax }}{6}{figure.caption.8}% 
+\contentsline {figure}{\numberline {\relax 2.3}{\ignorespaces Managed resource - Source: Authors own model, based on \cite {Jacob2004AutonomicSolution}.\relax }}{7}{figure.caption.9}% 
+\contentsline {figure}{\numberline {\relax 2.4}{\ignorespaces Autonomic manager - Source: Authors own model, based on \cite {Jacob2004AutonomicSolution}.\relax }}{7}{figure.caption.10}% 
+\contentsline {figure}{\numberline {\relax 2.5}{\ignorespaces Docker architecture - Source: Authors own model, based on \cite {Docker2020Docs}.\relax }}{9}{figure.caption.11}% 
+\contentsline {figure}{\numberline {\relax 2.6}{\ignorespaces Docker basic container structure - Source: Authors own model, based on \cite {Bullington2020Docker}.\relax }}{10}{figure.caption.15}% 
+\contentsline {figure}{\numberline {\relax 2.7}{\ignorespaces Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite {Hien2018Spark}.\relax }}{12}{figure.caption.19}% 
+\contentsline {figure}{\numberline {\relax 2.8}{\ignorespaces Overview of a Spark cluster architecture - Source: Authors own model, based on \cite {Apache2020Spark}.\relax }}{13}{figure.caption.20}% 
+\contentsline {figure}{\numberline {\relax 2.9}{\ignorespaces Spark`s cluster mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{13}{figure.caption.24}% 
+\contentsline {figure}{\numberline {\relax 2.10}{\ignorespaces Spark`s client mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{14}{figure.caption.25}% 
+\contentsline {figure}{\numberline {\relax 2.11}{\ignorespaces Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite {Mcdonald2020SparkRapids}.\relax }}{16}{figure.caption.26}% 
+\contentsline {figure}{\numberline {\relax 2.12}{\ignorespaces Pull-based approach to scrape metrics - Source: \cite {Bastos2019Prom}.\relax }}{16}{figure.caption.27}% 
+\contentsline {figure}{\numberline {\relax 2.13}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Bastos2019Prom}.\relax }}{17}{figure.caption.28}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Autonomic computing concept - Source: Authors own model, based on \cite {Jacob2004AutonomicSolution}.\relax }}{6}{figure.caption.5}% 
-\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces The control-loop concept - Source: Authors own model, based on \cite {Murch2004Autonomic}.\relax }}{6}{figure.caption.6}% 
-\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Managed resource - Source: Authors own model, based on \cite {Jacob2004AutonomicSolution}.\relax }}{7}{figure.caption.7}% 
-\contentsline {figure}{\numberline {\relax 3.4}{\ignorespaces Autonomic manager - Source: Authors own model, based on \cite {Jacob2004AutonomicSolution}.\relax }}{7}{figure.caption.8}% 
-\contentsline {figure}{\numberline {\relax 3.5}{\ignorespaces Docker architecture - Source: Authors own model, based on \cite {Docker2020Docs}.\relax }}{9}{figure.caption.9}% 
-\contentsline {figure}{\numberline {\relax 3.6}{\ignorespaces Docker basic container structure - Source: Authors own model, based on \cite {Bullington2020Docker}.\relax }}{10}{figure.caption.13}% 
-\contentsline {figure}{\numberline {\relax 3.7}{\ignorespaces Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite {Hien2018Spark}.\relax }}{12}{figure.caption.17}% 
-\contentsline {figure}{\numberline {\relax 3.8}{\ignorespaces Overview of a Spark cluster architecture - Source: Authors own model, based on \cite {Apache2020Spark}.\relax }}{13}{figure.caption.18}% 
-\contentsline {figure}{\numberline {\relax 3.9}{\ignorespaces Spark`s cluster mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{13}{figure.caption.22}% 
-\contentsline {figure}{\numberline {\relax 3.10}{\ignorespaces Spark`s client mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{14}{figure.caption.23}% 
-\contentsline {figure}{\numberline {\relax 3.11}{\ignorespaces Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite {Mcdonald2020SparkRapids}.\relax }}{16}{figure.caption.24}% 
-\contentsline {figure}{\numberline {\relax 3.12}{\ignorespaces Pull-based approach to scrape metrics - Source: \cite {Bastos2019Prom}.\relax }}{16}{figure.caption.25}% 
-\contentsline {figure}{\numberline {\relax 3.13}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Bastos2019Prom}.\relax }}{17}{figure.caption.26}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Scaling process UML activity model - Source: Authors own model.\relax }}{19}{figure.caption.33}% 
-\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Scaling process UML activity model - Source: Authors own model.\relax }}{20}{figure.caption.34}% 
-\contentsline {figure}{\numberline {\relax 4.3}{\ignorespaces Scaling process UML activity model - Source: Authors own model.\relax }}{21}{figure.caption.35}% 
+\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Scaling process UML activity model - Source: Authors own model.\relax }}{23}{figure.caption.40}% 
+\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Scaling process UML activity model - Source: Authors own model.\relax }}{25}{figure.caption.41}% 
+\contentsline {figure}{\numberline {\relax 4.3}{\ignorespaces Scaling process UML activity model - Source: Authors own model.\relax }}{25}{figure.caption.42}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
