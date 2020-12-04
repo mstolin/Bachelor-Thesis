@@ -17,13 +17,15 @@ Yahoo published an ecosystem platform for distributed computing called Hadoop QU
 Implementing data pipelines requires to chain multiple MapReduce jobs together. This causes a huge amount of writing and reading operation to the disk with bad impact on the overall performance. Another framework called Apache Spark was developed to simplify writing and executing parallel application at scale while keeping the benefits of MapReduce`s scalability and fault-tolerant data processing. Apache Spark provides a performance improve of 10x in iterative Machine Learning algorithms over MapReduce \cite{Zaharia2010Spark} and has evolved as a replacement for MapReduce as the distributed computing framework of choice.
 
 
-\section{Data Processing Acceleration with GPUs}
-% Spark only knows about CPUs
-Apache Spark only knows about CPUs. It performs its application on several CPU cores to enable parallization.
-% About CPU
-A CPU is build of multiple cores which are optimized for sequential serial processing QUELLE.
-% About GPU
-On the other hand, the architecture of a Graphical Process Unit (GPU) consists of a huge amount of smaller and more efficient cores which are optimized for darallel data processing (handling multiple tasks simoultaneously). In general, GPUs process data at a much faster rate than CPUs are capable.
+\section{Computing Acceleration with GPUs}
+% Why CPUs are limited
+Distributed computing frameworks like Apache Spark perform applications on a huge amount of CPU cores to enable parallization. A CPU is build of multiple cores which are optimized for sequential serial processing QUELLE. Performing computationally intensive applications on an Apache Spark cluster, consumes a huge amount of CPU cycles with bad impact on the overall performance QUELLE HETEROSPARK.
+% About the growing complexity of computational power
+To handle the complexity of Big Data applications, from executing Machine Learning algorithms or training Deep Loearning models, a remaining option of distributed computing clusters is ti scale-up individual nodes. Scaling-up is limited by resource capacity and can be become uneconomically at a specific point.
+% What about GPUs
+To perform computationaly complex applications with better performance, GPUs have become first class citizens in modern data centers. The architecture of a Graphical Process Unit (GPU) consists of a huge amount of smaller and more efficient cores which are optimized for parallel data processing (handling multiple tasks simoultaneously). In general, GPUs process data at a much faster rate than CPUs are capable.
+% How can apps be accelerated with GPUs
+Leveraging GPUs for distributed computing frameworks like Apache Spark, can boost the overall performance of performing complex algorithms on large datasets.
 
 
 \section{Auto-Scaling}
@@ -99,9 +101,19 @@ Vertical scaling is limited by the maximum hardware capacity. In addition, a poi
 %Another aspect to improve complex computation operations is GPU acceleration. GPU accelerations has been an on-going %research area in the recent years.
 
 \section{Problem Statement}
+\subsection{Performance}
+% Workload muss effizient verteil werden
+For complex machine learning applications working with massive datasets, it is necessary to distribute the workload to enable parallel execution. Therefore, a cluster has to be created to enable nodes to distribute their workload. Apache Spark will be used to create such a cluster.
+% GPUs sollen genutzt werden um Performance zu optimieren
+Apache Spark distributes the workload on multiple CPU cores on each node to enable parallelism. Machine Learning algorithms benefits from GPUs which enable data parallelism. In this context, the cluster needs to be extendend with GPUs and Apache Spark needs be aware how to distribute workload on GPUs as well.
 % Ein problem is, wie GPUs im CLuster verbinden -> Siehe RAPIDS paper für Formulierung
-% Wie automatisiert motoren (Perf metrics sammeln)
-% Wie automatisiert und effizient scalieren
+Since 
+
+
+\subsection{Auto-Scaling}
+% Das env muss automatisiert überwacht und analysiert werden
+Performing complex Machine Learning algorithms on large datasets requires a huge amount of resources. Theos resources need to be monitored frequently to be able to detect performance spikes. If performance spikes are detected, the system needs to calculate how many nodes to add to keeping the performance on a normal level.
+% Nodes müssen automatisch und dynamisch sklaiert werden um performance anspruch gerecht zu werden
 
 
 
@@ -127,26 +139,42 @@ Vertical scaling is limited by the maximum hardware capacity. In addition, a poi
 % Mit GPU ETLs beschleunigen
 %In addition, algorithms do profit from data-parallelism. 
 
-\section{Research Questions}
+\section{Research Questions and Research Objective}
 % Whats the goal of this thesis
 The goal of this thesis is to implement a computing environment to perform machine learning applications distributed. The environment should be able to scale itself automatically in accordance to the workload caused by performing the Machine Learning applications. In addition, the Machine Learning application should be performed automatically in a DevOps process. To address the goal of this research work, the following two research question will be investigated:
 
 
+%RQs
+\begin{enumerate}
+\item Is it possible to extend the number of Spark Worker in accordance to performance?
+\item Can we extend Apache Spark to accelerate execution with GPU support?
+\end{enumerate}
+
+
 % RQ1
-\paragraph{}
-\textit{Is it possible to extend the number of Spark Worker in accordance to performance?}
-
-
-% 
-This thesis investigates approaches to implement an Auto-Scaler that is able to add and remove Spark worker instances automatically in accordance to the workload. The Auto-Scaler needs to monitor the performance of the environment periodically and should make decisions according on that.
+The first research question searches for the possibilities to create an elastic Apache Spark cluster. This question also builds the foundation of the computing environment used for this thesis. To answer this question, state-of-the-art computing architectures have to be investigated. During the investigation, tools have to be evaluated that enable a simple deployment of Apache Spark worker instances and monitoring the performance metrics of the computing environment. In Addition, horizontal auto-scaling approaches that fit into the computing environment have to investigated.
 
 
 % RQ2
-\paragraph{Can we accelerate Machine Learning algorithms execution with GPU support?}
-%
-Apache Spark runs on CPU only.  In this thesis, a way will be investigated to enable GPU acceleration for Apache Spark applications.
+For the second research questions, approaches need to be investigate to extend Apache Spark to perform operation on GPUs. As mentioned in SEC X, Apache Spark only knows about CPUs. The aim to answer this question, is to find a way to add GPUs to the computing cluster and make them available for Apache Spark.
 
 
 \section{Thesis Structure}
 
 \section{Research Methodologies}
+% Read state of the art literature about scaling Apache Spark (elasticity)
+The first step is to read state-of-the-art literature. Literature about elastic computing architectures needs to be investigated to compare different tools for monitoring an environment and deploying computing nodes on demand.
+% How to enable GPU acceleration for Apache Spark
+In addition, literature about extending an Apache Spark cluster with GPU support needs to be investigated.
+% Classify literature
+The collected literature needs to be classified into different categories. First all architecture related paper should be summarized, second all literature about horizontal auto-scaling needs to be summarized and last all literature about GPU support for Apache Spark needs to be summarized.
+% Implementing The (Docker environment)
+After gaining knowledge about state-of-the-art technologies and approaches, the Apache Spark cluster needs to be implemented.
+% Impementing an auto-scaler
+After an Apache Spark cluster is available, the Auto-Scaler has to be implemented.
+% Testing
+If the Auto-Scaler is available, it needs to be tested.
+% Enabling GPU acceleration
+GPU support has to bee added to the cluster.
+% Evaluation
+With GPU support, the scalable environment can be evaluated with Machine Learning algorithms.
