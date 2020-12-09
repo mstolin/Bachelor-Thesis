@@ -2,6 +2,8 @@
 \label{sec:introduction}
 
 \section{Distributed Computing}
+% Little intro accorsing to Big Data ML and so on
+Machine Learning and Big Data projects consist of a combination of extract-transform-load (ETL) pipelines and compute intensive algorithms to create meaningful informations from massive data sets QULLE DevOps: CON.. .
 % Short intro to distributed computing
 Performing ETL applications on a single machine, limits the scale and performance of the application. Given this limitation, the idea of distributed computing evolved, where multiple machines with commodity hardware form a cluster to utilize their resources to solve high complex problems \cite{Ganelin2016Spark}.
 % Why is distributed computing so useful
@@ -52,53 +54,27 @@ Vertical scaling is limited by the maximum hardware capacity. In addition, a poi
 
 
 \section{DevOps}
+% What is DevOps
+DevOps (Development plus Operations) is way that automates process during the development life cycle of a product. Development phases can be testing, monitoring or deployment \cite{Vadapalli2018DevOps}. 
+% What benefits has the automation
+The automation of development processes leads to an overall improvement of development. It reduces human errors and the downtime for upgrades as well benefits to the improvement of productivity \cite{Vadapalli2018DevOps}.
 
 
+% DevOps and BigData/ML projects
+Machine Learning and Big Data Projects benefits from DevOps \cite{Vadapalli2018DevOps}.
 
 
+% Intergration of DevOps
+To integrate DevOps methodologies into a projects, an optimized strategy is key. The strategy needs to provides automation for each aspect of the projects life cycle. Therefore, it needs to integrate the correct tools, platforms and technologies \cite{Vadapalli2018DevOps}.
+% Which purpose does it serve
+An integration of DevOps methodologis into the life cycle of a software project can serve several purposes \cite{Vadapalli2018DevOps}:
+\begin{itemize}
+\item Automating the management of the infrastructure and configuration
+\item Automating testing and build workflows of source ode repositories
+\item Continuous integration and deployment
+\item Virtualization and containirazion
+\end{itemize}
 
-%Why compution is important, How to improve computation via GPU, what about (horizontal) auto-scaling, (DevOps??)
-
-%
-%\todo{EVTL DATUM AUF NOVEMBER ÄNDERN; WEGEN STARTDATUM!! in den online quellen}
-
-%Complex computation operations rely on a IT infrastructure that is able to perform operations on scale. Computing systems that automatically adapt to demands and conditions of the workload serve the needs of
-%highly scaled computing systems QUELLE. The microservice architecture is a technique to divide a big application into independent services. Each single service only serves one business task of the application QUELLE. In recent years, container applications have become popular to deploy microservices and visualize the needed resources for performing complex operations QUELLE. A container is a single unit that serves the 
-%whole environment for a microservice.
-
-% -- Struktur von Intro
-% Grid computing
-% Autonomic computing
-% Microservices ??
-% Container
-% GPU acceleration
-
-
-% Start
-%Storing huge amounts of data has become inexpensive in recent years, but processing it, requires 
-%parallel computations on clusters with multiple machines \cite{Chambers2018Spark}. Complex 
-%computation operations rely on a IT infrastructure with the ability to perform operations on scale. 
-%Scalability is the ability of a system to grow in accordance of the amount of work \cite{TakadaDistr}.
-
-% Sachen aus autonomic computing
-%In order to achieve high scalability, computing systems need to adapt dynamically to demands and conditions of the workload.
-
-
-% Technologies
-%In recent years, technologies have contributed to improve the scalability and performance of modern 
-%computing systems like cloud computing, virtualization and GPU acceleration.
-
-% Autonomic computing
-%Autonomic computing is an architecture for computing systems to manage themselves in accordance to high level objectives, %configured by administrators. These computing systems dynamically adapt to demands and conditions of the workload. The f%our main attributes of autonomic computing are self-configuring, self-healing, self-optimizing and self-protecting \%cite{Kephart2003VisionComputing}. The autonomic computing architecture consists 
-%of an autonomic manager, which is responsible to make adjustments in it`s own environment \cite{Sinreich2006AnAB}. %Technologies like Docker help to create containers ... bla bla bla
-
-% Virtualization
-%Modern virtualization technologies like containers help to overcome scalability limitations with the creation of virtual instances %of IT resources \cite{Erl2013CloudComputing}.
-
-
-% GPU acceleration
-% In addition to elasticity
-%Another aspect to improve complex computation operations is GPU acceleration. GPU accelerations has been an on-going %research area in the recent years.
 
 \section{Problem Statement}
 \subsection{Performance}
@@ -140,8 +116,11 @@ Performing complex Machine Learning algorithms on large datasets requires a huge
 %In addition, algorithms do profit from data-parallelism. 
 
 \section{Research Questions and Research Objective}
+%!!
+% Goals is to create a self-adapting and self-healing system
+%!!
 % Whats the goal of this thesis
-The goal of this thesis is to implement a computing environment to perform machine learning applications distributed. The environment should be able to scale itself automatically in accordance to the workload caused by performing the Machine Learning applications. In addition, the Machine Learning application should be performed automatically in a DevOps process. To address the goal of this research work, the following two research question will be investigated:
+The goal of this thesis is to implement a distributed computing environment to perform machine learning applications. The environment should be able to scale itself automatically in accordance to the workload caused by performing the Machine Learning applications. In addition, the Machine Learning application should be performed automatically in a DevOps process. To address the goal of this research work, the following two research question will be investigated:
 
 
 %RQs

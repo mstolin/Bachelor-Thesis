@@ -3,5 +3,78 @@
 %
 \todo{Describe Chapter}
 
-\section{Cluster architecture}
+\section{General}
+% BLa bla alles in Docker usw.
+T create an elastic computing environment, all needed components will be run as Docker container in a Docker network.
 
+
+\section{Computing environment}
+% The environment will be implemented with Docker/docker-compose
+To create an elastic environment Docker will be used. With docker Spark worker can be easy scaled. With docker-compose an environment can be created.
+% Images used
+% network (Communication)
+\subsection{Monitoring}
+cAdvisor will be uses to monitor metrics from the Docker engine. Prometheus collects the metrics defined in Section XY from cAdvisor and stores them in its time-series database.
+% The queries
+The query used for getting CPU metrics:
+
+\begin{lstlisting}[language=SQL, caption=Python example]
+SUM(SELECT BLA FROM XYZ)
+\end{lstlisting}
+
+The query used for getting GPU metrics:
+
+
+\subsection{Apache Spark Images}
+The are 4 different Spark images:
+
+1. Spark-Base
+2. Spark-Master
+3. Spark-Worker
+4. Spark-Submit
+
+Spark-Base is the foundation image for all other Spark images. Spark-Master is the image for the master node. Spark-Worker is the image for all SPark worker nodes. With Spark-Submit, a application will be submitted, the container runs as long as the application runs and exits after the execution automatically. Spark-Submit is used, because Cluster runs in Standalaone mode. Python cann submit cannot run in cluster mode QUELLE SPark.
+
+\subsection{GPU Acceleration}
+
+NVIDIA RAPIDS will be used as the plugin for GPU acceleration.
+
+
+
+\section{Auto-Scaler}
+The Auto-Scaler consists of a Python module which implements the logic for control-loop and a own Docker image.
+% Is implemented in python
+The Auto-Scaler is implemented in the Python programming language.
+% Is its own Docker image
+The Auto-Scaler module will be executed in an individual Docker image.
+% UML diagram
+
+\subsection{Configuration}
+All configuration properties defined in the concept of the Auto-Scaler in SECTION A will be defined in a YAML file.
+% As a cmd-line argument
+To set the configuration properties, the configuration file needs to be set as a command-line argument.
+% File example
+
+\subsection{Control-Loop}
+Control-Loop of the Auto-Scaler implements the Analyze, Plan, and Execute phase of the MAPE architecture.
+
+\subsubsection{Analyze}
+% Scaling Heat
+Scaling Heat algorithm will be used to estimate if a scaling action is necessary.
+
+\subsubsection{Plan}
+% KHPA
+The KHPA algorithm will be used to calculate how many worker are needed to reach the target utilization. Since we have two different metrics, the highest number of running worker will be used KUBERNETES QUELLE.
+
+\subsubsection{Execute}
+% Python Docker SDK
+Via the Python Docker SDK new container will be spawned in the network.
+% Check if worker is busy
+If worker need to be removed, it is necessary to check if the worker are running any applications at the moment. Spark provides a REST API to check this.
+% Cooldown
+After a scaling action has been performed, a cooldown period will be applied so all nodes can relax.
+
+
+
+\section{Automated Deployment}
+Hier die CI/CD von gitlab.

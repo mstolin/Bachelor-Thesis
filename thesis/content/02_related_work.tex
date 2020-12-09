@@ -1,24 +1,43 @@
-\chapter{Related Work}
+\chapter{Background and Related Work}
 \label{sec:related}
 %
 
 This chapter provides background information about ...
 \todo{Describe Chapter}
 
+\section{Background}
+
+\subsection{Scalability}
+
+\subsection{Self-Healing Environments}
+
+\subsection{Monitoring}
+% Monitoring should be able to deal with dynanism
+Self-healing and self-adopting systems are very dynamic in nature. A monitoring should be able to deal with a dynamic environment \cite{Farcic2017Toolkit21}.
+% Requirements of a monitoring system
+The requirements for a monitoring system, that is able to monitor a dynamic changing environment, are the following \cite{Farcic2017Toolkit21}:
+\begin{itemize}
+\item A decentralized way of generating metrics % Neu schreiben
+\item A multi-dimensional data model % Neu schreiben
+\item A powerful query language
+\end{itemize}
+
+
 
 % ===========================================
 % ===========================================
-\section{Elastic Environments}
+\section{Related Work}
+\subsection{Elastic Environments}
 % State of the art monitoring
 In recent years, container technologies have been used efficiently in complex IT environments. Dynamic scaling of containerized applications is an active area of research. The studied research can be divided in two parts. 
 
 
-\subsection{Architecture}
+\subsubsection{Architecture}
 % A review of auto-scaling techniques for elastic application in cloud environments
 \paragraph{} In the work by Lorido-Botrán et al.  they reviewed state-of-the-art literatures about auto-scaling and proposed a process for auto-scaling homogeneous elastic applications. They mentioned three different problems, auto-scaler face while remaining the Quality of Service (QoS): Under-provisioning, over-provisioning and oscillation. Under-provisioning refers to, if not enough resources are available, over-provisioning means that more resources are available than needed and oscillation occurs when the environment gets scaled too quickly before the impact is clear. They mentioned the MAPE-Loop which consists of four different parts: Monitor, Analyze, Plan and Execute.  The Auto-Scaler is part 
 
 
-\subsection{Auto-Scaler}
+\subsubsection{Auto-Scaler}
 % Application deployment using containers with auto-scaling for microservices in cloud environment
 \paragraph{}Srirama et al. \citep{Srirama2020AppDeplyCont} designed a heuristic-based auto-scaling strategy for container-based microservices in a cloud environment. The purpose of the auto-scaling strategy was to balance the overall resource utilization across microservices in the environment.
 % Results
@@ -30,7 +49,7 @@ The proposed auto-scaling strategy performed better results than state-of-the-ar
 Load balancing is based on static rules defining the upper and lower thresholds of a specific load. For example \textit{if CPU > 80\% then scale-out; if CPU < 20\% then scale-in}. The difficulty of this technique is to set the ideal rules. False rules can lead to bad performance. Proactive techniques try to predict the future values of performance metrics based on historical data. Reactive techniques are based on control theory to automate the systems management. In Addition, the authors proposed a new auto-scaling technique. To overcome the difficulties of static thresholds, the authors proposed a new auto-scaling technique using rules with dynamic thresholds. The results showed, that for auto-scaling techniques to scale well, it highly depends on parameter tuning. The best result was achieved with proactive results with a minimum threshold of 20\% and a maximum threshold of 60\%.
 
 
-\subsection{Auto-Scaling Algorithms}
+\subsubsection{Auto-Scaling Algorithms}
 % Delivering elastic ...
 \paragraph{}Barna et al. \cite{Barna2017ElasticContainerApps} proposed an autonomic scaling architecture approach for containerized microservices. Their approach focused on creating an autonomic management system, following the autonomic computing concept \cite{Kephart2003VisionComputing}, using a self-tuning performance model. The demonstrated architecture frequently monitors the environment and gathers performance metrics from components. It has the ability to analyze the data and dynamically scale components. In addition, to determine if a scaling action is needed, they proposed the \textit{Scaling Heat Algorithm}. The Scaling Heat Algorithm is used to prevent unnecessary scaling actions, which can throw the environment temporarily off.
 
@@ -41,7 +60,7 @@ Load balancing is based on static rules defining the upper and lower thresholds 
 
 % ===========================================
 % ===========================================
-\section{Heterogenous GPU aware Spark systems}
+\subsection{Heterogenous GPU aware Spark systems}
 % Why is GPU needed
 Apache Spark is a computing framework that distributes tasks between CPU cores. Data and compute intensive applications profit from GPU acceleration. Therefore, various research projects took effort to bring GPU acceleration to Apache Spark.
 

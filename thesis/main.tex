@@ -52,6 +52,7 @@
 %\widowpenalty=1000000
 %\brokenpenalty=1000000
 %\finalhyphendemerits=1000000
+%\renewcommand{\baselinestretch}{1.7}
 
 %% Dokument Beginn %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -91,6 +92,9 @@
 \input{content/Zusammenfassung}
 
 \cleardoublepage
+% Abbildungs- und Tabellenverzeichnis
+\listoffigures
+\listoftables
 % Inhaltsverzeichnis in den PDF-Links eintragen
 % \pdfbookmark[1]{Inhaltsverzeichnis}{toc}
 \tableofcontents
@@ -102,8 +106,8 @@
 
 %\iffalse
 \input{content/01_intro}
-\input{content/03_background}
 \input{content/02_related_work}
+\input{content/03_background}
 \input{content/04_design}
 \input{content/05_implementation}
 \input{content/06_evaluation}
@@ -123,10 +127,6 @@
 \bibliography{literatur}
 %\nocite{*}
 \clearpage
-
-% Abbildungs- und Tabellenverzeichnis
-\listoffigures
-%\listoftables
 
 
 \IfDefined{printindex}{\printindex}
