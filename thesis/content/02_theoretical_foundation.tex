@@ -1,0 +1,85 @@
+\chapter{Theoretical Foundation}
+\label{sec:related}
+%
+
+This chapter provides background information about ...
+\todo{Describe Chapter}
+
+\section{Scalability}
+% What is scalability
+Scalability defines the ability of a computing system to handle an increasing amount of load \cite{Farcic2017Toolkit21}.
+% Why scaling
+The main reasing for scaling is High-Availability TOOLKIT 2.1.
+% Choose right approach
+To choose the right approach of scaling an environment is essential.
+% Different kind of scaling
+To scale the computing capacity of a system, different approaches exists. A major scaling approach is horizontal scaling.
+
+%% Mehr darüber, warum scaling eigentlich so wichtig ist, und welche probleme man damit löst
+
+
+\subsection{Horizontal Scaling}
+% What is horizontal scaling
+Horizontal scaling is accomplished by duplicating nodes in the computing environment \cite{Wilder2012CloudPatterns}.
+% DIstribution
+Dplucation the nodes in a computing environment increases the computational capacity of the environment. In addition, the workload can be distributed across all clones to handle and balance and increasing load of tasks \cite{Wilder2012CloudPatterns, Abbott2015ScalabilityArt}. 
+% What about homogeneous nodes
+To increase the efficiency of horizontal scaling, all nodes should be homogeneous. Homogeneous nodes are able to perform the same work and response as other nodes \cite{Abbott2015ScalabilityArt}.
+
+
+\subsection{Limitations of Scalability}
+The limit of scalability is reached, when a computing system is not able to serve the requests of it`s concurrent users \cite{Wilder2012CloudPatterns}.
+% hardware capacity
+If the scalability of a computing environment is reached, an option is to add more powerful hardware resources to the system. This approach is called vertical scaling QULLE??. By adding more powerful hardware resources, the point can be reached, where more powerful hardware becomes unaffordable or not available \cite{Wilder2012CloudPatterns}.
+% Why horizontal i recommended
+To overcome the limits of hardware cpacity, a computing system shuld be designed to scale horizontally in the first place \cite{Abbott2015ScalabilityArt}.
+
+
+% ===========================================
+% ===========================================
+\section{Self-Healing Environments}
+% Auch über container
+
+
+% ===========================================
+% ===========================================
+\section{Monitoring}
+% Monitoring should be able to deal with dynanism
+Self-healing and self-adopting systems are very dynamic in nature. A monitoring should be able to deal with a dynamic environment.
+% Requirements of a monitoring system
+The requirements for a monitoring system, that is able to monitor a dynamic changing environment, are the following:
+\begin{itemize}
+\item An efficient database to store metrics
+\item A decentralized way of generating metrics \cite{Farcic2017Toolkit21} % Neu schreiben
+\item Multi-dimensional metrics \cite{Farcic2017Toolkit21}
+\item A powerful query language \cite{Farcic2017Toolkit21}
+\end{itemize}
+
+
+\subsection{Database}
+% TS are needed
+Saving continous data needs to be done efficiently. 
+For time-based metrics, a time series database is he most effective way to save the data \cite{Farcic2017Toolkit21}. To store a huge amount of data, data is stored in a very compact format.
+
+
+\subsection{Multi-dimensional Metrics}
+% Why do we need dimensions
+For query languages to be effective, metrics need to be dimensional. Metric without dimensions, are limited in their capabilities.
+% Dynamic environment
+In a dynamic environment, services are dynamically added and removed. Therefore, a dynamic environment needs dynamic analytics where metrics represent all dimension in the environment \cite{Farcic2018Toolkit22}.
+% Example
+\begin{lstlisting}[frame=single, label=lst:mon_metr_dimless, caption=Example of a dimensionless-metric, captionpos=b]
+container_memory_usage
+\end{lstlisting}
+\begin{lstlisting}[frame=single, label=lst:mon_metr_withdim, caption=Example of a metric with dimensions, captionpos=b]
+container_memory_usage{service="my_service"}
+\end{lstlisting}
+% Explain
+As the exasmple \Lst{lst:mon_metr_dimless} and \Lst{lst:mon_metr_withdim} show, the metric with dimension provide more efficient querieing to gather informations about the environment.
+
+
+\subsection{Query Model}
+
+
+\subsection{Choosing a Monitoring Tool}
+Graphite or Prometheus, Prometheus it its!
