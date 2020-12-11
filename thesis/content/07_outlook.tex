@@ -3,5 +3,11 @@
 %
 \todo{Describe Chapter}
 
-\section{Cluster architecture}
+\section{Optimizing Scaling}
+Current approach: Wait until all applications have finished.
+Better approach: Blacklist worker for removing so no executor will be launchend on the worker.
+Create an external shuffle service, so worker can be remove on runtime.
 
+
+\section{Reinforcement Learning for Auto-Scaling}
+bla bla
