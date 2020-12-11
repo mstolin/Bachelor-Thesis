@@ -15,6 +15,11 @@
 \label{fig:ca-overall_architecture}%
 \end{figure}
 
+% \subsection{Autonomic Manager}
+% TO fullfill the requirements mentioned in meonitorin in theo doundation .... we choose prometheus and cadvisor ....
+% \subsection{Apache SPark CLuster}
+% ...
+
 % Components
 The cluster consists of two main parts, the Autonomic Manager and the Apache Spark cluster. The autonomic manager consists of three components, cAdvisor for collecting metrics from all running Docker container, Prometheus to store metrics and the auto-scaler to scale the number of Spark worker according to the workload.
 The Apache Spark cluster is the computing environment, consisting of one Apache Spark master and a dynamic number of Apache Spark worker. A Spark-Submit component which will deployed if a Spark application gets executed in the cluster.

@@ -43,6 +43,12 @@ To overcome the limits of hardware cpacity, a computing system shuld be designed
 
 % ===========================================
 % ===========================================
+\section{Metrics}
+Gauge etc
+
+
+% ===========================================
+% ===========================================
 \section{Monitoring}
 % Monitoring should be able to deal with dynanism
 Self-healing and self-adopting systems are very dynamic in nature. A monitoring should be able to deal with a dynamic environment.
@@ -60,6 +66,26 @@ The requirements for a monitoring system, that is able to monitor a dynamic chan
 % TS are needed
 Saving continous data needs to be done efficiently. 
 For time-based metrics, a time series database is he most effective way to save the data \cite{Farcic2017Toolkit21}. To store a huge amount of data, data is stored in a very compact format.
+
+
+\subsection{Decentralized Way of gathering Metrics}
+The approach how the monitoring systems gathers metrics to store in the database plays a significant role.
+% There are push and pull based systems
+Push and pull based systems are the two primary approaches to gather metrics from services.
+% About push
+Push based monitoring systems expect services to push metrics to their storage.
+% About pull
+On the other hand, pull based monitoring systems scrape metrics from all defined targets. Targets do not know about the existence of the monitoring system and only need to collect and expose metrics.
+
+
+% When to choose what (Discovery)
+Service discovery is an important aspect to decide whenever to use a pull or push based monitoring system.
+% Push based discovery
+In a push-based environment, services only need to know the address of the monitoring service to push their data to the storage.
+% Pull based discovery
+A push-based monitoring tool needs to know the address of each target in the environment.
+% Why pull based works best with discovery
+The advantage of a pull-based systems are, they know what they expect. It is ieasier for pull-based monitoring system to detect whenever a target has failed or is not available.
 
 
 \subsection{Multi-dimensional Metrics}
@@ -82,4 +108,4 @@ As the exasmple \Lst{lst:mon_metr_dimless} and \Lst{lst:mon_metr_withdim} show, 
 
 
 \subsection{Choosing a Monitoring Tool}
-Graphite or Prometheus, Prometheus it its!
+Graphite or Prometheus, Prometheus it its! <- Eher in Design
