@@ -4,119 +4,6 @@
 In this chapter bla bla
 \todo{Describe Chapter}
 
-% ===========================================
-% ===========================================
-% Autonomic computing
-% ===========================================
-% ===========================================
-\section{Autonomic computing}
-% What is autonomic computing
-Autonomic computing is the ability of an IT infrastructure to automatically manage itself in accordance to high level objectives defined by administrators \cite{Kephart2003VisionComputing}.
-% Why
-Autonomic computing gives an IT infrastructure the flexibility to adapt dynamic requirements quickly and effectively to meet the challenges of modern business needs \cite{Murch2004Autonomic}. Therefore, autonomic computing environments can reduce operating costs, lower failure rates, make systems more secure and quickly respond to business needs \cite{Jacob2004AutonomicSolution}.
-
-
-% What does it need
-Computing systems need to obtain a detailed knowledge of it`s environment and how to extend it`s resources to be truly autonomic \cite{Murch2004Autonomic}.
-% The 4 basic elements
-An autonomic computing system is defined by four elements:
-\begin{itemize}
-\item \textbf{Self-configuring:}
-Self-configuring refers to the ability of an IT environment to adapt dynamically to system changes and to be able to deploy new components automatically. Therefore, the system needs to understand and control the characteristics of a configurable item \cite{Murch2004Autonomic, Sinreich2006AnAB}.
-
-\item \textbf{Self-optimizing:}
-To ensure given goals and objectives, a self-optimizing environment has the ability to efficiently maximize resource allocation and utilization \cite{Jacob2004AutonomicSolution}. To accomplish this requirement, the environment has to monitor all resources to determine if an action is needed \cite{Murch2004Autonomic}.
-
-\item \textbf{Self-healing:}
-Self-healing environments are able to detect problematic operations and then perform policy-based actions to ensure that the systems health is stable \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}. The policies of the actions have to be defined and should be executed without disrupting the system \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}.
-
-\item \textbf{Self-protecting:}
-The environment must identify unauthorized access and threats to the system and automatically protect itself taking appropriate actions during its runtime \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}.
-\end{itemize}
-
-
-\subsection{Autonomic computing concept}
-
-% Concept figure
-\begin{figure}[h]%
-\centering
-\includegraphics[scale=1]{images/03_background/ac_concept}%
-\caption{Autonomic computing concept - Source: Authors own model, based on \cite{Jacob2004AutonomicSolution}.}%
-\label{fig:ac_concept}%
-\end{figure}
-
-% Figure + short description
-\Fig{fig:ac_concept} demonstrates the main concept of an autonomic computing environment. The autonomic computing architecture relies on monitoring sensors and an adoption engine (autonomic manager) to manage resources in the environment \cite{Goscinski2011CloudComputing}.
-% About the environment
-In an autonomic computing environment, all components have to communicate to each other and can manage themselves. Appropriate decisions will be made by an autonomic manager that knows the given policies \cite{Jacob2004AutonomicSolution}.
-
-% Control loop figure
-\begin{figure}[h]%
-\centering
-\includegraphics[scale=1]{images/03_background/ac_control_loop}%
-\caption{The control-loop concept - Source: Authors own model, based on \cite{Murch2004Autonomic}.}%
-\label{fig:ac_control_loop}%
-\end{figure}
-
-% Explain control loop
-The core element of the autonomic architecture is the control-loop. \Fig{fig:ac_control_loop} illustrates the concept of a control-loop. The control-loop collects details about resources through monitoring and makes decisions based on analysis of the collected details to adjust the system if needed \cite{Murch2004Autonomic}.
-
-
-\subsection{Managed resources}
-
-% Figure
-\begin{figure}[h]%
-\centering
-\includegraphics[scale=1]{images/03_background/ac_managed_resource}%
-\caption{Managed resource - Source: Authors own model, based on \cite{Jacob2004AutonomicSolution}.}%
-\label{fig:ac_managed_resource}%
-\end{figure}
-
-% Explanation
-A managed resource is a single component or a combination of components in the autonomic computing environment \cite{Murch2004Autonomic, Jacob2004AutonomicSolution}. A component can be a hardware or software component, e.g. a database, a server, an application or a different entity \cite{Sinreich2006AnAB}.
-% Sensors and Effectors
-They are controlled by their sensors and effectors, as illustrated in \Fig{fig:ac_managed_resource}. Sensors are used to collect information about the state of the resource and effectors can be used to change the state of the resource \cite{Jacob2004AutonomicSolution}. The combination of sensors and effectors is called a touchpoint, which provides an interface for communication with the autonomic manager \cite{Sinreich2006AnAB}.
-% Scalability
-The ability to manage and control managed resources make them highly scalable \cite{Murch2004Autonomic}.
-
-
-\subsection{Autonomic manager}
-\label{subsec:background-autonomic_computing-autonomic_manager}
-
-% Figure
-\begin{figure}[h]%
-\centering
-\includegraphics[scale=1]{images/03_background/ac_autonomic_manager}%
-\caption{Autonomic manager - Source: Authors own model, based on \cite{Jacob2004AutonomicSolution}.}%
-\label{fig:ac_manager}%
-\end{figure}
-
-% WHat is the autonomic manager
-The autonomic manager implements the control-loop to collect, aggregate, filter and report system metrics from the managed resources. It can only make adjustments within it`s own scope and uses predefined policies to make decisions of what actions have to be executed to accommodate the goals and objectives \cite{Murch2004Autonomic, Sinreich2006AnAB}.
-% Knowledge
-In addition, the autonomic manager gains knowledge through analyzing the managed resources \cite{Murch2004Autonomic}.
-% MAPE-K
-The autonomic computing concept digests the MAPE-K model to implement an autonomic manager, as illustrated in \Fig{fig:ac_manager} \cite{Goscinski2011CloudComputing}.
-
-\begin{itemize}
-\item \textbf{Monitor:}
-The monitor phase is responsible to collect the needed metrics from all managed resources and applies aggregation and filter operations to the collected data \cite{Sinreich2006AnAB}.
-
-\item \textbf{Analyze:}
-The autonomic manager has to gain knowledge to determine if changes have to made to the environment \cite{Sinreich2006AnAB}. To predict future situations, the autonomic manager can model complex situation given the collected knowledge \cite{Jacob2004AutonomicSolution}.
-
-\item \textbf{Plan:}
-Plans have to be structured to achieve defined goals and objectives. A plan consists of policy-based actions \cite{Jacob2004AutonomicSolution, Sinreich2006AnAB}.
-
-\item \textbf{Execute:}
-The execute phase applies all necessary changes to the computing system \cite{Sinreich2006AnAB}.
-
-\item \textbf{Knowledge:}
-HIER KNOWLEDGE!!.
-\end{itemize}
-
-% Multiple manager
-Multiple autonomic manager can exist in an autonomic computing environment to perform only certain parts. For example, there can be one autonomic manager which is responsible to monitor and analyse the system and another autonomic manager to plan and execute. To create a complete and closed control-loop, multiple autonomic manager can be composed together \cite{Sinreich2006AnAB}.
 
 % ===========================================
 % ===========================================
@@ -136,7 +23,7 @@ Docker is not a container technology itself, it hides the complexity of working 
 % Architecture figure
 \begin{figure}[h]%
 \centering
-\includegraphics[scale=0.5]{images/03_background/docker_architecture}%
+\includegraphics[scale=0.5]{images/04_technical_background/docker_architecture}%
 \caption{Docker architecture - Source: Authors own model, based on \cite{Docker2020Docs}.}%
 \label{fig:spark_docker_architecture}%
 \end{figure}
@@ -188,7 +75,7 @@ A container is an execution environment running on the host-system kernel.
 % Container image
 \begin{figure}[h]%
 \centering
-\includegraphics[scale=0.8]{images/03_background/docker_basic_container_structure}%
+\includegraphics[scale=0.8]{images/04_technical_background/docker_basic_container_structure}%
 \caption{Docker basic container structure - Source: Authors own model, based on \cite{Bullington2020Docker}.}%
 \label{fig:docker_container_struct}%
 \end{figure}
@@ -261,7 +148,7 @@ From the logical plan, the Catalyst optimizer creates one ore more physical plan
 % Spark Catalyst figure
 \begin{figure}[h]%
 \centering
-\includegraphics[scale=0.5]{images/03_background/spark_catalyst}%
+\includegraphics[scale=0.5]{images/04_technical_background/spark_catalyst}%
 \caption{Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite{Hien2018Spark}.}%
 \label{fig:spark_catalyst_process}%
 \end{figure}
@@ -272,7 +159,7 @@ From the logical plan, the Catalyst optimizer creates one ore more physical plan
 
 \begin{figure}[h]%
 \centering
-\includegraphics[scale=0.5]{images/03_background/cluster_overview}%
+\includegraphics[scale=0.5]{images/04_technical_background/cluster_overview}%
 \caption{Overview of a Spark cluster architecture - Source: Authors own model, based on \cite{Apache2020Spark}.}%
 \label{fig:spark_cluster_overview}%
 \end{figure}
@@ -308,7 +195,7 @@ The cluster manager provides three different deploy modes for acquiring resource
 To run an application in cluster mode, the user has to submit a precompiled JAR, python script or R script to the cluster manager \cite{Chambers2018Spark}. After that, the cluster manager starts the driver process and executor processes exclusively for the Spark application on machines inside the cluster \cite{Chambers2018Spark, Hien2018Spark}.
 \begin{figure}[h]%
 \centering
-\includegraphics[scale=0.5]{images/03_background/cluster_mode}%
+\includegraphics[scale=0.5]{images/04_technical_background/cluster_mode}%
 \caption{Spark`s cluster mode - Source: Authors own model, based on \cite{Chambers2018Spark}.}%
 \label{fig:spark_cluster_mode}%
 \end{figure}
@@ -317,7 +204,7 @@ To run an application in cluster mode, the user has to submit a precompiled JAR,
 The difference between the client mode and the cluster mode is that, the driver process runs on the client machine outside of the Spark cluster \cite{Chambers2018Spark}.
 \begin{figure}[h]%
 \centering
-\includegraphics[scale=0.5]{images/03_background/client_mode}%
+\includegraphics[scale=0.5]{images/04_technical_background/client_mode}%
 \caption{Spark`s client mode - Source: Authors own model, based on \cite{Chambers2018Spark}.}%
 \label{fig:spark_client_mode}%
 \end{figure}
@@ -401,7 +288,7 @@ The Spark Catalyst optimizer identifies operator in a query plan that are suppor
 % RAPIDS query plan image
 \begin{figure}[h]%
 \centering
-\includegraphics[scale=0.25]{images/03_background/rapids_query_plan}%
+\includegraphics[scale=0.25]{images/04_technical_background/rapids_query_plan}%
 \caption{Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite{Mcdonald2020SparkRapids}.}%
 \label{fig:rapids_query_plan}%
 \end{figure}
@@ -421,7 +308,7 @@ It follows the pull-based approach to scrape metrics from hosts and services \ci
 % Pull-based image
 \begin{figure}[h]%
 \centering
-\includegraphics[scale=0.25]{images/03_background/prom_pull-based}%
+\includegraphics[scale=0.25]{images/04_technical_background/prom_pull-based}%
 \caption{Pull-based approach to scrape metrics - Source: \cite{Bastos2019Prom}.}%
 \label{fig:prom_pull-based}%
 \end{figure}
@@ -445,7 +332,7 @@ A metric is an observed property of software or hardware, e.g. the usage of a CP
 % Architecture image
 \begin{figure}[h]%
 \centering
-\includegraphics[scale=0.25]{images/03_background/prom_architecture}%
+\includegraphics[scale=0.25]{images/04_technical_background/prom_architecture}%
 \caption{Prometheus high-level architecture - Source: Authors own model, based on \cite{Prom2020Docs, Bastos2019Prom}.}%
 \label{fig:prom_architecture}%
 \end{figure}

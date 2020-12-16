@@ -6,103 +6,165 @@
 
 % ===========================================
 % ===========================================
-\section{Cluster Architecture}
-
-\begin{figure}[h]%
-\centering
-\includegraphics[scale=0.8]{images/04_conceptual_design/cluster_architecture/overall_architecture}%
-\caption{Scaling process UML activity model - Source: Authors own model.}%
-\label{fig:ca-overall_architecture}%
-\end{figure}
-
-% \subsection{Autonomic Manager}
-% TO fullfill the requirements mentioned in meonitorin in theo doundation .... we choose prometheus and cadvisor ....
-% \subsection{Apache SPark CLuster}
-% ...
-
-% Components
-The cluster consists of two main parts, the Autonomic Manager and the Apache Spark cluster. The autonomic manager consists of three components, cAdvisor for collecting metrics from all running Docker container, Prometheus to store metrics and the auto-scaler to scale the number of Spark worker according to the workload.
-The Apache Spark cluster is the computing environment, consisting of one Apache Spark master and a dynamic number of Apache Spark worker. A Spark-Submit component which will deployed if a Spark application gets executed in the cluster.
-Each component is supposed to be a Docker container running on the same host. The autonomic manager and the Apache Spark cluster have its own Docker network.
-% Communication
-The autonomic manager and the Apache Spark cluster don't communicate between each other.The autonomic manager gets its metrics directly from the Docker engine and sends instructions to the Docker engine to scale the number of Spark worker.
-
-
-% ===========================================
-% ===========================================
-\section{Apache Spark Cluster}
-% Hier Bild nur von Apache Spark Cluster, etwas detailierter
-The Apache Spark cluster is responsible to execute the computing application. It consists of one Apache Spark Master and a dynamic number of Apache Spark Worker. To create a Apache Saprk cluster, the master and all worker are deployed in standalone mode (described in section XY).
-All Spark components run in a single isolated Docker network.
-
-
-\subsection{Computing Environment}
-Computing environment consists only of Apache Spark Master and Spark worker. All Spark components are deplyed in standalone mode and each is a single container in the same Docker network. The Apache Spark master distributed the workload of an application across all available spark worker.
-
-\subsection{Spark Submit}
-Spark submit is a single component in the Apache Spark cluster. It is a Apache Spark submit runtime running in a single Docker container. Whenever a Saprk application needs to be executed, a Spark submit container gets deployed in the Apache Saprk and submits the application to the Spark master. After completion, the Spark submit container gets removed automatically.
-
-
-% ===========================================
-% ===========================================
-\section{Autonomic Manager}
-% Short description of old section
-The autonomic manager is implemented according to the MAPE architecture (introduced in SECTION AB). It is responsible to monitor the CPU and GPU utilization of all running Spark Worker and dynamically scales the number of Spark worker based on the observed metrics. As illustrated in \Fig{fig:ca-overall_architecture}, the autonomic manager consists of three components to compose an autonomic manager.
-
-
-\subsection{Workflow}
-% Process figure
-\begin{figure}[h]%
-\centering
-\includegraphics[scale=0.50]{images/04_conceptual_design/autonomic_manager/autonomic_manager_workflow}%
-\caption{Scaling process UML activity model - Source: Authors own model.}%
-\label{fig:am-workflow}%
-\end{figure}
-
-% Short description
-As illustrated in \Fig{fig:am-workflow}, the workflow of the autonomic manager is implemented as a loop. In each iteration, the autonomic manager collects and analyzes related metrics. If needed, the autonomic manager will create a scaling plan and execute it in the end of an iteration.
-
-
-% How is the workflow structured
-Following, each step is described in detail:
+\section{Design Restrictions}
+The design of the comuting environment will be restricted by several factors.
 
 \begin{enumerate}
-\item \textbf{Collect metrics:} CPU and GPU metrics need to be collected from the Docker engine. The collected data needs to be filtered aggregated.
-\item \textbf{Analyze metrics:} Collected metrics need to be analyzed to determine if a scaling action is need. If the computing environment runs smoothly and no scaling action is needed, the first two steps will be repeated until a scaling action is necessary.
-\item \textbf{Create scaling plan:} If the computing environment has to be scaled, a scaling plan will be generated. The scaling plan consists of instructions how many Spark worker have to added or removed.
-\item \textbf{Execute scaling plan:} The created scaling plan will be executed to accommodate the performance goals of the environment.
+\item Apache Spark for distributed computing
+\item Docker for containerization
+\item NVIDIA GPUs (Running on a DGX)
+\item Python applications
+\item Homogeneous nodes (worker)
+\item Worker auto-scaling
 \end{enumerate}
 
+% ===========================================
+% ===========================================
+\section{CI/CD}
 
-\subsection{Design}
 
-% Component design
-\begin{figure}[h]%
+% ===========================================
+% ===========================================
+\section{Identification of suitable Metrics}
+% Welche metrics gibt es
+% Welche metrics werden gesammelt (nur von den Worker)
+% Wie werden die metrics berechnet
+% Welche metriken sind suitable
+
+% Which metrics are suitable
+To determine if the Apache Spark needs to be scaled, suitable performance metrics needs to be identified. 
+% CPU
+As described in SECTION XY, Apache SPark performs the workload on CPU cores. Therefore, CPU utilization is a suitable metric to look out for scaling.
+% GPU
+As mentioned in SECTION XY, the computing environment will run on a DGX server with multiple GPUs. Each Apache Spark worker will get a GPU to accelerate its applications. Therefore, GPU utilization will be a suitable metric.
+
+
+\subsection{CPU Performance}
+% Evtl ist hier der faösche platz -> Besser eine Metrics section wo erklärt wird, wie das berechnet werden soll.
+\todo{Hier auf Tabelle verweisen (Anhang) Metriken die von Prometheus + cAdvisor bereitgestellt werden}
+
+% How is the CPU Utilization being calculated
+To adapt to business needs, the CPU percentage of each Spark Worker will be calculated. Prometheus provides several metrics to calculate the CPU percentage. The CPU percentage of all Worker can be calculated as follows:
+
+\begin{equation}
+CPUUtilization = \dfrac{\sum SparkWorkerCPUUtilization}{NumberOfSparkWorker}
+\label{eq:formel}
+\end{equation}
+
+\subsection{GPU Performance}
+\begin{equation}
+GPUUtilization = \dfrac{\sum SparkWorkerGPUUtilization}{NumberOfSparkWorker}
+\label{eq:formel}
+\end{equation}
+
+
+% ===========================================
+% ===========================================
+\section{Computing environment Architecture}
+
+
+\subsection{Requirements}
+1. self-healing
+2. self-adapting
+3. distributed computing
+4. monitoring
+
+
+\subsection{Overall}
+
+% Figure
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.85]{images/04_conceptual_design/autonomic_manager/autonomic_manager_overview}%
-\caption{Scaling process UML activity model - Source: Authors own model.}%
-\label{fig:am-design-component}%
+\includegraphics[scale=0.8]{images/05_conceptual_design/cluster_architecture/overall_architecture}
+\caption{Overall cluster architecture - Source: Authors own model.}
+\label{fig:ca-overall_architecture}
 \end{figure}
 
-The autonomic manager consists of three different components: cAdvisor, Prometheus, Auto-Scaler. Each components has a different responsibility. 
+\Fig{ig:ca-overall_architecture} illustrates the overall architecture with all components of the computing environment. The two main components in the environment are an Apache Spark cluster and an autonomic manager.
+% The components
+The autonomic manager will be implemented according to the MAPE architecture (SECTION XY). It is responsible for monitoring and auto-scaling the Apache Spark cluster. To enable distributed computing, an Apache Spark cluster will be set up to execute machine learning applications. 
+% The nodes and virtualization
+The autonomic manager and the Apache Spark cluster consist each of multiple nodes. Each node of a component will run as a Docker container.
+% Self healing
+To fullfill the requirements of a self-healing system, Docker Swarm (SECTION AB) will be used to orchestrate all nodes in the system and make sure each is healthy.
 
 
-% cAdvisor
-cAdvisor constantly monitors all Docker containers in the environment and makes perormance and system metrics available via its API.
-% Prometheus
-Prometheus pulls the metrics from cAdvisor. The metrics can be filtered and aggregated via Prometheus PromQL language. In addition, Prometheus stores metrics as time-series data in its database.
-% Monitor phase
-cAdvisor and Prometheus perform the monitor phase of the MAPE architecture.
+\subsection{Apache Spark Cluster}
 
 
-% Auto-Scaler
-The Auto-Scaler is responsible for the analyze, plan and execute phase. Each interval, the Auto-Scaler obtains the CPU and GPU metrics from the Prometheus API. It analyzes the metrics to determine if a scaling action is needed and creates and executes a scaling plan.
+\subsubsection{Master and Worker}
+The Apache Spark cluster will consist of a Spark master node and a dynamic number of Spark worker nodes.
+% Master
+The Spark master node is responsible to distribute the application workload across available Spark worker nodes.
+% Worker
+A Spark worker node will execute the workload given by the master node. Each Spark worker is homogeneous. 
+% Homegeneous spark worker
+Homegenneosity is important to scale the number of worker nodes. To enable homogeneous nodes, each SPark worker node is a Docker container running the same Docker image. In addition, each worker is given the same computing resources. With homogeneous Spark worker nodes, each worker will respond as all other nodes.
+% GPU acceleration
+To enable GPU acceleration, each WORKER/MASTER will have the RAPIDS plugin installed.
+% Standalone mode
+The cluster will be deployed in standalone mode. To be able to run Python applications
 
 
-% All are Docker container
-Each component of the autonomic manager is supposed to execute in an individual Docker container. To establish an isolated communication across all three components, all Docker container run in a single Docker network which is exclusively for the autonomic manager.
+\subsubsection{Spark Submit}
+Because the Apache Spark cluster ill be executed in standalone mode, a node inside the cluster is required to run Spark applications. When a Spark application will be executed, a Spark Submit container will be deployed in the cluster. When the appliccation has finished, the container will be automatically removed.
+Each app will be executed by a unique Spark Submit node.
+The Spark Submit node will be deployed via the CI pipeline (SECTION XY). The prupose of this 
 
 
+\subsection{Autonomic Manager}
+% Auto scaling
+% self adapting
+% monitoring system (database, cadvisor, metrics, aggregation, ....)
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.85]{images/05_conceptual_design/autonomic_manager/autonomic_manager_overview}
+\caption{Autonomic manager component design - Source: Authors own model.}
+\label{fig:am-design-component}
+\end{figure}
+
+% MAPE architecture
+The design of the autonomic manager needs to fullfill all requirements given by the MAPE architecture (SECTION XY). It will be responsible to monitor the performance of Apache Spark worker nodes in the environment, analyze the metrics and plan and execute scaling actions in accordance to fullfill the performance goals.
+% Figure
+As illustrated in \Fig{fig:am-design-component}, the autonomic manager consists of a cAdvisor, Prometheus and Auto-Scaler node. Together, all three nodes build a complete autonomic manager in accordance to the MAPE architecture. Each node will run as a Docker container.
+% Explain figure
+For monitoring, cAdvisor collects metrics from all available Docker container in the computing environment. Prometheus pulls metrics from cAdvsior for streage. The Auto-Scaler will fetch metrics from Prometheus and send scaling instructions to the Docker engine.
+
+
+\subsubsection{Monitoring System}
+% bEsser nochmal erläutern
+To create a monitoring system that fullfills the requirements (SECTION AB), cAdvisor and Prometheus will be used.
+% Why cadvisor and why prometheus
+
+
+\subsubsection{Workflow}
+
+\paragraph{} The workflow of the autonomic manager is implemented as a loop.
+
+% Workflow
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.50]{images/05_conceptual_design/autonomic_manager/autonomic_manager_workflow}
+\caption{UML activity model of the autonomic manager process - Source: Authors own model.}
+\label{fig:am-workflow}
+\end{figure}
+% Explain figure
+\paragraph{} \Fig{fig:am-workflow} illustrates all steps of each component of the autonomic manager process according to the MAPE architecture.
+
+
+% Monitor
+The workflow starts with collecting metrics in the monitor phase. cAdvisor is responsible to collect metrics from the Docker engine. After that, Prometheus stores the collected metrics as time-series data in its database.
+% Analyze
+Next, in the analyze phase, the Auto-Scaler needs to determine if a scaling action is needed. If scaling the Apache Spark worker nodes is not needed, the process has finished and will repeat from the beginning in the next period.
+% Plan
+If the performance is over- or under-utilized, a scaling action is needed. Then, the Auto-Scaler needs to determine how many Apache Spark worker nodes are needed to reach the performance goal.
+% Execute
+Lastly, the Auto-Scaler is responsible to send the scaling instructions to the Docker engine.
+
+
+% ===========================================
+% ===========================================
 \section{Auto-Scaler}
 % What is the Auto-Scaler
 The Auto-Scaler is a component of the the Autonomic Manager and is responsible for the Analyze, Plan and Execution phase.
@@ -182,32 +244,3 @@ After a scaling plan has been created, the Auto-Scaler needs to send the instruc
 After scaling the environment, it needs time for changes to take effect. Therefore a cooldown period will be activated after each scaling action.
 % Whats happens
 During the cooldown period, no scaling actions will be forwarded to the Docker engine.
-
-
-% ===========================================
-% ===========================================
-\section{Metrics}
-% Welche metrics gibt es
-% Welche metrics werden gesammelt (nur von den Worker)
-% Wie werden die metrics berechnet
-
-\subsection{CPU Utilization}
-% Evtl ist hier der faösche platz -> Besser eine Metrics section wo erklärt wird, wie das berechnet werden soll.
-\todo{Hier auf Tabelle verweisen (Anhang) Metriken die von Prometheus + cAdvisor bereitgestellt werden}
-
-% How is the CPU Utilization being calculated
-To adapt to business needs, the CPU percentage of each Spark Worker will be calculated. Prometheus provides several metrics to calculate the CPU percentage. The CPU percentage of all Worker can be calculated as follows:
-
-\begin{equation}
-CPUUtilization = \dfrac{\sum SparkWorkerCPUUtilization}{NumberOfSparkWorker}
-\label{eq:formel}
-\end{equation}
-
-
-\subsection{GPU Utilization}
-
-\begin{equation}
-GPUUtilization = \dfrac{\sum SparkWorkerGPUUtilization}{NumberOfSparkWorker}
-\label{eq:formel}
-\end{equation}
-
