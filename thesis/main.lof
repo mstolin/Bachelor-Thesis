@@ -5,24 +5,24 @@
 \contentsline {figure}{\numberline {\relax 2.2}{\ignorespaces The control-loop concept - Source: Authors own model, based on \cite {Murch2004Autonomic}.\relax }}{9}{figure.caption.8}% 
 \contentsline {figure}{\numberline {\relax 2.3}{\ignorespaces Managed resource - Source: Authors own model, based on \cite {Jacob2004AutonomicSolution}.\relax }}{10}{figure.caption.9}% 
 \contentsline {figure}{\numberline {\relax 2.4}{\ignorespaces Autonomic manager - Source: Authors own model, based on \cite {Jacob2004AutonomicSolution}.\relax }}{10}{figure.caption.10}% 
-\contentsline {figure}{\numberline {\relax 2.5}{\ignorespaces The monitoring process - Source: Authors own model.\relax }}{11}{figure.caption.11}% 
-\contentsline {figure}{\numberline {\relax 2.6}{\ignorespaces Push-based monitoring approach - Source: Authors own model.\relax }}{12}{figure.caption.12}% 
-\contentsline {figure}{\numberline {\relax 2.7}{\ignorespaces Pull-based monitoring approach - Source: Authors own model.\relax }}{13}{figure.caption.13}% 
+\contentsline {figure}{\numberline {\relax 2.5}{\ignorespaces The monitoring process - Source: Authors own model.\relax }}{12}{figure.caption.12}% 
+\contentsline {figure}{\numberline {\relax 2.6}{\ignorespaces Push-based monitoring approach - Source: Authors own model.\relax }}{13}{figure.caption.13}% 
+\contentsline {figure}{\numberline {\relax 2.7}{\ignorespaces Pull-based monitoring approach - Source: Authors own model.\relax }}{13}{figure.caption.14}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Docker architecture - Source: Authors own model, based on \cite {Docker2020Docs}.\relax }}{19}{figure.caption.19}% 
-\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Docker basic container structure - Source: Authors own model, based on \cite {Bullington2020Docker}.\relax }}{21}{figure.caption.23}% 
-\contentsline {figure}{\numberline {\relax 4.3}{\ignorespaces Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite {Hien2018Spark}.\relax }}{23}{figure.caption.27}% 
-\contentsline {figure}{\numberline {\relax 4.4}{\ignorespaces Overview of a Spark cluster architecture - Source: Authors own model, based on \cite {Apache2020Spark}.\relax }}{23}{figure.caption.28}% 
-\contentsline {figure}{\numberline {\relax 4.5}{\ignorespaces Spark`s cluster mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{24}{figure.caption.32}% 
-\contentsline {figure}{\numberline {\relax 4.6}{\ignorespaces Spark`s client mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{25}{figure.caption.33}% 
-\contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite {Mcdonald2020SparkRapids}.\relax }}{27}{figure.caption.34}% 
-\contentsline {figure}{\numberline {\relax 4.8}{\ignorespaces Pull-based approach to scrape metrics - Source: \cite {Bastos2019Prom}.\relax }}{27}{figure.caption.35}% 
-\contentsline {figure}{\numberline {\relax 4.9}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Bastos2019Prom}.\relax }}{28}{figure.caption.36}% 
+\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Docker architecture - Source: Authors own model, based on \cite {Docker2020Docs}.\relax }}{19}{figure.caption.20}% 
+\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Docker basic container structure - Source: Authors own model, based on \cite {Bullington2020Docker}.\relax }}{21}{figure.caption.24}% 
+\contentsline {figure}{\numberline {\relax 4.3}{\ignorespaces Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite {Hien2018Spark}.\relax }}{23}{figure.caption.28}% 
+\contentsline {figure}{\numberline {\relax 4.4}{\ignorespaces Overview of a Spark cluster architecture - Source: Authors own model, based on \cite {Apache2020Spark}.\relax }}{23}{figure.caption.29}% 
+\contentsline {figure}{\numberline {\relax 4.5}{\ignorespaces Spark`s cluster mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{24}{figure.caption.33}% 
+\contentsline {figure}{\numberline {\relax 4.6}{\ignorespaces Spark`s client mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{25}{figure.caption.34}% 
+\contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite {Mcdonald2020SparkRapids}.\relax }}{27}{figure.caption.35}% 
+\contentsline {figure}{\numberline {\relax 4.8}{\ignorespaces Pull-based approach to scrape metrics - Source: \cite {Bastos2019Prom}.\relax }}{27}{figure.caption.36}% 
+\contentsline {figure}{\numberline {\relax 4.9}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Bastos2019Prom}.\relax }}{28}{figure.caption.37}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Overall cluster architecture - Source: Authors own model.\relax }}{32}{figure.caption.43}% 
-\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Autonomic manager component design - Source: Authors own model.\relax }}{33}{figure.caption.46}% 
-\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces UML activity model of the autonomic manager process - Source: Authors own model.\relax }}{34}{figure.caption.50}% 
+\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Overall cluster architecture - Source: Authors own model.\relax }}{33}{figure.caption.44}% 
+\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Autonomic manager component design - Source: Authors own model.\relax }}{34}{figure.caption.47}% 
+\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces UML activity model of the autonomic manager process - Source: Authors own model.\relax }}{34}{figure.caption.51}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -7,16 +7,15 @@
 % ===========================================
 % ===========================================
 \section{Design Restrictions}
-The design of the comuting environment will be restricted by several factors.
+The design of the computing environment will be restricted by several points. These factors are given because of technological choices and requirements from up there.
 
-\begin{enumerate}
-\item Apache Spark for distributed computing
-\item Docker for containerization
-\item NVIDIA GPUs (Running on a DGX)
-\item Python applications
-\item Homogeneous nodes (worker)
-\item Worker auto-scaling
-\end{enumerate}
+\begin{itemize}
+\item \textbf{Running on a NVIDIA DGX A100\footnote{The Universal System for AI Infrastructure - \url{https://www.nvidia.com/en-us/data-center/dgx-a100/}}:} The environment will run on a NVIDIA DGX A100 workstation. The workstation has 80 CPUs and 8 GPUs installed. For this computing environment, 2 GPUs will be available.
+
+\item \textbf{Apache Spark for distributed computing:} Apache Spark will be used as a distributed computing framework.
+
+\item \textbf{Python as the main programming language:} Python will be used as the main programming language for Apache Spark applications. Therefore, examples will use Python code. Configurations for the system are optimized for using Python in production.
+\end{itemize}
 
 % ===========================================
 % ===========================================
@@ -25,18 +24,15 @@ The design of the comuting environment will be restricted by several factors.
 
 % ===========================================
 % ===========================================
-\section{Identification of suitable Metrics}
-% Welche metrics gibt es
-% Welche metrics werden gesammelt (nur von den Worker)
-% Wie werden die metrics berechnet
-% Welche metriken sind suitable
-
-% Which metrics are suitable
-To determine if the Apache Spark needs to be scaled, suitable performance metrics needs to be identified. 
-% CPU
-As described in SECTION XY, Apache SPark performs the workload on CPU cores. Therefore, CPU utilization is a suitable metric to look out for scaling.
-% GPU
-As mentioned in SECTION XY, the computing environment will run on a DGX server with multiple GPUs. Each Apache Spark worker will get a GPU to accelerate its applications. Therefore, GPU utilization will be a suitable metric.
+\section{Identification of suitable Metrics for Scaling}
+% Intro sentence
+To analyze the Apache Spark cluster computing performance suitable metrics have to be defined.
+% How do we compute
+As mention in SECTION XY, Apache Spark distributes its workload across multiple CPU cores. In addition, one objective of this thesis is to accelerate the computing performance of the Apache Spark cluster with GPUs.
+% List metrics
+Therefore suitable performance metrics are CPU utilization of all Apache Spark worker and the utilization of all available GPUs.
+% Those are time-based utilization
+These utilization metrics will be based on the time, when the Apche Spark cluster is actively performing computations.
 
 
 \subsection{CPU Performance}
@@ -46,12 +42,20 @@ As mentioned in SECTION XY, the computing environment will run on a DGX server w
 % How is the CPU Utilization being calculated
 To adapt to business needs, the CPU percentage of each Spark Worker will be calculated. Prometheus provides several metrics to calculate the CPU percentage. The CPU percentage of all Worker can be calculated as follows:
 
+Each Apache Spark worker has a number of CPU cores to perform work. To calculate the CPU utilization of an Apache Spark worker,
+
 \begin{equation}
-CPUUtilization = \dfrac{\sum SparkWorkerCPUUtilization}{NumberOfSparkWorker}
+SparkWorkerCPUUtilization = \dfrac{\sum CPUCoreUtilization}{NumberOfCPUCores}
+\label{eq:formel}
+\end{equation}
+
+\begin{equation}
+OverallCPUUtilization = \dfrac{\sum SparkWorkerCPUUtilization}{NumberOfSparkWorker}
 \label{eq:formel}
 \end{equation}
 
 \subsection{GPU Performance}
+The system has a fixed number of GPUs to use.
 \begin{equation}
 GPUUtilization = \dfrac{\sum SparkWorkerGPUUtilization}{NumberOfSparkWorker}
 \label{eq:formel}
@@ -64,6 +68,8 @@ GPUUtilization = \dfrac{\sum SparkWorkerGPUUtilization}{NumberOfSparkWorker}
 
 
 \subsection{Requirements}
+To create an architecture for the computing vironment, the following requirements are defined:
+
 1. self-healing
 2. self-adapting
 3. distributed computing
@@ -80,7 +86,7 @@ GPUUtilization = \dfrac{\sum SparkWorkerGPUUtilization}{NumberOfSparkWorker}
 \label{fig:ca-overall_architecture}
 \end{figure}
 
-\Fig{ig:ca-overall_architecture} illustrates the overall architecture with all components of the computing environment. The two main components in the environment are an Apache Spark cluster and an autonomic manager.
+\Fig{fig:ca-overall_architecture} illustrates the overall architecture with all components of the computing environment. The two main components in the environment are an Apache Spark cluster and an autonomic manager.
 % The components
 The autonomic manager will be implemented according to the MAPE architecture (SECTION XY). It is responsible for monitoring and auto-scaling the Apache Spark cluster. To enable distributed computing, an Apache Spark cluster will be set up to execute machine learning applications. 
 % The nodes and virtualization
