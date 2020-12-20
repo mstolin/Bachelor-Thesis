@@ -70,33 +70,37 @@
 \contentsline {paragraph}{Pushgateway:}{28}{paragraph*.42}% 
 \contentsline {paragraph}{Visualization:}{29}{paragraph*.43}% 
 \contentsline {subsection}{\numberline {4.4.2}Monitoring Docker container}{29}{subsection.4.4.2}% 
-\contentsline {section}{\numberline {4.5}Gitlab}{29}{section.4.5}% 
-\contentsline {section}{\numberline {4.6}K-MEANS}{29}{section.4.6}% 
-\contentsline {section}{\numberline {4.7}Naive Bayes Classifier}{29}{section.4.7}% 
-\contentsline {section}{\numberline {4.8}Scaling heat}{29}{section.4.8}% 
-\contentsline {section}{\numberline {4.9}KHP}{29}{section.4.9}% 
+\contentsline {section}{\numberline {4.5}GitLab CI/CD}{29}{section.4.5}% 
+\contentsline {subsection}{\numberline {4.5.1}CI/CD Pipeline}{29}{subsection.4.5.1}% 
+\contentsline {subsubsection}{Configuration}{29}{subsubsection*.44}% 
+\contentsline {subsubsection}{Basic Architecture}{30}{subsubsection*.45}% 
+\contentsline {subsection}{\numberline {4.5.2}Job Execution}{30}{subsection.4.5.2}% 
+\contentsline {section}{\numberline {4.6}K-MEANS}{30}{section.4.6}% 
+\contentsline {section}{\numberline {4.7}Naive Bayes Classifier}{30}{section.4.7}% 
+\contentsline {section}{\numberline {4.8}Scaling Heat}{30}{section.4.8}% 
+\contentsline {section}{\numberline {4.9}KHP}{30}{section.4.9}% 
 \contentsline {chapter}{\numberline {5}Conceptual Design}{31}{chapter.5}% 
 \contentsline {section}{\numberline {5.1}Design Restrictions}{31}{section.5.1}% 
 \contentsline {section}{\numberline {5.2}CI/CD}{31}{section.5.2}% 
-\contentsline {section}{\numberline {5.3}Identification of suitable Metrics}{31}{section.5.3}% 
+\contentsline {section}{\numberline {5.3}Identification of suitable Metrics for Scaling}{31}{section.5.3}% 
 \contentsline {subsection}{\numberline {5.3.1}CPU Performance}{32}{subsection.5.3.1}% 
 \contentsline {subsection}{\numberline {5.3.2}GPU Performance}{32}{subsection.5.3.2}% 
 \contentsline {section}{\numberline {5.4}Computing environment Architecture}{32}{section.5.4}% 
 \contentsline {subsection}{\numberline {5.4.1}Requirements}{32}{subsection.5.4.1}% 
 \contentsline {subsection}{\numberline {5.4.2}Overall}{32}{subsection.5.4.2}% 
 \contentsline {subsection}{\numberline {5.4.3}Apache Spark Cluster}{33}{subsection.5.4.3}% 
-\contentsline {subsubsection}{Master and Worker}{33}{subsubsection*.45}% 
-\contentsline {subsubsection}{Spark Submit}{33}{subsubsection*.46}% 
+\contentsline {subsubsection}{Master and Worker}{33}{subsubsection*.48}% 
+\contentsline {subsubsection}{Spark Submit}{33}{subsubsection*.49}% 
 \contentsline {subsection}{\numberline {5.4.4}Autonomic Manager}{33}{subsection.5.4.4}% 
-\contentsline {subsubsection}{Monitoring System}{34}{subsubsection*.48}% 
-\contentsline {subsubsection}{Workflow}{34}{subsubsection*.49}% 
-\contentsline {paragraph}{}{34}{paragraph*.50}% 
-\contentsline {paragraph}{}{35}{paragraph*.52}% 
+\contentsline {subsubsection}{Monitoring System}{34}{subsubsection*.51}% 
+\contentsline {subsubsection}{Workflow}{34}{subsubsection*.52}% 
+\contentsline {paragraph}{}{34}{paragraph*.53}% 
+\contentsline {paragraph}{}{35}{paragraph*.55}% 
 \contentsline {section}{\numberline {5.5}Auto-Scaler}{35}{section.5.5}% 
 \contentsline {subsection}{\numberline {5.5.1}Configuration}{35}{subsection.5.5.1}% 
-\contentsline {subsubsection}{General properties}{35}{subsubsection*.53}% 
-\contentsline {subsubsection}{Metrics}{36}{subsubsection*.54}% 
-\contentsline {subsubsection}{Apache Spark worker properties}{36}{subsubsection*.55}% 
+\contentsline {subsubsection}{General properties}{35}{subsubsection*.56}% 
+\contentsline {subsubsection}{Metrics}{36}{subsubsection*.57}% 
+\contentsline {subsubsection}{Apache Spark worker properties}{36}{subsubsection*.58}% 
 \contentsline {subsection}{\numberline {5.5.2}Analyze}{36}{subsection.5.5.2}% 
 \contentsline {subsection}{\numberline {5.5.3}Plan}{36}{subsection.5.5.3}% 
 \contentsline {subsection}{\numberline {5.5.4}Execute}{37}{subsection.5.5.4}% 
@@ -109,12 +113,13 @@
 \contentsline {section}{\numberline {6.3}Auto-Scaler}{40}{section.6.3}% 
 \contentsline {subsection}{\numberline {6.3.1}Configuration}{40}{subsection.6.3.1}% 
 \contentsline {subsection}{\numberline {6.3.2}Control-Loop}{40}{subsection.6.3.2}% 
-\contentsline {subsubsection}{Analyze}{40}{subsubsection*.56}% 
-\contentsline {subsubsection}{Plan}{40}{subsubsection*.57}% 
-\contentsline {subsubsection}{Execute}{40}{subsubsection*.58}% 
+\contentsline {subsubsection}{Analyze}{40}{subsubsection*.59}% 
+\contentsline {subsubsection}{Plan}{40}{subsubsection*.60}% 
+\contentsline {subsubsection}{Execute}{40}{subsubsection*.61}% 
 \contentsline {section}{\numberline {6.4}Automated Deployment}{40}{section.6.4}% 
 \contentsline {chapter}{\numberline {7}Evaluation}{41}{chapter.7}% 
-\contentsline {section}{\numberline {7.1}Cluster architecture}{41}{section.7.1}% 
+\contentsline {section}{\numberline {7.1}Test Environment}{41}{section.7.1}% 
+\contentsline {section}{\numberline {7.2}Datasets}{41}{section.7.2}% 
 \contentsline {chapter}{\numberline {8}Outlook}{43}{chapter.8}% 
 \contentsline {section}{\numberline {8.1}Optimizing Scaling}{43}{section.8.1}% 
 \contentsline {section}{\numberline {8.2}Reinforcement Learning for Auto-Scaling}{43}{section.8.2}% 
