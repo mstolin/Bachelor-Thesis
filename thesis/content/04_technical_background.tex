@@ -87,6 +87,7 @@ In Docker, a container is a runnable unit of an image and is used for distributi
 
 
 \subsection{Docker Swarm Mode}
+\label{subsec:04_docker_swarm}
 % What is Docker swarm
 Docker Swarm mode is the native cluster orchestration and management tool embedded in the Docker engine.
 % What is a swarm
@@ -136,15 +137,6 @@ A services defines the desired state of a task. The state is defined by the numb
 A task is a running Docker container. The task is defined by the corresponding service and will be managed by the manager node. A task can be performed on worker and manager nodes \cite{Docker2020Docs}.
 
 
-
-
-% What is compose
-%Docker Compose is a tool to run multi-container applications on a single host. A multi-container application consists of a stack of services, where each service is deployed as a container \cite{Bullington2020Docker, Docker2020Docs}.
-% How does compose works
-%Services can be configured in a YAML\footnote{YAML Ain't Markup Language - https://yaml.org/} file called \textit{docker-compose.yml}. This file defines the requirements of each service and determines how a service communicates to other services \cite{Kane2018DockerUp}.
-%\todo{Beispiel docker-compose}
-
-
 % ===========================================
 % ===========================================
 % Apache Spark
@@ -162,7 +154,7 @@ Spark provides resilient distributed datasets (RDDs) as the main abstraction for
 \todo{Master-Slave Architektur + Bild}
 
 
-\paragraph{Resilient distributed datasets:}
+\subsubsection{Resilient distributed datasets}
 % What are RDDs
 Resilient distributed datasets are fault-tolerant, parallel data structures to enable data sharing across cluster applications \cite{Zaharia2012RDDs}. They allow to express different cluster programming models like MapReduce, SQL and batched stream processing \cite{Zaharia2012RDDs}. RDDs have been implemented in Spark and serve as the underlying data structure for higher level APIs (Spark structured API) \cite{Zaharia2012RDDs}.
 % How can RDDs be used in applications    !! HIER MAL BEISPIEL WIE IN RDD ERZEUGT WIRD
@@ -173,7 +165,7 @@ An advantage of RDDs is, that they can be recovered through lineage. Lost partit
 RDDs are lower level APIs and should only be used in applications if custom data partitioning is needed \cite{Chambers2018Spark}. It is recommended to use Sparks structured API objects instead. Optimizations for RDDs have to be implemented manually while Spark automatically optimize the execution for structured API operations \cite{Chambers2018Spark}.
 
 
-\paragraph{Spark structured API:}
+\subsubsection{Spark structured API}
 % What is the structured API
 Spark provides high level structured APIs for manipulating all kinds of data. The three distributed core types are Datasets, DataFrames and SQL Tables and Views \cite{Chambers2018Spark}.
 % About DataFrames, Datasets and SQL
@@ -182,7 +174,7 @@ Datasets and DataFrames are immutable, lazy evaluated collections that provide e
 Datasets use JVM types and are therefore only available for JVM based languages. DataFrames are Datasets of type Row, which is the Spark internal optimized format for computations. This has advantages over JVM types which comes with garbage collection and object instantiation \cite{Chambers2018Spark}.
 
 
-\paragraph{Spark Catalyst:}
+\subsubsection{Spark Catalyst}
 % What is the Catalyst optimizer
 Spark also provides a query optimizer engine called Spark Catalyst. \Fig{fig:spark_catalyst_process} illustrates how the Spark Catalyst optimizer automatically optimizes Spark applications to run quickly and efficient.
 % Short How
@@ -246,18 +238,18 @@ The cluster manager provides three different deploy modes for acquiring resource
 To run an application in cluster mode, the user has to submit a precompiled JAR, python script or R script to the cluster manager \cite{Chambers2018Spark}. After that, the cluster manager starts the driver process and executor processes exclusively for the Spark application on machines inside the cluster \cite{Chambers2018Spark, Hien2018Spark}.
 \begin{figure}[h]%
 \centering
-\includegraphics[scale=0.5]{images/04_technical_background/cluster_mode}%
-\caption{Spark`s cluster mode - Source: Authors own model, based on \cite{Chambers2018Spark}.}%
-\label{fig:spark_cluster_mode}%
+\includegraphics[scale=0.5]{images/04_technical_background/cluster_mode}
+\caption{Spark`s cluster mode - Source: Authors own model, based on \cite{Chambers2018Spark}.}
+\label{fig:spark_cluster_mode}
 \end{figure}
 
 % Client mode
 The difference between the client mode and the cluster mode is that, the driver process runs on the client machine outside of the Spark cluster \cite{Chambers2018Spark}.
-\begin{figure}[h]%
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{images/04_technical_background/client_mode}%
-\caption{Spark`s client mode - Source: Authors own model, based on \cite{Chambers2018Spark}.}%
-\label{fig:spark_client_mode}%
+\includegraphics[scale=0.5]{images/04_technical_background/client_mode}
+\caption{Spark`s client mode - Source: Authors own model, based on \cite{Chambers2018Spark}.}
+\label{fig:spark_client_mode}
 \end{figure}
 
 % Local mode
@@ -345,35 +337,18 @@ The Spark Catalyst optimizer identifies operator in a query plan that are suppor
 \end{figure}
 
 
-% ====
-% Prometheus
-% ====
+% ===========================================
+% ===========================================
+% PROMETHEUS
+% ===========================================
+% ===========================================
 \section{Prometheus}
 % What is Prometheus
 Prometheus is an open-source monitoring and alerting system \cite{Prom2020Docs}.
 % Time-series format + PromQL
-To collect and store data, Prometheus supports a multi-dimensional key-value pair based data model which can be analyzed in real-time using the PromQL query language \cite{Pandey2020Monitoring}.
+To collect and store data, Prometheus supports a multi-dimensional key-value pair based data model, according to \SubSec{subsec:02_monitoring_db_multi-metrics}, which can be analyzed in real-time using the PromQL query language \cite{Pandey2020Monitoring}.
 % Pull-based approach
-It follows the pull-based approach to scrape metrics from hosts and services \cite{Bastos2019Prom}.
-
-% Pull-based image
-\begin{figure}[h]%
-\centering
-\includegraphics[scale=0.25]{images/04_technical_background/prom_pull-based}%
-\caption{Pull-based approach to scrape metrics - Source: \cite{Bastos2019Prom}.}%
-\label{fig:prom_pull-based}%
-\end{figure}
-
-% Describe figure
-As \Fig{fig:prom_pull-based} demonstrates, a pull-based monitoring system scrapes metrics from services which makes them available for the monitoring system. In this case, the monitoring system needs a list of all hosts and services to monitor \cite{Bastos2019Prom}.
-
-
-% What is monitoring and why is it important
-A monitoring system keeps track of the health status of components in a computing cluster. Because of the complexity of modern computing clusters, the effort is to high to observe components manually \cite{Bastos2019Prom}.
-
-
-% What are metrics
-A metric is an observed property of software or hardware, e.g. the usage of a CPU core. To measure metrics, data-point`s will be recorded at a fixed time interval. A data-point is a pair of a value and a timestamp. The combination of multiple data-point`s is called a time-series \cite{Turnbull2016Monitoring}.
+Prometheus follows the pull-based approach, as described in detail in \SubSec{subsec:02_monitoring_push-pull}, to scrape metrics from hosts and services \cite{Bastos2019Prom}.
 
 
 \subsection{Prometheus architecture}
@@ -418,14 +393,20 @@ If a target is not designed to be scraped, metrics can be pushed against the Pus
 Prometheus supports various tools for virtualization of the scraped data. Grafana\footnote{Grafana: The open observability platform - https://grafana.com/} is one of the widely used tools for this occasion.
 
 
-%\subsection{Creating alerts}
-% Beschreiben wie man das mach in der yml datei
-
-
-\subsection{Monitoring Docker container}
-% How can Prometheus be used with Docker (cAdvisor)
-% Auch auf andere Technologien eingehen -> Measuring DockerPerformance What a Mess!!!
-\todo{Wahrscheinlich erst nach der implementation}
+% ===========================================
+% ===========================================
+% CADVISOR
+% ===========================================
+% ===========================================
+\section{cAdvisor}
+% What is cAdvisor
+Container Advisor (cAdvisor) is a running deamon that collects, aggregates, analyses and exposes performance metrics from running containers.
+% How to run
+It has native support for Docker container and is deployed as a Docker container.
+% How it collects
+cAdvisor collects metrics from the container deamon and Linux cgroups.
+% How it exposes
+Collected metrics will be exposed in the Prometheus file format.
 
 
 % ===========================================

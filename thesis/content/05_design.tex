@@ -67,16 +67,8 @@ GPUUtilization = \dfrac{\sum SparkWorkerGPUUtilization}{NumberOfSparkWorker}
 \section{Computing environment Architecture}
 
 
-\subsection{Requirements}
-To create an architecture for the computing vironment, the following requirements are defined:
-
-1. self-healing
-2. self-adapting
-3. distributed computing
-4. monitoring
-
-
 \subsection{Overall}
+\label{subsec:05_arch_overall}
 
 % Figure
 \begin{figure}[h]
@@ -88,11 +80,11 @@ To create an architecture for the computing vironment, the following requirement
 
 \Fig{fig:ca-overall_architecture} illustrates the overall architecture with all components of the computing environment. The two main components in the environment are an Apache Spark cluster and an autonomic manager.
 % The components
-The autonomic manager will be implemented according to the MAPE architecture (SECTION XY). It is responsible for monitoring and auto-scaling the Apache Spark cluster. To enable distributed computing, an Apache Spark cluster will be set up to execute machine learning applications. 
+The autonomic manager will be implemented according to the MAPE architecture (introduced in \SubSec{subsec:02_ac_manager}). It is responsible for monitoring and auto-scaling the Apache Spark cluster. To enable distributed computing, an Apache Spark cluster will be set up to execute machine learning applications. 
 % The nodes and virtualization
 The autonomic manager and the Apache Spark cluster consist each of multiple nodes. Each node of a component will run as a Docker container.
 % Self healing
-To fullfill the requirements of a self-healing system, Docker Swarm (SECTION AB) will be used to orchestrate all nodes in the system and make sure each is healthy.
+All containers will run as services in Docker Swarm mode. As described in \SubSec{subsec:04_docker_swarm}, Docker Swarm mode will maintain a healthy state of all running containers. Therefore, the environment will enable self-healing according to the requirements of Autonomic Computing described in \Sec{sec:02_ac}.
 
 
 \subsection{Apache Spark Cluster}
@@ -131,17 +123,24 @@ The Spark Submit node will be deployed via the CI pipeline (SECTION XY). The pru
 \end{figure}
 
 % MAPE architecture
-The design of the autonomic manager needs to fullfill all requirements given by the MAPE architecture (SECTION XY). It will be responsible to monitor the performance of Apache Spark worker nodes in the environment, analyze the metrics and plan and execute scaling actions in accordance to fullfill the performance goals.
+The design of the autonomic manager needs to fullfill all requirements given by the MAPE architecture (described in \SubSec{subsec:02_ac_manager}). It will be responsible to monitor the performance of Apache Spark worker nodes in the environment, analyze the metrics and plan and execute scaling actions in accordance to fullfill the performance goals.
 % Figure
 As illustrated in \Fig{fig:am-design-component}, the autonomic manager consists of a cAdvisor, Prometheus and Auto-Scaler node. Together, all three nodes build a complete autonomic manager in accordance to the MAPE architecture. Each node will run as a Docker container.
 % Explain figure
-For monitoring, cAdvisor collects metrics from all available Docker container in the computing environment. Prometheus pulls metrics from cAdvsior for streage. The Auto-Scaler will fetch metrics from Prometheus and send scaling instructions to the Docker engine.
+For monitoring, cAdvisor collects metrics from all available Docker container in the computing environment. Prometheus pulls metrics from cAdvsior. The Auto-Scaler will fetch metrics from Prometheus and send scaling instructions to the Docker engine.
 
 
 \subsubsection{Monitoring System}
-% bEsser nochmal erläutern
-To create a monitoring system that fullfills the requirements (SECTION AB), cAdvisor and Prometheus will be used.
-% Why cadvisor and why prometheus
+% Why - dynamic env, requirements, etc
+The design introduced in \SubSec{subsec:05_arch_overall} is a dynamic changing computing environment. To monitor this dynamic environment, a monitoring-system is needed that fullfills the requirements described in \Sec{sec:02_monitoring}.
+
+
+% Gathering metrics
+cAdvisors will be used as an agent to collect performance metrics from all running Docker containers in the environment.
+% Store metrics
+Prometheus pulls the collected performance metrics from cAdvisor and stores the data as time-series data in its database.
+% Query
+In addition, Prometheus provides a powerful multi-dimensional query language to aggregate and analyze the stored data.
 
 
 \subsubsection{Workflow}
@@ -173,13 +172,15 @@ Lastly, the Auto-Scaler is responsible to send the scaling instructions to the D
 % ===========================================
 \section{Auto-Scaler}
 % What is the Auto-Scaler
-The Auto-Scaler is a component of the the Autonomic Manager and is responsible for the Analyze, Plan and Execution phase.
+The Auto-Scaler is a component of the the Autonomic Manager and is responsible for the analyze, plan and execution phase.
 % Complete autonomic manager
-Together with cAdvisor and Prometheus, the Auto-Scaler builds a complete Autonomic Manager according to the architecture demonstrated in \SubSec{subsec:background-autonomic_computing-autonomic_manager}.
-% controll loop
-In addition, the Auto-Scaler implements the control-loop which is responsible to make adjustments in the environment.
-% Communication
-Since Prometheus collects and stores available metrics from cAdvisor,  the Auto-Scaler has not to communicate with cAdvisor.
+Together with cAdvisor and Prometheus, the Auto-Scaler builds a complete Autonomic Manager according to \SubSec{subsec:02_ac_manager}.
+% control loop
+In addition, the Auto-Scaler implements the control-loop which is responsible to make adjustments in the environment according to the performance.
+% Communication with Prometheus
+To adjust the number of Apache Spark worker in the environment, the Auto-Scaler needs to perform queries on the performance metrics stored in Prometheus.
+% Analyzing
+After analyzing the performance metrics, the Auto-Scaler will send instructions to adjust the number of Apache Spark worker to the Docker engine. The Docker engine tells the Swarm manager to scale the replicas of the Apache Spark service in accordance to the Auto-Scaler instructions.
 
 % HIER NOCH BILD VON SCALER WIE MIT DER MAPE ARCH
 

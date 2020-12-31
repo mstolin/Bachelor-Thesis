@@ -24,7 +24,7 @@
 \contentsline {subsection}{\numberline {2.3.2}Time-Based Utilization}{11}{subsection.2.3.2}% 
 \contentsline {section}{\numberline {2.4}Monitoring}{11}{section.2.4}% 
 \contentsline {subsection}{\numberline {2.4.1}Database}{12}{subsection.2.4.1}% 
-\contentsline {subsection}{\numberline {2.4.2}Decentralized Way of gathering Metrics}{12}{subsection.2.4.2}% 
+\contentsline {subsection}{\numberline {2.4.2}Push and pull}{12}{subsection.2.4.2}% 
 \contentsline {subsection}{\numberline {2.4.3}Multi-dimensional Metrics}{13}{subsection.2.4.3}% 
 \contentsline {subsection}{\numberline {2.4.4}Query Language}{14}{subsection.2.4.4}% 
 \contentsline {subsection}{\numberline {2.4.5}Choosing a Monitoring Tool}{14}{subsection.2.4.5}% 
@@ -52,12 +52,12 @@
 \contentsline {subsubsection}{Services and Tasks}{22}{subsubsection*.26}% 
 \contentsline {section}{\numberline {4.2}Apache Spark}{22}{section.4.2}% 
 \contentsline {subsection}{\numberline {4.2.1}Spark programming model}{23}{subsection.4.2.1}% 
-\contentsline {paragraph}{Resilient distributed datasets:}{23}{paragraph*.27}% 
-\contentsline {paragraph}{Spark structured API:}{23}{paragraph*.28}% 
-\contentsline {paragraph}{Spark Catalyst:}{23}{paragraph*.29}% 
+\contentsline {subsubsection}{Resilient distributed datasets}{23}{subsubsection*.27}% 
+\contentsline {subsubsection}{Spark structured API}{23}{subsubsection*.28}% 
+\contentsline {subsubsection}{Spark Catalyst}{23}{subsubsection*.29}% 
 \contentsline {subsection}{\numberline {4.2.2}Spark application architecture}{24}{subsection.4.2.2}% 
 \contentsline {paragraph}{Spark driver:}{24}{paragraph*.32}% 
-\contentsline {paragraph}{Spark Executor:}{24}{paragraph*.33}% 
+\contentsline {paragraph}{Spark Executor:}{25}{paragraph*.33}% 
 \contentsline {paragraph}{Cluster manager:}{25}{paragraph*.34}% 
 \contentsline {subsection}{\numberline {4.2.3}Spark application implementation}{26}{subsection.4.2.3}% 
 \contentsline {subsection}{\numberline {4.2.4}Spark standalone cluster deployment}{26}{subsection.4.2.4}% 
@@ -65,22 +65,22 @@
 \contentsline {subsection}{\numberline {4.3.1}Extension of the Spark programming model}{27}{subsection.4.3.1}% 
 \contentsline {section}{\numberline {4.4}Prometheus}{28}{section.4.4}% 
 \contentsline {subsection}{\numberline {4.4.1}Prometheus architecture}{28}{subsection.4.4.1}% 
-\contentsline {paragraph}{Prometheus server:}{29}{paragraph*.40}% 
-\contentsline {paragraph}{Alertmanager:}{29}{paragraph*.41}% 
-\contentsline {paragraph}{Service discovery:}{29}{paragraph*.42}% 
-\contentsline {paragraph}{Exporters:}{29}{paragraph*.43}% 
-\contentsline {paragraph}{Pushgateway:}{29}{paragraph*.44}% 
-\contentsline {paragraph}{Visualization:}{29}{paragraph*.45}% 
-\contentsline {subsection}{\numberline {4.4.2}Monitoring Docker container}{30}{subsection.4.4.2}% 
-\contentsline {section}{\numberline {4.5}GitLab CI/CD}{30}{section.4.5}% 
-\contentsline {subsection}{\numberline {4.5.1}CI/CD Pipeline}{30}{subsection.4.5.1}% 
-\contentsline {subsubsection}{Configuration}{30}{subsubsection*.46}% 
-\contentsline {subsubsection}{Basic Architecture}{30}{subsubsection*.47}% 
-\contentsline {subsection}{\numberline {4.5.2}Job Execution}{30}{subsection.4.5.2}% 
-\contentsline {section}{\numberline {4.6}K-MEANS}{31}{section.4.6}% 
-\contentsline {section}{\numberline {4.7}Naive Bayes Classifier}{31}{section.4.7}% 
-\contentsline {section}{\numberline {4.8}Scaling Heat}{31}{section.4.8}% 
-\contentsline {section}{\numberline {4.9}KHP}{31}{section.4.9}% 
+\contentsline {paragraph}{Prometheus server:}{28}{paragraph*.39}% 
+\contentsline {paragraph}{Alertmanager:}{28}{paragraph*.40}% 
+\contentsline {paragraph}{Service discovery:}{29}{paragraph*.41}% 
+\contentsline {paragraph}{Exporters:}{29}{paragraph*.42}% 
+\contentsline {paragraph}{Pushgateway:}{29}{paragraph*.43}% 
+\contentsline {paragraph}{Visualization:}{29}{paragraph*.44}% 
+\contentsline {section}{\numberline {4.5}cAdvisor}{29}{section.4.5}% 
+\contentsline {section}{\numberline {4.6}GitLab CI/CD}{29}{section.4.6}% 
+\contentsline {subsection}{\numberline {4.6.1}CI/CD Pipeline}{30}{subsection.4.6.1}% 
+\contentsline {subsubsection}{Configuration}{30}{subsubsection*.45}% 
+\contentsline {subsubsection}{Basic Architecture}{30}{subsubsection*.46}% 
+\contentsline {subsection}{\numberline {4.6.2}Job Execution}{31}{subsection.4.6.2}% 
+\contentsline {section}{\numberline {4.7}K-MEANS}{31}{section.4.7}% 
+\contentsline {section}{\numberline {4.8}Naive Bayes Classifier}{31}{section.4.8}% 
+\contentsline {section}{\numberline {4.9}Scaling Heat}{31}{section.4.9}% 
+\contentsline {section}{\numberline {4.10}KHP}{31}{section.4.10}% 
 \contentsline {chapter}{\numberline {5}Conceptual Design}{33}{chapter.5}% 
 \contentsline {section}{\numberline {5.1}Design Restrictions}{33}{section.5.1}% 
 \contentsline {section}{\numberline {5.2}CI/CD}{33}{section.5.2}% 
@@ -88,23 +88,22 @@
 \contentsline {subsection}{\numberline {5.3.1}CPU Performance}{34}{subsection.5.3.1}% 
 \contentsline {subsection}{\numberline {5.3.2}GPU Performance}{34}{subsection.5.3.2}% 
 \contentsline {section}{\numberline {5.4}Computing environment Architecture}{34}{section.5.4}% 
-\contentsline {subsection}{\numberline {5.4.1}Requirements}{34}{subsection.5.4.1}% 
-\contentsline {subsection}{\numberline {5.4.2}Overall}{34}{subsection.5.4.2}% 
-\contentsline {subsection}{\numberline {5.4.3}Apache Spark Cluster}{35}{subsection.5.4.3}% 
-\contentsline {subsubsection}{Master and Worker}{35}{subsubsection*.50}% 
-\contentsline {subsubsection}{Spark Submit}{35}{subsubsection*.51}% 
-\contentsline {subsection}{\numberline {5.4.4}Autonomic Manager}{35}{subsection.5.4.4}% 
-\contentsline {subsubsection}{Monitoring System}{36}{subsubsection*.53}% 
-\contentsline {subsubsection}{Workflow}{36}{subsubsection*.54}% 
-\contentsline {paragraph}{}{36}{paragraph*.55}% 
-\contentsline {paragraph}{}{37}{paragraph*.57}% 
+\contentsline {subsection}{\numberline {5.4.1}Overall}{34}{subsection.5.4.1}% 
+\contentsline {subsection}{\numberline {5.4.2}Apache Spark Cluster}{35}{subsection.5.4.2}% 
+\contentsline {subsubsection}{Master and Worker}{35}{subsubsection*.49}% 
+\contentsline {subsubsection}{Spark Submit}{35}{subsubsection*.50}% 
+\contentsline {subsection}{\numberline {5.4.3}Autonomic Manager}{35}{subsection.5.4.3}% 
+\contentsline {subsubsection}{Monitoring System}{36}{subsubsection*.52}% 
+\contentsline {subsubsection}{Workflow}{36}{subsubsection*.53}% 
+\contentsline {paragraph}{}{36}{paragraph*.54}% 
+\contentsline {paragraph}{}{36}{paragraph*.56}% 
 \contentsline {section}{\numberline {5.5}Auto-Scaler}{37}{section.5.5}% 
 \contentsline {subsection}{\numberline {5.5.1}Configuration}{37}{subsection.5.5.1}% 
-\contentsline {subsubsection}{General properties}{37}{subsubsection*.58}% 
-\contentsline {subsubsection}{Metrics}{38}{subsubsection*.59}% 
-\contentsline {subsubsection}{Apache Spark worker properties}{38}{subsubsection*.60}% 
+\contentsline {subsubsection}{General properties}{37}{subsubsection*.57}% 
+\contentsline {subsubsection}{Metrics}{38}{subsubsection*.58}% 
+\contentsline {subsubsection}{Apache Spark worker properties}{38}{subsubsection*.59}% 
 \contentsline {subsection}{\numberline {5.5.2}Analyze}{38}{subsection.5.5.2}% 
-\contentsline {subsection}{\numberline {5.5.3}Plan}{38}{subsection.5.5.3}% 
+\contentsline {subsection}{\numberline {5.5.3}Plan}{39}{subsection.5.5.3}% 
 \contentsline {subsection}{\numberline {5.5.4}Execute}{39}{subsection.5.5.4}% 
 \contentsline {chapter}{\numberline {6}Implementation}{41}{chapter.6}% 
 \contentsline {section}{\numberline {6.1}General}{41}{section.6.1}% 
@@ -115,9 +114,9 @@
 \contentsline {section}{\numberline {6.3}Auto-Scaler}{42}{section.6.3}% 
 \contentsline {subsection}{\numberline {6.3.1}Configuration}{42}{subsection.6.3.1}% 
 \contentsline {subsection}{\numberline {6.3.2}Control-Loop}{42}{subsection.6.3.2}% 
-\contentsline {subsubsection}{Analyze}{42}{subsubsection*.61}% 
-\contentsline {subsubsection}{Plan}{42}{subsubsection*.62}% 
-\contentsline {subsubsection}{Execute}{42}{subsubsection*.63}% 
+\contentsline {subsubsection}{Analyze}{42}{subsubsection*.60}% 
+\contentsline {subsubsection}{Plan}{42}{subsubsection*.61}% 
+\contentsline {subsubsection}{Execute}{42}{subsubsection*.62}% 
 \contentsline {section}{\numberline {6.4}Automated Deployment}{42}{section.6.4}% 
 \contentsline {chapter}{\numberline {7}Evaluation}{43}{chapter.7}% 
 \contentsline {section}{\numberline {7.1}Test Environment}{43}{section.7.1}% 
