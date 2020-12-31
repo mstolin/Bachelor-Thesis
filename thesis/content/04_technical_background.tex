@@ -41,7 +41,7 @@ Docker is not a container technology itself, it hides the complexity of working 
 \paragraph{Docker Registry:} A Docker registry stores images. Images can be pushed to a public or private registry and pulled from it to build a container \cite{Docker2020Docs}.
 
 
-\subsection{Docker image}
+\subsection{Docker I mage}
 % What is an image
 An Image is a snapshot of the environment that is needed to run an application in a Docker container. The environment consists of all files, libraries and configurations that are needed for the application to run properly \cite{Docker2020Docs, Nickoloff2019Docker}.
 % How to create an image
@@ -73,11 +73,11 @@ ENTRYPOINT ["git"]
 A container is an execution environment running on the host-system kernel.
 
 % Container image
-\begin{figure}[h]%
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.8]{images/04_technical_background/docker_basic_container_structure}%
-\caption{Docker basic container structure - Source: Authors own model, based on \cite{Bullington2020Docker}.}%
-\label{fig:docker_container_struct}%
+\includegraphics[scale=0.8]{images/04_technical_background/docker_basic_container_structure}
+\caption{Docker basic container structure - Source: Authors own model, based on \cite{Bullington2020Docker}.}
+\label{fig:docker_container_struct}
 \end{figure}
 
 % Container advantages
@@ -86,12 +86,63 @@ The advantage of a container is its lightweight nature. As illustrated in \Fig{f
 In Docker, a container is a runnable unit of an image and is used for distributing and testing applications. A container can be configured to expose certain resources to the host system, e.g. network ports \cite{Bullington2020Docker}.
 
 
-\subsection{Docker Compose}
+\subsection{Docker Swarm Mode}
+% What is Docker swarm
+Docker Swarm mode is the native cluster orchestration and management tool embedded in the Docker engine.
+% What is a swarm
+In Docker Swarm mode, a cluster of multiple nodes is called a swarm. All nodes run in Swarm mode and act as managers or workers.
+% Whats the purpose
+In a swarm, multiple services can be deployed. The manager node is responsible to maintain the desired state of a service \cite{Docker2020Docs}.
+
+
+% Why
+Docker Swarm mode will be used to create a self-healing and a self-adapting environment as described in \Sec{sec:02_autonomic_computing}.
+% 
+Many properties of Docker Swarm mode contribute the fact that it is an ideal candidate to create self-healing and self-adapting environment:
+\begin{itemize}
+\item \textbf{Desired state:} The manager node monitors the state of each service in the swarm and adapts the environment to maintain the desired state \cite{Docker2020Docs}.
+
+\item \textbf{Cluster management and orchestration:} Docker Swarm mode is integrated with the Docker engine. A swarm can be created and managed using the Docker CLI \cite{Docker2020Docs}.
+
+\item \textbf{Service model:} The Docker engine allows to define the desired state of a service. The manager node maintains the desired state of all services in the swarm \cite{Docker2020Docs}.
+
+\item \textbf{Scaling:} The number of replicas can be defined for each service. The manager node will automatically adapt the number of replicas for a service to keep the desired state \cite{Docker2020Docs}.
+
+\item \textbf{Multi-host networking:} A swarm runs all services in an overlay network. New services will automatically be added to the overlay network \cite{Docker2020Docs}.
+\end{itemize}
+
+
+\subsubsection{Nodes}
+% What is a node
+A Docker engine participating in the swarm is called a node.
+% What about the node role
+Nodes can act as manager nodes, worker nodes or both \cite{Docker2020Docs}.
+
+
+% What about the manager
+The manager node is responsible for cluster orchestration an management. It maintains the desired state of all services and tasks in the swarm. In addition, the manager node dispatches tasks to worker nodes when service definitions will be submitted to the manager node \cite{Docker2020Docs}.
+
+
+% What about worker
+Worker nodes are responsible to execute the tasks receives by the manager node. While performing the tasks, the worker node notifies the manager node about the tasks state \cite{Docker2020Docs}.
+
+
+\subsubsection{Services and Tasks}
+% What is a service
+A services defines the desired state of a task. The state is defined by the number of replicas of a service and the configuration for the Docker container, e.g. Docker Image, resources, network, and more \cite{Docker2020Docs}.
+
+
+%What is a node
+A task is a running Docker container. The task is defined by the corresponding service and will be managed by the manager node. A task can be performed on worker and manager nodes \cite{Docker2020Docs}.
+
+
+
+
 % What is compose
-Docker Compose is a tool to run multi-container applications on a single host. A multi-container application consists of a stack of services, where each service is deployed as a container \cite{Bullington2020Docker, Docker2020Docs}.
+%Docker Compose is a tool to run multi-container applications on a single host. A multi-container application consists of a stack of services, where each service is deployed as a container \cite{Bullington2020Docker, Docker2020Docs}.
 % How does compose works
-Services can be configured in a YAML\footnote{YAML Ain't Markup Language - https://yaml.org/} file called \textit{docker-compose.yml}. This file defines the requirements of each service and determines how a service communicates to other services \cite{Kane2018DockerUp}.
-\todo{Beispiel docker-compose}
+%Services can be configured in a YAML\footnote{YAML Ain't Markup Language - https://yaml.org/} file called \textit{docker-compose.yml}. This file defines the requirements of each service and determines how a service communicates to other services \cite{Kane2018DockerUp}.
+%\todo{Beispiel docker-compose}
 
 
 % ===========================================
@@ -146,22 +197,22 @@ For example, the Catalyst can position a filter transformation in front of a joi
 From the logical plan, the Catalyst optimizer creates one ore more physical plans which consist of RDD operations \cite{Chambers2018Spark}. The cheapest physical will be generated into Java bytecode for execution across the cluster \cite{Hien2018Spark}.
 
 % Spark Catalyst figure
-\begin{figure}[h]%
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{images/04_technical_background/spark_catalyst}%
-\caption{Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite{Hien2018Spark}.}%
-\label{fig:spark_catalyst_process}%
+\includegraphics[scale=0.5]{images/04_technical_background/spark_catalyst}
+\caption{Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite{Hien2018Spark}.}
+\label{fig:spark_catalyst_process}
 \end{figure}
 \todo{Bild nochmal machen mit abstand	+ QUELLE anpassen}
 
 
 \subsection{Spark application architecture}
 
-\begin{figure}[h]%
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{images/04_technical_background/cluster_overview}%
-\caption{Overview of a Spark cluster architecture - Source: Authors own model, based on \cite{Apache2020Spark}.}%
-\label{fig:spark_cluster_overview}%
+\includegraphics[scale=0.5]{images/04_technical_background/cluster_overview}
+\caption{Overview of a Spark cluster architecture - Source: Authors own model, based on \cite{Apache2020Spark}.}
+\label{fig:spark_cluster_overview}
 \end{figure}
 
 \todo{Lieber Doch Master/Slave ???. Was ist mit dem CLuster-Manager}
@@ -330,11 +381,11 @@ A metric is an observed property of software or hardware, e.g. the usage of a CP
 \todo{Bilder für components}
 
 % Architecture image
-\begin{figure}[h]%
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.25]{images/04_technical_background/prom_architecture}%
-\caption{Prometheus high-level architecture - Source: Authors own model, based on \cite{Prom2020Docs, Bastos2019Prom}.}%
-\label{fig:prom_architecture}%
+\includegraphics[scale=0.25]{images/04_technical_background/prom_architecture}
+\caption{Prometheus high-level architecture - Source: Authors own model, based on \cite{Prom2020Docs, Bastos2019Prom}.}
+\label{fig:prom_architecture}
 \end{figure}
 
 % High level architecture
