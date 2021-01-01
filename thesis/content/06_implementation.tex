@@ -1,7 +1,141 @@
 \chapter{Implementation}
-\label{sec:implementation}
-%
+\label{sec:06_implementation}
 \todo{Describe Chapter}
+
+
+% ===========================================
+% ===========================================
+\section{Computing Environment}
+
+
+\subsection{Swarm}
+Vielleicht euch einfach das ganze kapitel Swarm nennen?
+- Dockerfile erläutern
+
+
+\subsection{Build Script}
+
+
+% ===========================================
+% ===========================================
+\section{Apache Spark Cluster}
+The Apache Spark cluster is created in standalone mode, see SECTION AB for details. There is one Apache Spark master node, a variant number of Apache Spark worker nodes and for each running application one Apache Spark Submit node. Each node runs in an independent Docker container. The Apache Spark master and worker nodes run as services in the swarm. Each Apache Spark node container is created from a custom Docker image. To simplify the images, a base image is created where all other images can inherit from.
+
+LISTING XY shows the instructions of the base image. The following requirements are needed for all Apache Spark node images:
+\begin{itemize}
+\item Use Ubuntu 16.04 as base image
+\item \textbf{Install Ubuntu packages:} OpenJDK 8 and Python 3 are needed to run Apache Spark and perform Python applications.
+\item Install Apache Spark
+\item Add the GPU discovery script
+\item Download needed \textit{.jar} files for the RAPIDS plugin
+\item Set environment variables
+\item Set working directory
+\end{itemize}
+
+
+Each node needs Apache Spark 3.1 installed. A version number of at least 3 is needed to install the NVIDIA RAPIDS plugin (see SECTION AB).
+
+
+\subsection{Apache Spark Master}
+
+
+\subsection{Apache Spark Worker}
+
+
+\subsection{Apache Spark Submit}
+- Dockerfile erklären
+- Config parameter
+
+
+\subsection{Building Images}
+
+
+% ===========================================
+% ===========================================
+\section{Monitoring-System}
+
+
+\subsection{cAdvisor}
+- Wie ist cAdvisor erreichbar
+- Screenshot von cAdvisor 
+
+
+\subsection{Prometheus}
+- Wie ist Prometheu errecihbar
+- DIe config von prometheus dateien
+- Screenshots von prometheus (target und visualisierung)
+
+
+
+%
+% WARUM NICHT GPU MIT IN DIE AUTO-SCALER METRICS?
+% weil alle worker sich die GPUs teilen ...
+%
+
+
+% ===========================================
+% ===========================================
+\section{Auto-Scaler}
+
+
+\subsection{Code Implementation}
+- Hier auch Beispiel logs
+- Dann scaling heat und KHP algos
+
+
+\subsection{Configuration}
+- Beispiel von der yml Datei
+
+
+\subsection{Docker Image}
+- Dockerfile hier erklären
+
+
+% ===========================================
+% ===========================================
+\section{GitLab CI/CD}
+
+
+\subsection{Automatic Deployment of Apache Spark Applications}
+Vielleicht eher das Kapitel so nennen
+- gitlab-ci.yml erklären
+- Screenshot von webui output
+
+
+\subsection{Image Registry}
+??
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{General}
 % BLa bla alles in Docker usw.

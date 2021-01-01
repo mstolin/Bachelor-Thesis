@@ -143,12 +143,13 @@ A task is a running Docker container. The task is defined by the corresponding s
 % ===========================================
 % ===========================================
 \section{Apache Spark}
+\label{sec:04_spark}
 Apache Spark is an open-source computing framework for parallel data processing on a large computer cluster. Spark manages the available resources and distributes computation tasks across a cluster to perform big-data processing operations at large scale \cite{Chambers2018Spark}. Before Spark was developed, Hadoop MapReduce \cite{Dean2010MapReduce} was the framework of choice for parallel operations on a computer cluster \cite{Zaharia2010Spark}. Spark accomplished to outperform Hadoop by 10x for iterative Machine Learning \cite{Zaharia2010Spark}. It is implemented in Scala\footnote{Scala programming language. https://www.scala-lang.org/}, a JVM-based language and provides a programming interface for Scala, Java\footnote{Java programming language. https://www.oracle.com/java/}, Python\footnote{Python programming language. https://www.python.org/} and R\footnote{R programming language. https://www.r-project.org/}. In addition, Spark includes an interactive SQL shell and libraries to implement Machine Learning and streaming applications \cite{Chambers2018Spark}.
 It was developed in 2009 as the Spark research project at UC Berkeley and became an Apache Software Foundation project in 2013 \cite{Chambers2018Spark}. 
 
 
 \subsection{Spark programming model}
-\label{sec:spark_programming_model}
+\label{subsec:04_spark_pr-model}
 % Explain RDDs
 Spark provides resilient distributed datasets (RDDs) as the main abstraction for parallel operations \cite{Zaharia2010Spark}. Core types of Spark`s higher-level structured API are built on top of RDDs \cite{Chambers2018Spark} and will automatically be optimized by Spark`s Catalyst optimizer to run operations quick and efficient \cite{Hien2018Spark}.
 \todo{Master-Slave Architektur + Bild}
@@ -175,8 +176,9 @@ Datasets use JVM types and are therefore only available for JVM based languages.
 
 
 \subsubsection{Spark Catalyst}
+\label{subsubsec:04_spark_pr-model_catalyst}
 % What is the Catalyst optimizer
-Spark also provides a query optimizer engine called Spark Catalyst. \Fig{fig:spark_catalyst_process} illustrates how the Spark Catalyst optimizer automatically optimizes Spark applications to run quickly and efficient.
+Spark also provides a query optimizer engine called Spark Catalyst. \Fig{fig:04_spark_pr-model_catalyst_process} illustrates how the Spark Catalyst optimizer automatically optimizes Spark applications to run quickly and efficient.
 % Short How
 Before executing the user`s code, the Catalyst optimizer translates the data-processing logic into a logical plan and optimizes the plan using heuristics \cite{Hien2018Spark}. After that, the Catalyst optimizer converts the logical plan into a physical plan to create code that can be executed \cite{Hien2018Spark}.
 
@@ -193,7 +195,7 @@ From the logical plan, the Catalyst optimizer creates one ore more physical plan
 \centering
 \includegraphics[scale=0.5]{images/04_technical_background/spark_catalyst}
 \caption{Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite{Hien2018Spark}.}
-\label{fig:spark_catalyst_process}
+\label{fig:04_spark_pr-model_catalyst_process}
 \end{figure}
 \todo{Bild nochmal machen mit abstand	+ QUELLE anpassen}
 
@@ -236,7 +238,7 @@ The cluster manager provides three different deploy modes for acquiring resource
 
 % Cluster mode
 To run an application in cluster mode, the user has to submit a precompiled JAR, python script or R script to the cluster manager \cite{Chambers2018Spark}. After that, the cluster manager starts the driver process and executor processes exclusively for the Spark application on machines inside the cluster \cite{Chambers2018Spark, Hien2018Spark}.
-\begin{figure}[h]%
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.5]{images/04_technical_background/cluster_mode}
 \caption{Spark`s cluster mode - Source: Authors own model, based on \cite{Chambers2018Spark}.}
@@ -309,32 +311,36 @@ Spark provides build-in scripts to start a master node and worker nodes in stand
 % ===========================================
 % ===========================================
 \section{RAPIDS accelerator for Apache Spark}
+\label{sec:04_rapids}
 % Explain
-The RAPIDS accelerator for Apache Spark is a plugin suite to enable GPU acceleration for computing operations on Apache Spark 3.x \cite{SparkRapids2020Docs}. 
-% What it does
-To accelerate computing operations, it uses the RAPIDS\footnote{Open GPU Data Science - https://rapids.ai/} libraries and extends the Spark programming model (see \SubSec{sec:spark_programming_model}) \cite{SparkRapids2020Docs, Mcdonald2020SparkRapids}.
+RAPIDS accelerator for Apache Spark is a plugin suite that aims to accelerate computing operation for Apache Spark using GPUs. It is available for Apache Spark 3 \cite{SparkRapids2020Docs}.
+% A little how
+The plugin uses the RAPIDS\footnote{Open GPU Data Science - \url{https://rapids.ai/}, accessed: 01-01-2021} libraries to extend the Apache Spark programming model, introduced in \SubSec{subsec:04_spark_pr-model} \cite{SparkRapids2020Docs, Mcdonald2020SparkRapids}.
+
 
 \subsection{Extension of the Spark programming model}
+\label{subsec:04_rapids_ext}
 % How does it extends DataFrame and SQL
-The plugin suite extends the Spark programming model with a new DataFrame based on Apache Arrow\cite{ApacheArrow2020Docs} data structures and the Catalyst optimizer to generate GPU-aware query plans \cite{Mcdonald2020SparkRapids}.
-
-
+\paragraph{}The plugin suite extends the Spark programming model with a new DataFrame based on Apache Arrow\footnote{Arrow. A cross-language development platform for in-memory data - \url{https://arrow.apache.org/}, accessed: 2020-12-03} data structures. In addition, the Catalyst optimizer (described in \SubSec{subsubsec:04_spark_pr-model_catalyst}) is extended to generate GPU-aware query plans \cite{Mcdonald2020SparkRapids}.
 % What is Apache Arrow
 Apache arrow is a data platform to build high performance applications that work with large dataset`s and to improve analytic algorithms. A component of Apache Arrow is the Arrow Columnar Format, an in-memory data structure specification for efficient analytic operations on GPUs and CPUs \cite{ApacheArrow2020Docs}.
 
 
-% How do DataFrames and SQL use RAPIDS
-Spark`s DataFrame and SQL use the RAPIDS APIs to run tranformations and actions on a GPU.
-% How does the Catalyst create GPU aware plans
-The Spark Catalyst optimizer identifies operator in a query plan that are supported by the RAPIDS APIs. To execute the query plan, these operators can be scheduled on a GPU within the Spark cluster \cite{Mcdonald2020SparkRapids}. If operators are not supported by the RAPIDS APIs, a physical plan for CPUs will be generated by the Catalyst optimizer to execute RDD operations \cite{Mcdonald2020SparkRapids}. \Fig{fig:rapids_query_plan} illustrates, how a query plan gets optimized with the RAPIDS accelerator for Spark enabled.
-
 % RAPIDS query plan image
-\begin{figure}[h]%
+\begin{figure}[h]
 \centering
-\includegraphics[scale=0.25]{images/04_technical_background/rapids_query_plan}%
-\caption{Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite{Mcdonald2020SparkRapids}.}%
-\label{fig:rapids_query_plan}%
+\includegraphics[scale=0.25]{images/04_technical_background/rapids_query_plan}
+\caption{Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite{Mcdonald2020SparkRapids}.}
+\label{fig:04_rapids_ext_query-plan}
 \end{figure}
+\paragraph{}\Fig{fig:04_rapids_ext_query-plan} illustrates how the RAPIDS plugin suite extends the Catalyst optimization process illustrated previously in \Fig{fig:04_spark_pr-model_catalyst_process}.
+% Identifiy operators
+% How does the Catalyst create GPU aware plans
+The Spark Catalyst optimizer identifies operator in a query plan that are supported by the RAPIDS APIs. To execute the query plan, these operators can be scheduled on a GPU within the Spark cluster \cite{Mcdonald2020SparkRapids}. If operators are not supported by the RAPIDS APIs, a physical plan for CPUs will be generated by the Catalyst optimizer to execute RDD operations \cite{Mcdonald2020SparkRapids}.
+
+
+\subsection{Installation}
+
 
 
 % ===========================================
@@ -406,7 +412,7 @@ It has native support for Docker container and is deployed as a Docker container
 % How it collects
 cAdvisor collects metrics from the container deamon and Linux cgroups.
 % How it exposes
-Collected metrics will be exposed in the Prometheus file format.
+Collected metrics will be exposed in the Prometheus file format \cite{Bastos2019Prom, cadvisor2020Docs}.
 
 
 % ===========================================
