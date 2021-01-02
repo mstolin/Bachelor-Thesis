@@ -258,7 +258,7 @@ The difference between the client mode and the cluster mode is that, the driver 
 The local mode starts a Spark application on a single computer \cite{Chambers2018Spark}. It is not recommended to use the local mode in production, instead it should be used for testing Spark applications or learning the Spark framework \cite{Chambers2018Spark}.
 
 
-\subsection{Spark application implementation}
+\subsection{Application Implementation}
 % Short intro
 The concept of a Spark application consists of calling transformations and actions. A transformation creates a DataFrame or a Dataset, the logical data structures of a Spark application. The computation of a Spark application gets processed when an action gets called in the application. The transformations of a Spark application build up a directed acyclic graph (DAG) of instructions. By calling an action, the DAG will break down into stages and tasks to create a single job for execution \cite{Chambers2018Spark}.
 % Show example application
@@ -294,15 +294,61 @@ $SPARK_HOME/bin/spark-submit \
 \Lst{lst:spark_submit_example} provides an example how the spark-submit executable can be used to launch a Spark Python application.
 
 
-\subsection{Spark standalone cluster deployment}
-% Why only standalone
-\todo{Why only standalone}
+\subsection{Standalone Cluster Deployment}
 % What is a standalone cluster
 The standalone mode is a basic cluster-manager build specifically for Spark. It is developed to only run Spark but supports workloads at large scale \cite{Chambers2018Spark}.
+% Why standalone cluster mode, advantages
 
 % How can we create a cluster
 Spark provides build-in scripts to start a master node and worker nodes in standalone mode. ABC demonstrates how a master node and worker node gets launched using the build-in scripts.
-% NE ALTER !, schon erwähnen start-master und start-worker
+
+
+\subsubsection{Starting Master and Worker Nodes}
+\paragraph{}Apache Spark provides executable launch scripts to start master and worker nodes in standalone mode.
+% Where to find them
+The executables can be found at \textit{sbin/start-master.sh} to start a master node and at \textit{sbin/start-slave.sh} to start a worker node.
+% parameter for worker script
+The worker launch executable requires the master node URI as parameter \cite{Apache2020Spark}. 
+
+% Example master
+\begin{lstlisting}[frame=single, label=lst:04_spark_standalone_launch-master, caption=Usage of master launch script, captionpos=b]
+$ ./sbin/start-master.sh
+\end{lstlisting}
+
+% Example worker
+\begin{lstlisting}[frame=single, label=lst:04_spark_standalone_launch-worker, caption=Usage of worker launch script, captionpos=b]
+$ ./sbin/start-slave.sh spark://spark-master:7077
+\end{lstlisting}
+
+% Introduce examples
+\paragraph{}\Lst{lst:04_spark_standalone_launch-master} and \Lst{lst:04_spark_standalone_launch-worker} provide an example of how to use both executables to start a master and a worker node. The URI \textit{spark://spark-master:7077} in \Lst{lst:04_spark_standalone_launch-worker} is an example of a master node URI. The master node launch script will print out the master URI after being executed successfully \cite{Apache2020Spark}.
+
+
+\subsubsection{Resource Allocation}
+In standalone mode, worker need a set of resources configured. Therefore, a worker can assign resources to executors.
+% Discovery script
+To specify how a worker discovers resources, a discovery script has to be available \cite{Apache2020Spark}.
+
+
+\subsubsection{Submitting Applications with spark-submit}
+% Which executable
+\paragraph{}To submit an application to a standalone cluster, Apache Spark provides the spark-submit executable. The executable file is available at \textit{bin/spark-submit} in the installation folder of Apache Spark.
+% Cluster mode
+In cluster mode (introduced in SUBSECTION XY) the driver of a Spark application (see subsection AB) will be launched from one of the worker processes inside the cluster.
+% When does it finish
+The submit process will finish after it has submitted the application. It does not wait for the submitted application to finish \cite{Apache2020Spark}.
+
+% Example
+\begin{lstlisting}[frame=single, label=lst:04_spark_standalone_submit_example, caption=Execution of a Spark Python application using the spark-submit executable, captionpos=b]
+$ bin/spark-submit --master spark://spark-master:7077 application.py
+\end{lstlisting}
+
+% How to use it
+\paragraph{}\Lst{lst:04_spark_standalone_submit_example} shows how the spark-submit executable can be used to submit a Python application to a standalone Apache Spark cluster.
+% required parameter
+Spark-submit requires the master node URI and the path to the desired Spark application file.
+% Which files
+With the spark-submit executable it is possible to submit Python, Java and R applications \cite{Apache2020Spark}.
 
 
 % ===========================================
@@ -315,13 +361,13 @@ Spark provides build-in scripts to start a master node and worker nodes in stand
 % Explain
 RAPIDS accelerator for Apache Spark is a plugin suite that aims to accelerate computing operation for Apache Spark using GPUs. It is available for Apache Spark 3 \cite{SparkRapids2020Docs}.
 % A little how
-The plugin uses the RAPIDS\footnote{Open GPU Data Science - \url{https://rapids.ai/}, accessed: 01-01-2021} libraries to extend the Apache Spark programming model, introduced in \SubSec{subsec:04_spark_pr-model} \cite{SparkRapids2020Docs, Mcdonald2020SparkRapids}.
+The plugin uses the RAPIDS\footnote{Open GPU Data Science - \url{https://rapids.ai/} (Accessed: 01-01-2021)} libraries to extend the Apache Spark programming model, introduced in \SubSec{subsec:04_spark_pr-model} \cite{SparkRapids2020Docs, Mcdonald2020SparkRapids}.
 
 
 \subsection{Extension of the Spark programming model}
 \label{subsec:04_rapids_ext}
 % How does it extends DataFrame and SQL
-\paragraph{}The plugin suite extends the Spark programming model with a new DataFrame based on Apache Arrow\footnote{Arrow. A cross-language development platform for in-memory data - \url{https://arrow.apache.org/}, accessed: 2020-12-03} data structures. In addition, the Catalyst optimizer (described in \SubSec{subsubsec:04_spark_pr-model_catalyst}) is extended to generate GPU-aware query plans \cite{Mcdonald2020SparkRapids}.
+\paragraph{}The plugin suite extends the Spark programming model with a new DataFrame based on Apache Arrow\footnote{Arrow. A cross-language development platform for in-memory data - \url{https://arrow.apache.org/} (Accessed: 2020-12-03)} data structures. In addition, the Catalyst optimizer (described in \SubSec{subsubsec:04_spark_pr-model_catalyst}) is extended to generate GPU-aware query plans \cite{Mcdonald2020SparkRapids}.
 % What is Apache Arrow
 Apache arrow is a data platform to build high performance applications that work with large dataset`s and to improve analytic algorithms. A component of Apache Arrow is the Arrow Columnar Format, an in-memory data structure specification for efficient analytic operations on GPUs and CPUs \cite{ApacheArrow2020Docs}.
 
@@ -334,13 +380,22 @@ Apache arrow is a data platform to build high performance applications that work
 \label{fig:04_rapids_ext_query-plan}
 \end{figure}
 \paragraph{}\Fig{fig:04_rapids_ext_query-plan} illustrates how the RAPIDS plugin suite extends the Catalyst optimization process illustrated previously in \Fig{fig:04_spark_pr-model_catalyst_process}.
-% Identifiy operators
 % How does the Catalyst create GPU aware plans
 The Spark Catalyst optimizer identifies operator in a query plan that are supported by the RAPIDS APIs. To execute the query plan, these operators can be scheduled on a GPU within the Spark cluster \cite{Mcdonald2020SparkRapids}. If operators are not supported by the RAPIDS APIs, a physical plan for CPUs will be generated by the Catalyst optimizer to execute RDD operations \cite{Mcdonald2020SparkRapids}.
 
 
-\subsection{Installation}
-
+\subsection{Installation Requirements for Apache Spark Standalone Mode}
+\label{subsec:04_rapids_req}
+The RAPIDS accelerator for Apache Spark is available for standalone Apache Spark cluster. To operate effectively, the following requirements need to be installed on all Apache Spark nodes in the cluster \cite{SparkRapids2020Docs}:
+% requirements
+\begin{itemize}
+\item Java Runtime Environment (JRE)
+\item NVIDIA GPU driver
+\item CUDA Toolkit\footnote{CUDA Toolkit - \url{https://developer.nvidia.com/cuda-toolkit} (Accessed: 2021-01-01)}
+\item RAPIDS accelerator for Apache Spark Java library
+\item cudf Java library which is supported by the RAPIDS accelerator Java library and the installed CUDA toolkit
+\item GPU resource discovery script
+\end{itemize}
 
 
 % ===========================================
