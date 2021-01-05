@@ -7,6 +7,7 @@
 % ===========================================
 % ===========================================
 \section{Design Restrictions}
+\label{sec:05_restrictions}
 The design of the computing environment will be restricted by several points. These factors are given because of technological choices and requirements from up there.
 
 \begin{itemize}
@@ -88,6 +89,7 @@ All containers will run as services in Docker Swarm mode. As described in \SubSe
 
 
 \subsection{Apache Spark Cluster}
+\label{subsec:05_arch_spark}
 
 
 \subsubsection{Master and Worker}
@@ -111,9 +113,7 @@ The Spark Submit node will be deployed via the CI pipeline (SECTION XY). The pru
 
 
 \subsection{Autonomic Manager}
-% Auto scaling
-% self adapting
-% monitoring system (database, cadvisor, metrics, aggregation, ....)
+\label{subsec:05_arch_am}
 
 \begin{figure}[h]
 \centering
@@ -171,6 +171,7 @@ Lastly, the Auto-Scaler is responsible to send the scaling instructions to the D
 % ===========================================
 % ===========================================
 \section{Auto-Scaler}
+\label{sec:05_auto-scaler}
 % What is the Auto-Scaler
 The Auto-Scaler is a component of the the Autonomic Manager and is responsible for the analyze, plan and execution phase.
 % Complete autonomic manager
@@ -186,7 +187,7 @@ After analyzing the performance metrics, the Auto-Scaler will send instructions 
 
 
 \subsection{Configuration}
-\label{subsec:design-auto_scaler-configuration}
+\label{subsec:05_auto-scaler_configuration}
 The Auto-Scaler needs specific configuration properties to be able to collect the correct metrics from Prometheus and deploy new Apache Spark worker container in the environment. The following are properties that have to be defined to ensure that the Auto-Scaler is able to collect meaningful metrics and scale Apache Spark worker as expected.
 
 \subsubsection{General properties}

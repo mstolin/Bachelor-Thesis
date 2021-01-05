@@ -20,7 +20,7 @@
 \contentsline {subsection}{\numberline {2.2.3}Autonomic manager}{10}{subsection.2.2.3}% 
 \contentsline {section}{\numberline {2.3}System Performance}{11}{section.2.3}% 
 \contentsline {subsection}{\numberline {2.3.1}Performance Metrics}{11}{subsection.2.3.1}% 
-\contentsline {paragraph}{}{11}{paragraph*.11}% 
+\contentsline {paragraph}{}{11}{paragraph*.12}% 
 \contentsline {subsection}{\numberline {2.3.2}Time-Based Utilization}{11}{subsection.2.3.2}% 
 \contentsline {section}{\numberline {2.4}Monitoring}{11}{section.2.4}% 
 \contentsline {subsection}{\numberline {2.4.1}Database}{12}{subsection.2.4.1}% 
@@ -31,66 +31,65 @@
 \contentsline {chapter}{\numberline {3}Related Work}{15}{chapter.3}% 
 \contentsline {section}{\numberline {3.1}Elastic Environments}{15}{section.3.1}% 
 \contentsline {subsection}{\numberline {3.1.1}Architecture}{15}{subsection.3.1.1}% 
-\contentsline {paragraph}{}{15}{paragraph*.15}% 
-\contentsline {subsection}{\numberline {3.1.2}Auto-Scaler}{15}{subsection.3.1.2}% 
 \contentsline {paragraph}{}{15}{paragraph*.16}% 
-\contentsline {paragraph}{}{16}{paragraph*.17}% 
-\contentsline {subsection}{\numberline {3.1.3}Auto-Scaling Algorithms}{16}{subsection.3.1.3}% 
+\contentsline {subsection}{\numberline {3.1.2}Auto-Scaler}{15}{subsection.3.1.2}% 
+\contentsline {paragraph}{}{15}{paragraph*.17}% 
 \contentsline {paragraph}{}{16}{paragraph*.18}% 
+\contentsline {subsection}{\numberline {3.1.3}Auto-Scaling Algorithms}{16}{subsection.3.1.3}% 
 \contentsline {paragraph}{}{16}{paragraph*.19}% 
+\contentsline {paragraph}{}{16}{paragraph*.20}% 
 \contentsline {section}{\numberline {3.2}Heterogenous GPU aware Spark systems}{16}{section.3.2}% 
 \contentsline {chapter}{\numberline {4}Technical Background}{19}{chapter.4}% 
 \contentsline {section}{\numberline {4.1}Docker}{19}{section.4.1}% 
 \contentsline {subsection}{\numberline {4.1.1}Docker architecture}{19}{subsection.4.1.1}% 
-\contentsline {paragraph}{Docker client:}{20}{paragraph*.21}% 
-\contentsline {paragraph}{Docker deamon:}{20}{paragraph*.22}% 
-\contentsline {paragraph}{Docker Registry:}{20}{paragraph*.23}% 
-\contentsline {subsection}{\numberline {4.1.2}Docker I mage}{20}{subsection.4.1.2}% 
+\contentsline {paragraph}{Docker client:}{20}{paragraph*.22}% 
+\contentsline {paragraph}{Docker deamon:}{20}{paragraph*.23}% 
+\contentsline {paragraph}{Docker Registry:}{20}{paragraph*.24}% 
+\contentsline {subsection}{\numberline {4.1.2}Docker Image}{20}{subsection.4.1.2}% 
 \contentsline {subsection}{\numberline {4.1.3}Docker Container}{20}{subsection.4.1.3}% 
 \contentsline {subsection}{\numberline {4.1.4}Docker Swarm Mode}{21}{subsection.4.1.4}% 
-\contentsline {subsubsection}{Nodes}{22}{subsubsection*.25}% 
-\contentsline {subsubsection}{Services and Tasks}{22}{subsubsection*.26}% 
+\contentsline {subsubsection}{Nodes}{21}{subsubsection*.26}% 
+\contentsline {subsubsection}{Services and Tasks}{22}{subsubsection*.27}% 
 \contentsline {section}{\numberline {4.2}Apache Spark}{22}{section.4.2}% 
-\contentsline {subsection}{\numberline {4.2.1}Spark programming model}{23}{subsection.4.2.1}% 
-\contentsline {subsubsection}{Resilient distributed datasets}{23}{subsubsection*.27}% 
-\contentsline {subsubsection}{Spark structured API}{23}{subsubsection*.28}% 
-\contentsline {subsubsection}{Spark Catalyst}{23}{subsubsection*.29}% 
-\contentsline {subsection}{\numberline {4.2.2}Spark application architecture}{24}{subsection.4.2.2}% 
-\contentsline {paragraph}{Spark driver:}{24}{paragraph*.32}% 
-\contentsline {paragraph}{Spark Executor:}{25}{paragraph*.33}% 
-\contentsline {paragraph}{Cluster manager:}{25}{paragraph*.34}% 
-\contentsline {subsection}{\numberline {4.2.3}Application Implementation}{26}{subsection.4.2.3}% 
-\contentsline {subsection}{\numberline {4.2.4}Standalone Cluster Deployment}{26}{subsection.4.2.4}% 
-\contentsline {subsubsection}{Starting Master and Worker Nodes}{27}{subsubsection*.37}% 
-\contentsline {paragraph}{}{27}{paragraph*.38}% 
-\contentsline {paragraph}{}{27}{paragraph*.39}% 
-\contentsline {subsubsection}{Resource Allocation}{27}{subsubsection*.40}% 
-\contentsline {subsubsection}{Submitting Applications with spark-submit}{27}{subsubsection*.41}% 
-\contentsline {paragraph}{}{27}{paragraph*.42}% 
-\contentsline {paragraph}{}{27}{paragraph*.43}% 
-\contentsline {section}{\numberline {4.3}RAPIDS accelerator for Apache Spark}{28}{section.4.3}% 
-\contentsline {subsection}{\numberline {4.3.1}Extension of the Spark programming model}{28}{subsection.4.3.1}% 
-\contentsline {paragraph}{}{28}{paragraph*.44}% 
-\contentsline {paragraph}{}{28}{paragraph*.46}% 
-\contentsline {subsection}{\numberline {4.3.2}Installation Requirements for Apache Spark Standalone Mode}{29}{subsection.4.3.2}% 
-\contentsline {section}{\numberline {4.4}Prometheus}{29}{section.4.4}% 
-\contentsline {subsection}{\numberline {4.4.1}Prometheus architecture}{29}{subsection.4.4.1}% 
-\contentsline {paragraph}{Prometheus server:}{29}{paragraph*.48}% 
-\contentsline {paragraph}{Alertmanager:}{30}{paragraph*.49}% 
-\contentsline {paragraph}{Service discovery:}{30}{paragraph*.50}% 
-\contentsline {paragraph}{Exporters:}{30}{paragraph*.51}% 
-\contentsline {paragraph}{Pushgateway:}{30}{paragraph*.52}% 
-\contentsline {paragraph}{Visualization:}{30}{paragraph*.53}% 
-\contentsline {section}{\numberline {4.5}cAdvisor}{31}{section.4.5}% 
-\contentsline {section}{\numberline {4.6}GitLab CI/CD}{31}{section.4.6}% 
-\contentsline {subsection}{\numberline {4.6.1}CI/CD Pipeline}{31}{subsection.4.6.1}% 
-\contentsline {subsubsection}{Configuration}{31}{subsubsection*.54}% 
-\contentsline {subsubsection}{Basic Architecture}{32}{subsubsection*.55}% 
-\contentsline {subsection}{\numberline {4.6.2}Job Execution}{32}{subsection.4.6.2}% 
-\contentsline {section}{\numberline {4.7}K-MEANS}{32}{section.4.7}% 
-\contentsline {section}{\numberline {4.8}Naive Bayes Classifier}{32}{section.4.8}% 
-\contentsline {section}{\numberline {4.9}Scaling Heat}{32}{section.4.9}% 
-\contentsline {section}{\numberline {4.10}KHP}{32}{section.4.10}% 
+\contentsline {subsection}{\numberline {4.2.1}Spark programming model}{22}{subsection.4.2.1}% 
+\contentsline {subsubsection}{Resilient distributed datasets}{22}{subsubsection*.28}% 
+\contentsline {subsubsection}{Spark structured API}{23}{subsubsection*.29}% 
+\contentsline {subsubsection}{Spark Catalyst}{23}{subsubsection*.30}% 
+\contentsline {subsection}{\numberline {4.2.2}Application Architecture}{24}{subsection.4.2.2}% 
+\contentsline {subsubsection}{Spark Driver}{24}{subsubsection*.33}% 
+\contentsline {subsubsection}{Spark Executor}{24}{subsubsection*.34}% 
+\contentsline {subsubsection}{Cluster Manager}{24}{subsubsection*.35}% 
+\contentsline {subsection}{\numberline {4.2.3}Standalone Cluster Deployment}{25}{subsection.4.2.3}% 
+\contentsline {subsubsection}{Starting Master and Worker Nodes}{25}{subsubsection*.38}% 
+\contentsline {paragraph}{}{25}{paragraph*.39}% 
+\contentsline {paragraph}{}{26}{paragraph*.40}% 
+\contentsline {subsubsection}{Resource Allocation}{26}{subsubsection*.41}% 
+\contentsline {subsubsection}{Submitting Applications with spark-submit}{26}{subsubsection*.42}% 
+\contentsline {paragraph}{}{26}{paragraph*.43}% 
+\contentsline {paragraph}{}{26}{paragraph*.44}% 
+\contentsline {section}{\numberline {4.3}RAPIDS accelerator for Apache Spark}{26}{section.4.3}% 
+\contentsline {subsection}{\numberline {4.3.1}Extension of the Spark programming model}{27}{subsection.4.3.1}% 
+\contentsline {paragraph}{}{27}{paragraph*.45}% 
+\contentsline {paragraph}{}{27}{paragraph*.47}% 
+\contentsline {subsection}{\numberline {4.3.2}Installation Requirements for Apache Spark Standalone Mode}{27}{subsection.4.3.2}% 
+\contentsline {section}{\numberline {4.4}Prometheus}{28}{section.4.4}% 
+\contentsline {subsection}{\numberline {4.4.1}Prometheus architecture}{28}{subsection.4.4.1}% 
+\contentsline {paragraph}{Prometheus server:}{28}{paragraph*.49}% 
+\contentsline {paragraph}{Alertmanager:}{29}{paragraph*.50}% 
+\contentsline {paragraph}{Service discovery:}{29}{paragraph*.51}% 
+\contentsline {paragraph}{Exporters:}{29}{paragraph*.52}% 
+\contentsline {paragraph}{Pushgateway:}{29}{paragraph*.53}% 
+\contentsline {paragraph}{Visualization:}{29}{paragraph*.54}% 
+\contentsline {section}{\numberline {4.5}cAdvisor}{29}{section.4.5}% 
+\contentsline {section}{\numberline {4.6}GitLab CI/CD}{29}{section.4.6}% 
+\contentsline {subsection}{\numberline {4.6.1}CI/CD Pipeline}{30}{subsection.4.6.1}% 
+\contentsline {subsubsection}{Configuration}{30}{subsubsection*.55}% 
+\contentsline {subsubsection}{Basic Architecture}{30}{subsubsection*.56}% 
+\contentsline {subsection}{\numberline {4.6.2}Job Execution}{30}{subsection.4.6.2}% 
+\contentsline {section}{\numberline {4.7}K-MEANS}{31}{section.4.7}% 
+\contentsline {section}{\numberline {4.8}Naive Bayes Classifier}{31}{section.4.8}% 
+\contentsline {section}{\numberline {4.9}Scaling Heat}{31}{section.4.9}% 
+\contentsline {section}{\numberline {4.10}KHP}{31}{section.4.10}% 
 \contentsline {chapter}{\numberline {5}Conceptual Design}{33}{chapter.5}% 
 \contentsline {section}{\numberline {5.1}Design Restrictions}{33}{section.5.1}% 
 \contentsline {section}{\numberline {5.2}CI/CD}{33}{section.5.2}% 
@@ -100,53 +99,50 @@
 \contentsline {section}{\numberline {5.4}Computing environment Architecture}{34}{section.5.4}% 
 \contentsline {subsection}{\numberline {5.4.1}Overall}{34}{subsection.5.4.1}% 
 \contentsline {subsection}{\numberline {5.4.2}Apache Spark Cluster}{35}{subsection.5.4.2}% 
-\contentsline {subsubsection}{Master and Worker}{35}{subsubsection*.58}% 
-\contentsline {subsubsection}{Spark Submit}{35}{subsubsection*.59}% 
+\contentsline {subsubsection}{Master and Worker}{35}{subsubsection*.59}% 
+\contentsline {subsubsection}{Spark Submit}{35}{subsubsection*.60}% 
 \contentsline {subsection}{\numberline {5.4.3}Autonomic Manager}{35}{subsection.5.4.3}% 
-\contentsline {subsubsection}{Monitoring System}{36}{subsubsection*.61}% 
-\contentsline {subsubsection}{Workflow}{36}{subsubsection*.62}% 
-\contentsline {paragraph}{}{36}{paragraph*.63}% 
-\contentsline {paragraph}{}{36}{paragraph*.65}% 
+\contentsline {subsubsection}{Monitoring System}{36}{subsubsection*.62}% 
+\contentsline {subsubsection}{Workflow}{36}{subsubsection*.63}% 
+\contentsline {paragraph}{}{36}{paragraph*.64}% 
+\contentsline {paragraph}{}{36}{paragraph*.66}% 
 \contentsline {section}{\numberline {5.5}Auto-Scaler}{37}{section.5.5}% 
 \contentsline {subsection}{\numberline {5.5.1}Configuration}{37}{subsection.5.5.1}% 
-\contentsline {subsubsection}{General properties}{37}{subsubsection*.66}% 
-\contentsline {subsubsection}{Metrics}{38}{subsubsection*.67}% 
-\contentsline {subsubsection}{Apache Spark worker properties}{38}{subsubsection*.68}% 
+\contentsline {subsubsection}{General properties}{37}{subsubsection*.67}% 
+\contentsline {subsubsection}{Metrics}{38}{subsubsection*.68}% 
+\contentsline {subsubsection}{Apache Spark worker properties}{38}{subsubsection*.69}% 
 \contentsline {subsection}{\numberline {5.5.2}Analyze}{38}{subsection.5.5.2}% 
 \contentsline {subsection}{\numberline {5.5.3}Plan}{39}{subsection.5.5.3}% 
 \contentsline {subsection}{\numberline {5.5.4}Execute}{39}{subsection.5.5.4}% 
 \contentsline {chapter}{\numberline {6}Implementation}{41}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Computing Environment}{41}{section.6.1}% 
-\contentsline {subsection}{\numberline {6.1.1}Swarm}{41}{subsection.6.1.1}% 
-\contentsline {subsection}{\numberline {6.1.2}Build Script}{41}{subsection.6.1.2}% 
-\contentsline {section}{\numberline {6.2}Apache Spark Cluster with GPU Acceleration}{41}{section.6.2}% 
-\contentsline {subsection}{\numberline {6.2.1}Apache Spark Base Image}{41}{subsection.6.2.1}% 
-\contentsline {subsection}{\numberline {6.2.2}Apache Spark Master}{43}{subsection.6.2.2}% 
-\contentsline {subsection}{\numberline {6.2.3}Apache Spark Worker}{43}{subsection.6.2.3}% 
-\contentsline {subsection}{\numberline {6.2.4}Apache Spark Submit}{43}{subsection.6.2.4}% 
-\contentsline {subsection}{\numberline {6.2.5}Building Images}{43}{subsection.6.2.5}% 
-\contentsline {section}{\numberline {6.3}Monitoring-System}{43}{section.6.3}% 
-\contentsline {subsection}{\numberline {6.3.1}cAdvisor}{43}{subsection.6.3.1}% 
-\contentsline {subsection}{\numberline {6.3.2}Prometheus}{43}{subsection.6.3.2}% 
-\contentsline {section}{\numberline {6.4}Auto-Scaler}{43}{section.6.4}% 
-\contentsline {subsection}{\numberline {6.4.1}Code Implementation}{43}{subsection.6.4.1}% 
-\contentsline {subsection}{\numberline {6.4.2}Configuration}{43}{subsection.6.4.2}% 
-\contentsline {subsection}{\numberline {6.4.3}Docker Image}{43}{subsection.6.4.3}% 
-\contentsline {section}{\numberline {6.5}GitLab CI/CD}{44}{section.6.5}% 
-\contentsline {subsection}{\numberline {6.5.1}Automatic Deployment of Apache Spark Applications}{44}{subsection.6.5.1}% 
-\contentsline {subsection}{\numberline {6.5.2}Image Registry}{44}{subsection.6.5.2}% 
-\contentsline {section}{\numberline {6.6}General}{44}{section.6.6}% 
-\contentsline {section}{\numberline {6.7}Computing environment}{44}{section.6.7}% 
-\contentsline {subsection}{\numberline {6.7.1}Monitoring}{44}{subsection.6.7.1}% 
-\contentsline {subsection}{\numberline {6.7.2}Apache Spark Images}{44}{subsection.6.7.2}% 
-\contentsline {subsection}{\numberline {6.7.3}GPU Acceleration}{45}{subsection.6.7.3}% 
-\contentsline {section}{\numberline {6.8}Auto-Scaler}{45}{section.6.8}% 
-\contentsline {subsection}{\numberline {6.8.1}Configuration}{45}{subsection.6.8.1}% 
-\contentsline {subsection}{\numberline {6.8.2}Control-Loop}{45}{subsection.6.8.2}% 
-\contentsline {subsubsection}{Analyze}{45}{subsubsection*.69}% 
-\contentsline {subsubsection}{Plan}{45}{subsubsection*.70}% 
-\contentsline {subsubsection}{Execute}{45}{subsubsection*.71}% 
-\contentsline {section}{\numberline {6.9}Automated Deployment}{45}{section.6.9}% 
+\contentsline {section}{\numberline {6.1}Requirements}{41}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}Auto-Scaler}{41}{section.6.2}% 
+\contentsline {subsection}{\numberline {6.2.1}Configuration}{41}{subsection.6.2.1}% 
+\contentsline {paragraph}{}{41}{paragraph*.70}% 
+\contentsline {paragraph}{General:}{42}{paragraph*.71}% 
+\contentsline {paragraph}{Metrics:}{42}{paragraph*.72}% 
+\contentsline {paragraph}{Worker:}{42}{paragraph*.73}% 
+\contentsline {subsection}{\numberline {6.2.2}Calculating Scaling Heat}{43}{subsection.6.2.2}% 
+\contentsline {subsection}{\numberline {6.2.3}Scaling the Apache Worker Service}{43}{subsection.6.2.3}% 
+\contentsline {subsection}{\numberline {6.2.4}Docker Image}{43}{subsection.6.2.4}% 
+\contentsline {section}{\numberline {6.3}Computing Environment}{43}{section.6.3}% 
+\contentsline {subsection}{\numberline {6.3.1}Hardware}{43}{subsection.6.3.1}% 
+\contentsline {subsection}{\numberline {6.3.2}Software info}{43}{subsection.6.3.2}% 
+\contentsline {subsection}{\numberline {6.3.3}Swarm}{44}{subsection.6.3.3}% 
+\contentsline {subsection}{\numberline {6.3.4}Build Script}{44}{subsection.6.3.4}% 
+\contentsline {subsection}{\numberline {6.3.5}Apache Spark Cluster with GPU Acceleration}{44}{subsection.6.3.5}% 
+\contentsline {paragraph}{}{44}{paragraph*.75}% 
+\contentsline {paragraph}{}{44}{paragraph*.76}% 
+\contentsline {subsubsection}{Apache Spark Base Image Installation Details}{44}{subsubsection*.77}% 
+\contentsline {paragraph}{}{44}{paragraph*.78}% 
+\contentsline {subsubsection}{Standalone Master and Worker Image}{45}{subsubsection*.79}% 
+\contentsline {paragraph}{Master image:}{45}{paragraph*.80}% 
+\contentsline {paragraph}{Worker image:}{45}{paragraph*.81}% 
+\contentsline {subsubsection}{Submit Image}{45}{subsubsection*.82}% 
+\contentsline {subsection}{\numberline {6.3.6}Autonomic Manager}{46}{subsection.6.3.6}% 
+\contentsline {paragraph}{}{46}{paragraph*.83}% 
+\contentsline {subsubsection}{Prometheus Target Configuration}{46}{subsubsection*.84}% 
+\contentsline {section}{\numberline {6.4}Automatic Deployment of Apache Spark Applications}{46}{section.6.4}% 
 \contentsline {chapter}{\numberline {7}Evaluation}{47}{chapter.7}% 
 \contentsline {section}{\numberline {7.1}Test Environment}{47}{section.7.1}% 
 \contentsline {section}{\numberline {7.2}Datasets}{47}{section.7.2}% 
@@ -155,3 +151,5 @@
 \contentsline {section}{\numberline {8.2}Reinforcement Learning for Auto-Scaling}{49}{section.8.2}% 
 \contentsline {chapter}{\numberline {9}Conclusion}{51}{chapter.9}% 
 \contentsline {section}{\numberline {9.1}Cluster architecture}{51}{section.9.1}% 
+\contentsline {part}{Anhang}{51}{section*.85}% 
+\contentsline {chapter}{\numberline {A}Apache Spark Cluster Implementation}{53}{appendix.A}% 

@@ -5,114 +5,34 @@
 
 % ===========================================
 % ===========================================
-\section{Computing Environment}
-
-
-\subsection{Swarm}
-Vielleicht euch einfach das ganze kapitel Swarm nennen?
-- Dockerfile erläutern
-
-
-\subsection{Build Script}
-
-
-% ===========================================
-% ===========================================
-\section{Apache Spark Cluster with GPU Acceleration}
-The Apache Spark cluster is created in standalone mode, see SECTION AB for details. The cluster consists of a single Apache Spark master node, a variant number of Apache Spark worker nodes and for each running application one Apache Spark Submit node. Each node runs in an independent Docker container. The Apache Spark master and worker nodes run as services in the swarm. Each Apache Spark node container is created from a custom Docker image. To simplify the images, a base image is created where all other images can inherit from.
-
-\subsection{Apache Spark Base Image}
-% The dockerfile
-\begin{lstlisting}[frame=single, label=lst:06_env_apache_base_dockerfile, caption=Dockerfile of the Apache Spark base image, captionpos=b]
-FROM nvidia/cuda:11.0-devel-ubuntu16.04
- 
-LABEL maintainer="marcel.pascal.stolin@ipa.fraunhofer.de"
- 
-ARG SPARK_VERSION
-ARG HADOOP_VERSION
- 
-# Install all important packages
-RUN apt-get update -qy && \
-    apt-get install -y openjdk-8-jre-headless procps python3 python3-pip curl
- 
-# Install Apache Spark
-RUN mkdir /usr/bin/spark/ && \
-    curl https://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz -o spark.tgz && \
-    tar -xf spark.tgz && \
-    mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}/* /usr/bin/spark/ && \
-    rm -rf spark.tgz && \
-    rm -rf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}/
- 
-# Add GPU discovery script
-RUN mkdir /opt/sparkRapidsPlugin/
-COPY getGpusResources.sh /opt/sparkRapidsPlugin/getGpusResources.sh
-ENV SPARK_RAPIDS_DIR=/opt/sparkRapidsPlugin
- 
-# Install cuDF and RAPIDS
-RUN curl -o ${SPARK_RAPIDS_DIR}/cudf-0.15-cuda11.jar https://repo1.maven.org/maven2/ai/rapids/cudf/0.15/cudf-0.15-cuda11.jar
-RUN curl -o ${SPARK_RAPIDS_DIR}/rapids-4-spark_2.12-0.2.0.jar https://repo1.maven.org/maven2/com/nvidia/rapids-4-spark_2.12/0.2.0/rapids-4-spark_2.12-0.2.0.jar
-ENV SPARK_CUDF_JAR=${SPARK_RAPIDS_DIR}/cudf-0.15-cuda11.jar
-ENV SPARK_RAPIDS_PLUGIN_JAR=${SPARK_RAPIDS_DIR}/rapids-4-spark_2.12-0.2.0.jar
- 
-# Set all environment variables
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-ENV SPARK_HOME /usr/bin/spark
-ENV SPARK_NO_DAEMONIZE true
-ENV PYSPARK_DRIVER_PYTHON python3
-ENV PYSPARK_PYTHON python3
-ENV PATH /usr/bin/spark/bin:/usr/bin/spark/sbin:$PATH
- 
-WORKDIR ${SPARK_HOME}
-\end{lstlisting}
-
-
-LISTING XY shows the instructions of the Apache Spark base image. The base image installs all requirements needed to run Apache Spark with the RAPIDS accelerator enabled, as listed in \SubSec{subsec:04_rapids_req}. The image uses CUDA as the base image. 
-
+\section{Requirements}
+Mentioned before, the goal is to create a self-healing and self-adapting computing environment. In addition, Apache Spark applications  should be able to deploy automatically via a CI pipeline to the cluster. Therefore, to implement the conceptual design described in SECTION XY, the following requirements need to be implemented:
 
 \begin{enumerate}
-\item The Apache Spark base image uses CUDA as the base image. It has already CUDA 11.0 and the NVIDIA GPU driver installed.
-\item SET SPARK AND HADOOP VERSION
-\item First the Ubuntu package repository is being updated. Second all required Ubuntu packages like the JRE 8 will be installed.
-\item Apache Spark will be downloaded and installed at \textit{/opts/Spark}.
-\item Add the GPU discovery script
-\item Download needed \textit{.jar} files for the RAPIDS plugin
-\item Set environment variables
-\item Set working directory
+% 1
+\item Implementing the Auto-Scaler Python module
+% 2
+\item Dockerizing the Auto-Scaler
+% 3
+\item Creating the computing environment in a Docker swarm
+\begin{itemize}
+\item Create an Apache Spark cluster with GPU acceleration
+\item Create an autonomic manager with a monitoring system and an Auto-Scaler
+\end{itemize}
+% 4
+\item Implement a GitLab CI pipeline to deploy Apache Spark applications to the cluster
 \end{enumerate}
 
 
-Each node needs Apache Spark 3.1 installed. A version number of at least 3 is needed to install the NVIDIA RAPIDS plugin (see SECTION AB).
-
-
-\subsection{Apache Spark Master}
-
-
-\subsection{Apache Spark Worker}
-
-
-\subsection{Apache Spark Submit}
-- Dockerfile erklären
-- Config parameter
-
-
-\subsection{Building Images}
-
-
 % ===========================================
 % ===========================================
-\section{Monitoring-System}
-
-
-\subsection{cAdvisor}
-- Wie ist cAdvisor erreichbar
-- Screenshot von cAdvisor 
-
-
-\subsection{Prometheus}
-- Wie ist Prometheu errecihbar
-- DIe config von prometheus dateien
-- Screenshots von prometheus (target und visualisierung)
-
+\section{Auto-Scaler}
+% Concept
+The conceptual design of the Auto-Scaler is described in detail in \Sec{sec:05_auto-scaler}. 
+% Python module
+The Auto-Scaler will be implemented as a module in Python 3.8.
+% Docker
+To deploy the Auto-Scaler in a Docker swarm, the Auto-Scaler needs to be dockerized in a Docker Image.
 
 
 %
@@ -120,143 +40,291 @@ Each node needs Apache Spark 3.1 installed. A version number of at least 3 is ne
 % weil alle worker sich die GPUs teilen ...
 %
 
-
-% ===========================================
-% ===========================================
-\section{Auto-Scaler}
-
-
-\subsection{Code Implementation}
-- Hier auch Beispiel logs
-- Dann scaling heat und KHP algos
-
-
 \subsection{Configuration}
-- Beispiel von der yml Datei
+% Design
+\paragraph{}The configuration parameter for the Auto-Scaler have been introduced in \Sec{subsec:05_auto-scaler_configuration}.
+% Its yaml
+The configuration for the Auto-Scaler will be specified in a YAML file.
+% The yaml file
+\Lst{lst:06_auto-scaler_config_example} describes an example of an Auto-Scaler configuration.
+% Overall structure
+Overall, a configuration file is structured in three sections: General, metrics and worker.
+% The table
+\Tab{table:06_auto-scaler_config_parameter} lists all available configuration parameter. It describes the value type and the default value, if a the parameter is not required, of each parameter.
+
+% General
+\paragraph{General:}
+The general section defines details about the scaling and heat algorithm and the Prometheus URL.
 
 
-\subsection{Docker Image}
-- Dockerfile hier erklären
+% Metrics
+\paragraph{Metrics:}
+Metrics is a list of performance metrics configuration parameters. The name of a metric (\textit{cpu} and \textit{gpu} in the example \Lst{lst:06_auto-scaler_config_example}) can be set by the administrator. A performance metric requires a query in the PromQL syntax. Additionally a target utilization is needed and the minimum and maximum utilization of the performance metric.
 
 
-% ===========================================
-% ===========================================
-\section{GitLab CI/CD}
+% Worker
+\paragraph{Worker:}
+To scale the replicas of the Apache Spark worker service, the name of the Docker service needs to be set. In addition, the minimum and maximum number of concurrent worker nodes needs to be defined to prevent an overhead of running worker nodes.
 
 
-\subsection{Automatic Deployment of Apache Spark Applications}
-Vielleicht eher das Kapitel so nennen
-- gitlab-ci.yml erklären
-- Screenshot von webui output
-
-
-\subsection{Image Registry}
-??
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\section{General}
-% BLa bla alles in Docker usw.
-T create an elastic computing environment, all needed components will be run as Docker container in a Docker network.
-
-
-\section{Computing environment}
-% The environment will be implemented with Docker/docker-compose
-To create an elastic environment Docker will be used. With docker Spark worker can be easy scaled. With docker-compose an environment can be created.
-% Images used
-% network (Communication)
-\subsection{Monitoring}
-cAdvisor will be uses to monitor metrics from the Docker engine. Prometheus collects the metrics defined in Section XY from cAdvisor and stores them in its time-series database.
-% The queries
-The query used for getting CPU metrics:
-
-\begin{lstlisting}[language=SQL, caption=Python example]
-SUM(SELECT BLA FROM XYZ)
+% Example
+\begin{lstlisting}[label=lst:06_auto-scaler_config_example, caption=Auto-Scaler configuration YAML file]
+general:
+  interval_seconds: 5
+  cooldown_period_seconds: 180
+  recurrence_factor: 3
+  prometheus_url: "http://localhost:9090"
+ 
+metrics:
+  cpu:
+    query: 'sum(rate(container_cpu_user_seconds_total{image="spark-worker:3.0.1-hadoop2.7"}[30s]))'
+    target_utilization: 0.5
+    thresholds:
+      min: 0.2
+      max: 0.6
+  
+  gpu:
+    query: 'sum(rate(container_cpu_user_seconds_total{image="spark-worker:3.0.1-hadoop2.7"}[30s]))'
+    target_utilization: 0.3
+    thresholds:
+      min: 0.2
+      max: 0.6
+ 
+worker:
+  service_name: "computing_spark-worker"
+  thresholds:
+    min: 1
+    max: 30
 \end{lstlisting}
 
-The query used for getting GPU metrics:
+
+% Parameter table
+\begin{table}[]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+Name                      & Type    & Default           \\ \midrule
+\multicolumn{3}{l}{\textbf{general}}                    \\ \midrule
+interval\_seconds         & Integer & 1                 \\
+cooldown\_period\_seconds & Integer & 180               \\
+recurrence\_factor        & Integer & 1                 \\
+prometheus\_url           & String  & \textit{Required} \\
+\multicolumn{3}{l}{\textbf{metrics}}                    \\ \midrule
+query                     & String  & \textit{Required} \\
+target\_utilization       & Float   & 0.5               \\
+\multicolumn{3}{l}{thresholds}                          \\
+min                       & Float   & 0.5               \\
+max                       & Float   & 0.5               \\
+\multicolumn{3}{l}{\textbf{worker}}                     \\ \midrule
+service\_name             & String  & \textit{Required} \\
+\multicolumn{3}{l}{thresholds}                          \\
+min                       & Float   & 0.5               \\
+max                       & Float   & 0.5               \\ \bottomrule
+\end{tabular}
+\caption{Auto-Scaler configuration parameter}
+\label{table:06_auto-scaler_config_parameter}
+\end{table}
 
 
-\subsection{Apache Spark Images}
-The are 4 different Spark images:
-
-1. Spark-Base
-2. Spark-Master
-3. Spark-Worker
-4. Spark-Submit
-
-Spark-Base is the foundation image for all other Spark images. Spark-Master is the image for the master node. Spark-Worker is the image for all SPark worker nodes. With Spark-Submit, a application will be submitted, the container runs as long as the application runs and exits after the execution automatically. Spark-Submit is used, because Cluster runs in Standalaone mode. Python cann submit cannot run in cluster mode QUELLE SPark.
-
-\subsection{GPU Acceleration}
-
-NVIDIA RAPIDS will be used as the plugin for GPU acceleration.
+\subsection{Calculating Scaling Heat}
 
 
-
-\section{Auto-Scaler}
-The Auto-Scaler consists of a Python module which implements the logic for control-loop and a own Docker image.
-% Is implemented in python
-The Auto-Scaler is implemented in the Python programming language.
-% Is its own Docker image
-The Auto-Scaler module will be executed in an individual Docker image.
-% UML diagram
-
-\subsection{Configuration}
-All configuration properties defined in the concept of the Auto-Scaler in SECTION A will be defined in a YAML file.
-% As a cmd-line argument
-To set the configuration properties, the configuration file needs to be set as a command-line argument.
-% File example
-
-\subsection{Control-Loop}
-Control-Loop of the Auto-Scaler implements the Analyze, Plan, and Execute phase of the MAPE architecture.
-
-\subsubsection{Analyze}
-% Scaling Heat
-Scaling Heat algorithm will be used to estimate if a scaling action is necessary.
-
-\subsubsection{Plan}
-% KHPA
-The KHPA algorithm will be used to calculate how many worker are needed to reach the target utilization. Since we have two different metrics, the highest number of running worker will be used KUBERNETES QUELLE.
-
-\subsubsection{Execute}
+\subsection{Scaling the Apache Worker Service}
+The KHPA algorithm will be used to calculate how many worker are needed to reach the target utilization. Since we have two different metrics, the highest number of running worker will be used KUBERNETES QUELLE
 % Python Docker SDK
 Via the Python Docker SDK new container will be spawned in the network.
 % Check if worker is busy
 If worker need to be removed, it is necessary to check if the worker are running any applications at the moment. Spark provides a REST API to check this.
 % Cooldown
-After a scaling action has been performed, a cooldown period will be applied so all nodes can relax.
+After a scaling action has been performed, a cooldown period will be applied so all nodes can relax
 
 
+\subsection{Docker Image}
+- Dockerfile hier erklären
+- Wie den Auto-Scaler per konsole starten (mit config parameter)
 
-\section{Automated Deployment}
-Hier die CI/CD von gitlab.
+
+% ===========================================
+% ===========================================
+\section{Computing Environment}
+
+
+\subsection{Hardware}
+% DGX erklären
+
+
+\subsection{Software info}
+Hier tabelle mit versionen von eingesetzter software
+
+
+\subsection{Swarm}
+Vielleicht euch einfach das ganze kapitel Swarm nennen?
+- Dockerfile erläutern
+- GPUs (nur die 2 bestimmten)
+
+
+\subsection{Build Script}
+
+
+\subsection{Apache Spark Cluster with GPU Acceleration}
+% Standalone
+\paragraph{}The Apache Spark cluster is created in standalone mode, see \SubSec{subsec:04_spark_standalone} for deployment details.
+% Master and worker
+The cluster consists of a single Apache Spark master node and a dynamic number of Apache Spark worker nodes. The master and worker container will run as a service in a swarm (see \Sec{subsec:04_docker_swarm}).
+% Submit
+For submitting an application to the cluster, an individual container performing the spark-submit executable will be deployed.
+% Docker
+Each node runs in an independent Docker container.
+
+
+% How many images are needed
+\paragraph{}Overall four Docker images are needed to create the Apache Spark cluster introduced in \SubSec{subsec:05_arch_spark}:
+\begin{itemize}
+\item Base image
+\item Master image
+\item Worker image
+\item Submit image
+\end{itemize}
+% The base image
+The master, worker and submit image require common packages to be installed and a set of common configuration. Therefore, an additional base image will serve as a base image.
+
+\subsubsection{Apache Spark Base Image Installation Details}
+\paragraph{}The base image Dockerfile is available at \Lst{lst:appendix_spark_base_dockerfile}.
+% Ubuntu base docker image
+As parent, the base image uses the \textit{nvidia/cuda:11.0-devel-ubuntu16.04} Docker image. The parent image runs Ubuntu\footnote{Enterprise Open Source and Linux - \url{https://www.ubuntu.com/} (Accessed: 2021-01-03)} in version 16.04. Additionally the CUDA Toolkit and the NVIDIA GPU driver are already installed.
+% Args for spark and hadoop version
+Docker provides the ability to set build arguments. To be able to install a specific Apache Spark version, two arguments,  can be set when building the Docker image.
+% Apache Spark
+Apache Spark will be installed at \textit{/opts/Spark}.
+% Work dir
+This directory will be set as the working directory for the Docker image as well.
+% Ubuntu packages
+Furthermore, required Ubuntu packages will be installed. This includes the Java Runtime Environment Version 8, which is a requirement for Apache Spark.
+% RAPIDS
+To enable GPU acceleration on all Apache Spark nodes, the base image will install the compiled Java files for the RAPIDS plugin at \textit{/opt/sparkRapidsPlugin} (for RAPIDS installation requirements, see \SubSec{subsec:04_rapids_req}). The .jar files can be downloaded in the maven repository.
+% Discovery script
+To enable Apache Spark to discover available GPUs, a GPU discovery script is needed (see \SubSec{subsubsec:04_spark_standalone_res-alloc} for details about resource allocation). This discovery script will be placed at \textit{/opt/sparkRapidsPlugin} as well. The discovery script is introduced at \Lst{lst:appendix_spark_gpu-discovery}.
+
+%% HETEROGEN
+
+
+% Building
+%\paragraph{}Listing XY demonstrates how the base image can be build 
+
+
+% Env var table
+%The table \ref{table:1} is an example of referenced \LaTeX elements.
+
+%\begin{table}[h!]
+%\centering
+%\begin{tabular}{||c c||} 
+ %\hline
+ %Environment variable & Value \\ [0.5ex] 
+ %\hline\hline
+ %$SPARK\_RAPIDS\_DIR$ & /opt/sparkRapidsPlugin \\ 
+ %$SPARK\_CUDF\_JAR$ & opt/sparkRapidsPlugin/cudf-0.15-cuda11.jar \\
+ %$SPARK\_RAPIDS\_PLUGIN\_JAR$ & opt/sparkRapidsPlugin/rapids-4-spark_2.12-0.2.0.jar \\
+ %$JAVA\_HOME$ & /usr/lib/jvm/java-8-openjdk-amd64 \\
+ %$PYSPARK\_PYTHON$ & python3 \\ [1ex] 
+ %\hline
+%\end{tabular}
+%\caption{Table to test captions and labels}
+%\label{table:1}
+%\end{table}
+
+
+\subsubsection{Standalone Master and Worker Image}
+% Base image
+The master and worker image are build on top of the  Apache Spark base image.
+% no additional installation
+Therefore, no additional installation steps are required.
+% standalone
+The master and worker nodes will be launched in standalone mode (see \SubSec{subsec:04_spark_standalone} for standalone mode details).
+
+
+\paragraph{Master image:}
+Implementation of the master node Dockerfile is available at \Lst{lst:appendix_spark_master_dockerfile}.
+% Ports
+The master node image needs two ports configured: The Apache Spark service port and the port for the web user interface.
+% web ui port
+The Apache Spark service port ist set to 7077 and the web user interface port to 4040. 
+% Start in standalone
+To start the master node in standalone mode, the start-master.sh launchable will be set as image entrypoint which requires no additional arguments.
+
+
+\paragraph{Worker image:}
+\Lst{lst:appendix_spark_worker_dockerfile} describes the implementation of the worker node Dockerfile.
+% web ui port
+The port for the worker web interface will be exposed at 4041.
+% Port
+To start the worker in standalone mode, the start-slave.sh executable will be set as entrypoint for the image.
+% Master uri
+The launch script requires the master node URI as a parameter. To keep the configuration simple, the environment variable HIER DIE VAR will be set in the compose file.
+% Worker configuration
+\Lst{lst:06_computing_spark_worker-env} describes the configuration environment for the worker. As mentioned previously (in \Sec{sec:05_restrictions}), for this project two GPUs are available on the DGX workstation. Furthermore, the worker needs to know where to find the GPU resource discovery script.
+
+% Building script
+\begin{lstlisting}[label=lst:06_computing_spark_worker-env, caption=Environment configuration for all worker nodes, language=bash]
+SPARK_WORKER_OPTS="-Dspark.worker.resource.gpu.amount=2 -Dspark.worker.resource.gpu.discoveryScript=/opt/sparkRapidsPlugin/getGpusResources.sh"
+\end{lstlisting}
+
+
+\subsubsection{Submit Image}
+% Pyspark
+As mentioned in \Sec{sec:05_restrictions}, a requirements is, that Apache Spark application will be implemented in Python. Accordingly, the pyspark Python module needs to installed on all submit nodes.
+% Application workspace
+Apache Spark application will be placed at \textit{/opt/spark-apps}. SECTION CI describes how an Apache Spark application will be copied to a submit node.
+% Entrypoint
+As entrypoint, the image will perform a custom submit script (available at LISTING AB). This script performs the spark-submit executable (usage described in detail in \SubSec{subsubsec:04_spark_standalone_submit}).
+
+
+\subsection{Autonomic Manager}
+As mentioned in \SubSec{subsec:05_arch_am}, the autonomic manager will consist of a monitoring system and the Auto-Scaler to create a complete control loop.
+
+\paragraph{}The monitoring system conceptual design was introduced in SECTION XY.
+It consists of a cAdvisor (SECTION XY) service and a Prometheus (SECTION XY) service.
+All modules will run as individual Docker services in the overall swarm.
+% Docker images
+The following DOcker images will be used for the monitoring system:
+% List all images
+\begin{itemize}
+\item \textbf{cAdvisor:} google/cadvisor
+\item \textbf{Prometheus:} prom/prometheus
+\end{itemize}
+
+\subsubsection{Prometheus Target Configuration}
+% Pull based
+As mentioned in \Sec{sec:04_prom}, Prometheus is a pull-based monitoring tool.
+% Target list
+It requires a list of targets to pull performance metrics from.
+
+
+% Describe config
+\Lst{lst:06_computing_am_prom-config} specifies the scrape configuration of the Prometheus system.
+% cAdvisor target
+The cAdvisor service is specified as a target. Prometheus will scrape every 5 seconds performance metrics from cAdvisor. All performance metrics will be labeled with the cAdvisor lable. The cAdvisor service is available at  cadvisor:8080.
+
+
+% Building script
+\begin{lstlisting}[label=lst:06_computing_am_prom-config, caption=Prometheus target configuration in YAML syntax]
+scrape_configs:
+    - job_name: prometheus
+      scrape_interval: 5s
+      static_configs:
+          - targets: ["localhost:9090"]
+ 
+    - job_name: cadvisor
+      scrape_interval: 5s
+      static_configs:
+          - targets: ["cadvisor:8080"]
+            labels:
+                group: "cadvisor"
+\end{lstlisting}
+
+
+% ===========================================
+% ===========================================
+\section{Automatic Deployment of Apache Spark Applications}
+Vielleicht eher das Kapitel so nennen
+- gitlab-ci.yml erklären
+- Screenshot von webui output
