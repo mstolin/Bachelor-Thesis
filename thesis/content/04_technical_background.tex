@@ -506,6 +506,78 @@ GitLab runner can be set up only for specific projects or be available to all pr
 % ===========================================
 % ===========================================
 \section{Scaling Heat}
+\label{sec:04_scal-heat}
+% Intro
+The Scaling Heat algorithm is an algorithm to determine at which point a scaling action is necessary.
+% Authors and why
+It was introduced by A et. al. to overcome issues of traditional recurrence factor algorithms.
+
+
+\subsection{Recurrence Factor}
+% Why recurrence factor
+\paragraph{}In a traditional Autonomic Computing environment, scaling decisions are made whenever data is being received from the monitoring system (see SECTION AB for details about the Autonomic Computing). If a performance spike occurred for each scaling decision, it causes to many decision to perform scaling actions.
+% The problem
+Scaling actions in every interval can cause bad overall performance of the system or causes the system to look temporarily off.
+% The recurrence factor
+To overcome these issue, a recurrence factor needs to be introduced to the decision making algorithm.
+% What it does
+With a recurrence factor (n), a scaling action will only be performed until a performance threshold has been violated n times.
+
+
+% Problems of traditional recurrence factor algos
+\paragraph{}Traditional recurrence factor algorithm require violations to occur regularly. If a performance violation of the opposite direction occurs, the algorithm can get stuck in the violation process. Therefore, no scaling actions will be performed for a long time.
+
+
+\subsection{Scaling Heat Algorithm Concept}
+
+\begin{algorithm}[H]
+\SetKwInput{KwInput}{Input}
+\SetKwInput{KwOutput}{Output}
+\SetAlgoLined
+\KwInput{Your Input}
+\KwInput{Your Input}
+\KwInput{Your Input}
+\KwOutput{Your output}
+\uIf{$utilization \geq upper\_threshold$}{
+   \tcp{cluster overload}
+   \uIf{$heat < 0$}{
+     \tcp{reset heat for removal}
+     $heat \leftarrow 0$\;
+   }
+   $heat \leftarrow heat + 1$\;
+   }
+   \uElseIf{$utilization \leq lower\_threshold$}{
+     \tcp{cluster overload}
+     \uIf{$heat > 0$}{
+       \tcp{reset heat for adding}
+       $heat \leftarrow 0$\;
+     }
+     $heat \leftarrow heat - 1$\;
+   }  
+   \Else{
+   \tcp{utilization is within threshold range}
+   \tcp{move heat towards 0}
+   \uIf{$heat > 0$}{
+      $heat \leftarrow heat - 1$\;
+   }
+   \uElseIf{$heat < 0$}{
+      $heat \leftarrow heat + 1$\;   
+   }
+  }
+\uIf{$heat = n$}{
+$heat \leftarrow 0$\;
+}
+\uElseIf{$heat = -n$}{
+$heat \leftarrow 0$\;
+}
+\Return{heat}
+ \caption{Scaling Heat decision making algorithm}
+ \label{alg:04_scal-heat_concept_algo}
+\end{algorithm}
+
+
+% Describe the concept
+The main 
 
 
 % ===========================================

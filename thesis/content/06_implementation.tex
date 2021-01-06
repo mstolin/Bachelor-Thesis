@@ -5,7 +5,7 @@
 
 % ===========================================
 % ===========================================
-\section{Requirements}
+\section{Background}
 Mentioned before, the goal is to create a self-healing and self-adapting computing environment. In addition, Apache Spark applications  should be able to deploy automatically via a CI pipeline to the cluster. Therefore, to implement the conceptual design described in SECTION XY, the following requirements need to be implemented:
 
 \begin{enumerate}
@@ -50,7 +50,7 @@ The configuration for the Auto-Scaler will be specified in a YAML file.
 % Overall structure
 Overall, a configuration file is structured in three sections: General, metrics and worker.
 % The table
-\Tab{table:06_auto-scaler_config_parameter} lists all available configuration parameter. It describes the value type and the default value, if a the parameter is not required, of each parameter.
+\Tab{table:06_auto-scaler_config_parameter} lists all available configuration parameters. It describes the value type and the default value of each parameter. Some parameters are required to be defined by the administrator and have no default value.
 
 % General
 \paragraph{General:}
@@ -126,17 +126,50 @@ max                       & Float   & 0.5               \\ \bottomrule
 \end{table}
 
 
-\subsection{Calculating Scaling Heat}
-
-
 \subsection{Scaling the Apache Worker Service}
-The KHPA algorithm will be used to calculate how many worker are needed to reach the target utilization. Since we have two different metrics, the highest number of running worker will be used KUBERNETES QUELLE
+docker service apache-worker scale replicas=4
+
+
+\subsubsection{Estimation of Necessary Scaling Actions}
+To estimate if a scaling action is necessary, the Scaling Heat algorithm is used (introduced in Section AB).
+% For each performance metric
+During each interval, the heat will be calculated for each performance metric specified in the configuration under \textit{metrics}.
+% HeatStore
+To store and calculate the heat for each performance metric, a class called \textit{HeatStore} was created.
+% Explain UML
+FIGURE XY describes the UML class diagram for the \textit{HeatStore} Python class.
+% For what can it be used
+The class can be used to retrieve, update and reset the heat for a performance metric.
+
+
+% Recurrence factor
+\Tab{table:06_auto-scaler_config_parameter} shows a configuration parameter called \textit{recurrence\_factor} under general.
+% Indication
+The recurrence factor (N) indicates if a scale-out or scale-in action is necessary. If the calculated heat for a performance metric is N then a scale-out action will be performed, if the heat is -N, a scale-in action will be performed.
+% Reset heat
+After a scaling action has been performed, the heat of the performance metric will be reset.
+
+
+\subsubsection{Calculating the Number of Needed Worker Nodes}
+% Intro KHPA
+The KHPA algorithm will be used to calculate how many worker are needed to reach the target utilization (see SECTION XY for algorithm details). 
+% More metrics then one
+For this project, scaling actions will be performed according to the CPU and GPU utilization. The number of needed worker nodes will be calculated for each performance metric. At then end, the highest number of worker nodes will be chosen KUBERNETES QUELLE.
+
+
+\subsubsection{Performing a Scaling Action}
 % Python Docker SDK
-Via the Python Docker SDK new container will be spawned in the network.
+Docker provides a Python library for the Docker Engine\footnote{Docker SDK for Python 4.4.1 Documentation - \url{https://docker-py.readthedocs.io/en/4.4.1/} (Accessed: 2021-01-05)}. This library will be used to perform the swarm scaling action.
+
+
 % Check if worker is busy
-If worker need to be removed, it is necessary to check if the worker are running any applications at the moment. Spark provides a REST API to check this.
+If worker need to be removed, it is necessary to check if the worker are running any applications. Removing a worker while an application is performing will cause the cancellation of the application.
+% How to check if applications are running
+To check if applications 
+
+
 % Cooldown
-After a scaling action has been performed, a cooldown period will be applied so all nodes can relax
+After a scaling action has been performed, a cooldown period will be applied. This cooldown period gives the environment time to distribute work between available worker nodes.
 
 
 \subsection{Docker Image}
@@ -146,7 +179,7 @@ After a scaling action has been performed, a cooldown period will be applied so 
 
 % ===========================================
 % ===========================================
-\section{Computing Environment}
+\section{Deployment of a Docker Swarm}
 
 
 \subsection{Hardware}
