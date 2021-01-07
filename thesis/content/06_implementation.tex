@@ -1,5 +1,5 @@
 \chapter{Implementation}
-\label{sec:06_implementation}
+\label{chap:06_implementation}
 \todo{Describe Chapter}
 
 
@@ -131,33 +131,48 @@ docker service apache-worker scale replicas=4
 
 
 \subsubsection{Estimation of Necessary Scaling Actions}
-To estimate if a scaling action is necessary, the Scaling Heat algorithm is used (introduced in Section AB).
+
+%
+% ANALYZE !!!!!
+%
+
+The Scaling Heat algorithm, introduced in \Sec{sec:04_scal-heat}, is being used to estimate if a scaling action is necessary.
+% Why
+The algorithm is being used because it will prevent the Auto-Scaler to perform unnecessary scaling actions.
 % For each performance metric
-During each interval, the heat will be calculated for each performance metric specified in the configuration under \textit{metrics}.
-% HeatStore
-To store and calculate the heat for each performance metric, a class called \textit{HeatStore} was created.
-% Explain UML
-FIGURE XY describes the UML class diagram for the \textit{HeatStore} Python class.
-% For what can it be used
-The class can be used to retrieve, update and reset the heat for a performance metric.
-
-
+During each interval, after performance metrics have been received from the monitoring system, a heat value will be calculated for each performance metric specified in the configuration under \textit{metrics}.
 % Recurrence factor
-\Tab{table:06_auto-scaler_config_parameter} shows a configuration parameter called \textit{recurrence\_factor} under general.
-% Indication
-The recurrence factor (N) indicates if a scale-out or scale-in action is necessary. If the calculated heat for a performance metric is N then a scale-out action will be performed, if the heat is -N, a scale-in action will be performed.
-% Reset heat
-After a scaling action has been performed, the heat of the performance metric will be reset.
+The algorithm uses a recurrence factor which has to be defined in design time. The Auto-Scaler configuration provides a parameter called \textit{recurrence\_factor} (see \Tab{table:06_auto-scaler_config_parameter} for details). 
+
+
+% HeatStore
+\paragraph{}To store and calculate the heat for each performance metric, a class called \texttt{HeatStore} was created.
+% Explain UML
+FIGURE XY describes the UML class diagram for the \texttt{HeatStore} Python class.
+% For what can it be used
+The class can be used to retrieve, update and reset the heat for a list of performance metrics.
 
 
 \subsubsection{Calculating the Number of Needed Worker Nodes}
+
+%
+% PLAN !!!
+%
+
+
 % Intro KHPA
 The KHPA algorithm will be used to calculate how many worker are needed to reach the target utilization (see SECTION XY for algorithm details). 
 % More metrics then one
-For this project, scaling actions will be performed according to the CPU and GPU utilization. The number of needed worker nodes will be calculated for each performance metric. At then end, the highest number of worker nodes will be chosen KUBERNETES QUELLE.
+In this project, the calculation is done for the CPU and GPU utilization. The highest number of the desired worker node replicas is chosen.
 
 
 \subsubsection{Performing a Scaling Action}
+
+%
+% EXEVUTE !!!
+%
+
+
 % Python Docker SDK
 Docker provides a Python library for the Docker Engine\footnote{Docker SDK for Python 4.4.1 Documentation - \url{https://docker-py.readthedocs.io/en/4.4.1/} (Accessed: 2021-01-05)}. This library will be used to perform the swarm scaling action.
 
@@ -169,7 +184,7 @@ To check if applications
 
 
 % Cooldown
-After a scaling action has been performed, a cooldown period will be applied. This cooldown period gives the environment time to distribute work between available worker nodes.
+After a scaling action has been performed, a cooldown period will be applied. The cooldown period is needed because the number of desired worker nodes can keep fluctuating due to the dynamic nature of performance metrics.
 
 
 \subsection{Docker Image}
@@ -224,19 +239,19 @@ The master, worker and submit image require common packages to be installed and 
 \subsubsection{Apache Spark Base Image Installation Details}
 \paragraph{}The base image Dockerfile is available at \Lst{lst:appendix_spark_base_dockerfile}.
 % Ubuntu base docker image
-As parent, the base image uses the \textit{nvidia/cuda:11.0-devel-ubuntu16.04} Docker image. The parent image runs Ubuntu\footnote{Enterprise Open Source and Linux - \url{https://www.ubuntu.com/} (Accessed: 2021-01-03)} in version 16.04. Additionally the CUDA Toolkit and the NVIDIA GPU driver are already installed.
+As parent, the base image uses the \texttt{nvidia/cuda:11.0-devel-ubuntu16.04} Docker image. The parent image runs Ubuntu\footnote{Enterprise Open Source and Linux - \url{https://www.ubuntu.com/} (Accessed: 2021-01-03)} in version 16.04. Additionally the CUDA Toolkit and the NVIDIA GPU driver are already installed.
 % Args for spark and hadoop version
 Docker provides the ability to set build arguments. To be able to install a specific Apache Spark version, two arguments,  can be set when building the Docker image.
 % Apache Spark
-Apache Spark will be installed at \textit{/opts/Spark}.
+Apache Spark will be installed at \texttt{/opts/Spark}.
 % Work dir
 This directory will be set as the working directory for the Docker image as well.
 % Ubuntu packages
 Furthermore, required Ubuntu packages will be installed. This includes the Java Runtime Environment Version 8, which is a requirement for Apache Spark.
 % RAPIDS
-To enable GPU acceleration on all Apache Spark nodes, the base image will install the compiled Java files for the RAPIDS plugin at \textit{/opt/sparkRapidsPlugin} (for RAPIDS installation requirements, see \SubSec{subsec:04_rapids_req}). The .jar files can be downloaded in the maven repository.
+To enable GPU acceleration on all Apache Spark nodes, the base image will install the compiled Java files for the RAPIDS plugin at \texttt{/opt/sparkRapidsPlugin} (for RAPIDS installation requirements, see \SubSec{subsec:04_rapids_req}). The .jar files can be downloaded in the maven repository.
 % Discovery script
-To enable Apache Spark to discover available GPUs, a GPU discovery script is needed (see \SubSec{subsubsec:04_spark_standalone_res-alloc} for details about resource allocation). This discovery script will be placed at \textit{/opt/sparkRapidsPlugin} as well. The discovery script is introduced at \Lst{lst:appendix_spark_gpu-discovery}.
+To enable Apache Spark to discover available GPUs, a GPU discovery script is needed (see \SubSec{subsubsec:04_spark_standalone_res-alloc} for details about resource allocation). This discovery script will be placed at \texttt{/opt/sparkRapidsPlugin} as well. The discovery script is introduced at \Lst{lst:appendix_spark_gpu-discovery}.
 
 %% HETEROGEN
 

@@ -9,14 +9,14 @@
 \contentsline {lstlisting}{\numberline {4.3}Example usage of the spark-submit executable}{26}{lstlisting.4.3}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {lstlisting}{\numberline {6.1}Auto-Scaler configuration YAML file}{42}{lstlisting.6.1}% 
-\contentsline {lstlisting}{\numberline {6.2}Environment configuration for all worker nodes}{46}{lstlisting.6.2}% 
-\contentsline {lstlisting}{\numberline {6.3}Prometheus target configuration in YAML syntax}{47}{lstlisting.6.3}% 
+\contentsline {lstlisting}{\numberline {6.1}Auto-Scaler configuration YAML file}{44}{lstlisting.6.1}% 
+\contentsline {lstlisting}{\numberline {6.2}Environment configuration for all worker nodes}{48}{lstlisting.6.2}% 
+\contentsline {lstlisting}{\numberline {6.3}Prometheus target configuration in YAML syntax}{49}{lstlisting.6.3}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {lstlisting}{\numberline {A.1}Apache Spark base image Dockerfile}{55}{lstlisting.A.1}% 
-\contentsline {lstlisting}{\numberline {A.2}Apache Spark master image Dockerfile}{56}{lstlisting.A.2}% 
-\contentsline {lstlisting}{\numberline {A.3}Apache Spark worker image Dockerfile}{56}{lstlisting.A.3}% 
-\contentsline {lstlisting}{\numberline {A.4}GPU discovery script - Source: \url {https://github.com/apache/spark/blob/v3.0.1/examples/src/main/scripts/getGpusResources.sh} (Accessed: 2021-01-03)}{56}{lstlisting.A.4}% 
+\contentsline {lstlisting}{\numberline {A.1}Apache Spark base image Dockerfile}{57}{lstlisting.A.1}% 
+\contentsline {lstlisting}{\numberline {A.2}Apache Spark master image Dockerfile}{58}{lstlisting.A.2}% 
+\contentsline {lstlisting}{\numberline {A.3}Apache Spark worker image Dockerfile}{58}{lstlisting.A.3}% 
+\contentsline {lstlisting}{\numberline {A.4}GPU discovery script - Source: \url {https://github.com/apache/spark/blob/v3.0.1/examples/src/main/scripts/getGpusResources.sh} (Accessed: 2021-01-03)}{58}{lstlisting.A.4}% 

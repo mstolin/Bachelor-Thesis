@@ -1,5 +1,5 @@
 \chapter{Technical Background}
-\label{sec:background}
+\label{chap:04_background}
 %
 In this chapter bla bla
 \todo{Describe Chapter}
@@ -431,6 +431,7 @@ Collected metrics will be exposed in the Prometheus file format \cite{Bastos2019
 % ===========================================
 % ===========================================
 \section{GitLab CI/CD}
+\label{sec:04_background_gitlab}
 GitLab CI/CD is a tool integrated into the GitLab platform that enables Continuous Integration (CI), Continuous Delivery (CD) and Continuous Deployment (CD) for software development.
 % Gitlab platform
 The GitLab platform integrates many development features like Git repository management and CI/CD.
@@ -486,58 +487,45 @@ GitLab runner can be set up only for specific projects or be available to all pr
 
 % ===========================================
 % ===========================================
-% K-MEANS
-% ===========================================
-% ===========================================
-\section{K-MEANS}
-
-
-% ===========================================
-% ===========================================
-% Bayes
-% ===========================================
-% ===========================================
-\section{Naive Bayes Classifier}
-
-
-% ===========================================
-% ===========================================
 % Scaling heat
 % ===========================================
 % ===========================================
 \section{Scaling Heat}
 \label{sec:04_scal-heat}
 % Intro
-The Scaling Heat algorithm is an algorithm to determine at which point a scaling action is necessary.
+The Scaling Heat algorithm is a decision making algorithm to determine if a scaling action is necessary.
 % Authors and why
-It was introduced by A et. al. to overcome issues of traditional recurrence factor algorithms.
+It was introduced by Barna et al. \cite{Barna2017ElasticContainerApps} to overcome issues of traditional recurrence factor algorithms \cite{Barna2017ElasticContainerApps}.
 
 
 \subsection{Recurrence Factor}
 % Why recurrence factor
-\paragraph{}In a traditional Autonomic Computing environment, scaling decisions are made whenever data is being received from the monitoring system (see SECTION AB for details about the Autonomic Computing). If a performance spike occurred for each scaling decision, it causes to many decision to perform scaling actions.
+\paragraph{}In an Autonomic Computing environment, a scaling decision is made in each interval after data has been retrieved from the monitoring system (see \Sec{sec:02_ac} for the Autonomic Computing architecture). 
+% Performance spikes
+Sudden performance spikes can occur and can cause the decision algorithm to perform unnecessary scaling actions.
 % The problem
-Scaling actions in every interval can cause bad overall performance of the system or causes the system to look temporarily off.
+These unnecessary scaling actions can have a negative impact on the overall computing performance.
 % The recurrence factor
-To overcome these issue, a recurrence factor needs to be introduced to the decision making algorithm.
+To overcome this issue, a recurrence factor needs to be introduced to the decision making algorithm.
 % What it does
-With a recurrence factor (n), a scaling action will only be performed until a performance threshold has been violated n times.
+With a recurrence factor ($n$), a scaling action will only be performed until a performance threshold has been violated $n$ times \cite{Barna2017ElasticContainerApps}.
 
 
 % Problems of traditional recurrence factor algos
-\paragraph{}Traditional recurrence factor algorithm require violations to occur regularly. If a performance violation of the opposite direction occurs, the algorithm can get stuck in the violation process. Therefore, no scaling actions will be performed for a long time.
+\paragraph{}Traditional recurrence factor algorithm require violations to occur regularly. If a performance violation of the opposite direction occurs, the algorithm can get stuck in the violation process. Therefore, no scaling actions will be performed \cite{Barna2017ElasticContainerApps}.
 
 
 \subsection{Scaling Heat Algorithm Concept}
 
+% The algorithm
 \begin{algorithm}[H]
 \SetKwInput{KwInput}{Input}
 \SetKwInput{KwOutput}{Output}
 \SetAlgoLined
-\KwInput{Your Input}
-\KwInput{Your Input}
-\KwInput{Your Input}
-\KwOutput{Your output}
+\KwInput{$utilization$ - The retrieved utilization for a performance metric}
+\KwInput{$lower\_threshold$ and $upper\_threshold$ - Range limit of the performance metric}
+\KwInput{$heat$ - Current heat value of a performance metric. Indicating if a scaling action is necessary}
+\KwOutput{$heat$ - New heat value for the next iteration}
 \uIf{$utilization \geq upper\_threshold$}{
    \tcp{cluster overload}
    \uIf{$heat < 0$}{
@@ -565,19 +553,29 @@ With a recurrence factor (n), a scaling action will only be performed until a pe
    }
   }
 \uIf{$heat = n$}{
+Perform a scale-out action\;
 $heat \leftarrow 0$\;
 }
 \uElseIf{$heat = -n$}{
+Perform a scale-in action\;
 $heat \leftarrow 0$\;
 }
 \Return{heat}
- \caption{Scaling Heat decision making algorithm}
- \label{alg:04_scal-heat_concept_algo}
+\caption{Scaling Heat decision making algorithm\cite{Barna2017ElasticContainerApps}}
+\label{alg:04_scal-heat_concept_algo}
 \end{algorithm}
 
 
 % Describe the concept
-The main 
+\paragraph{}\Alg{alg:04_scal-heat_concept_algo} introduces the Scaling Heat algorithm.
+% The base
+The algorithm is based in a concept called \textit{heat}. The value of heat indicates if a scaling action of removing or adding components is necessary.
+% Violations
+If the given utilization of a performance metric violates the upper threshold, the heat value will increase. Violations of the lower threshold will cause a decrease respectively.
+% Recurrence
+When the heat reaches the recurrence factor $n$, positive for adding and negative for removing nodes, a scaling action will be executed.
+% Reset
+After executing a scaling action, the heat value will be set to 0 \cite{Barna2017ElasticContainerApps}.
 
 
 % ===========================================
@@ -585,4 +583,12 @@ The main
 % KHP
 % ===========================================
 % ===========================================
-\section{KHP}
+\section{Kubernetes Horizontal Pod Autoscaler}
+% Short intro
+Kubernetes Horizontal Pod Autoscaler (KHPA) is a auto-scaling algorithm used in Kubernetes.
+% What
+KHPA scale the number of replicas per Pod based on the utilization of performance metrics.
+% Pod?
+Kubernetes is an orchestration tool that allows to create and deploy units called Pods. A Pod is a running process on a cluster that encapsulates an application.
+% Interval
+The algorithm is based on a control loop. Each $n$ seconds, the algorithm gathers performance metrics and computes the number of Pods to achieve the desired utilization of a performance metric.
