@@ -1,7 +1,7 @@
 \babel@toc {english}{}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}% 
 \contentsline {section}{\numberline {1.1}Distributed Computing}{1}{section.1.1}% 
-\contentsline {section}{\numberline {1.2}Computing Acceleration with GPUs}{1}{section.1.2}% 
+\contentsline {section}{\numberline {1.2}Computing Acceleration with GPUs}{2}{section.1.2}% 
 \contentsline {section}{\numberline {1.3}Auto-Scaling}{2}{section.1.3}% 
 \contentsline {section}{\numberline {1.4}Automated Deployment Pipeline}{3}{section.1.4}% 
 \contentsline {section}{\numberline {1.5}Research Objective and Research Questions}{3}{section.1.5}% 
@@ -9,9 +9,6 @@
 \contentsline {paragraph}{}{4}{paragraph*.9}% 
 \contentsline {paragraph}{}{4}{paragraph*.10}% 
 \contentsline {section}{\numberline {1.6}Problem Statement}{4}{section.1.6}% 
-\contentsline {subsection}{\numberline {1.6.1}Performance}{4}{subsection.1.6.1}% 
-\contentsline {subsection}{\numberline {1.6.2}Dynamic Computing Environment}{5}{subsection.1.6.2}% 
-\contentsline {subsection}{\numberline {1.6.3}Automated Deployment}{5}{subsection.1.6.3}% 
 \contentsline {section}{\numberline {1.7}Thesis Structure}{5}{section.1.7}% 
 \contentsline {section}{\numberline {1.8}Research Methodologies}{5}{section.1.8}% 
 \contentsline {chapter}{\numberline {2}Theoretical Foundation}{7}{chapter.2}% 
