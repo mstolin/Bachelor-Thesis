@@ -1,0 +1,14 @@
+Id,Name,Shape Library,Page ID,Contained By,Group,Line Source,Line Destination,Source Arrow,Destination Arrow,Text Area 1
+1,Page,,,,,,,,,Page 1
+2,Text,Standard,1,,,,,,,
+3,Text,Standard,1,,,,,,,Autonomic Manager
+4,Process,Flowchart Shapes,1,,,,,,,Monitor
+5,Process,Flowchart Shapes,1,,,,,,,Plan
+6,Process,Flowchart Shapes,1,,,,,,,Analyse 
+7,Process,Flowchart Shapes,1,,,,,,,Execute
+8,Text,Standard,1,,,,,,,
+9,Process,Flowchart Shapes,1,,,,,,,Sensor
+10,Process,Flowchart Shapes,1,,,,,,,Effector
+11,Text,Standard,1,,,,,,,Managed Resource
+12,Line,,1,,,9,2,None,None,
+13,Line,,1,,,10,2,None,None,

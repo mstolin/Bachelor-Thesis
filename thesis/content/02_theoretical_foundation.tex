@@ -1,9 +1,9 @@
 \chapter{Theoretical Foundation}
 \label{chap:02_foundation}
-%
 
-This chapter provides background information about ...
-\todo{Describe Chapter}
+
+This chapter provides the theoretical foundation about concepts that will be used in this thesis. The concepts describes in this chapter provide the foundation to understand the choice of the all tools. In addition to understand the conceptual design.
+
 
 \section{Scalability}
 % What is scalability
@@ -37,27 +37,59 @@ To overcome the limits of hardware cpacity, a computing system shuld be designed
 
 % ===========================================
 % ===========================================
-\section{Continuous Integration, Delivery and Deployment}
+\section{Deployment Pipeline}
+% Short Abstract
+A deployment pipeline is a implementation of the process for getting software from source code to production.
+% Based on CI
+It is based on the concept of Continuous Integration (CD) and Continuous Delivery (CD).
+% Involves what
+The process involves building, testing and deploying software through automated scripts \cite{Farley2010CI}.
 
-\begin{figure}[h]
-\centering
-\includegraphics[scale=1]{images/02_theoretical_foundation/ci_cd/ci_cd_phases}
-\caption{Autonomic computing concept - Source: Authors own model, based on \cite{Jacob2004AutonomicSolution}.}
-\label{fig:02_foundation_ci-cd_phases}
-\end{figure}
+
+% Advantages
+
+
+%\begin{figure}[h]
+%\centering
+%\includegraphics[scale=1]{images/02_theoretical_foundation/ci_cd/ci_cd_phases}
+%\caption{Autonomic computing concept - Source: Authors own model, based on \cite{Jacob2004AutonomicSolution}.}
+%\label{fig:02_foundation_ci-cd_phases}
+%\end{figure}
+
 
 \subsection{Continuous Integration}
+% FIrst part
+CI is the first part in a deployment pipeline.
+% What its about
+The CI process is responsible for building, testing and validating the software.
+This ensures that the software is in a deployable state at all time \cite{Rossel2017CICD}.
+% Requirements
+A CI pipeline is based on several requirements:
+% The list
+\begin{enumerate}
+\item \textbf{A single code base:} It is important that the source code of an application is in a single code base.
+% Automation script
+This includes all automation script to build, test and validate the application.
+% Changes
+Each change on the code base will trigger the CI pipeline on the build server \cite{Rossel2017CICD}.
+
+\item \textbf{A build server:} The build server is responsible to monitor the code base for changes.
+% Execute
+If a change has been pushed, the build server automatically executes the CI scripts in order \cite{Rossel2017CICD}.
+\end{enumerate}
+
+% Goal of CI
+The goal of  CI pipeline is, to have a production ready artefact of the software after performing \cite{Rossel2017CICD}.
 
 
 \subsection{Continuous Delivery}
-
-
-\subsection{Continuous Deployment}
+After the CI pipeline has succeeded, a CD pipeline is responsible to deploy the artefact to a production server \cite{Rossel2017CICD}.
+% Advantages of a cd pipeline
 
 
 % ===========================================
 % ===========================================
-\section{Autonomic computing}
+\section{Autonomic Computing}
 \label{sec:02_ac}
 % What is autonomic computing
 Autonomic computing is the ability of an IT infrastructure to automatically manage itself in accordance to high level objectives defined by administrators \cite{Kephart2003VisionComputing}.
@@ -84,12 +116,12 @@ The environment must identify unauthorized access and threats to the system and 
 \end{itemize}
 
 
-\subsection{Autonomic computing concept}
+\subsection{Autonomic Computing Concept}
 
 % Concept figure
 \begin{figure}[h]
 \centering
-\includegraphics[scale=1]{images/04_technical_background/ac_concept}
+\includegraphics[scale=1]{images/02_theoretical_foundation/autonomic_computing/autonomic_computing_concept}
 \caption{Autonomic computing concept - Source: Authors own model, based on \cite{Jacob2004AutonomicSolution}.}
 \label{fig:ac_concept}
 \end{figure}
@@ -102,7 +134,7 @@ In an autonomic computing environment, all components have to communicate to eac
 % Control loop figure
 \begin{figure}[h]
 \centering
-\includegraphics[scale=1]{images/04_technical_background/ac_control_loop}
+\includegraphics[scale=1]{images/02_theoretical_foundation/autonomic_computing/control_loop}
 \caption{The control-loop concept - Source: Authors own model, based on \cite{Murch2004Autonomic}.}
 \label{fig:ac_control_loop}
 \end{figure}
@@ -111,12 +143,12 @@ In an autonomic computing environment, all components have to communicate to eac
 The core element of the autonomic architecture is the control-loop. \Fig{fig:ac_control_loop} illustrates the concept of a control-loop. The control-loop collects details about resources through monitoring and makes decisions based on analysis of the collected details to adjust the system if needed \cite{Murch2004Autonomic}.
 
 
-\subsection{Managed resources}
+\subsection{Managed Resources}
 
 % Figure
 \begin{figure}[h]
 \centering
-\includegraphics[scale=1]{images/04_technical_background/ac_managed_resource}
+\includegraphics[scale=1]{images/02_theoretical_foundation/autonomic_computing/managed_resource}
 \caption{Managed resource - Source: Authors own model, based on \cite{Jacob2004AutonomicSolution}.}
 \label{fig:ac_managed_resource}
 \end{figure}
@@ -129,13 +161,13 @@ They are controlled by their sensors and effectors, as illustrated in \Fig{fig:a
 The ability to manage and control managed resources make them highly scalable \cite{Murch2004Autonomic}.
 
 
-\subsection{Autonomic manager}
+\subsection{Autonomic Manager}
 \label{subsec:02_ac_manager}
 
 % Figure
 \begin{figure}[h]
 \centering
-\includegraphics[scale=1]{images/04_technical_background/ac_autonomic_manager}
+\includegraphics[scale=1]{images/02_theoretical_foundation/autonomic_computing/autonomic_manager}
 \caption{Autonomic manager - Source: Authors own model, based on \cite{Jacob2004AutonomicSolution}.}
 \label{fig:ac_manager}
 \end{figure}
@@ -226,13 +258,15 @@ The requirements for a monitoring system, that is able to monitor a dynamic chan
 
 
 \subsection{Database}
-% TS are needed
-Saving continous data needs to be done efficiently. 
-For time-based metrics, a time series database is he most effective way to save the data \cite{Farcic2017Toolkit21}. To store a huge amount of data, data is stored in a very compact format.
-A BISL MEHR ÜBER METRICS UND TIMESERIES.
+% Continuous data
+Continuous data needs to be stored in the most efficient way.
+% TSDB
+Time-series databases (TSDB) are optimized to store and retrieve time-series data.
+% Format
+In a time-series database, metrics will be stored in a compact and optimized format. This allows the database to store a massive amount of time-series data on a single machine.
 
 
-\subsection{Push and pull}
+\subsection{Push and Pull}
 \label{subsec:02_monitoring_push-pull}
 The approach how the monitoring systems gathers metrics to store in the database plays a significant role.
 % There are push and pull based systems
@@ -268,7 +302,7 @@ A pull-based monitoring tool needs to know the address of each target in the env
 The advantage of a pull-based monitoring systems is the simplicity to detect whenever a target has failed or is not available \cite{Farcic2017Toolkit21}.
 
 
-\subsection{Multi-dimensional Metrics}
+\subsection{Multi-Dimensional Metrics}
 \label{subsec:02_monitoring_db_multi-metrics}
 % Why do we need dimensions
 For query languages to be effective, metrics need to be dimensional. Metric without dimensions, are limited in their capabilities.
@@ -276,18 +310,16 @@ For query languages to be effective, metrics need to be dimensional. Metric with
 In a dynamic environment, services are dynamically added and removed. Therefore, a dynamic environment needs dynamic analytics where metrics represent all dimension in the environment \cite{Farcic2018Toolkit22}.
 % Example
 \begin{lstlisting}[frame=single, label=lst:mon_metr_dimless, caption=Example of a dimensionless-metric, captionpos=b]
-container_memory_usage
+container_cpu_user_seconds_total
 \end{lstlisting}
 \begin{lstlisting}[frame=single, label=lst:mon_metr_withdim, caption=Example of a metric with dimensions, captionpos=b]
-container_memory_usage{service="my_service"}
+container_cpu_user_seconds_total{image="spark-worker:3.0.1-hadoop2.7"}
 \end{lstlisting}
 % Explain
 As the exasmple \Lst{lst:mon_metr_dimless} and \Lst{lst:mon_metr_withdim} show, the metric with dimension provide more efficient querieing to gather informations about the environment.
 
 
 \subsection{Query Language}
-
-
-
-\subsection{Choosing a Monitoring Tool}
-Graphite or Prometheus, Prometheus it its! <- Eher in Design
+Another requirement is a powerful and flexible query language. It should have the ability to query a multi-dimensional data model.
+% Aggregations
+Furthermore, the query language must allow aggregations on time-series data.
