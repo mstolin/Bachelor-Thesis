@@ -39,7 +39,7 @@ To overcome the limits of hardware cpacity, a computing system shuld be designed
 % ===========================================
 \section{Deployment Pipeline}
 % Short Abstract
-A deployment pipeline is a implementation of the process for getting software from source code to production.
+A deployment pipeline is an implementation of the process for getting software from source code to production.
 % Based on CI
 It is based on the concept of Continuous Integration (CD) and Continuous Delivery (CD).
 % Involves what
@@ -58,28 +58,54 @@ The process involves building, testing and deploying software through automated 
 
 
 \subsection{Continuous Integration}
+% Abtract def
+Continuous Integration is a development practice where each change on a primary code base is validated by automated scripts. This ensures that errors are detected and fixed in an early development stage \cite{Duvall2007CI}.
 % FIrst part
-CI is the first part in a deployment pipeline.
+CI is the first process in a deployment pipeline.
 % What its about
-The CI process is responsible for building, testing and validating the software.
-This ensures that the software is in a deployable state at all time \cite{Rossel2017CICD}.
+This process is responsible for building, testing and validating the software to guarantee that the software is in a deployable state at all time \cite{Rossel2017CICD}.
+% Advantages
+A CI process contributes with the following advantages to the development life cycle of an application:
+\begin{itemize}
+\item \textbf{Reduce risks:}
+Because the CI process will run tests and validations on each change, errors will be detected in an early stage and can be fixed immediately \cite{Duvall2007CI}.
+
+\item \textbf{Reduce manual processes:} 
+% Same time
+The CI process will perform every time a commit has being made to the code base.
+% Same process
+Each run is processed the exact same way every time.
+% No human
+Therefore, no human intervention is needed to start the process which saves time and cost \cite{Duvall2007CI}.
+
+\item \textbf{Generate deployable software:}
+If an error occurs during a CI run, developers will be informed and fixes can be applied immediately.
+This ensures that the software is in a deployable state at time \cite{Duvall2007CI}.
+\end{itemize}
+
+
+\subsubsection{Requirements of a Continuous Integration Process}
 % Requirements
-A CI pipeline is based on several requirements:
+The implementation of a CI process is based on several requirements:
 % The list
 \begin{enumerate}
-\item \textbf{A single code base:} It is important that the source code of an application is in a single code base.
-% Automation script
-This includes all automation script to build, test and validate the application.
+\item \textbf{Version control repository:}
+To manage changes to the code base, the source code and all other assets like the build script should be hosted on a single version control repository.
 % Changes
-Each change on the code base will trigger the CI pipeline on the build server \cite{Rossel2017CICD}.
+Each change on the code base will trigger the CI process on the build server to run against the latest version available \cite{Duvall2007CI}.
 
-\item \textbf{A build server:} The build server is responsible to monitor the code base for changes.
+\item \textbf{Build server:}
+The build server is responsible to monitor the code base for changes.
 % Execute
-If a change has been pushed, the build server automatically executes the CI scripts in order \cite{Rossel2017CICD}.
+If a change has been committed, the build server automatically executes the CI scripts in order \cite{Rossel2017CICD, Duvall2007CI}.
+
+\item \textbf{Build script:}
+This includes all automation scripts to build, test and validate the source code \cite{Duvall2007CI}.
 \end{enumerate}
 
-% Goal of CI
-The goal of  CI pipeline is, to have a production ready artefact of the software after performing \cite{Rossel2017CICD}.
+
+\subsubsection{Continuous Integration Process Example}
+% BLA BLA
 
 
 \subsection{Continuous Delivery}

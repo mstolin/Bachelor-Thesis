@@ -1,20 +1,50 @@
 \chapter{Introduction}
 \label{sec:01_introduction}
 
+% Concepts
+In this chapter the concepts of distributed computing, GPU acceleration, auto-scaling, and automated deployment pipeline will be introduced.
+% research and problems
+Next, the research objective and the research questions as well as the problem statement of this thesis will be described.
+% structure
+Finally, the structure of this thesis is being explained.
+
 
 % ===========================================
 % ===========================================
 \section{Distributed Computing}
 % Little intro accorsing to Big Data ML and so on
-Machine Learning and Big Data projects consist of a combination of extract-transform-load (ETL) pipelines and compute intensive algorithms to create meaningful informations from massive datasets \cite{Vadapalli2018DevOps}.
+Machine Learning and Big Data projects consist of a combination of extract-transform-load (ETL) pipelines and compute intensive algorithms to create meaningful information from large datasets \cite{Vadapalli2018DevOps}.
+% Problem with large datasets
+Because of its computing intensive nature, Big Data is mostly processed in parallel on distributed hardware.
+% Divide and concquer
+Both concepts of distributed computing and parallel processing follow a divide-and-conquer principle \cite{Khattak2016BigData}.
 % Short intro to distributed computing
-Performing ETL applications on a single machine, limits the scale and performance of the application. Given this limitation, the idea of distributed computing evolved. In the concept of distributed computing, multiple machines with commodity hardware form a cluster to utilize their resources to solve high complex problems \cite{Ganelin2016Spark}.
-% Evolution of distributed computing
-Several companies utilized the idea of distributed computing to solve some of their business problems. 
+Distributed computing is achieved by forming a cluster of multiple machines with commodity hardware to utilize their resources to solve highly complex problems \cite{Ganelin2016Spark}.
+% Parallel processing
+To process Big Data in parallel, a larger task will be divided into smaller sub-tasks that run concurrently.
+% Intro to data and pask parallelism
+In general, one of the two following approaches can be used to achieve parallel processing \cite{Khattak2016BigData}:
+\begin{itemize}
+\item \textbf{Task Parallelism:}
+This approach refers to enabling parallelization by dividing a task into multiple sub-tasks.
+% Each sub-tasks.
+Each sub-task performs a different algorithm with its own copy of the same data in parallel.
+% The results
+The result is created by joining the output of all sub-tasks together \cite{Khattak2016BigData}.
+
+\item \textbf{Data Parallelism:}
+This approach is achieved by dividing a dataset into a series of smaller sub-datasets to process each sub-dataset in parallel.
+% Spread
+The sub-datasets are processed using the same algorithm across different nodes.
+%
+The final output is joined together from each sub-dataset \cite{Khattak2016BigData}.
+\end{itemize}
+% Intro of tools
+Various tools and frameworks such as MapReduce, Apache Hadoop and Apache Spark have been created to facilitate distributed computing.
 % MapReduce
-Google developed the MapReduce\cite{Dean2004MapReduce} framework. MapReduce gives the opportunity to solve massive complex problems in parallel on a cluster of single machines.
+The MapReduce\cite{Dean2004MapReduce} framework gives the opportunity to solve massive complex problems in parallel on a cluster of single machines.
 % Hadoop
-Yahoo published an ecosystem platform for distributed computing called Apache Hadoop\footnote{Apache Hadoop - \url{https://hadoop.apache.org/} (Accessed: 2020-01-08)}. Apache Hadoop contributed to create a cluster to process massive amounts of data in parallel.
+Apache Hadoop\footnote{Apache Hadoop - \url{https://hadoop.apache.org/} (Accessed: 2020-01-08)} is an ecosystem platform for distributed computing. It contributes to create a cluster to process massive amounts of data in parallel by implementing the MapReduce processing framework \cite{Khattak2016BigData}.
 % Apache Spark
 Implementing data pipelines with MapReduce requires to chain multiple MapReduce jobs together. This causes a huge amount of writing and reading operation to the disk with bad impact on the overall performance. Another framework called Apache Spark was developed to simplify writing and executing parallel applications at scale while keeping the benefits of MapReduce`s scalability and fault-tolerant data processing. Apache Spark provides a performance improve of 10x in iterative Machine Learning algorithms over MapReduce \cite{Zaharia2010Spark} and has evolved as a replacement for MapReduce as the distributed computing framework of choice.
 
@@ -23,11 +53,11 @@ Implementing data pipelines with MapReduce requires to chain multiple MapReduce 
 % ===========================================
 \section{Computing Acceleration with GPUs}
 % Why CPUs are limited
-Distributed computing frameworks like Apache Spark perform applications on a huge amount of CPU cores to enable parallization. A CPU is build of multiple cores which are optimized for sequential serial processing. Performing computationally intensive applications on an Apache Spark cluster, consumes a huge amount of CPU cycles with bad impact on the overall performance \cite{Li2015HeteroSpark}.
+Distributed computing frameworks like Apache Spark perform applications on a huge amount of CPU cores to enable parallization. A CPU is build of multiple cores which are optimized for sequential serial processing. Performing computationally intensive applications on an Apache Spark cluster, consumes a huge amount of CPU cycles with negative impact on the overall performance \cite{Li2015HeteroSpark}.
 % About the growing complexity of computational power
-To handle the complexity of Big Data applications, from executing Machine Learning algorithms or training Deep Learning models, a remaining option of distributed computing clusters is to scale-up individual nodes. Scaling-up is limited by resource capacity and can be become uneconomically at a specific point.
+To handle the complexity of Big Data applications, from executing Machine Learning algorithms or training Deep Learning models, an option of distributed computing clusters is to scale-up individual nodes. Scaling-up is limited by resource capacity and can be become uneconomically at a specific point.
 % What about GPUs
-To perform computationally complex applications with better performance, Graphical Process Units (GPU) have become first class citizens in modern data centers. The architecture of a GPU consists of a huge amount of smaller and more efficient cores which are optimized for parallel data processing (handling multiple tasks simultaneously). In general, GPUs process data at a much faster rate than CPUs are capable.
+To perform computationally complex applications with better performance, Graphical Process Units (GPUs) have become first class citizens in modern data centers. The architecture of a GPU consists of a large amount of smaller and more efficient cores which are optimized for parallel data processing (handling multiple tasks simultaneously). In general, GPUs process data at a much faster rate than CPUs are capable.
 % How can apps be accelerated with GPUs
 Leveraging GPUs for distributed computing frameworks like Apache Spark, can boost the overall performance of performing complex algorithms on large datasets.
 
@@ -36,23 +66,23 @@ Leveraging GPUs for distributed computing frameworks like Apache Spark, can boos
 % ===========================================
 \section{Auto-Scaling}
 % Short intro to auto-scaling
-Adjusting the resources in a computing environment is not an easy task. To do it manually, a system administrator needs a deep knowledge about the environment and has to watch performance spikes regularly. This is a resource wasting process. In an optimal way, an automized process would watch the computing environment, analyse performance metrics and automatically add or remove resources to optimize the performance and cost. This process is called auto-scaling.
+Adjusting the resources in a computing environment is not an easy task. To do it manually, a system administrator needs a deep knowledge about the environment and has to watch performance spikes regularly. This is a resource wasting process. In an optimal way, an automized process would watch the computing environment, analyse performance metrics and automatically add or remove resources to optimize the performance and cost of running. This process is called auto-scaling.
 
 
 % Why is auto-scaling needed
-Hiring experts to manually watching an application and scaling an computing environment is a waste of resources and cost.
+Hiring experts to manually watching an application and scaling an computing environment is a waste of resources.
 % Benefits of auto-scaling
-An Auto-Scaler takes care of watching the environment by adding and removing resources to adapt to the computing needs. The Auto-Scaler can be configured to take care of optimal resource allocation while keeping the cost of running low.
+An \textit{Auto-Scaler} takes care of watching the environment by adding and removing resources to adapt to the computing needs. The \textit{Auto-Scaler} can be configured to take care of optimal resource allocation and keep the cost of running at low point.
 
 
 % How can auto-scaling be achieved (Horizontal and vertical)
-Two different scaling approaches can be used to scale resources in a computing environment: Vertical-scaling and horizontal-scaling.
+There exist two different scaling approaches to scale resources in a computing environment: Vertical-scaling and horizontal-scaling.
 % Vertical scaling
 Vertical scaling refers to adjusting the hardware resources of an individual node in the environment. Hardware adjustments can include adding (scale-up) or removing (scale-down) resources like memory or CPU cores \cite{Wilder2012CloudPatterns}. By adding more powerful resources to a node, a node can take more throughput and perform more specialized tasks \cite{Abbott2015ScalabilityArt}.
 % Horizontal scaling
 Adjusting the nodes in a computing environment is referred as horizontal scaling \cite{Wilder2012CloudPatterns}. Increasing the number of nodes in an environment, increases the overall computing capacity and additionally, the workload can be distributed across all nodes \cite{Wilder2012CloudPatterns, Abbott2015ScalabilityArt}.
 % Not exclusive
-Both scaling approaches are not exclusive. A computing environment can be designed to scale vertically, horizontally or both \cite{Wilder2012CloudPatterns}.
+It is important to note, that both approaches are not exclusive from each other and a computing environment can be designed to combine both approaches \cite{Wilder2012CloudPatterns}.
 % Why horizontal scaling is preferred
 Vertical scaling is limited by the maximum hardware capacity. Furthermore, a point can be reached where more powerful hardware resources become unaffordable or are not available \cite{Abbot2011ScalabilityRules}.  Therefore, horizontal scaling is the preferred approach to enable auto-scaling.
 
@@ -63,9 +93,9 @@ Vertical scaling is limited by the maximum hardware capacity. Furthermore, a poi
 % Whats the problem
 Building, testing and releasing software manually is a time-consuming and error-prone process.
 % Overcoming this issue
-To overcome this issue, a pattern called deployment pipeline automates the build, test, deploy and release processes of an application development cycle.
+To overcome this issue, a pattern called deployment pipeline automates the build, test, deploy, and release processes of an application development cycle.
 % How does it work
-The concept of deployment pipelines is based on automation scripts which will be performed on every changes on an applications source code, environment, data or configuration \cite{Farley2010CI}.
+The concept of deployment pipelines is based on automation scripts which will be performed on every change on an applications source code, environment, data or configuration files \cite{Farley2010CI}.
 % Goals of the deployment pipeline
 A fully automated deployment pipeline has many improvements over deploying applications manually:
 % The goals
@@ -79,27 +109,23 @@ A fully automated deployment pipeline has many improvements over deploying appli
 \end{itemize}
 % CI
 The automated deployment pipeline is based on the Continuous Integration (CI) process. Furthermore, the deployment pipeline is the logical implementation of CI \cite{Farley2010CI}.
-% How is it used nowadays
-Nowadays, 
 
 
 % ===========================================
 % ===========================================
 \section{Research Objective and Research Questions}
 % Fraunhofer
-The thesis work will be implemented at Center for Cyber Cognitive Intelligence at the Fraunhofer IPA\footnote{Fraunhofer Institute for Manufacturing Engineering and Automation IPA - \url{https://www.ipa.fraunhofer.de/} (Accessed: 2021-01-07)}.
-% Apache Spark cluster
-At the IPA, developers deploy ML applications using Apache Spark.
-% Goal
-Executing these applications should be accelerated using GPUs on the Apache Spark cluster.
-% Scaling
-If the point is reached where the performance utilization of the Apache Spark cluster is too high, the environment should adapt to the computing needs and scale the Apache Spark cluster by adding more workers.
-% Deployment
-In addition, developers should have the ability to submit an application to the Apache Spark cluster automatically which will be triggered by pushing changes to the code base of the application.
+The thesis work will be implemented at the Center for Cyber Cognitive Intelligence at the Fraunhofer IPA\footnote{Fraunhofer Institute for Manufacturing Engineering and Automation IPA - \url{https://www.ipa.fraunhofer.de/} (Accessed: 2021-01-07)}.
+% DGX and docker
+At the IPA, developers train ML models on Docker container running on a NVIDIA DGX\footnote{The Universal System for AI Infrastructure - \url{https://www.nvidia.com/en-us/data-center/dgx-a100/} (Accessed: 2020-01-09)} workstation.
+% resource combination
+To optimize the training of ML applications, developers combine CPU and GPU resources only limited.
+% The prototype
+Therefore a prototype of an Apache Spark cluster prototype has to be implemented which has the ability to automatically allocate resources according to the computing needs to scale its performance.
 
 
 %Rqs
-To address the goal of this thesis, the following three research question will be investigated:
+The following three research question will be investigated to implemented the mentioned prototype:
 %RQs
 \begin{itemize}
 \item \textbf{RQ1:} Is it possible to scale the number of Apache Spark Worker in accordance to performance utilization?
@@ -149,9 +175,11 @@ Given the previously introduced research questions and the research objective, t
 
 \begin{enumerate}
 % Problem 1
-\item Developers at the Fraunhofer IPA perform ML applications on an Apache Spark cluster.
-On this cluster, the workload of applications is only distributed over a set of CPUs to enable parallelism.
-To improve the execution time of these applications, the cluster needs to be aware of distributing suitable operations on GPUs as well.
+\item Developers at the Fraunhofer IPA perform ML model training on several Docker containers running on a DGX with limited usage of available GPUs.
+% Add Apache Spark
+Apache Spark can be used to optimize the model training by distributing the workload.
+% GPU
+Additionally, the Apache Cluster should be aware about available GPUs to accelerate the model training.
 
  % Problem 2
 \item To enable GPU acceleration for Apache Spark alone is not sufficient to increase the performance.
@@ -168,43 +196,20 @@ Additionally, a deployment pipeline will contribute to the reliability of execut
 % ===========================================
 % ===========================================
 \section{Thesis Structure}
+\todo{Chapter 9}
 % 02 Theoretical Foundation
 \Chap{chap:02_foundation} provides the theoretical foundation about concepts which have been introduced in this chapter.
 % 03 Related Work
 \Chap{chap:03_related-work} focuses on related work which provides solutions to solve the given problems of this thesis introduced in \Sec{sec:01_introduction_problem}.
 % 04 Technical Background
-In \Chap{chap:04_background} all technologies which are being used to implement the objective of this thesis are being introduced.
+In \Chap{chap:04_background} all used technologies to implement the objective of this thesis are being introduced.
 % 05 Design
 Afterwards in \Chap{chap:05_design}, a conceptual design of a dynamic computing environment and an automated deployment pipeline is being described.
 % 06 Implementation
-\Chap{chap:06_implementation} describes the implementation of the computing environment and how the deployment pipeline is being used to automate the deployment of applications to the computing environment.
+\Chap{chap:06_implementation} contains the implementation of the computing environment and how the deployment pipeline is being used to automate the deployment of applications to the computing environment.
 % 07 Evaluation
 In \Chap{chap:07_evaluation} the results of the implementation are being presented and analysed.
 % 08 Outlook
 \Chap{chap:08_outlook} introduces further work, which has been discovered during the work of this thesis, as well as improvements for the implementation.
 % 09 Conclusion
 Finally \Chap{chap:09_conclusion} ...
-
-
-% ===========================================
-% ===========================================
-\section{Research Methodologies}
-% State of the art
-To reach the research objective and solve all problems of this thesis work, the first step will be to read state-of-the-art literature about the following topics:
-\begin{enumerate}
-\item Enabling GPU acceleration on Apache Spark
-\item Self-adapting heterogeneous systems
-\item Automated deployment pipelines
-\end{enumerate}
-% Knowledge
-All literature has to be summarized to gain a deep understanding of how to solve the defined problem statements.
-% Tools
-During this step, suitable software tools which help to implement the research objective have to be identified.
-% Designing the concept
-Afterwards, the summarized knowledge will be used to create a conceptual design of the implementation.
-% Implementing
-The conceptual design will be used to implement an environment that fulfils the research objective and solves each defined problem statement.
-% Evaluating
-After the implementation has been completed, the environment needs to be evaluated to ensure it fulfils the thesis research objective.
-% Conclusion
-Lastly, the results of the evaluation will be analysed.
