@@ -46,17 +46,6 @@ It is based on the concept of Continuous Integration (CD) and Continuous Deliver
 The process involves building, testing and deploying software through automated scripts \cite{Farley2010CI}.
 
 
-% Advantages
-
-
-%\begin{figure}[h]
-%\centering
-%\includegraphics[scale=1]{images/02_theoretical_foundation/ci_cd/ci_cd_phases}
-%\caption{Autonomic computing concept - Source: Authors own model, based on \cite{Jacob2004AutonomicSolution}.}
-%\label{fig:02_foundation_ci-cd_phases}
-%\end{figure}
-
-
 \subsection{Continuous Integration}
 % Abtract def
 Continuous Integration is a development practice where each change on a primary code base is validated by automated scripts. This ensures that errors are detected and fixed in an early development stage \cite{Duvall2007CI}.
@@ -67,10 +56,10 @@ This process is responsible for building, testing and validating the software to
 % Advantages
 A CI process contributes with the following advantages to the development life cycle of an application:
 \begin{itemize}
-\item \textbf{Reduce risks:}
+\item Reduce risks:
 Because the CI process will run tests and validations on each change, errors will be detected in an early stage and can be fixed immediately \cite{Duvall2007CI}.
 
-\item \textbf{Reduce manual processes:} 
+\item Reduce manual processes:
 % Same time
 The CI process will perform every time a commit has being made to the code base.
 % Same process
@@ -78,7 +67,7 @@ Each run is processed the exact same way every time.
 % No human
 Therefore, no human intervention is needed to start the process which saves time and cost \cite{Duvall2007CI}.
 
-\item \textbf{Generate deployable software:}
+\item Generate deployable software:
 If an error occurs during a CI run, developers will be informed and fixes can be applied immediately.
 This ensures that the software is in a deployable state at time \cite{Duvall2007CI}.
 \end{itemize}
@@ -89,23 +78,57 @@ This ensures that the software is in a deployable state at time \cite{Duvall2007
 The implementation of a CI process is based on several requirements:
 % The list
 \begin{enumerate}
-\item \textbf{Version control repository:}
+\item Version control repository:
 To manage changes to the code base, the source code and all other assets like the build script should be hosted on a single version control repository.
 % Changes
 Each change on the code base will trigger the CI process on the build server to run against the latest version available \cite{Duvall2007CI}.
 
-\item \textbf{Build server:}
+\item Build server:
 The build server is responsible to monitor the code base for changes.
 % Execute
 If a change has been committed, the build server automatically executes the CI scripts in order \cite{Rossel2017CICD, Duvall2007CI}.
 
-\item \textbf{Build script:}
+\item Build script:
 This includes all automation scripts to build, test and validate the source code \cite{Duvall2007CI}.
 \end{enumerate}
 
 
-\subsubsection{Continuous Integration Process Example}
-% BLA BLA
+\subsubsection{Continuous Integration Process Implementation Example}
+% Explain workflow
+\paragraph{}\Fig{fig:02_foundation_deployment_ci_scenario} demonstrates the CI scenario.
+% Commit changes
+First a developer commits changes to the version control repository.
+% CI
+The CI server monitors the repository for changes. After the change has been committed, the CI server pulls the latest version of the source code and executes all build scripts in order to integrate the software.
+% Feedback
+Finally, the CI server sends feedback to inform the developer bout the build script status  \cite{Duvall2007CI}.
+
+
+% The scenario figure
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.7]{images/02_theoretical_foundation/deployment_pipeline/ci_scenario}
+\caption{Continuous Integration Scenario - Source: Authors own model, based on \cite{Duvall2007CI}.}
+\label{fig:02_foundation_deployment_ci_scenario}
+\end{figure}
+
+
+% Explain build script order
+\paragraph{}A CI run should be executed in a headless automated process. It is not feasible to rely on a manual process.
+% Automated scripts
+All assets to perform the CI run should be able to access from the repository. Therefore a machine can start the build script process by executing a command script in an automated fashion \cite{Duvall2007CI}.
+% The example
+An example of a logical build script order is illustrated in \Fig{fig:02_foundation_deployment_ci_script-order}.
+
+
+
+% The build script order figure
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{images/02_theoretical_foundation/deployment_pipeline/ci_build_script_order}
+\caption{An example of a logical build script order for a CI process- Source: Authors own model, based on \cite{Duvall2007CI}.}
+\label{fig:02_foundation_deployment_ci_script-order}
+\end{figure}
 
 
 \subsection{Continuous Delivery}

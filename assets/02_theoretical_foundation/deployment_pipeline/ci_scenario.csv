@@ -1,0 +1,10 @@
+Id,Name,Shape Library,Page ID,Contained By,Group,Line Source,Line Destination,Source Arrow,Destination Arrow,Text Area 1
+1,Page,,,,,,,,,Page 1
+2,Terminator,Flowchart Shapes,1,,,,,,,Developer
+3,Process,Flowchart Shapes,1,,,,,,,Version Control Repository
+4,Process,Flowchart Shapes,1,,,,,,,Build Server
+5,Process,Flowchart Shapes,1,,,,,,,Build Scripts
+6,Line,,1,,,3,4,Arrow,None,Pull latest Version
+7,Line,,1,,,4,5,None,Arrow,Execute
+8,Line,,1,,,2,3,None,Arrow,Commit Changes
+9,Line,,1,,,4,2,None,Arrow,Send Feedback
