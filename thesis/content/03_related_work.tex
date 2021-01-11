@@ -1,14 +1,13 @@
-\chapter{Related Work}
+\chapter{Literature Survey}
 \label{chap:03_related-work}
-%
 
-This chapter provides background information about ...
-\todo{Describe Chapter}
+
+This chapter provides an overview over the literature about scalable computing environments, GPU accelerated Apache Spark cluster and the implementation of automated deployment pipelines. These topics are related with the proposed conceptual design of this thesis (\Chap{chap:05_design}) and the resulting implementation (\Chap{chap:06_implementation}).
 
 
 % ===========================================
 % ===========================================
-\section{Elastic Environments}
+\section{Scalable Computing Environments}
 % State of the art monitoring
 In recent years, container technologies have been used efficiently in complex IT environments. Dynamic scaling of containerized applications is an active area of research. The studied research can be divided in two parts. 
 
@@ -41,13 +40,14 @@ Load balancing is based on static rules defining the upper and lower thresholds 
 
 % ===========================================
 % ===========================================
-\section{Heterogenous GPU aware Spark systems}
-% Why is GPU needed
-Apache Spark is a computing framework that distributes tasks between CPU cores. Data and compute intensive applications profit from GPU acceleration. Therefore, various research projects took effort to bring GPU acceleration to Apache Spark.
+\section{GPU accelerated Apache Spark Cluster}
+This work is targeting at enabling GPU acceleration for Apache Spark.
+Several solutions exist which are trying to solve the problem in similar ways.
+The proposed solutions work by extending the Apache Spark programming model through a communication layer to execute operations on a GPU.
 
 
 % HeteroSpark
-Li et al. \cite{Li2015HeteroSpark} developed a middleware framework called \textit{HeteroSpark} to enable GPU acceleration on Apache Spark worker nodes. HeteroSpark listens for function calls in Spark applications and invokes the GPU kernel for acceleration. For communication between CPU and GPU, HeteroSpark uses the Java RMI\footnote{Java Remote Method Invocation} API to send data from the CPU JVM to the GPU JVM for execution.
+\paragraph{}Li et al. \cite{Li2015HeteroSpark} developed a middleware framework called \textit{HeteroSpark} to enable GPU acceleration on Apache Spark worker nodes. HeteroSpark listens for function calls in Apache Spark applications and invokes the GPU kernel for acceleration. For communication between CPU and GPU, HeteroSpark implements a CPU-GPU communication layer for each worker node using the Java RMI\footnote{Java Remote Method Invocation} API. To execute operation on the GPU, the CPU JVM will send serialized data to the GPU JVM using the RMI communication interface. The GPU JVM will deserialize the received data for execution.
 % Design
 The design provides a plug-n-play approach and an API for the user to call functions with GPU support.
 % Results
@@ -55,16 +55,43 @@ Overall, HeteroSpark is able to achieve a 18x speed-up for various Machine Learn
 
 
 % HetSpark
-Klodjan et al. \cite{Klodjan2018HetSpark} introduced HetSpark a heterogeneous modification of Apache Spark.
+\paragraph{}Klodjan et al. \cite{Klodjan2018HetSpark} introduced \textit{HetSpark} a modification of Apache Spark.
 % The goal
-HetSpark extends Apache Spark with two executors, a GPU accelerated executor and a commodity class. The GPU accelerated executor is based on VineTalk\cite{Mavridis2017VineTalk} for GPU acceleration.
+HetSpark extends Apache Spark with two executors, a GPU accelerated executor and a commodity class. 
+% accelerated
+The accelerated executor uses VineTalk\cite{Mavridis2017VineTalk} for GPU acceleration.
+% VineTalk
+VineTalk contributes as a transport layer between the application and accelerator devices (CPU or GPU).
+% Byte code analysis
+To detect suitable tasks for GPU acceleration, HetSpark uses the ASM\footnote{ASM - \url{https://asm.ow2.io/} (Accessed: 2021-01-11)} framework to analyse the byte code of Java binaries.
 % Results
 The authors observed, that for compute intensive tasks GPU accelerated executers are preferable while for linear tasks CPU-only accelerators should be used.
 
 
 % Spark-GPU
-Yuan et al. \cite{Yuan2016SparkGPU} proposed SparkGPU to enable parallel processing with GPUs in Apache Spark and contributes to achieve high performance and high throughput in Apache Spark applications.
+\paragraph{}Yuan et al. \cite{Yuan2016SparkGPU} proposed \textit{SparkGPU} to enable parallel processing with GPUs in Apache Spark and contributes to achieve high performance and high throughput in Apache Spark applications.
 SparkGPU extends Apache Sparks to determine the suitability of parallel-processing for a task to enable task scheduling between CPU and GPU. 
 SparkGPU accomplished to improve the performance of machine learning algorithms up to 16.13x and SQL query execution performance up to 4.83x.
 
 
+% RAPIDS
+With the release of Apache Spark 3.0, NVIDIA published a plugin for Apache Spark which works like the introduced solutions.
+
+
+% ===========================================
+% ===========================================
+\section{Implementation of an Automated Deployment Pipeline}
+Implementing an automated deployment pipeline is a more applied topic and well introduced.
+
+
+% continuous delivery
+\paragraph{}The proposed design and implementation of an automated deployment pipeline was mostly inspired by the proposed solution of the book \textit{Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation} by Humble et al. \cite{Farley2010CI}.
+% Short intro about the content of this book
+Throughout this book, the authors explain the theoretical idea behind an automated deployment pipeline and explaining an example implementation.
+% Implementation
+The proposed implementation covers the software lifecycle from compiling source to delivering the software to a production environment.
+The commit stage which covers the build and test part of the software can be applied in parts for this thesis work.
+
+
+% continuous integration
+\paragraph{}Another book which covers the concept of Continuous Integration is \textit{Continuous Integration: Improving Software Quality and Reducing Risk} by Duvall et al. \cite{Duvall2007CI}. This book provides an implementation example of a full-featured CI system similar to Humble et al. \cite{Farley2010CI}.

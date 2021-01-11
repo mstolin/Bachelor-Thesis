@@ -2,37 +2,37 @@
 \label{chap:02_foundation}
 
 
-This chapter provides the theoretical foundation about concepts that will be used in this thesis. The concepts describes in this chapter provide the foundation to understand the choice of the all tools. In addition to understand the conceptual design.
+This chapter provides the theoretical foundation about concepts that will be used in this thesis. The theoretical foundation is necessary to understand the choice of tools and the introduced solution in this thesis to create the research objective, answer the research questions, and solve the problem statements.
 
 
 \section{Scalability}
+\label{sec:02_foundations_scalability}
 % What is scalability
-Scalability defines the ability of a computing system to handle an increasing amount of load \cite{Farcic2017Toolkit21}.
-% Why scaling
-The main reasing for scaling is High-Availability TOOLKIT 2.1.
-% Choose right approach
-To choose the right approach of scaling an environment is essential.
-% Different kind of scaling
-To scale the computing capacity of a system, different approaches exists. A major scaling approach is horizontal scaling.
-
-%% Mehr darüber, warum scaling eigentlich so wichtig ist, und welche probleme man damit löst
+Scalability defines the ability of a computing system to handle an increasing amount of load \cite{Farcic2017Toolkit21}. 
+% Vertical and horizontal
+To increase the scalability of a system, different approaches exist. The two main approaches are vertical scaling and horizontal scaling.
+% Only horizontal
+During this thesis work, the horizontal scaling approach is being used because of its suitability to solve this thesis problems and therefore being introduced in this section.
+% Vertical
+Vertical scaling will not be used due to its limitations explained in \Sec{subsec:02_foundations_scalability_limits}.
 
 
 \subsection{Horizontal Scaling}
 % What is horizontal scaling
 Horizontal scaling is accomplished by duplicating nodes in the computing environment \cite{Wilder2012CloudPatterns}.
 % DIstribution
-Dplucation the nodes in a computing environment increases the computational capacity of the environment. In addition, the workload can be distributed across all clones to handle and balance and increasing load of tasks \cite{Wilder2012CloudPatterns, Abbott2015ScalabilityArt}. 
-% What about homogeneous nodes
-To increase the efficiency of horizontal scaling, all nodes should be homogeneous. Homogeneous nodes are able to perform the same work and response as other nodes \cite{Abbott2015ScalabilityArt}.
+Duplicating the nodes in a computing environment increases the computational capacity of the environment. In addition, the workload can be distributed across all nodes to handle and balance an increasing workload \cite{Wilder2012CloudPatterns, Abbott2015ScalabilityArt}. 
+% Homogeneous nodes
+Horizontal scaling is more efficient with homogeneous nodes. Homogeneous nodes add the same amount of computing power to the system and are able to perform the same work and response as other nodes. With non-homogeneous nodes, capacity planing and distributing workload becomes more complex \cite{Abbott2015ScalabilityArt}.
 
 
-\subsection{Limitations of Scalability}
-The limit of scalability is reached, when a computing system is not able to serve the requests of it`s concurrent users \cite{Wilder2012CloudPatterns}.
+\subsection{Limitations of Vertical Scaling}
+\label{subsec:02_foundations_scalability_limits}
+The limit of scalability is reached, when a computing system is not able to serve the requests of its concurrent users \cite{Wilder2012CloudPatterns}.
 % hardware capacity
-If the scalability of a computing environment is reached, an option is to add more powerful hardware resources to the system. This approach is called vertical scaling QULLE??. By adding more powerful hardware resources, the point can be reached, where more powerful hardware becomes unaffordable or not available \cite{Wilder2012CloudPatterns}.
-% Why horizontal i recommended
-To overcome the limits of hardware cpacity, a computing system shuld be designed to scale horizontally in the first place \cite{Abbott2015ScalabilityArt}.
+If the scalability of a computing environment is reached, an option is to add more powerful hardware resources to the system. This approach is called vertical scaling. Adding more powerful hardware can become unaffordable or a point can be reached, where more powerful hardware is not available.
+% Downtime
+Additionally, increasing the physical capacity of a system requires a restart. Most of the time restarting is not possible, because it will interrupt important services running on the system \cite{Wilder2012CloudPatterns}.
 
 
 % ===========================================
@@ -41,7 +41,7 @@ To overcome the limits of hardware cpacity, a computing system shuld be designed
 % Short Abstract
 A deployment pipeline is an implementation of the process for getting software from source code to production.
 % Based on CI
-It is based on the concept of Continuous Integration (CD) and Continuous Delivery (CD).
+It is based on the concept of Continuous Integration (CD).
 % Involves what
 The process involves building, testing and deploying software through automated scripts \cite{Farley2010CI}.
 
@@ -49,12 +49,10 @@ The process involves building, testing and deploying software through automated 
 \subsection{Continuous Integration}
 % Abtract def
 Continuous Integration is a development practice where each change on a primary code base is validated by automated scripts. This ensures that errors are detected and fixed in an early development stage \cite{Duvall2007CI}.
-% FIrst part
-CI is the first process in a deployment pipeline.
 % What its about
-This process is responsible for building, testing and validating the software to guarantee that the software is in a deployable state at all time \cite{Rossel2017CICD}.
+The CI process is responsible for building and testing the software to guarantee that the software is in a releasable state at all time \cite{Rossel2017CICD}.
 % Advantages
-A CI process contributes with the following advantages to the development life cycle of an application:
+CI contributes with the following advantages to the development life cycle of an application:
 \begin{itemize}
 \item Reduce risks:
 Because the CI process will run tests and validations on each change, errors will be detected in an early stage and can be fixed immediately \cite{Duvall2007CI}.
@@ -73,7 +71,7 @@ This ensures that the software is in a deployable state at time \cite{Duvall2007
 \end{itemize}
 
 
-\subsubsection{Requirements of a Continuous Integration Process}
+\subsection{Requirements of a Continuous Integration Process}
 % Requirements
 The implementation of a CI process is based on several requirements:
 % The list
@@ -89,11 +87,11 @@ The build server is responsible to monitor the code base for changes.
 If a change has been committed, the build server automatically executes the CI scripts in order \cite{Rossel2017CICD, Duvall2007CI}.
 
 \item Build script:
-This includes all automation scripts to build, test and validate the source code \cite{Duvall2007CI}.
+This includes all automation scripts to validate the source code \cite{Duvall2007CI}.
 \end{enumerate}
 
 
-\subsubsection{Continuous Integration Process Implementation Example}
+\subsection{Continuous Integration Process Implementation Example}
 % Explain workflow
 \paragraph{}\Fig{fig:02_foundation_deployment_ci_scenario} demonstrates the CI scenario.
 % Commit changes
@@ -101,7 +99,7 @@ First a developer commits changes to the version control repository.
 % CI
 The CI server monitors the repository for changes. After the change has been committed, the CI server pulls the latest version of the source code and executes all build scripts in order to integrate the software.
 % Feedback
-Finally, the CI server sends feedback to inform the developer bout the build script status  \cite{Duvall2007CI}.
+Finally, the CI server sends feedback to inform the developer about the build script status  \cite{Duvall2007CI}.
 
 
 % The scenario figure
@@ -116,10 +114,9 @@ Finally, the CI server sends feedback to inform the developer bout the build scr
 % Explain build script order
 \paragraph{}A CI run should be executed in a headless automated process. It is not feasible to rely on a manual process.
 % Automated scripts
-All assets to perform the CI run should be able to access from the repository. Therefore a machine can start the build script process by executing a command script in an automated fashion \cite{Duvall2007CI}.
+All assets to perform the CI run should be accessed from the repository. Therefore a machine can start the build script process by executing a command script in an automated fashion \cite{Duvall2007CI}.
 % The example
 An example of a logical build script order is illustrated in \Fig{fig:02_foundation_deployment_ci_script-order}.
-
 
 
 % The build script order figure
@@ -129,11 +126,6 @@ An example of a logical build script order is illustrated in \Fig{fig:02_foundat
 \caption{An example of a logical build script order for a CI process- Source: Authors own model, based on \cite{Duvall2007CI}.}
 \label{fig:02_foundation_deployment_ci_script-order}
 \end{figure}
-
-
-\subsection{Continuous Delivery}
-After the CI pipeline has succeeded, a CD pipeline is responsible to deploy the artefact to a production server \cite{Rossel2017CICD}.
-% Advantages of a cd pipeline
 
 
 % ===========================================
@@ -147,20 +139,20 @@ Autonomic computing gives an IT infrastructure the flexibility to adapt dynamic 
 
 
 % What does it need
-Computing systems need to obtain a detailed knowledge of it`s environment and how to extend it`s resources to be truly autonomic \cite{Murch2004Autonomic}.
+Computing systems need to obtain a detailed knowledge of its environment and how to extend its resources to be truly autonomic \cite{Murch2004Autonomic}.
 % The 4 basic elements
 An autonomic computing system is defined by four elements:
 \begin{itemize}
-\item \textbf{Self-configuring:}
+\item Self-configuring:
 Self-configuring refers to the ability of an IT environment to adapt dynamically to system changes and to be able to deploy new components automatically. Therefore, the system needs to understand and control the characteristics of a configurable item \cite{Murch2004Autonomic, Sinreich2006AnAB}.
 
-\item \textbf{Self-optimizing:}
+\item Self-optimizing:
 To ensure given goals and objectives, a self-optimizing environment has the ability to efficiently maximize resource allocation and utilization \cite{Jacob2004AutonomicSolution}. To accomplish this requirement, the environment has to monitor all resources to determine if an action is needed \cite{Murch2004Autonomic}.
 
-\item \textbf{Self-healing:}
+\item Self-healing:
 Self-healing environments are able to detect problematic operations and then perform policy-based actions to ensure that the systems health is stable \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}. The policies of the actions have to be defined and should be executed without disrupting the system \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}.
 
-\item \textbf{Self-protecting:}
+\item Self-protecting:
 The environment must identify unauthorized access and threats to the system and automatically protect itself taking appropriate actions during its runtime \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}.
 \end{itemize}
 
@@ -207,7 +199,7 @@ A managed resource is a single component or a combination of components in the a
 % Sensors and Effectors
 They are controlled by their sensors and effectors, as illustrated in \Fig{fig:ac_managed_resource}. Sensors are used to collect information about the state of the resource and effectors can be used to change the state of the resource \cite{Jacob2004AutonomicSolution}. The combination of sensors and effectors is called a touchpoint, which provides an interface for communication with the autonomic manager \cite{Sinreich2006AnAB}.
 % Scalability
-The ability to manage and control managed resources make them highly scalable \cite{Murch2004Autonomic}.
+The ability to manage and control managed resources makes them highly scalable \cite{Murch2004Autonomic}.
 
 
 \subsection{Autonomic Manager}
@@ -222,11 +214,11 @@ The ability to manage and control managed resources make them highly scalable \c
 \end{figure}
 
 % WHat is the autonomic manager
-The autonomic manager implements the control-loop to collect, aggregate, filter and report system metrics from the managed resources. It can only make adjustments within it`s own scope and uses predefined policies to make decisions of what actions have to be executed to accommodate the goals and objectives \cite{Murch2004Autonomic, Sinreich2006AnAB}.
+The autonomic manager implements the control-loop to collect, aggregate, filter and report system metrics from the managed resources. It can only make adjustments within its own scope and uses predefined policies to make decisions of what actions have to be executed to accommodate the goals and objectives \cite{Murch2004Autonomic, Sinreich2006AnAB}.
 % Knowledge
-In addition, the autonomic manager gains knowledge through analyzing the managed resources \cite{Murch2004Autonomic}.
-% MAPE-K
-The autonomic computing concept digests the MAPE-K model to implement an autonomic manager, as illustrated in \Fig{fig:ac_manager} \cite{Goscinski2011CloudComputing}.
+In addition, the autonomic manager gains knowledge through analysing the managed resources \cite{Murch2004Autonomic}.
+% MAPE
+The autonomic computing concept digests the MAPE model to implement an autonomic manager, as illustrated in \Fig{fig:ac_manager} \cite{Goscinski2011CloudComputing}.
 
 \begin{itemize}
 \item \textbf{Monitor:}
@@ -264,7 +256,7 @@ The following are examples of common types for performance metrics:
 
 
 % Overhead
-\paragraph{}Measuring performance metrics can cause an overhead. To gather and store performance metrics, CPU cycles must be spent. This can have a negative affect on the target performance \cite{Greg2020SysPerf}.
+\paragraph{}It is important to note that measuring performance metrics can cause an overhead. To gather and store performance metrics, CPU cycles must be spent. This can have a negative affect on the target performance \cite{Greg2020SysPerf}.
 
 
 \subsection{Time-Based Utilization}
@@ -281,9 +273,9 @@ When a resource approaches 100\% utilization, the performance of that resource c
 \section{Monitoring}
 \label{sec:02_monitoring}
 % What is monitoring
-Monitoring is a process, that aims to detect and take care of system faults. In a dynamic environment, becoming aware of the system is trivial \cite{Ligus2012EffMonitoring}.
+Monitoring is a process, that aims to detect and take care of system faults. In a dynamic environment, becoming aware of the system is a trivial process \cite{Ligus2012EffMonitoring}.
 % What is a monitoring system
-A monitoring system consists of a set of different tools. The tools are responsible to perform measurements on components in the computing environment and collect, store and interpret the monitored data \cite{Ligus2012EffMonitoring}. 
+A monitoring system consists of a set of multiple tools. The tools are responsible to perform measurements on components in the computing environment and collect, store and interpret the monitored data \cite{Ligus2012EffMonitoring}. 
 
 
 % The monitoring Loop/Process
@@ -293,13 +285,13 @@ A monitoring system consists of a set of different tools. The tools are responsi
 \caption{The monitoring process - Source: Authors own model.}
 \label{fig:mon_mon-system-process}
 \end{figure}
-In the monitoring process, illustrated in \Fig{fig:mon_mon-system-process}, data is continuously collected by agents. An agent is a process that continuously gathers metrics. Data can be device statistics, logs or system measurements. Agents will group these data into metrics and submit them to the monitoring system via a protocol. The monitoring system will store the metrics in its database \cite{Ligus2012EffMonitoring}.
+In the monitoring process, illustrated in \Fig{fig:mon_mon-system-process}, data is continuously collected by agents. An agent is a process that continuously gathers metrics. Data can be device statistics, logs or system measurements. Agents will group these data into metrics and submit them to the monitoring system. The monitoring system will store the metrics in its database \cite{Ligus2012EffMonitoring}.
 
 
 % Requirements of a monitoring system
 The requirements for a monitoring system, that is able to monitor a dynamic changing environment, are the following:
 \begin{itemize}
-\item An efficient database to store metrics
+\item An efficient database to store metrics \cite{Farcic2017Toolkit21}
 \item A push or pull based way of gathering metrics \cite{Farcic2017Toolkit21}
 \item Multi-dimensional metrics \cite{Farcic2017Toolkit21}
 \item A powerful query language \cite{Farcic2017Toolkit21}
@@ -315,7 +307,7 @@ Time-series databases (TSDB) are optimized to store and retrieve time-series dat
 In a time-series database, metrics will be stored in a compact and optimized format. This allows the database to store a massive amount of time-series data on a single machine.
 
 
-\subsection{Push and Pull}
+\subsection{Push and Pull Based Monitoring Systems}
 \label{subsec:02_monitoring_push-pull}
 The approach how the monitoring systems gathers metrics to store in the database plays a significant role.
 % There are push and pull based systems
@@ -354,7 +346,7 @@ The advantage of a pull-based monitoring systems is the simplicity to detect whe
 \subsection{Multi-Dimensional Metrics}
 \label{subsec:02_monitoring_db_multi-metrics}
 % Why do we need dimensions
-For query languages to be effective, metrics need to be dimensional. Metric without dimensions, are limited in their capabilities.
+For query languages to be effective, metrics need to be dimensional. Metrics without dimensions, are limited in their capabilities.
 % Dynamic environment
 In a dynamic environment, services are dynamically added and removed. Therefore, a dynamic environment needs dynamic analytics where metrics represent all dimension in the environment \cite{Farcic2018Toolkit22}.
 % Example
@@ -365,7 +357,7 @@ container_cpu_user_seconds_total
 container_cpu_user_seconds_total{image="spark-worker:3.0.1-hadoop2.7"}
 \end{lstlisting}
 % Explain
-As the exasmple \Lst{lst:mon_metr_dimless} and \Lst{lst:mon_metr_withdim} show, the metric with dimension provide more efficient querieing to gather informations about the environment.
+As the example \Lst{lst:mon_metr_dimless} and \Lst{lst:mon_metr_withdim} show, the metric with dimension provides more efficient querying to gather informations about the environment.
 
 
 \subsection{Query Language}
