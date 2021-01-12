@@ -73,6 +73,35 @@ The authors observed, that for compute intensive tasks GPU accelerated executers
 SparkGPU extends Apache Sparks to determine the suitability of parallel-processing for a task to enable task scheduling between CPU and GPU. 
 SparkGPU accomplished to improve the performance of machine learning algorithms up to 16.13x and SQL query execution performance up to 4.83x.
 
+% SHort intro
+Yuan et al. \cite{Yuan2016SparkGPU} proposed \textit{SparkGPU} a CPU-GPU hybrid system build on top of Apache Spark.
+% The goal
+The goal of SparkGPU is to utilize GPUs to achieve high performance and throughput.
+% Problems trying to solve
+SparkGPU tries to solve the following problems statements:
+% -
+% Extension
+To solve the mentioned problem statements, SparkGPU extends Apache Spark in many ways:
+\begin{itemize}
+\item Enable block processing on GPUs by extending Apache Sparks iterator model. Therefore Apache Spark can better utilize GPUs to accelerate application performance.
+
+\item To offload queries to the GPU, SparkGPU extends the query optimizer. The query optimizer will create query plans with both CPU and GPU operators.
+
+\item To manage GPUs in the cluster, SparkGPU extends the cluster manager.
+\end{itemize}
+% Intro GPU-RDD
+To extend the programming API, SparkGPU provides a new RDD type called GPU-RDD.
+% OPtimized for GPU
+A GPU-RDD is optimized to utilize the GPU.
+SparkGPU utilizes native memory on the GPU instead of the Java heap to buffer data in GPU-RDDs.
+% Operations
+Operations performed on a GPU-RDD can be performed on the GPU. Several built-in operators on the GPU-RDD are provided which support data-parallelism.
+To perform more complex operations on a GPU-RDD, users are able to implement their own customized functions.
+
+
+% The query optimizer
+SparkGPU is able to execute SQL queries on both CPU and GPU.
+By adding a set of GPU rules and strategies, SparkGPU extends the query optimizer to find the best execution plan for GPU scheduling.
 
 % RAPIDS
 With the release of Apache Spark 3.0, NVIDIA published a plugin for Apache Spark which works like the introduced solutions.

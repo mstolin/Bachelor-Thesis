@@ -131,6 +131,7 @@ max                       & Float   & 0.5               \\ \bottomrule
 
 \subsection{Scaling the Apache Worker Service}
 docker service apache-worker scale replicas=4
+Not possible to use nvidia-runtime because of restart -> scale docker container
 
 
 \subsubsection{Estimation of Necessary Scaling Actions}
