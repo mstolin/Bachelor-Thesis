@@ -2,52 +2,64 @@
 \label{chap:03_related-work}
 
 
-This chapter provides an overview over the literature about scalable computing environments, GPU accelerated Apache Spark cluster and the implementation of automated deployment pipelines. These topics are related with the proposed conceptual design of this thesis (\Chap{chap:05_design}) and the resulting implementation (\Chap{chap:06_implementation}).
+This chapter provides an overview over the literature about scalable computing environments, GPU accelerated Apache Spark cluster and the implementation of automated deployment pipelines. These topics are related to the choice of technologies (\Chap{chap:04_background}), the proposed conceptual design of this thesis (\Chap{chap:05_design}), and the resulting implementation (\Chap{chap:06_implementation}).
 
 
 % ===========================================
 % ===========================================
 \section{Scalable Computing Environments}
 % State of the art monitoring
-In recent years, container technologies have been used efficiently in complex IT environments. Dynamic scaling of containerized applications is an active area of research. The studied research can be divided in two parts. 
+In recent years, container technologies have been used efficiently in complex computing environments. Dynamic scaling of containerized applications is an active area of research.
+% WHich is important for this thesis
+To accommodate this thesis research objective, the literature research was focused on three topics: Architecture of auto-scaling environments, horizontal auto-scaling strategies, and auto-scaling algorithms.
 
 
-\subsection{Architecture}
+\subsection{Architecture of Auto-Scaling Environments}
 % A review of auto-scaling techniques for elastic application in cloud environments
-\paragraph{} In the work by Lorido-Botrán et al.  they reviewed state-of-the-art literatures about auto-scaling and proposed a process for auto-scaling homogeneous elastic applications. They mentioned three different problems, auto-scaler face while remaining the Quality of Service (QoS): Under-provisioning, over-provisioning and oscillation. Under-provisioning refers to, if not enough resources are available, over-provisioning means that more resources are available than needed and oscillation occurs when the environment gets scaled too quickly before the impact is clear. They mentioned the MAPE-Loop which consists of four different parts: Monitor, Analyze, Plan and Execute.  The Auto-Scaler is part 
+\paragraph{}
+Lorido-Botrán et al.  reviewed state-of-the-art literatures about auto-scaling and proposed a process for auto-scaling homogeneous elastic applications. They mentioned three different problems, auto-scaler face while remaining the Quality of Service (QoS): Under-provisioning, over-provisioning, and oscillation. Under-provisioning refers to a lack of available resources. Over-provisioning means that more resources are available than needed and oscillation occurs when the environment gets scaled too quickly before the impact is clear. They mentioned the MAPE-Loop which consists of four different parts: Monitor, Analyze, Plan and Execute.  The Auto-Scaler is part 
 
 
 \subsection{Auto-Scaler}
 % Application deployment using containers with auto-scaling for microservices in cloud environment
-\paragraph{}Srirama et al. \citep{Srirama2020AppDeplyCont} designed a heuristic-based auto-scaling strategy for container-based microservices in a cloud environment. The purpose of the auto-scaling strategy was to balance the overall resource utilization across microservices in the environment.
+\paragraph{}
+Srirama et al. \citep{Srirama2020AppDeplyCont} designed a heuristic-based auto-scaling strategy for container-based microservices in a cloud environment. The purpose of the auto-scaling strategy was to balance the overall resource utilization across microservices in the environment.
 % Results
 The proposed auto-scaling strategy performed better results than state-of-the-art algorithms in processing time, processing cost and resource utilization. The processing cost of microservices could be reduced by 12-20\% and the CPU and memory utilization of cloud-servers have been maximized by 9-15\% and 10-18\%.
 
 
 % Comparison of auto-scaling techniques for cloud environments
-\paragraph{}Lorido-Botrán et al.  \cite{Botran2013AutoScalingComp} compared different representative auto-scaling techniques in a simulation in terms of cost and SLO violations. They compared load balancing with static threshold-based rules, reactive and proactive techniques based on CPU load.
-Load balancing is based on static rules defining the upper and lower thresholds of a specific load. For example \textit{if CPU > 80\% then scale-out; if CPU < 20\% then scale-in}. The difficulty of this technique is to set the ideal rules. False rules can lead to bad performance. Proactive techniques try to predict the future values of performance metrics based on historical data. Reactive techniques are based on control theory to automate the systems management. In Addition, the authors proposed a new auto-scaling technique. To overcome the difficulties of static thresholds, the authors proposed a new auto-scaling technique using rules with dynamic thresholds. The results showed, that for auto-scaling techniques to scale well, it highly depends on parameter tuning. The best result was achieved with proactive results with a minimum threshold of 20\% and a maximum threshold of 60\%.
+\paragraph{}
+Lorido-Botrán et al.  \cite{Botran2013AutoScalingComp} compared different representative auto-scaling techniques in a simulation in terms of cost and SLO violations. They compared load balancing with static threshold-based rules, reactive and proactive techniques based on CPU load.
+Load balancing is based on static rules defining the upper and lower thresholds of a specific load. For example \textit{if CPU > 80\% then scale-out; if CPU < 20\% then scale-in}. The difficulty of this technique is to set the ideal rules. False rules can lead to bad performance. Proactive techniques try to predict the future values of performance metrics based on historical data. Reactive techniques are based on control theory to automate the systems management. To overcome the difficulties of static thresholds, the authors proposed a new auto-scaling technique using rules with dynamic thresholds. The results showed, that for auto-scaling techniques to scale well, it highly depends on parameter tuning. The best result was achieved with proactive results with a minimum threshold of 20\% and a maximum threshold of 60\%.
 
 
 \subsection{Auto-Scaling Algorithms}
 % Delivering elastic ...
-\paragraph{}Barna et al. \cite{Barna2017ElasticContainerApps} proposed an autonomic scaling architecture approach for containerized microservices. Their approach focused on creating an autonomic management system, following the autonomic computing concept \cite{Kephart2003VisionComputing}, using a self-tuning performance model. The demonstrated architecture frequently monitors the environment and gathers performance metrics from components. It has the ability to analyze the data and dynamically scale components. In addition, to determine if a scaling action is needed, they proposed the \textit{Scaling Heat Algorithm}. The Scaling Heat Algorithm is used to prevent unnecessary scaling actions, which can throw the environment temporarily off.
+\paragraph{}Barna et al. \cite{Barna2017ElasticContainerApps} proposed an autonomic scaling architecture approach for containerized microservices. Their approach focused on creating an autonomic management system, following the autonomic computing concept \cite{Kephart2003VisionComputing}, using a self-tuning performance model. The demonstrated architecture frequently monitors the environment and gathers performance metrics from components. It has the ability to analyze the data and dynamically scale components. In addition, to determine if a scaling action is needed, they proposed the \textit{Scaling Heat Algorithm}. The Scaling Heat algorithm is used to prevent unnecessary scaling actions, which can throw the environment temporarily off.
+% Is ised in this thesis
+The Scaling Heat algorithm will be used for decision making in this thesis work, it is explained in detail in \Sec{sec:04_background_scaling-heat}.
 
 
 % Auto-scaling of Containers: the Impact of Relative and Absolute Metrics
-\paragraph{}Casalicchio et al. \cite{Casalicchio2017AutoScaleCont} focused on the difference of absolute and relative metrics for container-based auto-scaling algorithms. They analysed the mechanism of the \textit{Kubernetes Horizontal Pod Auto-scaling} (KHPA) algorithm and proposed a new auto-scaling algorithm based on KHPA using absolute metrics called \textit{KHPA-A}. The results showed, that KHPA-A can reduce response time between 0.5x and 0.66x compared to KHPA. In addition, their work proposed an architecture using cAdvisor for collecting container performance metrics, Prometheus for monitoring, alerting and storing time-series data and Grafana for visualizing metrics.
+\paragraph{}Casalicchio et al. \cite{Casalicchio2017AutoScaleCont} focused on the difference of absolute and relative metrics for container-based auto-scaling algorithms. They analysed the mechanism of the \textit{Kubernetes Horizontal Pod Auto-Scaling} (KHPA) algorithm and proposed a new auto-scaling algorithm based on KHPA using absolute metrics called \textit{KHPA-A}. The results showed, that KHPA-A can reduce response time between 0.5x and 0.66x compared to KHPA. In addition, their work proposed an architecture using cAdvisor for collecting container performance metrics, Prometheus for monitoring, alerting and storing time-series data and Grafana for visualizing metrics.
+% KHPA
+KHPA-A is more efficient with the vertical scaling approach. In this thesis, the focus for scaling strategies is based on the horizontal scaling approach. Therefore, the KHPA algorithm will be used throughout this thesis and is explained in detail in \Sec{sec:04_background_khpa}.
+\todo{Fakt checken}
 
 
 % ===========================================
 % ===========================================
 \section{GPU accelerated Apache Spark Cluster}
-This work is targeting at enabling GPU acceleration for Apache Spark.
+This thesis is targeting at enabling GPU acceleration for Apache Spark.
 Several solutions exist which are trying to solve the problem in similar ways.
-The proposed solutions work by extending the Apache Spark programming model through a communication layer to execute operations on a GPU.
+In research, many solutions have been proposed.
+In the following, three different approaches will be introduced.
 
 
 % HeteroSpark
-\paragraph{}Li et al. \cite{Li2015HeteroSpark} developed a middleware framework called \textit{HeteroSpark} to enable GPU acceleration on Apache Spark worker nodes. HeteroSpark listens for function calls in Apache Spark applications and invokes the GPU kernel for acceleration. For communication between CPU and GPU, HeteroSpark implements a CPU-GPU communication layer for each worker node using the Java RMI\footnote{Java Remote Method Invocation} API. To execute operation on the GPU, the CPU JVM will send serialized data to the GPU JVM using the RMI communication interface. The GPU JVM will deserialize the received data for execution.
+\paragraph{}
+Li et al. \cite{Li2015HeteroSpark} developed a middleware framework called \textit{HeteroSpark} to enable GPU acceleration on Apache Spark worker nodes. HeteroSpark listens for function calls in Apache Spark applications and invokes the GPU kernel for acceleration. For communication between CPU and GPU, HeteroSpark implements a CPU-GPU communication layer for each worker node using the Java RMI API. To execute operation on the GPU, the CPU JVM will send serialized data to the GPU JVM using the RMI communication interface. The GPU JVM will deserialize the received data for execution.
 % Design
 The design provides a plug-n-play approach and an API for the user to call functions with GPU support.
 % Results
@@ -55,7 +67,8 @@ Overall, HeteroSpark is able to achieve a 18x speed-up for various Machine Learn
 
 
 % HetSpark
-\paragraph{}Klodjan et al. \cite{Klodjan2018HetSpark} introduced \textit{HetSpark} a modification of Apache Spark.
+\paragraph{}
+Klodjan et al. \cite{Klodjan2018HetSpark} introduced \textit{HetSpark} a modification of Apache Spark.
 % The goal
 HetSpark extends Apache Spark with two executors, a GPU accelerated executor and a commodity class. 
 % accelerated
@@ -69,25 +82,36 @@ The authors observed, that for compute intensive tasks GPU accelerated executers
 
 
 % Spark-GPU
-\paragraph{}Yuan et al. \cite{Yuan2016SparkGPU} proposed \textit{SparkGPU} to enable parallel processing with GPUs in Apache Spark and contributes to achieve high performance and high throughput in Apache Spark applications.
-SparkGPU extends Apache Sparks to determine the suitability of parallel-processing for a task to enable task scheduling between CPU and GPU. 
-SparkGPU accomplished to improve the performance of machine learning algorithms up to 16.13x and SQL query execution performance up to 4.83x.
-
+\paragraph{}
 % SHort intro
 Yuan et al. \cite{Yuan2016SparkGPU} proposed \textit{SparkGPU} a CPU-GPU hybrid system build on top of Apache Spark.
 % The goal
 The goal of SparkGPU is to utilize GPUs to achieve high performance and throughput.
 % Problems trying to solve
 SparkGPU tries to solve the following problems statements:
-% -
+% The problems
+\begin{enumerate}
+% Iterator
+\item The iterator model Apache Spark uses, executes one element at a time.
+This approach does not match the GPU architecture and underutilizes GPU resources.
+
+% JVM
+\item Apache Spark runs on the JVM and therefore stores its data on the heap memory.
+GPU programs are usually implemented with GPU programming models like CUDA which cannot access data on the heap.
+Therefore, data must be copied between the heap and native memory frequently. These copy operations are expensive.
+
+% Cluster manager
+\item Existing cluster manager of Apache Spark manage GPUs in a coarse grained fashion.
+This can lead to crashes because of insufficient memory when multiple program run on the GPU concurrently.
+\end{enumerate}
 % Extension
-To solve the mentioned problem statements, SparkGPU extends Apache Spark in many ways:
+To solve the mentioned problem statements, SparkGPU extends Apache Spark in the following ways:
 \begin{itemize}
 \item Enable block processing on GPUs by extending Apache Sparks iterator model. Therefore Apache Spark can better utilize GPUs to accelerate application performance.
 
 \item To offload queries to the GPU, SparkGPU extends the query optimizer. The query optimizer will create query plans with both CPU and GPU operators.
 
-\item To manage GPUs in the cluster, SparkGPU extends the cluster manager.
+\item To manage GPUs efficiently, SparkGPU extends the cluster manager and the task scheduler.
 \end{itemize}
 % Intro GPU-RDD
 To extend the programming API, SparkGPU provides a new RDD type called GPU-RDD.
@@ -96,15 +120,19 @@ A GPU-RDD is optimized to utilize the GPU.
 SparkGPU utilizes native memory on the GPU instead of the Java heap to buffer data in GPU-RDDs.
 % Operations
 Operations performed on a GPU-RDD can be performed on the GPU. Several built-in operators on the GPU-RDD are provided which support data-parallelism.
-To perform more complex operations on a GPU-RDD, users are able to implement their own customized functions.
 
 
 % The query optimizer
 SparkGPU is able to execute SQL queries on both CPU and GPU.
 By adding a set of GPU rules and strategies, SparkGPU extends the query optimizer to find the best execution plan for GPU scheduling.
 
-% RAPIDS
-With the release of Apache Spark 3.0, NVIDIA published a plugin for Apache Spark which works like the introduced solutions.
+% Cluster manager
+To manage GPU memory on shared GPUs, SparkGPU provides a user-level GPU-management library.
+% Mem contention
+The library will ensure, when memory contention happens, that SparkGPU will stop scheduling new tasks to the Apache Spark cluster.
+
+% End
+SparkGPU accomplished to improve the performance of machine learning algorithms up to 16.13x and SQL query execution performance up to 4.83x.
 
 
 % ===========================================

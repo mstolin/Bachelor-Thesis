@@ -19,18 +19,18 @@ Docker is an open-source platform that enables containerization of applications.
 Docker is not a container technology itself, it hides the complexity of working with container technologies directly and instead provides an abstraction and the tools to work with containers \cite{Nickoloff2019Docker, Bullington2020Docker, Potdar2020Docker}.
 
 
-\subsection{Docker architecture}
-
+\subsection{Docker Architecture}
+\label{subsec:04_docker_architecture}
 % Architecture figure
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{images/04_technical_background/docker_architecture}
+\includegraphics[scale=1]{images/04_technical_background/docker/docker_architecture}
 \caption{Docker architecture - Source: Authors own model, based on \cite{Docker2020Docs}.}
-\label{fig:spark_docker_architecture}
+\label{fig:04_docker_architecture_architecture}
 \end{figure}
 
 % Explain figure
-\Fig{fig:spark_docker_architecture} illustrates the client server architecture of Docker which consists of of a Docker client, the Docker deamon and a registry.
+\Fig{fig:04_docker_architecture_architecture} illustrates the client server architecture of Docker which consists of of a Docker client, the Docker deamon and a registry.
 
 
 \paragraph{Docker client:} The Docker client is an interface for the user to send commands to the Docker deamon \cite{Docker2020Docs}.
@@ -57,13 +57,13 @@ A container is an execution environment running on the host-system kernel.
 % Container image
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.8]{images/04_technical_background/docker_basic_container_structure}
+\includegraphics[scale=1]{images/04_technical_background/docker/container_structure}
 \caption{Docker basic container structure - Source: Authors own model, based on \cite{Bullington2020Docker}.}
-\label{fig:docker_container_struct}
+\label{fig:04_docker_container_container-structure}
 \end{figure}
 
 % Container advantages
-The advantage of a container is its lightweight nature. As illustrated in \Fig{fig:docker_container_struct}, containers take advantage of OS-level virtualization instead of hardware-virtualization without the need of a hypervisor \cite{Docker2020Docs, Nickoloff2019Docker}. Containers share the resources of the host-system instead of using reserved resources \cite{Bullington2020Docker}. Multiple containers can run on the host-system kernel and are by default isolated from each other \cite{Docker2020Docs}.
+The advantage of a container is its lightweight nature. As illustrated in \Fig{fig:04_docker_container_container-structure}, containers take advantage of OS-level virtualization instead of hardware-virtualization without the need of a hypervisor \cite{Docker2020Docs, Nickoloff2019Docker}. Containers share the resources of the host-system instead of using reserved resources \cite{Bullington2020Docker}. Multiple containers can run on the host-system kernel and are by default isolated from each other \cite{Docker2020Docs}.
 % Docker container
 In Docker, a container is a runnable unit of an image and is used for distributing and testing applications. A container can be configured to expose certain resources to the host system, e.g. network ports \cite{Bullington2020Docker}.
 
@@ -175,7 +175,7 @@ From the logical plan, the Catalyst optimizer creates one ore more physical plan
 % Spark Catalyst figure
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{images/04_technical_background/spark_catalyst}
+\includegraphics[scale=1]{images/04_technical_background/spark/catalyst_optimization_process}
 \caption{Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite{Hien2018Spark}.}
 \label{fig:04_spark_pr-model_catalyst_process}
 \end{figure}
@@ -516,7 +516,7 @@ With a recurrence factor ($n$), a scaling action will only be performed until a 
 
 
 \subsection{Scaling Heat Algorithm Concept}
-
+\label{sec:04_background_scaling-heat}
 % The algorithm
 \begin{algorithm}[H]
 \SetKwInput{KwInput}{Input}
@@ -584,6 +584,7 @@ After executing a scaling action, the heat value will be set to 0 \cite{Barna201
 % ===========================================
 % ===========================================
 \section{Kubernetes Horizontal Pod Autoscaler}
+\label{sec:04_background_khpa}
 % Short intro
 Kubernetes Horizontal Pod Autoscaler (KHPA) is a auto-scaling algorithm used in Kubernetes.
 % What

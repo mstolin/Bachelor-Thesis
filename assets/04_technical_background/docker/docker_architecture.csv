@@ -1,0 +1,21 @@
+Id,Name,Shape Library,Page ID,Contained By,Group,Line Source,Line Destination,Source Arrow,Destination Arrow,Text Area 1
+1,Page,,,,,,,,,Page 1
+2,Process,Flowchart Shapes,1,,,,,,,
+3,Text,Standard,1,,,,,,,Docker Client
+4,Process,Flowchart Shapes,1,,,,,,,
+5,Text,Standard,1,,,,,,,Docker Host
+6,Process,Flowchart Shapes,1,,,,,,,Docker Deamon
+7,Process,Flowchart Shapes,1,,,,,,,
+8,Process,Flowchart Shapes,1,,,,,,,
+9,Process,Flowchart Shapes,1,,,,,,,Docker Images
+10,Process,Flowchart Shapes,1,,,,,,,
+11,Process,Flowchart Shapes,1,,,,,,,
+12,Process,Flowchart Shapes,1,,,,,,,Docker Container
+13,Process,Flowchart Shapes,1,,,,,,,
+14,Text,Standard,1,,,,,,,Docker Registry
+15,Line,,1,,,6,13,None,None,
+16,Line,,1,,,9,13,None,None,
+17,Line,,1,,,12,7,None,None,
+18,Line,,1,,,6,2,None,None,
+19,Line,,1,,,9,6,None,None,
+20,Line,,1,,,12,6,None,None,

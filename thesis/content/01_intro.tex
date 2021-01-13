@@ -25,14 +25,14 @@ To process Big Data in parallel, a larger task will be divided into smaller sub-
 % Intro to data and pask parallelism
 In general, one of the two following approaches can be used to achieve parallel processing \cite{Khattak2016BigData}:
 \begin{itemize}
-\item \textbf{Task Parallelism:}
+\item Task Parallelism:
 This approach refers to enabling parallelization by dividing a task into multiple sub-tasks.
 % Each sub-tasks.
 Each sub-task performs a different algorithm with its own copy of the same data in parallel.
 % The results
 The result is created by joining the output of all sub-tasks together \cite{Khattak2016BigData}.
 
-\item \textbf{Data Parallelism:}
+\item Data Parallelism:
 This approach is achieved by dividing a dataset into a series of smaller sub-datasets to process each sub-dataset in parallel.
 % Spread
 The sub-datasets are processed using the same algorithm across different nodes.
@@ -48,25 +48,18 @@ Apache Hadoop\footnote{Apache Hadoop - \url{https://hadoop.apache.org/} (Accesse
 % Apache Spark
 Implementing data pipelines with MapReduce requires to chain multiple MapReduce jobs together. This causes a huge amount of writing and reading operation to the disk with bad impact on the overall performance. Another framework called Apache Spark was developed to simplify writing and executing parallel applications at scale while keeping the benefits of MapReduce`s scalability and fault-tolerant data processing. Apache Spark provides a performance improve of 10x in iterative Machine Learning algorithms over MapReduce \cite{Zaharia2010Spark} and has evolved as a replacement for MapReduce as the distributed computing framework of choice.
 
-%
-% GPU is a massive parallel computing device with high computational power and memory bandwidth, which are suitable for data-parallel applications
-% Data analytics applications running on Spark usually have rich data parallelism, which naturally matches GPU’s parallel architecture
-% GPU’s performance advantage comes from its high parallelism and high memory bandwidth.
-% VON Spark-GPU
-%
-
 
 % ===========================================
 % ===========================================
 \section{Computing Acceleration with GPUs}
 % Why CPUs are limited
-Distributed computing frameworks like Apache Spark perform applications on a huge amount of CPU cores to enable parallization. A CPU is build of multiple cores which are optimized for sequential serial processing. Performing computationally intensive applications on an Apache Spark cluster, consumes a huge amount of CPU cycles with negative impact on the overall performance \cite{Li2015HeteroSpark}.
+Distributed computing frameworks like Apache Spark perform applications on a huge amount of CPU cores to enable parallelism. A CPU is build of multiple cores which are optimized for sequential serial processing. Performing computationally intensive applications on an Apache Spark cluster, consumes a huge amount of CPU cycles with negative impact on the overall performance \cite{Li2015HeteroSpark}.
 % About the growing complexity of computational power
 To handle the complexity of Big Data applications, from executing Machine Learning algorithms or training Deep Learning models, an option of distributed computing clusters is to scale-up individual nodes. Scaling-up is limited by resource capacity and can be become uneconomically at a specific point.
 % What about GPUs
-To perform computationally complex applications with better performance, Graphical Process Units (GPUs) have become first class citizens in modern data centers. The architecture of a GPU consists of a large amount of smaller and more efficient cores which are optimized for parallel data processing (handling multiple tasks simultaneously). In general, GPUs process data at a much faster rate than CPUs are capable.
+To perform computationally complex applications with better performance, Graphical Process Units (GPUs) have become first class citizens in modern data centers. The architecture of a GPU consists of a large amount of smaller and more efficient cores which are suitable for data-parallel data processing (handling multiple tasks simultaneously) \cite{Yuan2016SparkGPU}. In general, GPUs process data at a much faster rate than CPUs are capable.
 % How can apps be accelerated with GPUs
-Leveraging GPUs for distributed computing frameworks like Apache Spark, can boost the overall performance of performing complex algorithms on large datasets.
+Apache Spark applications have a data-parallel nature. Therefore, enabling Apache Spark to leverage GPUs to perform complex ML algorithms on big datasets can have a huge positive impact on the performance \cite{Yuan2016SparkGPU}.
 
 
 % ===========================================
@@ -136,9 +129,9 @@ Therefore a prototype of an Apache Spark cluster prototype has to be implemented
 The following three research question will be investigated to implemented the mentioned prototype:
 %RQs
 \begin{itemize}
-\item \textbf{RQ1:} Is it possible to scale the number of Apache Spark Worker in accordance to performance utilization?
-\item \textbf{RQ2:} How can Apache Spark be extended to accelerate application execution with GPU support?
-\item \textbf{RQ3:} Is it possible to automate the deployment process of applications to a running Apache Spark cluster?
+\item RQ1: Is it possible to scale the number of Apache Spark Worker in accordance to performance utilization?
+\item RQ2: How can Apache Spark be extended to accelerate application execution with GPU support?
+\item RQ3: Is it possible to automate the deployment process of applications to a running Apache Spark cluster?
 \end{itemize}
 
 
