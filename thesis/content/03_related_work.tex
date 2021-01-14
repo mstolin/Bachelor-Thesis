@@ -2,25 +2,56 @@
 \label{chap:03_related-work}
 
 
-This chapter provides an overview over the literature about scalable computing environments, GPU accelerated Apache Spark cluster and the implementation of automated deployment pipelines. These topics are related to the choice of technologies (\Chap{chap:04_background}), the proposed conceptual design of this thesis (\Chap{chap:05_design}), and the resulting implementation (\Chap{chap:06_implementation}).
+This chapter provides an overview over related literature to this thesis. It introduces work about auto-scaling computing environments, GPU accelerated Apache Spark cluster and the implementation of automated deployment pipelines. These topics are related to the choice of technologies (\Chap{chap:04_background}), the proposed conceptual design of this thesis (\Chap{chap:05_design}), and the resulting implementation (\Chap{chap:06_implementation}).
 
 
 % ===========================================
 % ===========================================
-\section{Scalable Computing Environments}
+\section{Auto-Scaling Computing Environments}
 % State of the art monitoring
 In recent years, container technologies have been used efficiently in complex computing environments. Dynamic scaling of containerized applications is an active area of research.
 % WHich is important for this thesis
 To accommodate this thesis research objective, the literature research was focused on three topics: Architecture of auto-scaling environments, horizontal auto-scaling strategies, and auto-scaling algorithms.
 
 
-\subsection{Architecture of Auto-Scaling Environments}
+\subsection{Auto-Scaler}
 % A review of auto-scaling techniques for elastic application in cloud environments
 \paragraph{}
-Lorido-Botrán et al.  reviewed state-of-the-art literatures about auto-scaling and proposed a process for auto-scaling homogeneous elastic applications. They mentioned three different problems, auto-scaler face while remaining the Quality of Service (QoS): Under-provisioning, over-provisioning, and oscillation. Under-provisioning refers to a lack of available resources. Over-provisioning means that more resources are available than needed and oscillation occurs when the environment gets scaled too quickly before the impact is clear. They mentioned the MAPE-Loop which consists of four different parts: Monitor, Analyze, Plan and Execute.  The Auto-Scaler is part 
+Lorido-Botrán et al. \cite{Lorido2014Review} reviewed state-of-the-art literatures about auto-scaling and explain proposals of a auto-scaling process in a cloud environment.
+% SLA and costs
+It is mentioned that an Auto-Scaler is responsible to find a trade-off between meeting the SLA and keeping the cost of renting resources low.
+% SLA
+
+% Auto-scaling probelsm
+They introduced three problems, an Auto-Scaler faces while scaling an environment and meeting the SLA:
+% The problems
+\begin{enumerate}
+%1
+\item Under-provisioning:
+An application is under-provisioned if it needs more resources to process the incoming workload.
+To make resources available and return the application to its normal state may take some time which causes SLA violations.
+% 2
+\item Over-provisioning:
+If an application has more resources available than needed will lead to unnecessary costs for the client.
+% 3
+\item Oscillation:
+If scaling-actions are being executed too quickly before the impact is available, a combination of over-provisioned and under-provisioned applications can occur.
+A cooldown period after a scaling-action has being executed can be activated to prevent oscillation.
+\end{enumerate}
+% MAPE
+To prevent the mentioned problems from occurring, the authors mentioned and explained the MAPE architecture (described in detail in \Sec{sec:02_ac}).
+% MAPE phases
+MAPE consists of four different phases: Monitor, analyse, plan, and execute.
+% Only AP
+The authors mention that some Auto-Scaler proposals only focus on the analyse and planning phase. 
+% Analysing and planning techniques
+Several techniques for the analyse phase are being introduced: Queuing theory and time-series analysis.
+As well as for the planning phase: Threshold-based rules, reinforcement learning, and control theory.
+% Active proactive grouping
+Some Auto-Scaler use techniques to predict the future state of the environment (e.g. reinforcement learning). These are called reactive Auto-Scalers.
+Proactive Auto-Scalers use techniques to respond to the current status of the environment (e.g. threshold-based rules).
 
 
-\subsection{Auto-Scaler}
 % Application deployment using containers with auto-scaling for microservices in cloud environment
 \paragraph{}
 Srirama et al. \citep{Srirama2020AppDeplyCont} designed a heuristic-based auto-scaling strategy for container-based microservices in a cloud environment. The purpose of the auto-scaling strategy was to balance the overall resource utilization across microservices in the environment.
