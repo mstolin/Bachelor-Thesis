@@ -12,19 +12,19 @@
 \contentsline {figure}{\numberline {\relax 2.9}{\ignorespaces Pull-based monitoring approach - Source: Authors own model.\relax }}{15}{figure.caption.22}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Docker architecture - Source: Authors own model, based on \cite {Docker2020Docs}.\relax }}{23}{figure.caption.33}% 
-\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Docker basic container structure - Source: Authors own model, based on \cite {Bullington2020Docker}.\relax }}{24}{figure.caption.37}% 
-\contentsline {figure}{\numberline {\relax 4.3}{\ignorespaces Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite {Hien2018Spark}.\relax }}{28}{figure.caption.43}% 
-\contentsline {figure}{\numberline {\relax 4.4}{\ignorespaces Overview of a Spark cluster architecture - Source: Authors own model, based on \cite {Apache2020Spark}.\relax }}{29}{figure.caption.44}% 
-\contentsline {figure}{\numberline {\relax 4.5}{\ignorespaces Spark`s cluster mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{30}{figure.caption.48}% 
-\contentsline {figure}{\numberline {\relax 4.6}{\ignorespaces Spark`s client mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{30}{figure.caption.49}% 
-\contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite {Mcdonald2020SparkRapids}.\relax }}{32}{figure.caption.58}% 
-\contentsline {figure}{\numberline {\relax 4.8}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Bastos2019Prom}.\relax }}{33}{figure.caption.60}% 
-\contentsline {figure}{\numberline {\relax 4.9}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{35}{figure.caption.69}% 
+\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Docker architecture - Source: Authors own model, based on \cite {Docker2020Docs}.\relax }}{23}{figure.caption.32}% 
+\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Docker basic container structure - Source: Authors own model, based on \cite {Bullington2020Docker}.\relax }}{24}{figure.caption.36}% 
+\contentsline {figure}{\numberline {\relax 4.3}{\ignorespaces Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite {Hien2018Spark}.\relax }}{28}{figure.caption.42}% 
+\contentsline {figure}{\numberline {\relax 4.4}{\ignorespaces Overview of a Spark cluster architecture - Source: Authors own model, based on \cite {Apache2020Spark}.\relax }}{29}{figure.caption.43}% 
+\contentsline {figure}{\numberline {\relax 4.5}{\ignorespaces Spark`s cluster mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{30}{figure.caption.47}% 
+\contentsline {figure}{\numberline {\relax 4.6}{\ignorespaces Spark`s client mode - Source: Authors own model, based on \cite {Chambers2018Spark}.\relax }}{30}{figure.caption.48}% 
+\contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite {Mcdonald2020SparkRapids}.\relax }}{32}{figure.caption.57}% 
+\contentsline {figure}{\numberline {\relax 4.8}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Bastos2019Prom}.\relax }}{33}{figure.caption.59}% 
+\contentsline {figure}{\numberline {\relax 4.9}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{35}{figure.caption.68}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Overall cluster architecture - Source: Authors own model.\relax }}{40}{figure.caption.73}% 
-\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Autonomic manager component design - Source: Authors own model.\relax }}{42}{figure.caption.76}% 
-\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces UML activity model of the autonomic manager process - Source: Authors own model.\relax }}{43}{figure.caption.80}% 
+\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Overall cluster architecture - Source: Authors own model.\relax }}{40}{figure.caption.72}% 
+\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Autonomic manager component design - Source: Authors own model.\relax }}{42}{figure.caption.75}% 
+\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces UML activity model of the autonomic manager process - Source: Authors own model.\relax }}{43}{figure.caption.79}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
