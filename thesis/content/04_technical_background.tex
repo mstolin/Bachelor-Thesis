@@ -187,7 +187,7 @@ From the logical plan, the Catalyst optimizer creates one ore more physical plan
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{images/04_technical_background/cluster_overview}
+\includegraphics[scale=1]{images/04_technical_background/spark/spark_cluster_architecture}
 \caption{Overview of a Spark cluster architecture - Source: Authors own model, based on \cite{Apache2020Spark}.}
 \label{fig:spark_cluster_overview}
 \end{figure}
@@ -211,8 +211,6 @@ A Spark executor performs the tasks given by the Spark driver \cite{Chambers2018
 The cluster manager is an external service that orchestrates the work between the machines in the cluster \cite{Hien2018Spark, Apache2020Spark}. The cluster manager knows about the resources of each worker and decides on which machine the Spark driver process and the executor processes run \cite{Hien2018Spark, Chambers2018Spark}.
 % Different cluster types
 Spark supports different services that can run as the cluster manager: Standalone mode (introduced in \Sec{subsec:04_spark_standalone}), Apache Mesos\footnote{Apache Mesos - \url{https://mesos.apache.org/} (Accessed: 2021-01-02)}, Hadoop YARN\cite{Murthy2013Yarn} and Kubernetes\footnote{Kubernetes - \url{https://kubernetes.io/} (Accessed: 2021-01-02)} \cite{Apache2020Spark}.
-% What is standalone
-\todo{Explain standalone}
 % Explain different cluster deploy modes
 The cluster manager provides three different deploy modes for acquiring resources in the cluster.
 \begin{itemize}
@@ -329,7 +327,7 @@ Apache arrow is a data platform to build high performance applications that work
 % RAPIDS query plan image
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.25]{images/04_technical_background/rapids_query_plan}
+\includegraphics[scale=1]{images/04_technical_background/rapids/rapids_catalyst_optimization_process}
 \caption{Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite{Mcdonald2020SparkRapids}.}
 \label{fig:04_rapids_ext_query-plan}
 \end{figure}

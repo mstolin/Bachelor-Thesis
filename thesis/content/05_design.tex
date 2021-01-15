@@ -144,6 +144,8 @@ Prometheus pulls the collected performance metrics from cAdvisor and stores the 
 % Query
 In addition, Prometheus provides a powerful multi-dimensional query language to aggregate and analyze the stored data.
 
+% Collecting operational data can be challenging in a horizontally        scaling environment since the number of nodes varies over time. Any        system that automates gathering of log files from individual nodes        needs to account for this, and care needs to be taken to ensure that        logs are captured before nodes are released.
+
 
 \subsubsection{Workflow}
 

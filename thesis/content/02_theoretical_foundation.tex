@@ -2,44 +2,58 @@
 \label{chap:02_foundation}
 
 
-This chapter provides the theoretical foundation about concepts that will be used in this thesis. The theoretical foundation is necessary to understand the choice of tools and the introduced solution in this thesis to create the research objective, answer the research questions, and solve the problem statements.
+This chapter provides the theoretical foundation to understand concepts that will be used in this thesis. First, the concept of Scalability will be described. Second, the theory behind a deployment pipeline is explained. Third, the concept of autonomic computing is  introduced. Fourth, the theory of measuring system performance is explained. Lastly, the concept of monitoring is being described.
 
 
 \section{Scalability}
 \label{sec:02_foundations_scalability}
 % What is scalability
 Scalability defines the ability of a computing system to handle an increasing amount of load \cite{Farcic2017Toolkit21}. 
+% Limit of scalability
+The limit of scalability is reached, when a computing system is not able to serve the requests of its concurrent users \cite{Wilder2012CloudPatterns}.
 % Vertical and horizontal
-To increase the scalability of a system, different approaches exist. The two main approaches are vertical scaling and horizontal scaling.
-% Only horizontal
-During this thesis work, the horizontal scaling approach is being used because of its suitability to solve this thesis problems and therefore being introduced in this section.
-% Vertical
-Vertical scaling will not be used due to its limitations explained in \Sec{subsec:02_foundations_scalability_limits}.
+Different approaches exist to increase the scalability of a system. The two main approaches are vertical scaling and horizontal scaling.
 
 
 \subsection{Horizontal Scaling}
 % What is horizontal scaling
-Horizontal scaling is accomplished by duplicating nodes in the computing environment \cite{Wilder2012CloudPatterns}.
+Horizontal scaling is accomplished by adding nodes to the computing environment to increase the overall capacity.
+Each node typically adds the equal amount of computing capacity (e.g. amount of memory) \cite{Wilder2012CloudPatterns}.
 % DIstribution
-Duplicating the nodes in a computing environment increases the computational capacity of the environment. In addition, the workload can be distributed across all nodes to handle and balance an increasing workload \cite{Wilder2012CloudPatterns, Abbott2015ScalabilityArt}. 
+By increasing the number of nodes in a computing environment, the workload can be distributed more efficiently across all nodes to handle and balance an increasing workload \cite{Wilder2012CloudPatterns, Abbott2015ScalabilityArt}.
+
+
+% Limit of hor scaling
+Scaling a computing environment horizontally is limited by the efficiency of each added node.
+% The simplicity of homo nodes
+The horizontal scaling approach is more efficient with the simplicity of homogeneous nodes.
 % Homogeneous nodes
-Horizontal scaling is more efficient with homogeneous nodes. Homogeneous nodes add the same amount of computing power to the system and are able to perform the same work and response as other nodes. With non-homogeneous nodes, capacity planing and distributing workload becomes more complex \cite{Abbott2015ScalabilityArt}.
+Homogeneous nodes add the same amount of computing power to the system and are able to perform the same work and response as other nodes.
+% Examples
+With homogeneous nodes, creating strategies for capacity planning, load balancing, and auto-scaling is more efficient.
+% Different nodes
+In an environment with different types of nodes, creating these strategies is more complex due to the need of context \cite{Wilder2012CloudPatterns}.
 
 
-\subsection{Limitations of Vertical Scaling}
-\label{subsec:02_foundations_scalability_limits}
-The limit of scalability is reached, when a computing system is not able to serve the requests of its concurrent users \cite{Wilder2012CloudPatterns}.
+\subsection{Vertical Scaling}
+\label{subsec:02_foundations_scalability_vertical-scaling}
+% Concept
+Vertical scaling refers to increasing the overall capacity by improving the computing power with additional hardware of individual nodes (e.g. adding memory, increasing number of CPU cores) \cite{Wilder2012CloudPatterns}.
+
+
 % hardware capacity
-If the scalability of a computing environment is reached, an option is to add more powerful hardware resources to the system. This approach is called vertical scaling. Adding more powerful hardware can become unaffordable or a point can be reached, where more powerful hardware is not available.
+If additional hardware has to be added to a system, it is not guaranteed that more powerful hardware is available or affordable.
+% The limit of vertical scalability
+Therefore, vertical scaling is limited by of available hardware.
 % Downtime
-Additionally, increasing the physical capacity of a system requires a restart. Most of the time restarting is not possible, because it will interrupt important services running on the system \cite{Wilder2012CloudPatterns}.
+Additionally, changing physical hardware of a running system can require a downtime. For most system a downtime should be avoided because it will interrupt important services running on the system \cite{Wilder2012CloudPatterns}.
 
 
 % ===========================================
 % ===========================================
 \section{Deployment Pipeline}
 % Short Abstract
-A deployment pipeline is an implementation of the process for getting software from source code to production.
+A deployment pipeline is an implementation of the process of getting software from source code to production.
 % Based on CI
 It is based on the concept of Continuous Integration (CI).
 % Involves what
@@ -50,12 +64,12 @@ The process involves building, testing and deploying software through automated 
 % Abtract def
 Continuous Integration is a development practice where each change on a primary code base is validated by automated scripts. This ensures that errors are detected and fixed in an early development stage \cite{Duvall2007CI}.
 % What its about
-The CI process is responsible for building and testing the software to guarantee that the software is in a releasable state at all time \cite{Rossel2017CICD}.
+The CI process is responsible for building and testing the software to guarantee that it is in a releasable state at all time \cite{Rossel2017CICD}.
 % Advantages
 CI contributes with the following advantages to the development life cycle of an application:
 \begin{itemize}
 \item Reduce risks:
-Because the CI process will run tests and validations on each change, errors will be detected in an early stage and can be fixed immediately \cite{Duvall2007CI}.
+The CI process runs tests and validates the software on each change. Errors are detected in an early stage and can be fixed immediately \cite{Duvall2007CI}.
 
 \item Reduce manual processes:
 % Same time
@@ -67,7 +81,7 @@ Therefore, no human intervention is needed to start the process which saves time
 
 \item Generate deployable software:
 If an error occurs during a CI run, developers will be informed and fixes can be applied immediately.
-This ensures that the software is in a deployable state at time \cite{Duvall2007CI}.
+This ensures that the software is in a deployable state at all times \cite{Duvall2007CI}.
 \end{itemize}
 
 
@@ -79,15 +93,20 @@ The implementation of a CI process is based on several requirements:
 \item Version control repository:
 To manage changes to the code base, the source code and all other assets like the build script should be hosted on a single version control repository.
 % Changes
-Each change on the code base will trigger the CI process on the build server to run against the latest version available \cite{Duvall2007CI}.
+Each change on the code base triggers the CI process on the build server to run against the latest version available \cite{Duvall2007CI}.
 
 \item Build server:
 The build server is responsible to monitor the code base for changes.
 % Execute
-If a change has been committed, the build server automatically executes the CI scripts in order \cite{Rossel2017CICD, Duvall2007CI}.
+If a change is committed, the build server automatically executes the CI scripts in order \cite{Rossel2017CICD, Duvall2007CI}.
 
 \item Build script:
-This includes all automation scripts to validate the source code \cite{Duvall2007CI}.
+This includes all automation scripts to validate the source code \cite{Duvall2007CI}. Typical examples are:
+\begin{itemize}
+\item Building the software binaries (e.g. \texttt{.jar} binaries for Java source code).
+\item Running unit and integration tests.
+\item Deploying the binaries to a test or production environment.
+\end{itemize}
 \end{enumerate}
 
 
@@ -235,37 +254,42 @@ The execute phase applies all necessary changes to the computing system \cite{Si
 \end{itemize}
 
 % Multiple manager
-Multiple autonomic manager can exist in an autonomic computing environment to perform only certain parts. For example, there can be one autonomic manager which is responsible to monitor and analyse the system and another autonomic manager to plan and execute. To create a complete and closed control-loop, multiple autonomic manager can be composed together \cite{Sinreich2006AnAB}.
+Multiple autonomic manager can exist in an autonomic computing environment to perform only certain phases. For example, an autonomic manager which is responsible to monitor and analyse the system and an autonomic manager to plan and execute. To create a complete and closed control-loop, multiple autonomic manager can be composed together \cite{Sinreich2006AnAB}.
 
 
 % ===========================================
 % ===========================================
 \section{System Performance}
+% Short abstract
 
 
 \subsection{Performance Metrics}
 % Short description
 Performance metrics are statistics that describe the system performance. These statistics are generated by the system, applications or other tools \cite{Greg2020SysPerf}.
 % Common types
-The following are examples of common types for performance metrics:
+Common types for performance metrics are:
 \begin{itemize}
 \item Throughput: Volume of data or operations per second \cite{Greg2020SysPerf}.
 \item Latency: Time of operation \cite{Greg2020SysPerf}.
-\item Utilization: Usage of a component \cite{Greg2020SysPerf}.
+\item Utilization: Usage of a hardware resource \cite{Greg2020SysPerf}.
 \end{itemize}
 
 
 % Overhead
-\paragraph{}It is important to note that measuring performance metrics can cause an overhead. To gather and store performance metrics, CPU cycles must be spent. This can have a negative affect on the target performance \cite{Greg2020SysPerf}.
+\paragraph{}It is important to note that measuring performance metrics can cause an overhead. To gather and store performance metrics, additional CPU cycles must be spent. This can have a negative affect on the target performance \cite{Greg2020SysPerf}.
 
 
 \subsection{Time-Based Utilization}
 % What is utilization
-Utilization is a performance metrics that describes the usage of a device, e.g. CPU device usage.
+Utilization is a performance metric that describes the usage of a device, e.g. CPU device usage.
 % What about time-based utilization
 A time-based utilization describes the usage of a component during a time period where the component was actively performing work \cite{Greg2020SysPerf}.
-% 100% utilization
-When a resource approaches 100\% utilization, the performance of that resource can degrade. If a component can process operations in parallel, the performance does not have to degrade much at 100\% utilization and the component can process more work \cite{Greg2020SysPerf}.
+
+
+% 100 utilization
+The performance of a hardware resource can degrade significantly if the utilization approaches 100\%.
+% Parallel hardware
+Hardware which is able to perform work in parallel, might not have a performance degrade at 100\%. Those hardware is able to accept additional work at a high utilization at a later time \cite{Greg2020SysPerf}.
 
 
 % ===========================================
@@ -275,14 +299,14 @@ When a resource approaches 100\% utilization, the performance of that resource c
 % What is monitoring
 Monitoring is a process, that aims to detect and take care of system faults. In a dynamic environment, becoming aware of the system is a trivial process \cite{Ligus2012EffMonitoring}.
 % What is a monitoring system
-A monitoring system consists of a set of multiple tools. The tools are responsible to perform measurements on components in the computing environment and collect, store and interpret the monitored data \cite{Ligus2012EffMonitoring}. 
+A monitoring system consists of a set of multiple which are responsible to perform measurements on components in the computing environment and collect, store and interpret the monitored data \cite{Ligus2012EffMonitoring}. 
 
 
 % The monitoring Loop/Process
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.9]{images/02_theoretical_foundation/monitoring/monitoring_system}
-\caption{The monitoring process - Source: Authors own model.}
+\caption{The monitoring process}
 \label{fig:mon_mon-system-process}
 \end{figure}
 In the monitoring process, illustrated in \Fig{fig:mon_mon-system-process}, data is continuously collected by agents. An agent is a process that continuously gathers metrics. Data can be device statistics, logs or system measurements. Agents will group these data into metrics and submit them to the monitoring system. The monitoring system will store the metrics in its database \cite{Ligus2012EffMonitoring}.
@@ -311,15 +335,15 @@ In a time-series database, metrics will be stored in a compact and optimized for
 \label{subsec:02_monitoring_push-pull}
 The approach how the monitoring systems gathers metrics to store in the database plays a significant role.
 % There are push and pull based systems
-Push and pull based systems are the two primary approaches to gather metrics from services.
+Push- and pull-based systems are the two primary approaches to gather metrics from services.
 % About push
-Push based monitoring systems expect services to push metrics to their storage.
+Push-based monitoring systems expect services to push metrics to their storage.
 % About pull
-On the other hand, pull based monitoring systems scrape metrics from all defined targets. Targets do not know about the existence of the monitoring system and only need to collect and expose metrics \cite{Farcic2017Toolkit21}.
+Pull-based monitoring systems scrape metrics from all defined targets. Targets do not know about the existence of the monitoring system and only need to collect and expose metrics \cite{Farcic2017Toolkit21}.
 
 
 % When to choose what (Discovery)
-Service discovery is an important aspect to decide whenever to use a pull or push based monitoring system \cite{Farcic2017Toolkit21}.
+Service discovery is an important aspect to decide whenever to use a pull- or push-based monitoring system \cite{Farcic2017Toolkit21}.
 
 \begin{figure}[h]
 \centering
@@ -340,7 +364,7 @@ In a push-based environment, services only need to know the address of the monit
 % Pull based discovery
 A pull-based monitoring tool needs to know the address of each target in the environment.
 % Why pull based works best with discovery
-The advantage of a pull-based monitoring systems is the simplicity to detect whenever a target has failed or is not available \cite{Farcic2017Toolkit21}.
+The advantage of a pull-based monitoring system is the simplicity to detect whenever a target has failed or is not available \cite{Farcic2017Toolkit21}.
 
 
 \subsection{Multi-Dimensional Metrics}
