@@ -126,43 +126,41 @@ A task is a running Docker container. The task is defined by the corresponding s
 % ===========================================
 \section{Apache Spark}
 \label{sec:04_spark}
-Apache Spark is an open-source computing framework for parallel data processing on a large computer cluster. Spark manages the available resources and distributes computation tasks across a cluster to perform big-data processing operations at large scale \cite{Chambers2018Spark}. Before Spark was developed, Hadoop MapReduce \cite{Dean2010MapReduce} was the framework of choice for parallel operations on a computer cluster \cite{Zaharia2010Spark}. Spark accomplished to outperform Hadoop by 10x for iterative Machine Learning \cite{Zaharia2010Spark}. It is implemented in Scala\footnote{Scala programming language. https://www.scala-lang.org/}, a JVM-based language and provides a programming interface for Scala, Java\footnote{Java programming language. https://www.oracle.com/java/}, Python\footnote{Python programming language. https://www.python.org/} and R\footnote{R programming language. https://www.r-project.org/}. In addition, Spark includes an interactive SQL shell and libraries to implement Machine Learning and streaming applications \cite{Chambers2018Spark}.
-It was developed in 2009 as the Spark research project at UC Berkeley and became an Apache Software Foundation project in 2013 \cite{Chambers2018Spark}. 
+Apache Spark is an open-source computing framework for parallel data processing on a large computer cluster. Apache Spark manages the available resources and distributes computation tasks across a cluster to perform big-data processing operations at large scale \cite{Chambers2018Spark}. Before Apache Spark was developed, Hadoop MapReduce \cite{Dean2010MapReduce} was the framework of choice for parallel operations on a computer cluster \cite{Zaharia2010Spark}. Spark accomplished to outperform Hadoop by 10x for iterative Machine Learning \cite{Zaharia2010Spark}. It is implemented in Scala\footnote{Scala programming language. https://www.scala-lang.org/}, a JVM-based language and provides a programming interface for Scala, Java\footnote{Java programming language. https://www.oracle.com/java/}, Python\footnote{Python programming language. https://www.python.org/}, and R\footnote{R programming language. https://www.r-project.org/}. Additionally, Apache Spark includes an interactive SQL shell and libraries to implement Machine Learning and streaming applications \cite{Chambers2018Spark}.
 
 
-\subsection{Spark programming model}
+\subsection{Spark Programming Model}
 \label{subsec:04_spark_pr-model}
 % Explain RDDs
-Spark provides resilient distributed datasets (RDDs) as the main abstraction for parallel operations \cite{Zaharia2010Spark}. Core types of Spark`s higher-level structured API are built on top of RDDs \cite{Chambers2018Spark} and will automatically be optimized by Spark`s Catalyst optimizer to run operations quick and efficient \cite{Hien2018Spark}.
-\todo{Master-Slave Architektur + Bild}
+Apache Spark provides resilient distributed datasets (RDDs) as the main abstraction for parallel operations \cite{Zaharia2010Spark}. Core types of the higher-level structured API are built on top of RDDs and will automatically be optimized by the Catalyst optimizer to run operations quick and efficient \cite{Chambers2018Spark, Hien2018Spark}.
 
 
 \subsubsection{Resilient distributed datasets}
 % What are RDDs
-Resilient distributed datasets are fault-tolerant, parallel data structures to enable data sharing across cluster applications \cite{Zaharia2012RDDs}. They allow to express different cluster programming models like MapReduce, SQL and batched stream processing \cite{Zaharia2012RDDs}. RDDs have been implemented in Spark and serve as the underlying data structure for higher level APIs (Spark structured API) \cite{Zaharia2012RDDs}.
-% How can RDDs be used in applications    !! HIER MAL BEISPIEL WIE IN RDD ERZEUGT WIRD
-RDD`s are a immutable, partitioned collection of records and can only be initiated through transformations (e.g. map, filter) on data or other RDD`s.
-% What are the advantages of RDDs    !!! HIER NOCHMAL BEISPIEL WIE DAS AUSSEHEN KANN
+Resilient distributed datasets are fault-tolerant, parallel data structures to enable data sharing across cluster applications \cite{Zaharia2012RDDs}. They allow to express different cluster programming models like MapReduce, SQL and batched stream processing \cite{Zaharia2012RDDs}. RDDs have been implemented in Apache Spark and serve as the underlying data structure for higher level APIs (Spark structured API) \cite{Zaharia2012RDDs}.
+% How can RDDs be used in applications
+RDDs are a immutable, partitioned collection of records and can only be initiated through transformations (e.g. map, filter) on data or other RDDs.
+% What are the advantages of RDDs
 An advantage of RDDs is, that they can be recovered through lineage. Lost partitions of an RDD can be recomputed from other RDDs in parallel on different nodes \cite{Zaharia2012RDDs}. 
 % Better use structured API
-RDDs are lower level APIs and should only be used in applications if custom data partitioning is needed \cite{Chambers2018Spark}. It is recommended to use Sparks structured API objects instead. Optimizations for RDDs have to be implemented manually while Spark automatically optimize the execution for structured API operations \cite{Chambers2018Spark}.
+RDDs are lower level APIs and should only be used in applications if custom data partitioning is needed \cite{Chambers2018Spark}. It is recommended to use Sparks structured API objects instead. Optimizations for RDDs have to be implemented manually while Apache Spark automatically optimizes the execution for structured API operations \cite{Chambers2018Spark}.
 
 
-\subsubsection{Spark structured API}
+\subsubsection{Apache Spark Structured API}
 % What is the structured API
-Spark provides high level structured APIs for manipulating all kinds of data. The three distributed core types are Datasets, DataFrames and SQL Tables and Views \cite{Chambers2018Spark}.
+Apache Spark provides high level structured APIs for manipulating all kinds of data. The three distributed core types are Datasets, DataFrames and SQL Tables and Views \cite{Chambers2018Spark}.
 % About DataFrames, Datasets and SQL
 Datasets and DataFrames are immutable, lazy evaluated collections that provide execution plans for operations \cite{Chambers2018Spark}. SQL Tables and Views work the same way as DataFrames, except that SQL is used as the interface instead of using the DataFrame programming interface \cite{Chambers2018Spark}.
 % Differences between Datasets ad Dataframes
-Datasets use JVM types and are therefore only available for JVM based languages. DataFrames are Datasets of type Row, which is the Spark internal optimized format for computations. This has advantages over JVM types which comes with garbage collection and object instantiation \cite{Chambers2018Spark}.
+Datasets use JVM types and are therefore only available for JVM based languages. DataFrames are Datasets of type \texttt{Row}, which is the optimized format for computations \cite{Chambers2018Spark}.
 
 
-\subsubsection{Spark Catalyst}
+\subsubsection{Apache Spark Catalyst}
 \label{subsubsec:04_spark_pr-model_catalyst}
 % What is the Catalyst optimizer
-Spark also provides a query optimizer engine called Spark Catalyst. \Fig{fig:04_spark_pr-model_catalyst_process} illustrates how the Spark Catalyst optimizer automatically optimizes Spark applications to run quickly and efficient.
+Apache Spark also provides a query optimizer engine called Apache Spark Catalyst. \Fig{fig:04_spark_pr-model_catalyst_process} illustrates how the Spark Catalyst optimizer automatically optimizes Apache Spark applications to run quickly and efficient.
 % Short How
-Before executing the user`s code, the Catalyst optimizer translates the data-processing logic into a logical plan and optimizes the plan using heuristics \cite{Hien2018Spark}. After that, the Catalyst optimizer converts the logical plan into a physical plan to create code that can be executed \cite{Hien2018Spark}.
+Before executing the users code, the Catalyst optimizer translates the data-processing logic into a logical plan and optimizes the plan using heuristics \cite{Hien2018Spark}. After that, the Catalyst optimizer converts the logical plan into a physical plan to create code that can be executed \cite{Hien2018Spark}.
 
 
 % What are logical plans
@@ -170,7 +168,7 @@ Logical plans get created from a DataFrame or a SQL query. A logical plan repres
 For example, the Catalyst can position a filter transformation in front of a join operation \cite{Hien2018Spark}.
 
 % What are physical plans
-From the logical plan, the Catalyst optimizer creates one ore more physical plans which consist of RDD operations \cite{Chambers2018Spark}. The cheapest physical will be generated into Java bytecode for execution across the cluster \cite{Hien2018Spark}.
+From the logical plan, the Catalyst optimizer creates one ore more physical plans which consist of RDD operations \cite{Chambers2018Spark}. The cheapest physical plan will be generated into Java bytecode for execution across the cluster \cite{Hien2018Spark}.
 
 % Spark Catalyst figure
 \begin{figure}[h]
@@ -179,7 +177,6 @@ From the logical plan, the Catalyst optimizer creates one ore more physical plan
 \caption{Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite{Hien2018Spark}.}
 \label{fig:04_spark_pr-model_catalyst_process}
 \end{figure}
-\todo{Bild nochmal machen mit abstand	+ QUELLE anpassen}
 
 
 \subsection{Application Architecture}
@@ -193,52 +190,56 @@ From the logical plan, the Catalyst optimizer creates one ore more physical plan
 \end{figure}
 
 % Explain image
-\Fig{fig:spark_cluster_overview} illustrates the main architecture of a Spark cluster. The architecture follows the master-worker model where the Spark driver is the master and the Spark executors are the worker \cite{Hien2018Spark}.
-\todo{Nicht ganz richtig, Master und Worker sind machines und driver und executor sind prozesse}
+\Fig{fig:spark_cluster_overview} illustrates the main architecture of an Apache Spark cluster running an application.
+% Master-Worker
+The architecture follows the master-worker model.
+% The processes
+Each running application has one driver process (master) and multiple executor processes (worker) exclusively assigned by the cluster manager.
+% Cluster manager
+Furthermore, the cluster manager decides on which nodes the processes will be executed \cite{Hien2018Spark}.
 
 
-\subsubsection{Spark Driver}
+\subsubsection{Driver Process}
 \label{subsubsec:04_spark_architecture_driver}
-The Spark driver is a JVM process on a physical machine and responsible to maintain the execution of a Spark application \cite{Chambers2018Spark}. It coordinates the application tasks onto each available executor \cite{Hien2018Spark}. To get launch executors and get physical resources, the Spark driver interacts with the cluster manager \cite{Chambers2018Spark, Hien2018Spark}.
+The driver process is a JVM process running on a physical machine and responsible to maintain the execution of an Apache Spark application \cite{Chambers2018Spark}. It coordinates the application tasks onto each available executor \cite{Hien2018Spark}. 
+The driver interacts with the cluster manager to launch executors and allocate hardware resources \cite{Chambers2018Spark, Hien2018Spark}.
 
 
-\subsubsection{Spark Executor}
-A Spark executor performs the tasks given by the Spark driver \cite{Chambers2018Spark}. It runs as a JVM process and runs until the Spark application finishes \cite{Hien2018Spark}. After the executor finishes, it reports back to the Spark driver \cite{Chambers2018Spark}. Each task will be performed on a separate CPU core to enable parallel processing  \cite{Hien2018Spark}.
+\subsubsection{Executor Process}
+% JVM
+The executor process is a JVM process, that runs through the whole duration of an application \cite{Hien2018Spark, Apache2020Spark}.
+% Tasks
+It is responsible to perform all tasks (units of work) assigned by the driver process \cite{Chambers2018Spark}.
+% Report
+After the executor process finish, it reports back to the driver process \cite{Chambers2018Spark}.
+% CPU
+Each task will be performed on a separate CPU core to enable parallel processing \cite{Hien2018Spark}.
 
 
 \subsubsection{Cluster Manager}
 \label{subsubsec:04_spark_architecture_manager}
-The cluster manager is an external service that orchestrates the work between the machines in the cluster \cite{Hien2018Spark, Apache2020Spark}. The cluster manager knows about the resources of each worker and decides on which machine the Spark driver process and the executor processes run \cite{Hien2018Spark, Chambers2018Spark}.
+The cluster manager is an external service that orchestrates the work between available machines in the cluster \cite{Hien2018Spark, Apache2020Spark}.
+% Worker and master nodes
+It decides on which nodes in the cluster the driver process and the executor processes will be launched.
+% Resources
+Additionally, the cluster manager manages the resources of each node in the cluster \cite{Hien2018Spark, Chambers2018Spark}.
 % Different cluster types
-Spark supports different services that can run as the cluster manager: Standalone mode (introduced in \Sec{subsec:04_spark_standalone}), Apache Mesos\footnote{Apache Mesos - \url{https://mesos.apache.org/} (Accessed: 2021-01-02)}, Hadoop YARN\cite{Murthy2013Yarn} and Kubernetes\footnote{Kubernetes - \url{https://kubernetes.io/} (Accessed: 2021-01-02)} \cite{Apache2020Spark}.
+Apache Spark supports different services that can run as cluster manager: Standalone mode (introduced in \Sec{subsec:04_spark_standalone}), Apache Mesos\footnote{Apache Mesos - \url{https://mesos.apache.org/} (Accessed: 2021-01-02)}, Hadoop YARN\cite{Murthy2013Yarn}, and Kubernetes\footnote{Kubernetes - \url{https://kubernetes.io/} (Accessed: 2021-01-02)} \cite{Apache2020Spark}.
 % Explain different cluster deploy modes
 The cluster manager provides three different deploy modes for acquiring resources in the cluster.
 \begin{itemize}
-\item Cluster mode
-\item Client mode
-\item Local mode
-\end{itemize}
-
 % Cluster mode
-To run an application in cluster mode, the user has to submit a precompiled JAR, python script or R script to the cluster manager \cite{Chambers2018Spark}. After that, the cluster manager starts the driver process and executor processes exclusively for the Spark application on machines inside the cluster \cite{Chambers2018Spark, Hien2018Spark}.
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.5]{images/04_technical_background/cluster_mode}
-\caption{Spark`s cluster mode - Source: Authors own model, based on \cite{Chambers2018Spark}.}
-\label{fig:spark_cluster_mode}
-\end{figure}
+\item Cluster mode:
+To run an application in cluster mode, the user has to submit a precompiled JAR, python script or R script to the cluster manager \cite{Chambers2018Spark}. After that, the cluster manager starts the driver process and executor processes exclusively for the Apache Spark application on machines inside the cluster \cite{Chambers2018Spark, Hien2018Spark}.
 
 % Client mode
+\item Client mode:
 The difference between the client mode and the cluster mode is that, the driver process runs on the client machine outside of the Spark cluster \cite{Chambers2018Spark}.
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.5]{images/04_technical_background/client_mode}
-\caption{Spark`s client mode - Source: Authors own model, based on \cite{Chambers2018Spark}.}
-\label{fig:spark_client_mode}
-\end{figure}
 
 % Local mode
-The local mode starts a Spark application on a single computer \cite{Chambers2018Spark}. It is not recommended to use the local mode in production, instead it should be used for testing Spark applications or learning the Spark framework \cite{Chambers2018Spark}.
+\item Local mode:
+The local mode starts an Apache Spark application on a single computer \cite{Chambers2018Spark}. It is important to mention, that the local mode is not recommended to use in production. Instead it should be used for testing Apache Spark applications \cite{Chambers2018Spark}.
+\end{itemize}
 
 
 \subsection{Standalone Cluster Deployment}
@@ -251,7 +252,7 @@ The standalone mode is a basic cluster-manager build specifically for Apache Spa
 \subsubsection{Starting Master and Worker Nodes}
 \paragraph{}Apache Spark provides executable launch scripts to start master and worker nodes in standalone mode.
 % Where to find them
-The executables can be found at \textit{sbin/start-master.sh} to start a master node and at \textit{sbin/start-slave.sh} to start a worker node.
+The executables can be found at \texttt{sbin/start-master.sh} to start a master node and at \texttt{/start-slave.sh} to start a worker node.
 % parameter for worker script
 The worker launch executable requires the master node URI as parameter \cite{Apache2020Spark}. 
 
@@ -269,7 +270,7 @@ $ ./sbin/start-slave.sh spark://spark-master:7077
 
 
 % Introduce examples
-\paragraph{}\Lst{lst:04_spark_standalone_launch-master} and \Lst{lst:04_spark_standalone_launch-worker} provide an example of how to use both executables to start a master and a worker node. The URI \textit{spark://spark-master:7077} in \Lst{lst:04_spark_standalone_launch-worker} is an example of a master node URI. The master node launch script will print out the master URI after being executed successfully \cite{Apache2020Spark}.
+\paragraph{}\Lst{lst:04_spark_standalone_launch-master} and \Lst{lst:04_spark_standalone_launch-worker} provide an example of how to use both executables to start a master and a worker node. The URI \texttt{spark://spark-master:7077} in \Lst{lst:04_spark_standalone_launch-worker} is an example of a master node URI. The master node launch script will print out the master URI after being executed successfully \cite{Apache2020Spark}.
 
 
 \subsubsection{Resource Allocation}
@@ -282,9 +283,9 @@ To specify how a worker discovers resources, a discovery script has to be availa
 \subsubsection{Submitting Applications with spark-submit}
 \label{subsubsec:04_spark_standalone_submit}
 % Which executable
-\paragraph{}To submit an application to a standalone cluster, Apache Spark provides the spark-submit executable. The executable file is available at \textit{bin/spark-submit} in the installation folder of Apache Spark.
+\paragraph{}To submit an application to a standalone cluster, Apache Spark provides the \texttt{spark-submit} executable. The executable file is available at \texttt{bin/spark-submit} in the installation folder of Apache Spark.
 % Cluster mode
-In cluster mode (introduced in \Sec{subsubsec:04_spark_architecture_manager}) the driver of a Spark application (see \Sec{subsubsec:04_spark_architecture_driver}) will be launched from one of the worker processes inside the cluster.
+In cluster mode the driver of an Apache Spark application (see \Sec{subsubsec:04_spark_architecture_driver}) will be launched from one of the worker processes inside the cluster.
 % When does it finish
 The submit process will finish after it has submitted the application. It does not wait for the submitted application to finish \cite{Apache2020Spark}.
 
@@ -372,7 +373,7 @@ Prometheus follows the pull-based approach, as described in detail in \SubSec{su
 % Architecture image
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.25]{images/04_technical_background/prom_architecture}
+\includegraphics[scale=0.55]{images/04_technical_background/prometheus/prometheus_architecture}
 \caption{Prometheus high-level architecture - Source: Authors own model, based on \cite{Prom2020Docs, Bastos2019Prom}.}
 \label{fig:prom_architecture}
 \end{figure}
