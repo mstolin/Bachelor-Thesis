@@ -1,9 +1,7 @@
 \chapter{Technical Background}
 \label{chap:04_background}
-%
-In this chapter bla bla
-\todo{Describe Chapter}
 
+This chapter introduces the technologies and algorithms used for this thesis work. It explains the fundamental concepts as well as installation requirements if needed.
 
 % ===========================================
 % ===========================================
@@ -12,11 +10,10 @@ In this chapter bla bla
 % ===========================================
 \section{Docker}
 \label{sec:04_docker}
-\todo{Mehr zum Thema DevOps}
 % Short docker intro
 Docker is an open-source platform that enables containerization of applications. Containerization is a technology to package, ship and run applications and their environment in individual containers.
 % Make clear
-Docker is not a container technology itself, it hides the complexity of working with container technologies directly and instead provides an abstraction and the tools to work with containers \cite{Nickoloff2019Docker, Bullington2020Docker, Potdar2020Docker}.
+Docker is not a container technology itself. It hides the complexity of working with container technologies directly and instead provides an abstraction and the tools to work with containers \cite{Nickoloff2019Docker, Bullington2020Docker, Potdar2020Docker}.
 
 
 \subsection{Docker Architecture}
@@ -30,13 +27,13 @@ Docker is not a container technology itself, it hides the complexity of working 
 \end{figure}
 
 % Explain figure
-\Fig{fig:04_docker_architecture_architecture} illustrates the client server architecture of Docker which consists of of a Docker client, the Docker deamon and a registry.
+\Fig{fig:04_docker_architecture_architecture} illustrates the client server architecture of Docker. It consists of a Docker Client, the Docker Deamon, and a Docker Registry.
 
 
-\paragraph{Docker client:} The Docker client is an interface for the user to send commands to the Docker deamon \cite{Docker2020Docs}.
+\paragraph{Docker Client:} The Docker client is an interface for the user to send commands to the Docker deamon \cite{Docker2020Docs}.
 
 
-\paragraph{Docker deamon:} The Docker deamon manages all containers running on the host system and handles the containers resources, networks and volumes \cite{Bullington2020Docker}.
+\paragraph{Docker Deamon:} The Docker deamon manages all containers running on the host system and handles the containers resources, networks and volumes \cite{Bullington2020Docker}.
 
 
 \paragraph{Docker Registry:} A Docker registry stores images. Images can be pushed to a public or private registry and pulled from it to build a container \cite{Docker2020Docs}.
@@ -78,20 +75,18 @@ In Docker Swarm mode, a cluster of multiple nodes is called a swarm. All nodes r
 In a swarm, multiple services can be deployed. The manager node is responsible to maintain the desired state of a service \cite{Docker2020Docs}.
 
 
-% Why
-Docker Swarm mode will be used to create a self-healing and a self-adapting environment as described in \Sec{sec:02_autonomic_computing}.
 % 
-Many properties of Docker Swarm mode contribute the fact that it is an ideal candidate to create self-healing and self-adapting environment:
+Many properties of Docker Swarm mode contribute the fact that it is an ideal tool to create self-healing and self-adapting environment:
 \begin{itemize}
-\item \textbf{Desired state:} The manager node monitors the state of each service in the swarm and adapts the environment to maintain the desired state \cite{Docker2020Docs}.
+\item Desired state: The manager node monitors the state of each service in the swarm and adapts the environment to maintain the desired state \cite{Docker2020Docs}.
 
-\item \textbf{Cluster management and orchestration:} Docker Swarm mode is integrated with the Docker engine. A swarm can be created and managed using the Docker CLI \cite{Docker2020Docs}.
+\item Cluster management and orchestration: Docker Swarm mode is integrated within the Docker engine. A swarm can be created and managed using the Docker CLI \cite{Docker2020Docs}.
 
-\item \textbf{Service model:} The Docker engine allows to define the desired state of a service. The manager node maintains the desired state of all services in the swarm \cite{Docker2020Docs}.
+\item Service model: The Docker engine allows to define the desired state of a service. The manager node maintains the desired state of all services in the swarm \cite{Docker2020Docs}.
 
-\item \textbf{Scaling:} The number of replicas can be defined for each service. The manager node will automatically adapt the number of replicas for a service to keep the desired state \cite{Docker2020Docs}.
+\item Scaling: The number of replicas can be defined for each service. The manager node will automatically adapt the number of replicas for a service to keep the desired state \cite{Docker2020Docs}.
 
-\item \textbf{Multi-host networking:} A swarm runs all services in an overlay network. New services will automatically be added to the overlay network \cite{Docker2020Docs}.
+\item Multi-host networking: A swarm runs all services in an overlay network. New services will automatically be added to the overlay network \cite{Docker2020Docs}.
 \end{itemize}
 
 
@@ -126,7 +121,7 @@ A task is a running Docker container. The task is defined by the corresponding s
 % ===========================================
 \section{Apache Spark}
 \label{sec:04_spark}
-Apache Spark is an open-source computing framework for parallel data processing on a large computer cluster. Apache Spark manages the available resources and distributes computation tasks across a cluster to perform big-data processing operations at large scale \cite{Chambers2018Spark}. Before Apache Spark was developed, Hadoop MapReduce \cite{Dean2010MapReduce} was the framework of choice for parallel operations on a computer cluster \cite{Zaharia2010Spark}. Spark accomplished to outperform Hadoop by 10x for iterative Machine Learning \cite{Zaharia2010Spark}. It is implemented in Scala\footnote{Scala programming language. https://www.scala-lang.org/}, a JVM-based language and provides a programming interface for Scala, Java\footnote{Java programming language. https://www.oracle.com/java/}, Python\footnote{Python programming language. https://www.python.org/}, and R\footnote{R programming language. https://www.r-project.org/}. Additionally, Apache Spark includes an interactive SQL shell and libraries to implement Machine Learning and streaming applications \cite{Chambers2018Spark}.
+Apache Spark is an open-source computing framework for parallel data processing on a large computer cluster. Apache Spark manages the available resources and distributes computation tasks across a cluster to perform big-data processing operations at large scale \cite{Chambers2018Spark}. Before Apache Spark was developed, Hadoop MapReduce \cite{Dean2010MapReduce} was the framework of choice for parallel operations on a computer cluster \cite{Zaharia2010Spark}. Spark accomplished to outperform Hadoop by 10x for iterative Machine Learning \cite{Zaharia2010Spark}. It is implemented in Scala\footnote{The Scala programming language - \url{https://www.scala-lang.org/} (Accessed: 2020-12-18)}, a JVM-based language and provides a programming interface for Scala, Java\footnote{Java Software - \url{https://www.oracle.com/java/} (Accessed: 2020-12-18)}, Python\footnote{Python programming language - \url{https://www.python.org/} (Accessed: 2020-12-18)}, and R\footnote{The R Project for Statistical Computing - \url{https://www.r-project.org/} (Accessed: 2020-12-18)}. Additionally, Apache Spark includes an interactive SQL shell and libraries to implement Machine Learning and streaming applications \cite{Chambers2018Spark}.
 
 
 \subsection{Spark Programming Model}
@@ -312,17 +307,17 @@ With the spark-submit executable it is possible to submit Python, Java and R app
 \section{RAPIDS accelerator for Apache Spark}
 \label{sec:04_rapids}
 % Explain
-RAPIDS accelerator for Apache Spark is a plugin suite that aims to accelerate computing operation for Apache Spark using GPUs. It is available for Apache Spark 3 \cite{SparkRapids2020Docs}.
+RAPIDS accelerator for Apache Spark is a plugin suite that aims to accelerate computing operations for Apache Spark using GPUs. It is available for Apache Spark 3 \cite{SparkRapids2020Docs}.
 % A little how
-The plugin uses the RAPIDS\footnote{Open GPU Data Science - \url{https://rapids.ai/} (Accessed: 01-01-2021)} libraries to extend the Apache Spark programming model, introduced in \SubSec{subsec:04_spark_pr-model} \cite{SparkRapids2020Docs, Mcdonald2020SparkRapids}.
+The plugin uses the RAPIDS\footnote{Open GPU Data Science - \url{https://rapids.ai/} (Accessed: 2021-01-01)} libraries to extend the Apache Spark programming model, introduced in \SubSec{subsec:04_spark_pr-model} \cite{SparkRapids2020Docs, Mcdonald2020SparkRapids}.
 
 
 \subsection{Extension of the Spark programming model}
 \label{subsec:04_rapids_ext}
 % How does it extends DataFrame and SQL
-\paragraph{}The plugin suite extends the Spark programming model with a new DataFrame based on Apache Arrow\footnote{Arrow. A cross-language development platform for in-memory data - \url{https://arrow.apache.org/} (Accessed: 2020-12-03)} data structures. In addition, the Catalyst optimizer (described in \SubSec{subsubsec:04_spark_pr-model_catalyst}) is extended to generate GPU-aware query plans \cite{Mcdonald2020SparkRapids}.
+\paragraph{}The plugin suite extends the Apache Spark programming model with a new DataFrame based on Apache Arrow\footnote{Arrow. A cross-language development platform for in-memory data - \url{https://arrow.apache.org/} (Accessed: 2020-12-03)} data structures. In addition, the Catalyst optimizer (described in \SubSec{subsubsec:04_spark_pr-model_catalyst}) is extended to generate GPU-aware query plans \cite{Mcdonald2020SparkRapids}.
 % What is Apache Arrow
-Apache arrow is a data platform to build high performance applications that work with large dataset`s and to improve analytic algorithms. A component of Apache Arrow is the Arrow Columnar Format, an in-memory data structure specification for efficient analytic operations on GPUs and CPUs \cite{ApacheArrow2020Docs}.
+Apache arrow is a data platform to build high performance applications that work with large datasets and to improve analytic algorithms. A component of Apache Arrow is the Arrow Columnar Format, an in-memory data structure specification for efficient analytic operations on GPUs and CPUs \cite{ApacheArrow2020Docs}.
 
 
 % RAPIDS query plan image
@@ -334,12 +329,12 @@ Apache arrow is a data platform to build high performance applications that work
 \end{figure}
 \paragraph{}\Fig{fig:04_rapids_ext_query-plan} illustrates how the RAPIDS plugin suite extends the Catalyst optimization process illustrated previously in \Fig{fig:04_spark_pr-model_catalyst_process}.
 % How does the Catalyst create GPU aware plans
-The Spark Catalyst optimizer identifies operator in a query plan that are supported by the RAPIDS APIs. To execute the query plan, these operators can be scheduled on a GPU within the Spark cluster \cite{Mcdonald2020SparkRapids}. If operators are not supported by the RAPIDS APIs, a physical plan for CPUs will be generated by the Catalyst optimizer to execute RDD operations \cite{Mcdonald2020SparkRapids}.
+The Spark Catalyst optimizer identifies operators in a query plan that are supported by the RAPIDS API. To execute the query plan, these operators can be scheduled on a GPU within the Spark cluster \cite{Mcdonald2020SparkRapids}. If operators are not supported by the RAPIDS APIs, a physical plan for CPUs will be generated by the Catalyst optimizer to execute RDD operations \cite{Mcdonald2020SparkRapids}.
 
 
 \subsection{Installation Requirements for Apache Spark Standalone Mode}
 \label{subsec:04_rapids_req}
-The RAPIDS accelerator for Apache Spark is available for standalone Apache Spark cluster. To operate effectively, the following requirements need to be installed on all Apache Spark nodes in the cluster \cite{SparkRapids2020Docs}:
+The RAPIDS accelerator for Apache Spark is available for a standalone mode Apache Spark cluster. To operate effectively, the following requirements need to be installed on all Apache Spark nodes in the cluster \cite{SparkRapids2020Docs}:
 % requirements
 \begin{itemize}
 \item Java Runtime Environment (JRE)
@@ -366,14 +361,10 @@ To collect and store data, Prometheus supports a multi-dimensional key-value pai
 Prometheus follows the pull-based approach, as described in detail in \SubSec{subsec:02_monitoring_push-pull}, to scrape metrics from hosts and services \cite{Bastos2019Prom}.
 
 
-\subsection{Prometheus architecture}
-
-\todo{Bilder für components}
-
 % Architecture image
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.55]{images/04_technical_background/prometheus/prometheus_architecture}
+\includegraphics[scale=0.62]{images/04_technical_background/prometheus/prometheus_architecture}
 \caption{Prometheus high-level architecture - Source: Authors own model, based on \cite{Prom2020Docs, Bastos2019Prom}.}
 \label{fig:prom_architecture}
 \end{figure}
@@ -381,7 +372,7 @@ Prometheus follows the pull-based approach, as described in detail in \SubSec{su
 % High level architecture
 \Fig{fig:prom_architecture} illustrates the high-level architecture of Prometheus.
 % Description of components
-The Prometheus ecosystem provides multiple components. Components can be optional, depending on the monitoring needs of the environment \cite{Bastos2019Prom}. The main components of a Prometheus system are Prometheus server, Alertmanager, service discovery, exporters, Pushgateway and visualization tools \cite{Prom2020Docs}.
+The Prometheus ecosystem provides multiple components. Components can be optional, depending on the monitoring needs of the environment \cite{Bastos2019Prom}. The main components of a Prometheus system are Prometheus server, Alertmanager, service discovery, exporters, Push Gateway, and data visualization tools \cite{Prom2020Docs}.
 
 
 \paragraph{Prometheus server:} 
@@ -397,15 +388,15 @@ As mentioned before, Prometheus follows a pull-based approach to fetch metrics f
 
 
 \paragraph{Exporters:}
-If an application does not support an endpoint for Prometheus, an exporter can be used to fetch metrics and make them available to the Prometheus server. An exporter is a monitoring agent running on a target host that fetches metric from the host and exports them to the Prometheus server \cite{Pandey2020Monitoring}.
+If an application does not support an endpoint for Prometheus, an exporter can be used to fetch metrics and make them available to the Prometheus server. An exporter is a monitoring agent running on a target host that fetches metrics from the host and exports them to the Prometheus server \cite{Pandey2020Monitoring}.
 
 
-\paragraph{Pushgateway:}
-If a target is not designed to be scraped, metrics can be pushed against the Pushgateway\cite{Prom2020Docs}. The Pushgateway converts the data into the Prometheus data format and passes them to the Prometheus server \cite{Pandey2020Monitoring}.
+\paragraph{Push Gateway:}
+If a target is not designed to be scraped, metrics can be pushed against the Push Gateway \cite{Prom2020Docs}. The Push Gateway converts the data into the Prometheus data format and passes them to the Prometheus server \cite{Pandey2020Monitoring}.
 
 
 \paragraph{Visualization:}
-Prometheus supports various tools for virtualization of the scraped data. Grafana\footnote{Grafana: The open observability platform - https://grafana.com/} is one of the widely used tools for this occasion.
+Prometheus supports various tools for virtualization of the scraped data. Grafana\footnote{Grafana: The open observability platform - \url{https://grafana.com/} (Accessed: 2021-01-19)} is one of the widely used tools for this occasion.
 
 
 % ===========================================
@@ -584,11 +575,28 @@ After executing a scaling action, the heat value will be set to 0 \cite{Barna201
 % ===========================================
 \section{Kubernetes Horizontal Pod Autoscaler}
 \label{sec:04_background_khpa}
+\paragraph{}
 % Short intro
-Kubernetes Horizontal Pod Autoscaler (KHPA) is a auto-scaling algorithm used in Kubernetes.
+Kubernetes Horizontal Pod Autoscaler (KHPA) is an auto-scaling algorithm used in Kubernetes.
 % What
-KHPA scale the number of replicas per Pod based on the utilization of performance metrics.
+KHPA scales the number of replicas per Pod based on the utilization of performance metrics.
 % Pod?
 Kubernetes is an orchestration tool that allows to create and deploy units called Pods. A Pod is a running process on a cluster that encapsulates an application.
 % Interval
-The algorithm is based on a control loop. Each $n$ seconds, the algorithm gathers performance metrics and computes the number of Pods to achieve the desired utilization of a performance metric.
+The algorithm is based on a control loop. Each $n$ seconds, the algorithm gathers performance metrics and computes the target number of replicas to achieve the desired utilization of a performance metric \cite{Casalicchio2017AutoScaleCont}.
+
+
+% Support for multiple metrics
+The algorithm computes the number of desired replicas for a single performance metric. If a scaling action depends on multiple performance metrics, the number of replicas has to be computed for each performance metric. The largest number of replicas is used as the target number of replicas \cite{Kubernetes2021Docs}.
+
+
+\paragraph{}
+KHPA takes as input the number of active pods running in the cluster, the utilization of the desired performance metric of each pod, and the target utilization of the performance metric.
+% Intro formula
+The formula to compute the target number of pods $P$ is defined by \cite{Kubernetes2021Docs}:
+% The formula
+\begin{equation}
+P = \left \lceil active\_replicas \times \left ( \frac{\sum pod\_utilization}{target\_utilization} \right ) \right \rceil
+\label{eq:04_background_khpa_equation}
+\end{equation}
+
