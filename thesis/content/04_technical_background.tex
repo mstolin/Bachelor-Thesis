@@ -361,42 +361,82 @@ To collect and store data, Prometheus supports a multi-dimensional key-value pai
 Prometheus follows the pull-based approach, as described in detail in \SubSec{subsec:02_monitoring_push-pull}, to scrape metrics from hosts and services \cite{Bastos2019Prom}.
 
 
+\subsection{Prometheus Architecture}
 % Architecture image
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.62]{images/04_technical_background/prometheus/prometheus_architecture}
-\caption{Prometheus high-level architecture - Source: Authors own model, based on \cite{Prom2020Docs, Bastos2019Prom}.}
+\includegraphics[scale=0.8]{images/04_technical_background/prometheus/prometheus_architecture}
+\caption{Prometheus high-level architecture - Source: Authors own model, based on \cite{Prom2020Docs, Brazil2018Prom}.}
 \label{fig:prom_architecture}
 \end{figure}
 
 % High level architecture
 \Fig{fig:prom_architecture} illustrates the high-level architecture of Prometheus.
 % Description of components
-The Prometheus ecosystem provides multiple components. Components can be optional, depending on the monitoring needs of the environment \cite{Bastos2019Prom}. The main components of a Prometheus system are Prometheus server, Alertmanager, service discovery, exporters, Push Gateway, and data visualization tools \cite{Prom2020Docs}.
+The Prometheus ecosystem provides multiple components. Components can be optional, depending on the monitoring needs of the environment \cite{Bastos2019Prom}. The main components of a Prometheus system are Prometheus Server, Alertmanager, service discovery, exporters, Push Gateway, and data visualization \cite{Prom2020Docs}.
 
-
-\paragraph{Prometheus server:} 
+\subsubsection{Prometheus Server}
+% SHort intro
 The Prometheus server is the main component of a Prometheus system. It is responsible to collect metrics as time-series data from targets and stores the collected data in the built-in TSDB \cite{Bastos2019Prom}. Prometheus uses the concept of scraping to collect metrics from a target. A target host has to expose an endpoint to make metrics available in the Prometheus data format \cite{Pandey2020Monitoring}. Additionally, the Prometheus server triggers alerts to the Alertmanager if a configured condition becomes true \cite{Prom2020Docs}.
+% The figure
+The core components of the Prometheus Server, as illustrated in \Fig{fig:prom_architecture}, are the following:
+
+\begin{itemize}
+% Service discovery
+\item Service Discovery:
+As being mentioned before, Prometheus follows a pull-based approach to fetch metrics from a target. To know about all targets, Prometheus needs a list of the corresponding hosts. The service discovery manages the complexity of maintaining a list of hosts manually in an changing infrastructure \cite{Bastos2019Prom}. Therefore, Prometheus is able to notice targets which are not responding \cite{Brazil2018Prom}.
+
+% Retrieval
+\item Retrieval:
+Prometheus sends a HTTP request to each target to scrape metrics. The request is send each interval, which can be set in the configuration \cite{Brazil2018Prom}.
+
+% HTTP API
+\item HTTP API:
+Prometheus provides a HTTP API. This API can be used to request raw data and evaluate PromQL queries.
+Data visualisation tool can use this API to create visualisations of the requested metrics \cite{Brazil2018Prom}.
+
+% Recording rules and alerts
+\item Recording and alert rules:
+Recording rules enable to precompute frequently needed or compute-intensive PromQL expressions. The result will be saved as a set of time-series in the local storage. This enables to query a recording rule at a much faster speed than the original PromQL expression \cite{Brazil2018Prom, Prom2020Docs}.
+
+Alert rules define conditions based on PromQL expressions. If a condition becomes true, an alert will be send to an external service \cite{Prom2020Docs}.
+
+% Storage
+\item Storage:
+Received data is stored in a custom highly efficient format on a local on-disk time-series database \cite{Prom2020Docs}. Prometheus does not offer a solution for distributed storage across a cluster of machines \cite{Brazil2018Prom}.
+\end{itemize}
 
 
-\paragraph{Alertmanager:}
+\subsubsection{Optional Components}
+The Prometheus ecosystem offers a set of components which are optional and can be activated depending on the monitoring needs.
+The optional components illustrated in \Fig{fig:prom_architecture} are the following:
+
+\begin{itemize}
+% Alertmanager
+\item Alertmanager:
 If an alerting rule becomes true, the Prometheus server generates an alert and pushes it to the Alertmanager. The Alertmanager generates notifications from the received alerts. A notification can take multiple forms like emails or chat messages. Webhooks can be implemented to trigger custom notifications \cite{Bastos2019Prom}.
 
-
-\paragraph{Service discovery:}
-As mentioned before, Prometheus follows a pull-based approach to fetch metrics from a target. To know about all targets, Prometheus needs a list of the corresponding hosts. The service discovery manages the complexity of maintaining a list of hosts manually in an changing infrastructure \cite{Bastos2019Prom}.
-
-
-\paragraph{Exporters:}
+% Exporters
+\item Exporters:
 If an application does not support an endpoint for Prometheus, an exporter can be used to fetch metrics and make them available to the Prometheus server. An exporter is a monitoring agent running on a target host that fetches metrics from the host and exports them to the Prometheus server \cite{Pandey2020Monitoring}.
 
-
-\paragraph{Push Gateway:}
+% Push Gateway
+\item Push Gateway:
 If a target is not designed to be scraped, metrics can be pushed against the Push Gateway \cite{Prom2020Docs}. The Push Gateway converts the data into the Prometheus data format and passes them to the Prometheus server \cite{Pandey2020Monitoring}.
 
-
-\paragraph{Visualization:}
+% Data vis
+\item Data Visualisation:
 Prometheus supports various tools for virtualization of the scraped data. Grafana\footnote{Grafana: The open observability platform - \url{https://grafana.com/} (Accessed: 2021-01-19)} is one of the widely used tools for this occasion.
+\end{itemize}
+
+
+\subsection{Prometheus Configuration}
+
+
+\subsubsection{Targets}
+
+
+\subsubsection{Recording Rules}
 
 
 % ===========================================
@@ -439,27 +479,64 @@ Adding CI/CD pipelines to the software development cycle of an application, allo
 The fundamental component of GitLab CI/CD is called a pipeline. Pipelines will perform based on conditions. A conditions might be a push to the main branch of the repository \cite{Gitlab2020Docs}. A pipeline comprises two components:
 
 \begin{itemize}
-\item \textbf{Stages:} A stage consists of one or multiple jobs that run in parallel. Furthermore, a stage defines how jobs will be executed. For example, a build stage only performs after a test stage has performed successfully \cite{Gitlab2020Docs}.
+\item Stages: A stage consists of one or multiple jobs that run in parallel. Furthermore, a stage defines how jobs will be executed. For example, a build stage only performs after a test stage has performed successfully \cite{Gitlab2020Docs}.
 
-\item \textbf{Jobs:} Jobs are responsible to perform the scripts defined by administrators. The scripts define necessary actions. For example compiling the source code or performing tests \cite{Gitlab2020Docs}.
+\item Jobs: Jobs are responsible to perform the scripts defined by administrators. The scripts define necessary actions. For example compiling the source code or performing tests \cite{Gitlab2020Docs}.
 \end{itemize}
 
 
-\subsubsection{Configuration}
 % How to configurate a pipeline (.gitlab-ci.yml)
-GitLab CI/CD is configured by a \textit{.gitlab-ci.yml} file. It is necessary that this file is located in the repositories root directory.
+GitLab CI/CD is configured by a \texttt{.gitlab-ci.yml} file. It is necessary that this file is located in the repositories root directory.
 % What does this file
-The configuration file will create a pipeline that performs after a push to the codebase \cite{Gitlab2020Docs}.
+The configuration file will create a pipeline that performs after a push to the repository \cite{Gitlab2020Docs}.
 
 
-\subsubsection{Basic Architecture}
+\subsection{Example of a Basic CI/CD Pipeline Architecture}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=1]{images/04_technical_background/gitlab/basic-pipeline-architecture}
+\includegraphics[scale=0.8]{images/04_technical_background/gitlab/basic_pipeline}
 \caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
-\label{fig:gitlab-basic_pipeline}
+\label{fig:04_gitlab_pipeline_basic_arch}
 \end{figure}
+
+% Explain figure
+\Fig{fig:04_gitlab_pipeline_basic_arch} illustrates an architecture of a basic CI/CD pipeline.
+% Two stages
+The pipeline consists of a build and a test stage. Stages will be performed in order. The test stage will only be performed after the build stage was successful.
+% Build stage
+The build stage consists of a single job named \textit{build\_job}. This job is executed first, after a change is pushed to the repository.
+% Test stage
+Two jobs exist in the test stage. These jobs are executed in parallel when the test stage is triggered.
+
+
+% Example config
+
+% Explain example
+\Lst{lst:04_gitlab_pipeline_basic_config-example} provides the configuration for the basic pipeline example.
+% Shell script
+Each job executes a shell script to perform the desired actions. The shell scripts have to be located in the source code repository.
+% The example
+\begin{lstlisting}[label=lst:04_gitlab_pipeline_basic_config-example, caption=Example of a \texttt{.gitlab-ci.yml} configuration file]
+stages:
+  - build
+  - test
+
+build-job:
+  stage: build
+  script:
+    - build_software.sh
+
+unit-test-job:
+  stage: test
+  script:
+    - run_unit_tests.sh
+    
+integration-test-job:
+  stage: test
+  script:
+    - run_integration_tests.sh
+\end{lstlisting}
 
 
 \subsection{Job Execution}
@@ -578,20 +655,20 @@ After executing a scaling action, the heat value will be set to 0 \cite{Barna201
 \paragraph{}
 % Short intro
 Kubernetes Horizontal Pod Autoscaler (KHPA) is an auto-scaling algorithm used in Kubernetes.
-% What
-KHPA scales the number of replicas per Pod based on the utilization of performance metrics.
 % Pod?
 Kubernetes is an orchestration tool that allows to create and deploy units called Pods. A Pod is a running process on a cluster that encapsulates an application.
+% What
+KHPA scales the number of replicas per Pod based on the utilization of performance metrics.
 % Interval
 The algorithm is based on a control loop. Each $n$ seconds, the algorithm gathers performance metrics and computes the target number of replicas to achieve the desired utilization of a performance metric \cite{Casalicchio2017AutoScaleCont}.
 
 
 % Support for multiple metrics
-The algorithm computes the number of desired replicas for a single performance metric. If a scaling action depends on multiple performance metrics, the number of replicas has to be computed for each performance metric. The largest number of replicas is used as the target number of replicas \cite{Kubernetes2021Docs}.
+The algorithm computes the number of replicas for a single performance metric. If a scaling action depends on multiple performance metrics, the number of replicas has to be computed for each performance metric. The largest number of replicas is used as the target number of replicas \cite{Kubernetes2021Docs}.
 
 
 \paragraph{}
-KHPA takes as input the number of active pods running in the cluster, the utilization of the desired performance metric of each pod, and the target utilization of the performance metric.
+KHPA takes as input the number of active replicas for a pod ($active\_replicas$), the utilization of the performance metric of each replica ($pod\_utilization$), and the target utilization of the performance metric ($target\_utilization$).
 % Intro formula
 The formula to compute the target number of pods $P$ is defined by \cite{Kubernetes2021Docs}:
 % The formula

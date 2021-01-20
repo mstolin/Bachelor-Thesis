@@ -36,6 +36,10 @@ The Auto-Scaler will be implemented as a module in Python 3.8.
 % Docker
 To deploy the Auto-Scaler in a Docker swarm, the Auto-Scaler needs to be dockerized in a Docker Image.
 
+%
+% Keine prom alertmanager weil wegen neustart und dann db weg
+% Mehr flexibilität, unabhängig von prom
+%
 
 %
 % WARUM NICHT GPU MIT IN DIE AUTO-SCALER METRICS?
@@ -350,6 +354,13 @@ The following DOcker images will be used for the monitoring system:
 \end{itemize}
 
 \subsubsection{Prometheus Target Configuration}
+
+% ==============
+% Hands-On Infrastructure Monitoring with Prometheus -> Comparing CPU usage -> PromQL approach
+% ==============
+
+
+
 % Pull based
 As mentioned in \Sec{sec:04_prom}, Prometheus is a pull-based monitoring tool.
 % Target list

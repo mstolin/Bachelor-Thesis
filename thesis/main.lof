@@ -17,12 +17,12 @@
 \contentsline {figure}{\numberline {\relax 4.3}{\ignorespaces Optimization process of the Spark Catalyst - Source: Authors own model, based on \cite {Hien2018Spark}.\relax }}{28}{figure.caption.42}% 
 \contentsline {figure}{\numberline {\relax 4.4}{\ignorespaces Overview of a Spark cluster architecture - Source: Authors own model, based on \cite {Apache2020Spark}.\relax }}{29}{figure.caption.43}% 
 \contentsline {figure}{\numberline {\relax 4.5}{\ignorespaces Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite {Mcdonald2020SparkRapids}.\relax }}{32}{figure.caption.55}% 
-\contentsline {figure}{\numberline {\relax 4.6}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Bastos2019Prom}.\relax }}{33}{figure.caption.57}% 
-\contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{36}{figure.caption.66}% 
+\contentsline {figure}{\numberline {\relax 4.6}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Brazil2018Prom}.\relax }}{33}{figure.caption.57}% 
+\contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{36}{figure.caption.62}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Overall cluster architecture - Source: Authors own model.\relax }}{40}{figure.caption.72}% 
-\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Autonomic manager component design - Source: Authors own model.\relax }}{42}{figure.caption.75}% 
-\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces UML activity model of the autonomic manager process - Source: Authors own model.\relax }}{43}{figure.caption.79}% 
+\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Overall cluster architecture - Source: Authors own model.\relax }}{42}{figure.caption.68}% 
+\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Autonomic manager component design - Source: Authors own model.\relax }}{44}{figure.caption.71}% 
+\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces UML activity model of the autonomic manager process - Source: Authors own model.\relax }}{45}{figure.caption.75}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
