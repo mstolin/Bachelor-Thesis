@@ -1,7 +1,7 @@
 \chapter{Technical Background}
 \label{chap:04_background}
 
-This chapter introduces the technologies and algorithms used for this thesis work. It explains the fundamental concepts as well as installation requirements if needed.
+This chapter provides information about the technologies and algorithms used for this thesis work. It explains the fundamental concepts of Docker, Apache Spark, RAPIDS accelerator plugin, Prometheus, cAdvisor, and GitLab CI/CD. Additionally the Scaling Heat and the Kubernetes Horizontal Pod Autoscaler algorithms are introduced.
 
 % ===========================================
 % ===========================================
@@ -29,22 +29,53 @@ Docker is not a container technology itself. It hides the complexity of working 
 % Explain figure
 \Fig{fig:04_docker_architecture_architecture} illustrates the client server architecture of Docker. It consists of a Docker Client, the Docker Deamon, and a Docker Registry.
 
+\begin{itemize}
+% Docker client
+\item Docker Client: The Docker client is an interface for the user to send commands to the Docker deamon \cite{Docker2020Docs}.
 
-\paragraph{Docker Client:} The Docker client is an interface for the user to send commands to the Docker deamon \cite{Docker2020Docs}.
+% Docker deamon
+\item Docker Deamon: The Docker deamon manages all containers running on the host system and handles the containers resources, networks and volumes \cite{Bullington2020Docker}.
 
-
-\paragraph{Docker Deamon:} The Docker deamon manages all containers running on the host system and handles the containers resources, networks and volumes \cite{Bullington2020Docker}.
-
-
-\paragraph{Docker Registry:} A Docker registry stores images. Images can be pushed to a public or private registry and pulled from it to build a container \cite{Docker2020Docs}.
+% Docker registry
+\item Docker Registry: A Docker registry stores images. Images can be pushed to a public or private registry and pulled from it to build a container \cite{Docker2020Docs}.
+\end{itemize}
 
 
 \subsection{Docker Image}
 \label{subsec:04_docker_image}
+\paragraph{}
 % What is an image
 An Image is a snapshot of the environment that is needed to run an application in a Docker container. The environment consists of all files, libraries and configurations that are needed for the application to run properly \cite{Docker2020Docs, Nickoloff2019Docker}.
 % How to create an image
-Images can be created from existing containers or from executing a build script called Dockerfile. A Dockerfile is a text file consisting of instructions for building an image. The Docker image builder executes the instructions of a Dockerfile from top to bottom \cite{Nickoloff2019Docker}.
+Images can be created from existing containers or from executing a build script called \textit{Dockerfile} \cite{Nickoloff2019Docker}.
+
+
+\paragraph{}
+Images can be build automatically by executing instructions defined in a Dockerfile.
+% Instructions
+A Dockerfile is a text documents that contains instructions. Instructions are commands which will be executed in order to assemble an image. They are defined in the \texttt{INSTRUCTION argument} format.
+% Parent
+A Dockerfile must begin with a \texttt{FROM} instruction. The \texttt{FROM} instruction defines the parent image from which the image is build \cite{Docker2020Docs}.
+
+
+% Example
+\Lst{lst:04_docker_image_dockerfile} provides a basic example of a Dockerfile.
+% Parent
+In the example, \textit{ubuntu} is defined as the parent image.
+% apt
+Next, the Ubuntu package list is updated and the \textit{nginx} package is installed using the \texttt{apt-get} command.
+% Expose
+Finally, the Docker image is instructed to listen to the port 80 at runtime with the \texttt{EXPOSE} instruction.
+
+% Dockerfile example
+\begin{lstlisting}[label=lst:04_docker_image_dockerfile, caption=Basic example of a Dockerfile]
+FROM ubuntu
+
+RUN apt-get update -qy && \
+    apt-get install -y nginx
+
+EXPOSE 80
+\end{lstlisting}
 
 
 \subsection{Docker Container}
@@ -130,7 +161,7 @@ Apache Spark is an open-source computing framework for parallel data processing 
 Apache Spark provides resilient distributed datasets (RDDs) as the main abstraction for parallel operations \cite{Zaharia2010Spark}. Core types of the higher-level structured API are built on top of RDDs and will automatically be optimized by the Catalyst optimizer to run operations quick and efficient \cite{Chambers2018Spark, Hien2018Spark}.
 
 
-\subsubsection{Resilient distributed datasets}
+\subsubsection{Resilient Distributed Datasets}
 % What are RDDs
 Resilient distributed datasets are fault-tolerant, parallel data structures to enable data sharing across cluster applications \cite{Zaharia2012RDDs}. They allow to express different cluster programming models like MapReduce, SQL and batched stream processing \cite{Zaharia2012RDDs}. RDDs have been implemented in Apache Spark and serve as the underlying data structure for higher level APIs (Spark structured API) \cite{Zaharia2012RDDs}.
 % How can RDDs be used in applications
@@ -304,7 +335,7 @@ With the spark-submit executable it is possible to submit Python, Java and R app
 % NVIDIA RAPIDS
 % ===========================================
 % ===========================================
-\section{RAPIDS accelerator for Apache Spark}
+\section{RAPIDS Accelerator for Apache Spark}
 \label{sec:04_rapids}
 % Explain
 RAPIDS accelerator for Apache Spark is a plugin suite that aims to accelerate computing operations for Apache Spark using GPUs. It is available for Apache Spark 3 \cite{SparkRapids2020Docs}.
@@ -472,7 +503,7 @@ Rules are defined in a rule group. Each rule is defined by a name and a valid Pr
 groups:
   - name: http_requests
      - record: job:http_inprogress_requests:sum
-        expr: sum by (job) (http_inprogress_requests)
+       expr: sum by (job) (http_inprogress_requests)
 \end{lstlisting}
 
 

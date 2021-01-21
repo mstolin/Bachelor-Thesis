@@ -146,6 +146,10 @@
 \input{content/09_conclusion}
 %\fi
 
+% Anhang (Bibliographie darf im deutschen nicht in den Anhang!)
+\bibliography{literatur}
+%\nocite{*}
+\clearpage
 
 % Anhang
 \appendix
@@ -153,11 +157,6 @@
 \phantomsection
 \addcontentsline{toc}{part}{Anhang}
 \input{content/appendix}
-
-% Anhang (Bibliographie darf im deutschen nicht in den Anhang!)
-\bibliography{literatur}
-%\nocite{*}
-\clearpage
 
 
 \IfDefined{printindex}{\printindex}
