@@ -7,7 +7,9 @@
 \contentsline {lstlisting}{\numberline {4.1}Usage of master launch script}{30}{lstlisting.4.1}% 
 \contentsline {lstlisting}{\numberline {4.2}Usage of worker launch script}{30}{lstlisting.4.2}% 
 \contentsline {lstlisting}{\numberline {4.3}Example usage of the spark-submit executable}{31}{lstlisting.4.3}% 
-\contentsline {lstlisting}{\numberline {4.4}Example of a \texttt {.gitlab-ci.yml} configuration file}{37}{lstlisting.4.4}% 
+\contentsline {lstlisting}{\numberline {4.4}Prometheus configuration file example}{35}{lstlisting.4.4}% 
+\contentsline {lstlisting}{\numberline {4.5}Prometheus rules configuration file example}{36}{lstlisting.4.5}% 
+\contentsline {lstlisting}{\numberline {4.6}Example of a \texttt {.gitlab-ci.yml} configuration file}{37}{lstlisting.4.6}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {lstlisting}{\numberline {6.1}Auto-Scaler configuration YAML file}{50}{lstlisting.6.1}% 

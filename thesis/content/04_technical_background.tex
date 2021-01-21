@@ -356,7 +356,9 @@ The RAPIDS accelerator for Apache Spark is available for a standalone mode Apach
 % What is Prometheus
 Prometheus is an open-source monitoring and alerting system \cite{Prom2020Docs}.
 % Time-series format + PromQL
-To collect and store data, Prometheus supports a multi-dimensional key-value pair based data model, according to \SubSec{subsec:02_monitoring_db_multi-metrics}, which can be analyzed in real-time using the PromQL query language \cite{Pandey2020Monitoring}.
+To collect and store data, Prometheus supports a multi-dimensional key-value pair based data model, according to \SubSec{subsec:02_monitoring_db_multi-metrics}, which can be analyzed in using the PromQL query language \cite{Pandey2020Monitoring}.
+% SHort PromQL
+PromQL is a functional query language for selecting and aggregating time-series data in real-time \cite{Prom2020Docs}.
 % Pull-based approach
 Prometheus follows the pull-based approach, as described in detail in \SubSec{subsec:02_monitoring_push-pull}, to scrape metrics from hosts and services \cite{Bastos2019Prom}.
 
@@ -431,12 +433,47 @@ Prometheus supports various tools for virtualization of the scraped data. Grafan
 
 
 \subsection{Prometheus Configuration}
+% Short intro
+Configuration related to scraping jobs and rules are configured in configuration files. Configuration are written in the YAML file format \cite{Prom2020Docs}.
 
 
-\subsubsection{Targets}
+% Explain listing
+\Lst{lst:04_prom_config_example} shows a valid configuration file example.
+% global section
+In the \texttt{global} configuration section, default values can be set.
+% scrape_configs
+Targets are defined in the \texttt{scrape\_configs} section. Each target is defined as a scrape job with a unique name.  A target can be defined statically using the \texttt{static\_configs} parameter or dynamically using the available service discovery mechanisms \cite{Prom2020Docs}.
+% rules
+Rules have to be configured in a separate YAML file. To load rules into Prometheus, the file path has to be set in the \texttt{rule\_files} parameter.
 
+% config file example
+\begin{lstlisting}[label=lst:04_prom_config_example, caption=Prometheus configuration file example]
+global:
+  scrape_interval: 5s
 
-\subsubsection{Recording Rules}
+scrape_configs:
+  - job_name: cadvisor
+    static_configs:
+      - targets: ["cadvisor:8080"]
+        labels:
+          group: "cadvisor"
+          
+rule_files:
+  - "/etc/prometheus/recording_rules.yml"
+\end{lstlisting}
+
+% rules example
+\Lst{lst:04_prom_config_rule-example} is an configuration example of a recording rule.
+% Rule config
+Rules are defined in a rule group. Each rule is defined by a name and a valid PromQL expression \cite{Prom2020Docs}.
+
+% Recording rule example
+\begin{lstlisting}[label=lst:04_prom_config_rule-example, caption=Prometheus rules configuration file example]
+groups:
+  - name: http_requests
+     - record: job:http_inprogress_requests:sum
+        expr: sum by (job) (http_inprogress_requests)
+\end{lstlisting}
 
 
 % ===========================================
