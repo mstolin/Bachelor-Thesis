@@ -49,7 +49,7 @@ It is important to mention, that a build stage is missing in this conceptual des
 % Python
 Python is an interpreted language and therefore no compilation is needed to execute the source code. \todo{Quelle}
 % Other languages
-As being mentioned in Section SPARK, Apache Spark supports different languages that Python.  For example, for Java application, a build stage is needed to compile the source code to a .jar binary, which can be submitted to the Apache Spark cluster.
+As being mentioned in Section SPARK, Apache Spark supports different languages than Python.  For example, for Java application, a build stage is needed to compile the source code to a .jar binary, which can be submitted to the Apache Spark cluster.
 
 
 \subsection{Test Stage}
@@ -96,7 +96,7 @@ GitLab CI/CD performs the train stage on the GitLab runner which is running on t
 % Deploy
 The GitLab Runner executes the deployment script defined in the train stage.
 % Deploy script
-The deployment script executes Docker CLI commands to deploy a spark-submit container in the Apache Spark cluster swarm network.
+The deployment script executes a \texttt{docker run} command to deploy a spark-submit container in the Apache Spark cluster swarm network.
 
 
 % ===========================================
@@ -149,30 +149,82 @@ U_{GPU} = \dfrac{\sum bla\_bla}{ActiveGPUs}
 
 \todo{Only self-adapting -> wegen autonomic computing}
 
-\subsection{Overall}
-\label{subsec:05_arch_overall}
+% Single machine
+The computing environment will be deployed on a single machine.
+% Autonomic
+The goal is to create a self.optimizing environment, according to the autonomic computing environment described in SECTION AB.
+% Docker
+The be able to scale components in the environment, each components is deployed as a Docker container using Docker Swarm mode (see Section XY). Docker Swarm mode allows to define the number replicas per service an keeps track of it. The number of replicas can be adapted at runtime. This gives the environment an additional self-healing ability.
+% Communication
+To enable communication, all Docker container run in the same network.
 
-% Figure
+% Overall design
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.8]{images/05_conceptual_design/cluster_architecture/overall_architecture}
 \caption{Overall cluster architecture - Source: Authors own model.}
-\label{fig:ca-overall_architecture}
+\label{fig:05_environment_concept}
 \end{figure}
+% Introduce
+\Fig{fig:05_environment_concept} introduces the conceptual architecture of the computing environment.
+% Two main components
+The computing environment consists of two main modules which consist of individual components:
+\begin{itemize}
+\item Autonomic manager: Is responsible to automatically monitor the hardware resource utilization of the environment and adapt the number of Apache Spark worker to reach a defined utilization.
+\item Apache Spark cluster: An Apache Spark cluster enables to distribute the workload of training ML models. Additionally it enables to perform computation parallel on multiple CPU cores and GPUs.
+\end{itemize}
+% Managed resources
+As being introduced in SECTION XY, an autonomic computing environment consists of an autonomic manager and managed resources.
+% Spark are managed resources
+In this environment, all Apache Spark worker container are the managed resources.
+% Scaling
 
-\Fig{fig:ca-overall_architecture} illustrates the overall architecture with all components of the computing environment. The two main components in the environment are an Apache Spark cluster and an autonomic manager.
-% The components
-The autonomic manager will be implemented according to the MAPE architecture (introduced in \SubSec{subsec:02_ac_manager}). It is responsible for monitoring and auto-scaling the Apache Spark cluster. To enable distributed computing, an Apache Spark cluster will be set up to execute machine learning applications. 
-% The nodes and virtualization
-The autonomic manager and the Apache Spark cluster consist each of multiple nodes. Each node of a component will run as a Docker container.
-% Self healing
-All containers will run as services in Docker Swarm mode. As described in \SubSec{subsec:04_docker_swarm}, Docker Swarm mode will maintain a healthy state of all running containers. Therefore, the environment will enable self-healing according to the requirements of Autonomic Computing described in \Sec{sec:02_ac}.
 
-
-\subsection{Apache Spark Cluster}
-\label{subsec:05_arch_spark}
-
+\section{Apache Spark Cluster}
+\label{sec:05_spark}
 \todo{Why standalone -> Because most simple way; Master und worker -> Managed Resources}
+% Short intro
+
+% Standalone mode
+The Apache Spark is deployed in standalone mode. Standalone mode is the most simple mode without the need to install and configure an additional service as a cluster manager. An orchestration tool like Kubernetes or Apache Mesos as cluster manager is not needed, because Docker Swarm mode is used as orchestration tool.
+% Docker
+Each node in the cluster (Master, Worker, and Submit) will be run as a Docker container.
+% Figure
+\todo{Figure hier}
+% FIgure intro
+FIG XY illustrates the Apache Spark cluster architecture. It consists of a single master node, multiple worker nodes, and none or multiple spark-submit nodes.
+% worker
+The number of worker nodes will be adapted by the Autonomic Manager in accordance to the utilization of defined performance metrics.
+% spark-submit
+A spark-submit node is only deployed until an application is being submit by the CI pipeline described in SECTION XY.
+
+
+\subsection{Homogeneous Apache Spark Worker Nodes}
+% Short intro
+As being mentioned in SECTION AB, horizontal scaling is most efficient by scaling homogeneous node.
+% How to achieve
+To ensure each worker node is homogeneous, the same Docker image is used for all worker container.
+% Resources
+This guarantees that each worker has the same resources available and uses the same software as any other worker.
+
+
+\subsection{Deploying Application with spark-submit}
+% Short intro
+A spark-submit node is deployed each time an application is being submitted to the cluster.
+% spark-submit purpose
+The purpose of a spark-submit node is to submit an application with the spark-submit executable to the cluster (described in SECTION XY).
+% How
+The container needs access to the same network. Needs access to the application source code or binary files.
+It should be possible to define various resources.
+Because GPU acceleration is enabled, it should be possible to set a CPU or GPU only mode.
+
+
+\subsection{GPU Acceleration with RAPIDS}
+One objective of this thesis is, to enable GPU acceleration for Apache Spark.
+%
+To do this, the RAPIDS accelerator plugin for Apache Spark is being used.
+Each worker becomse the same amount of CPU resources.
+
 
 \subsubsection{Master and Worker}
 The Apache Spark cluster will consist of a Spark master node and a dynamic number of Spark worker nodes.
