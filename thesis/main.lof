@@ -20,9 +20,11 @@
 \contentsline {figure}{\numberline {\relax 4.6}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Brazil2018Prom}.\relax }}{34}{figure.caption.56}% 
 \contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{37}{figure.caption.59}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Overall cluster architecture - Source: Authors own model.\relax }}{44}{figure.caption.65}% 
-\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Autonomic manager component design - Source: Authors own model.\relax }}{46}{figure.caption.68}% 
-\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces UML activity model of the autonomic manager process - Source: Authors own model.\relax }}{47}{figure.caption.72}% 
+\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Automated Deployment Pipeline concept\relax }}{44}{figure.caption.65}% 
+\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Deployment of a spark-submit container\relax }}{45}{figure.caption.68}% 
+\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces Overall cluster architecture - Source: Authors own model.\relax }}{47}{figure.caption.69}% 
+\contentsline {figure}{\numberline {\relax 5.4}{\ignorespaces Autonomic manager component design - Source: Authors own model.\relax }}{48}{figure.caption.72}% 
+\contentsline {figure}{\numberline {\relax 5.5}{\ignorespaces UML activity model of the autonomic manager process - Source: Authors own model.\relax }}{49}{figure.caption.76}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

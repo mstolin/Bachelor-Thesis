@@ -16,49 +16,129 @@ The design of the computing environment will be restricted by several points. Th
 \item \textbf{Apache Spark for distributed computing:} Apache Spark will be used as a distributed computing framework.
 
 \item \textbf{Python as the main programming language:} Python will be used as the main programming language for Apache Spark applications. Therefore, examples will use Python code. Configurations for the system are optimized for using Python in production.
+
+\item GitLab as repository: sadf <- Eher implementation detail/requirement
 \end{itemize}
 
 % ===========================================
 % ===========================================
-\section{CI/CD}
+\section{Automated Deployment Pipeline}
+% Abstract
+The objective of this thesis is to automatically submit an Apache Spark application to the Apache Spark cluster to train ML models. Therefore, the training process has to be integrated into the application development lifecycle.
+% Git
+The source code of an Apache Spark application is hosted on a Git repository. After each committed change on the repository, the pipeline is triggered.
+
+
+% Conceptual figure
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{images/05_conceptual_design/automated_deployment_pipeline/ci_cd_concept}
+\caption{Automated Deployment Pipeline concept}
+\label{fig:05_deployment_concept}
+\end{figure}
+% Short intro
+\Fig{fig:05_deployment_concept} illustrates the conceptual design of the Automated Deployment Pipeline.
+% The stages
+The pipeline consists of two different stages:
+\begin{enumerate}
+\item Test stage: After the build stage has succeeded, the test stage will perform tests.
+\item Train stage: If the tests have been successful, the application is submitted to the Apache Spark cluster for training.
+\end{enumerate}
+% No build stage
+It is important to mention, that a build stage is missing in this conceptual design. The build stage includes compiling source code into a format that can be executed directly.
+% Python
+Python is an interpreted language and therefore no compilation is needed to execute the source code. \todo{Quelle}
+% Other languages
+As being mentioned in Section SPARK, Apache Spark supports different languages that Python.  For example, for Java application, a build stage is needed to compile the source code to a .jar binary, which can be submitted to the Apache Spark cluster.
+
+
+\subsection{Test Stage}
+% short intro
+In order to detect error in an early stage, the source code has to be tested.
+% responsibilities
+The test stage is responsible to the the source code within a set of various tests. Tests can include:
+% Tests
+\begin{itemize}
+\item Unit tests:
+\item Integration tests:
+\item End-to-end tests:
+\end{itemize}
+% Different jobs
+For each different test, a new job in the test stage is being created. All jobs will perform in parallel after the test stage has been triggered.
+% On failure
+If a job has failed, the whole test stage is marked as failure and all participating developers will get a notification.
+
+
+\subsection{Train Stage}
+\paragraph{}
+% Short intro
+The train stage is responsible to submit the Apache Spark application to the Apache cluster after the test state was successful.
+% How
+As being mentioned in SECTION XY, an Apache Spark application will be submitted to the Apache Spark cluster by creating a spark-submit Docker container in the same Docker swarm network.
+Therefore, after the train stage has been triggered a spark-submit container has to be deployed in the Apache Spark cluster to submit the latest version of the Apache Spark application.
+
+\paragraph{}
+% Same machine
+To access the Apache Spark cluster Docker swarm network, the train stage has to be executed on the same machine.
+% Gitlab runner
+Therefore a GitLab runner performing on the machine is needed. Additionally, the GitLab runner needs access to the underlying Docker engine to deploy new container to a given network.
+% Perform train stage concept
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{images/05_conceptual_design/automated_deployment_pipeline/train_stage_runner}
+\caption{Deployment of a spark-submit container}
+\label{fig:05_deployment_train_concept}
+\end{figure}
+% Explain figure
+\Fig{fig:05_deployment_train_concept} illustrates the steps to deploy a spark-submit container in the Apache Spark cluster swarm network.
+% Runner
+GitLab CI/CD performs the train stage on the GitLab runner which is running on the NVIDIA DGX machine.
+% Deploy
+The GitLab Runner executes the deployment script defined in the train stage.
+% Deploy script
+The deployment script executes Docker CLI commands to deploy a spark-submit container in the Apache Spark cluster swarm network.
 
 
 % ===========================================
 % ===========================================
-\section{Identification of suitable Metrics for Scaling}
-% Intro sentence
-To analyze the Apache Spark cluster computing performance suitable metrics have to be defined.
-% How do we compute
-As mention in SECTION XY, Apache Spark distributes its workload across multiple CPU cores. In addition, one objective of this thesis is to accelerate the computing performance of the Apache Spark cluster with GPUs.
-% List metrics
-Therefore suitable performance metrics are CPU utilization of all Apache Spark worker and the utilization of all available GPUs.
+\section{Identification of Suitable Metrics for Scaling}
+% SHort intro
+To scale the number of Apache Spark worker in accordance to the actively performing workload, suitable metrics to define the cluster performance have to be defined.
+% Rapids enabled GPU
+With the RAPIDS accelerator for Apache Spark enabled, the Apache Spark cluster is able to utilize the computing power of GPUs and CPUs to enable parallization.
+% SO?
+Therefore, suitable metrics to measure the performance are the overall CPU utilization across all worker and the GPU utilization of all available GPUs.
 % Those are time-based utilization
-These utilization metrics will be based on the time, when the Apche Spark cluster is actively performing computations.
+These utilization metrics will be based on the time when the Aapche Spark cluster is actively performing computations.
 
 
-\subsection{CPU Performance}
-% Evtl ist hier der faösche platz -> Besser eine Metrics section wo erklärt wird, wie das berechnet werden soll.
-\todo{Hier auf Tabelle verweisen (Anhang) Metriken die von Prometheus + cAdvisor bereitgestellt werden}
+\subsection{CPU Utilization}
+% Sharing CPU cores
+All Apache Spark worker run on the same machine. Therefore, all available CPU cores on the machine will be shared across each running Apache Spark worker.
 
-% How is the CPU Utilization being calculated
-To adapt to business needs, the CPU percentage of each Spark Worker will be calculated. Prometheus provides several metrics to calculate the CPU percentage. The CPU percentage of all Worker can be calculated as follows:
 
-Each Apache Spark worker has a number of CPU cores to perform work. To calculate the CPU utilization of an Apache Spark worker,
+% cadvisor
+cAdvisor provides a performance called metric \texttt{container\_cpu\_usage\_seconds\_total}\footnote{Monitoring cAdvisor with Prometheus - \url{https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md} (Accessed: 2021-01-21)}. This metric provides the total amount of CPU seconds consumed by core per container. 
+% Overall utilization
+To calculate the overall CPU utilization for all Apache Spark worker, the value of the performance metric for each over a specific rate has to be summed up. Therefore, the CPU utilization ($U_{CPU}$) is defined by:
 
 \begin{equation}
-SparkWorkerCPUUtilization = \dfrac{\sum CPUCoreUtilization}{NumberOfCPUCores}
+U_{CPU}=\sum_{n=1}^{ActiveWorker}container\_cpu\_usage\_seconds\_total_{n}
 \label{eq:formel}
 \end{equation}
 
-\begin{equation}
-OverallCPUUtilization = \dfrac{\sum SparkWorkerCPUUtilization}{NumberOfSparkWorker}
-\label{eq:formel}
-\end{equation}
+\subsection{GPU Utilization}
+% Number of gpus
+Two GPUs on the machine are available across all Apache Spark Worker.
+% The metric
+The dcgm\_exporter agent provides the \texttt{bla\_bla} performance metric. This metric returns the procentual utilization per GPU.
+% How to calculate
+Therefore, the overall GPU utilization ($U_{GPU}$) is defined by:
 
-\subsection{GPU Performance}
+
 The system has a fixed number of GPUs to use.
 \begin{equation}
-GPUUtilization = \dfrac{\sum SparkWorkerGPUUtilization}{NumberOfSparkWorker}
+U_{GPU} = \dfrac{\sum bla\_bla}{ActiveGPUs}
 \label{eq:formel}
 \end{equation}
 
