@@ -13,11 +13,11 @@ The design of the computing environment will be restricted by several points. Th
 \begin{itemize}
 \item \textbf{Running on a NVIDIA DGX A100\footnote{The Universal System for AI Infrastructure - \url{https://www.nvidia.com/en-us/data-center/dgx-a100/}}:} The environment will run on a NVIDIA DGX A100 workstation. The workstation has 80 CPUs and 8 GPUs installed. For this computing environment, 2 GPUs will be available.
 
-\item \textbf{Apache Spark for distributed computing:} Apache Spark will be used as a distributed computing framework.
+\item Apache Spark: To distribute the workload of training ML models, Apache Spark is a requirement.
 
-\item \textbf{Python as the main programming language:} Python will be used as the main programming language for Apache Spark applications. Therefore, examples will use Python code. Configurations for the system are optimized for using Python in production.
+\item Python programming language: Python is used as the main programming language for Apache Spark applications. Therefore, examples will use Python code. Configurations for the system are optimized for using Python in production.
 
-\item GitLab as repository: sadf <- Eher implementation detail/requirement
+\item GitLab: All source code is hosted on a GitLab repository. Additionally, the CI pipeline runs on GitLab CI/CD (introduced in SECTION X).
 \end{itemize}
 
 % ===========================================
@@ -50,6 +50,8 @@ It is important to mention, that a build stage is missing in this conceptual des
 Python is an interpreted language and therefore no compilation is needed to execute the source code. \todo{Quelle}
 % Other languages
 As being mentioned in Section SPARK, Apache Spark supports different languages than Python.  For example, for Java application, a build stage is needed to compile the source code to a .jar binary, which can be submitted to the Apache Spark cluster.
+% AABBER .egg. zip geht auch bei python
+% For Python applications, simply pass a .py file in the place of <application-jar> instead of a JAR, and add Python .zip, .egg or .py files to the search path with --py-files.
 
 
 \subsection{Test Stage}
@@ -146,9 +148,6 @@ U_{GPU} = \dfrac{\sum bla\_bla}{ActiveGPUs}
 % ===========================================
 % ===========================================
 \section{Computing environment Architecture}
-
-\todo{Only self-adapting -> wegen autonomic computing}
-
 % Single machine
 The computing environment will be deployed on a single machine.
 % Autonomic
@@ -180,11 +179,12 @@ In this environment, all Apache Spark worker container are the managed resources
 % Scaling
 
 
+% ===========================================
+% ===========================================
 \section{Apache Spark Cluster}
 \label{sec:05_spark}
-\todo{Why standalone -> Because most simple way; Master und worker -> Managed Resources}
 % Short intro
-
+The Apache Spark cluster is the computing unit of the computing environment. It is responsible to distribute the workload of ML training applications.
 % Standalone mode
 The Apache Spark is deployed in standalone mode. Standalone mode is the most simple mode without the need to install and configure an additional service as a cluster manager. An orchestration tool like Kubernetes or Apache Mesos as cluster manager is not needed, because Docker Swarm mode is used as orchestration tool.
 % Docker
@@ -208,80 +208,173 @@ To ensure each worker node is homogeneous, the same Docker image is used for all
 This guarantees that each worker has the same resources available and uses the same software as any other worker.
 
 
-\subsection{Deploying Application with spark-submit}
+\subsection{Deploying an Application with spark-submit}
 % Short intro
 A spark-submit node is deployed each time an application is being submitted to the cluster.
 % spark-submit purpose
 The purpose of a spark-submit node is to submit an application with the spark-submit executable to the cluster (described in SECTION XY).
-% How
-The container needs access to the same network. Needs access to the application source code or binary files.
-It should be possible to define various resources.
-Because GPU acceleration is enabled, it should be possible to set a CPU or GPU only mode.
+% No support for python in cluster mode
+Standalone mode does not support to submit a Python application with the spark-submit executable from outside of the cluster. Therefore, a node running the spark-submit executable has to be submitted within the cluster \cite{Apache2020Spark}.
+% Swarm
+To submit and application to the master node, the spark-submit node needs to be in the same Docker swarm network. The node is deployed as a Docker container instead of a Docker service. Each spark-submit node is deployed with a different setting depending on the configuration and application from the CI pipeline.
+% End
+After the application has been submitted, the spark-submit node automatically exits.
+
+% Was noch evtl fehlt:
+% CPU_ONLY mode
+% Resourcen für executor einstellen
 
 
 \subsection{GPU Acceleration with RAPIDS}
 One objective of this thesis is, to enable GPU acceleration for Apache Spark.
 %
 To do this, the RAPIDS accelerator plugin for Apache Spark is being used.
-Each worker becomse the same amount of CPU resources.
+Each worker becomse the same amount of GPU resources.
 
 
-\subsubsection{Master and Worker}
-The Apache Spark cluster will consist of a Spark master node and a dynamic number of Spark worker nodes.
-% Master
-The Spark master node is responsible to distribute the application workload across available Spark worker nodes.
-% Worker
-A Spark worker node will execute the workload given by the master node. Each Spark worker is homogeneous. 
-% Homegeneous spark worker
-Homegenneosity is important to scale the number of worker nodes. To enable homogeneous nodes, each SPark worker node is a Docker container running the same Docker image. In addition, each worker is given the same computing resources. With homogeneous Spark worker nodes, each worker will respond as all other nodes.
-% GPU acceleration
-To enable GPU acceleration, each WORKER/MASTER will have the RAPIDS plugin installed.
-% Standalone mode
-The cluster will be deployed in standalone mode. To be able to run Python applications
-
-
-\subsubsection{Spark Submit}
-Because the Apache Spark cluster ill be executed in standalone mode, a node inside the cluster is required to run Spark applications. When a Spark application will be executed, a Spark Submit container will be deployed in the cluster. When the appliccation has finished, the container will be automatically removed.
-Each app will be executed by a unique Spark Submit node.
-The Spark Submit node will be deployed via the CI pipeline (SECTION XY). The prupose of this 
-
-
-\subsection{Autonomic Manager}
-\label{subsec:05_arch_am}
-
+\section{Autonomic Manager}
+\label{05_am}
+% SHort intro
+The autonomic manager is a main module of the computing environment. The theoretical concept of an autonomic manager is described in SECTION XY.
+% Responsibilites
+It is responsible to monitor the performance metrics (introduced in SECTION AB) of all Apache Spark worker nodes and automatically scale the number of worker nodes to adapt to a specified performance goal.
+% MAPE
+The autonomic manager will be implemented according to the MAPE architecture as described in SECTION XY. To create a complete control-loop, the autonomic manager is composed of multiple components as illustrated in \Fig{fig:05_am_concept}.
+% A figure explaining the concept
+\label{subsec:05_am}
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.85]{images/05_conceptual_design/autonomic_manager/autonomic_manager_overview}
+\includegraphics[scale=1]{images/05_conceptual_design/autonomic_manager/autonomic_manager_concept}
 \caption{Autonomic manager component design - Source: Authors own model.}
-\label{fig:am-design-component}
+\label{fig:05_am_concept}
 \end{figure}
-
-% MAPE architecture
-The design of the autonomic manager needs to fullfill all requirements given by the MAPE architecture (described in \SubSec{subsec:02_ac_manager}). It will be responsible to monitor the performance of Apache Spark worker nodes in the environment, analyze the metrics and plan and execute scaling actions in accordance to fullfill the performance goals.
-% Figure
-As illustrated in \Fig{fig:am-design-component}, the autonomic manager consists of a cAdvisor, Prometheus and Auto-Scaler node. Together, all three nodes build a complete autonomic manager in accordance to the MAPE architecture. Each node will run as a Docker container.
 % Explain figure
-For monitoring, cAdvisor collects metrics from all available Docker container in the computing environment. Prometheus pulls metrics from cAdvsior. The Auto-Scaler will fetch metrics from Prometheus and send scaling instructions to the Docker engine.
+It consists of a monitoring system (explained in SECTION XY) and an \textit{Auto-Scaler} module.
+% Docker
+Each component in the computing environment is deployed as a Docker service or container. Therefore, the autonomic manager needs access to the Docker engine to send instructions and monitor performance metrics of Docker container.
+% GPU metrics
+As being mentioned before, a fixed number of GPUs will be available on the machine. These GPUs need to be monitored on the node level instead of tthe container level. To monitor the GPU utilization, the autonomic manager needs access to the GPUs as well.
 
 
-\subsubsection{Monitoring System}
-% Why - dynamic env, requirements, etc
-The design introduced in \SubSec{subsec:05_arch_overall} is a dynamic changing computing environment. To monitor this dynamic environment, a monitoring-system is needed that fullfills the requirements described in \Sec{sec:02_monitoring}.
+\subsection{Monitoring System}
+% Short intro
+The monitoring system is a main module of the autonomic manager. The tasks of a monitoring system are, to monitor the performance of components in the environment (see SECTION XY).
+% Responsibilites
+In this environment, the monitoring system collects the performance metrics of the Apache Spark worker Docker container and the GPU performance. It is important to mention that the number of worker nodes varies over time. The Auto-Scaler will scale the replicas of worker nodes according to the system performance.
+% Mape
+Therefore, it is responsible to perform the Monitor phase of the MAPE architecture.
+% CHanging environment
+The number of worker node varies over time 
+% The figure
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{images/05_conceptual_design/autonomic_manager/monitoring_system_concept}
+\caption{Autonomic manager component design - Source: Authors own model.}
+\label{fig:05_am_monitoring_concept}
+\end{figure}
+% Explain figure
+\Fig{fig:05_am_monitoring_concept} illustrates the architecture of the monitoring system. It consists of three components:
+% The components
+\begin{itemize}
+\item dcgm-exporter: A monitoring agent which is responsible to collect GPU performance metrics.
+\item cAdvisor: cAdvisor is monitoring agent which collects performance metrics of Docker container in the environment.
+\item Prometheus: Prometheus collects the performance metrics from all monitoring agents and saves them as time-series data in a time-series database.
+\end{itemize}
+% Docker
+Each component will be deployed as a Docker service in the overall Docker swarm.
 
 
-% Gathering metrics
-cAdvisors will be used as an agent to collect performance metrics from all running Docker containers in the environment.
-% Store metrics
-Prometheus pulls the collected performance metrics from cAdvisor and stores the data as time-series data in its database.
-% Query
-In addition, Prometheus provides a powerful multi-dimensional query language to aggregate and analyze the stored data.
+\subsection{Auto-Scaler}
+% Short intro
+The \textit{Auto-Scaler} is the second module of the autonomic manager and responsible to dynamically adjust the replicas of Apache Spark worker nodes in the computing environment to accommodate specified performance goals.
+% MAPE
+It implements the Analyse, Plan, and Execute phases of the MAPE architecture.
+% MAPE
+In addition to the monitoring system, the Auto-Scaler creates a complete autonomic manager implementing all four phases of the MAPE architecture.
+% Reactive threshold based 
+The \textit{Auto-Scaler} is a reactive auto-scaler (described in SECTION XY) and used a threshold-based algorithm to adapt the number of worker nodes.
+% Prom API
+As illustrated in \Fig{fig:05_am_concept}, the \textit{Auto-Scaler} fetches performance metrics from the monitoring system.
+% Prom API
+To fetch metrics from the monitoring-system, it connects to the HTTP API of Prometheus.
+% Phases
+After it received the performance metrics, the Auto-Scaler analyses the metrics, plans scaling-actions to adjust the number of worker replicas and sends instructions to the Docker engine.
+% Configuration
+The \textit{Auto-Scaler} can be configured using a configuration file.
 
-% Collecting operational data can be challenging in a horizontally        scaling environment since the number of nodes varies over time. Any        system that automates gathering of log files from individual nodes        needs to account for this, and care needs to be taken to ensure that        logs are captured before nodes are released.
+
+\subsubsection{MAPE Phases}
+% SHort intro
+As being mentioned, the \textit{Auto-Scaler} implements the Analyse, Plan, and Execute phases of the MAPE architecture. Each phase has a different workflow to accommodate its goal.
+
+\paragraph{Analyse:}
+% Short intro to analyze phase
+In order to determine if a scaling-action is necessary, the \textit{Auto-Scaler} has fetch and analyse all defined performance metrics. 
+% How to analyze
+During each period, the \textit{Auto-scaler} fetches performance metrics from the Prometheus HTTP API with specified PromQL queries.
+% Determine if scaling is needed
+After the metrics are received, the \textit{Auto-Scaler} determines if a scaling action is needed using the Scaling Heat algorithm (introduced in Section AB). If scaling is not necessary, the \textit{Auto-Scaler} continues to collect and analyse performance metrics from Prometheus.
+
+\paragraph{Plan:}
+% Short intro
+If a scaling-action is necessary, the \textit{Auto-Scaler} is responsible to determine the number of Apache Spark worker replicas, needed to reach the utilization goals.
+% What is a scaling plan
+A scaling plan consists of instructions to add or remove worker nodes. These instructions are send to the Docker engine.
+% Calculating Spark worker
+To calculate the number of worker nodes, the \textit{Auto-Scaler} uses the Kubernetes Horizontal Pod Auto-Scaling algorithm (introduced in SECTION XY).
+% Thresholds
+In addition, the Auto-Scaler needs to check if the estimated number of worker replicas violate the specified upper- and lower-thresholds of active worker nodes.
+
+\paragraph{Execute:}
+% Short intro
+After a scaling plan is created, the Auto-Scaler needs to send the instructions to the Docker engine.
+% Cooldown
+After scaling the number of worker replicas, the Apache Spark cluster needs time for changes to take effect. Therefore, a cooldown period is activated after each scaling action (explained in Section AB).
+% Whats happens
+During the cooldown period, no scaling actions are executed.
 
 
-\subsubsection{Workflow}
+\subsubsection{Configuration}
+The Auto-Scaler needs specific configuration properties to be able to collect the correct metrics from Prometheus and deploy new Apache Spark worker container in the environment. The following are properties that have to be defined to ensure that the Auto-Scaler is able to collect meaningful metrics and scale Apache Spark worker as expected.
 
-\paragraph{} The workflow of the autonomic manager is implemented as a loop.
+\begin{itemize}
+\item General properties:
+\begin{itemize}
+\item Interval seconds: The number of seconds when the loop has to repeat needs to be defined.
+
+\item Cooldown period: The duration in seconds,  the Auto-Scaler has to wait after a scaling action was performed.
+
+\item Recurrence factor: To prevent to many scaling actions,  the autonomic manager should only execute a scaling action,  if the utilization thresholds is violated \textit{n} times.
+
+\item Prometheus URL: The Auto-Scaler will fetch the configured metrics from the Prometheus REST API.
+\end{itemize}
+
+\item Metrics:
+To support to analyze multiple metrics, the user should be able to create a dynamic list if metrics. Each metric needs to have a variety of properties configured.
+\begin{itemize}
+\item Target utilization: The relative target utilization of a metrics needs to be defined to calculate the number of Spark worker to add or to remove to reach the defined goal.
+
+\item Utilization thresholds: To determine if a scaling action is needed, the scaling heat algorithm needs the minimum and maximum utilization defined by an administrator.
+
+\item Query: A PromQL query needs to be defined to collect the metric for all Spark Worker.
+\end{itemize}
+
+\item Apache Spark worker properties:
+\begin{itemize}
+\item Worker image: To guarantee that each Spark worker is homogeneous, all worker container should be created with the same image.
+
+\item Worker network: To establish communication between all Spark worker and the Spark master, all new Spark worker container should be in the same network.
+
+\item Worker thresholds: The minimum and maximum number of concurrent Spark worker should be defined. To avoid the cold start effect, the minimum amount of worker should be 1. 
+
+\item Apache Spark master URI: To distribute the workload across all Spark Worker, all Spark Worker need to communicate with the Spark master.
+\end{itemize}
+\end{itemize}
+
+
+\subsection{Control Loop}
+
+\paragraph{ert} The workflow of the autonomic manager is implemented as a loop.
 
 % Workflow
 \begin{figure}[h]
@@ -291,7 +384,7 @@ In addition, Prometheus provides a powerful multi-dimensional query language to 
 \label{fig:am-workflow}
 \end{figure}
 % Explain figure
-\paragraph{} \Fig{fig:am-workflow} illustrates all steps of each component of the autonomic manager process according to the MAPE architecture.
+\paragraph{wert} \Fig{fig:am-workflow} illustrates all steps of each component of the autonomic manager process according to the MAPE architecture.
 
 
 % Monitor
@@ -302,89 +395,3 @@ Next, in the analyze phase, the Auto-Scaler needs to determine if a scaling acti
 If the performance is over- or under-utilized, a scaling action is needed. Then, the Auto-Scaler needs to determine how many Apache Spark worker nodes are needed to reach the performance goal.
 % Execute
 Lastly, the Auto-Scaler is responsible to send the scaling instructions to the Docker engine.
-
-
-% ===========================================
-% ===========================================
-\section{Auto-Scaler}
-\label{sec:05_auto-scaler}
-% What is the Auto-Scaler
-The Auto-Scaler is a component of the the Autonomic Manager and is responsible for the analyze, plan and execution phase.
-% Complete autonomic manager
-Together with cAdvisor and Prometheus, the Auto-Scaler builds a complete Autonomic Manager according to \SubSec{subsec:02_ac_manager}.
-% control loop
-In addition, the Auto-Scaler implements the control-loop which is responsible to make adjustments in the environment according to the performance.
-% Communication with Prometheus
-To adjust the number of Apache Spark worker in the environment, the Auto-Scaler needs to perform queries on the performance metrics stored in Prometheus.
-% Analyzing
-After analyzing the performance metrics, the Auto-Scaler will send instructions to adjust the number of Apache Spark worker to the Docker engine. The Docker engine tells the Swarm manager to scale the replicas of the Apache Spark service in accordance to the Auto-Scaler instructions.
-
-\todo{HIER NOCH BILD VON SCALER WIE MIT DER MAPE ARCH; Reactive Auto-Scaler, threshold-based rules}
-
-
-\subsection{Configuration}
-\label{subsec:05_auto-scaler_configuration}
-The Auto-Scaler needs specific configuration properties to be able to collect the correct metrics from Prometheus and deploy new Apache Spark worker container in the environment. The following are properties that have to be defined to ensure that the Auto-Scaler is able to collect meaningful metrics and scale Apache Spark worker as expected.
-
-\subsubsection{General properties}
-
-\begin{itemize}
-\item \textbf{Interval seconds:} The number of seconds when the loop has to repeat needs to be defined.
-
-\item \textbf{Cooldown period:} The duration in seconds,  the Auto-Scaler has to wait after a scaling action was performed.
-
-\item \textbf{Recurrence factor:} To prevent to many scaling actions,  the autonomic manager should only execute a scaling action,  if the utilization thresholds is violated \textit{n} times.
-
-\item \textbf{Prometheus URL:} The Auto-Scaler will fetch the configured metrics from the Prometheus REST API.
-\end{itemize}
-
-\subsubsection{Metrics}
-
-To support to analyze multiple metrics, the user should be able to create a dynamic list if metrics. Each metric needs to have a variety of properties configured.
-
-\begin{itemize}
-\item \textbf{Target utilization:} The relative target utilization of a metrics needs to be defined to calculate the number of Spark worker to add or to remove to reach the defined goal.
-
-\item \textbf{Utilization thresholds:} To determine if a scaling action is needed, the scaling heat algorithm needs the minimum and maximum utilization defined by an administrator.
-
-\item \textbf{Query:} A PromQL query needs to be defined to collect the metric for all Spark Worker.
-\end{itemize}
-
-\subsubsection{Apache Spark worker properties}
-
-\begin{itemize}
-\item \textbf{Worker image:} To guarantee that each Spark worker is homogeneous, all worker container should be created with the same image.
-
-\item \textbf{Worker network:} To establish communication between all Spark worker and the Spark master, all new Spark worker container should be in the same network.
-
-\item \textbf{Worker thresholds:} The minimum and maximum number of concurrent Spark worker should be defined. To avoid the cold start effect, the minimum amount of worker should be 1. 
-
-\item \textbf{Apache Spark master URI:} To distribute the workload across all Spark Worker, all Spark Worker need to communicate with the Spark master.
-\end{itemize}
-
-
-\subsection{Analyze}
-% Short intro to analyze phase
-In order to determine if a scaling-action is necessary, the Auto-Scaler has to process the collected metrics. 
-% How to analyze
-During each period, the Auto-scaler queries the Prometheus time-series database with the configured queries to get all needed metrics. 
-% Determine if scaling is needed
-After the metrics are received, the Auto-Scaler determines if a scaling action is needed using the Scaling Heat algorithm (introduced in Section AB). If scaling is not necessary, the Auto-Scaler continues to collect metrics from Prometheus.
-
-
-\subsection{Plan}
-% Short intro
-If a scaling-action is necessary, the Auto-Scaler is responsible to plan how to scale the number of Spark worker to satisfy the defined utilization goals.
-% What is a scaling plan
-A scaling plan consists of instructions to add or remove Spark worker which will be send to the Docker engine.
-% Calculating Spark worker
-To calculate the number of Spark worker, needed to accomplish the defined target utilization, the Auto-Scaler uses the \textit{Kubernetes Horizontal Pod Auto-Scaling} algorithm. In addition, the Auto-Scaler needs to check if the estimated number of Spark worker fall bellow the minimum threshold or exceed the maximum threshold of concurrent Spark worker.
-
-
-\subsection{Execute}
-% Short intro
-After a scaling plan has been created, the Auto-Scaler needs to send the instructions to the Docker engine.
-% Cooldown
-After scaling the environment, it needs time for changes to take effect. Therefore a cooldown period will be activated after each scaling action.
-% Whats happens
-During the cooldown period, no scaling actions will be forwarded to the Docker engine.
