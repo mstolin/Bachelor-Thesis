@@ -123,21 +123,21 @@
 \contentsline {paragraph}{Execute:}{51}{paragraph*.75}% 
 \contentsline {subsubsection}{Configuration}{51}{subsubsection*.76}% 
 \contentsline {subsection}{\numberline {5.6.3}Control Loop}{52}{subsection.5.6.3}% 
-\contentsline {paragraph}{ert}{52}{paragraph*.77}% 
-\contentsline {paragraph}{wert}{52}{paragraph*.79}% 
+\contentsline {paragraph}{}{52}{paragraph*.77}% 
+\contentsline {paragraph}{}{52}{paragraph*.79}% 
 \contentsline {chapter}{\numberline {6}Implementation}{55}{chapter.6}% 
 \contentsline {section}{\numberline {6.1}Background}{55}{section.6.1}% 
 \contentsline {section}{\numberline {6.2}Auto-Scaler}{55}{section.6.2}% 
 \contentsline {subsection}{\numberline {6.2.1}Configuration}{55}{subsection.6.2.1}% 
-\contentsline {paragraph}{}{55}{paragraph*.80}% 
-\contentsline {paragraph}{General:}{56}{paragraph*.81}% 
-\contentsline {paragraph}{Metrics:}{56}{paragraph*.82}% 
-\contentsline {paragraph}{Worker:}{56}{paragraph*.83}% 
+\contentsline {paragraph}{}{55}{paragraph*.81}% 
+\contentsline {paragraph}{General:}{56}{paragraph*.82}% 
+\contentsline {paragraph}{Metrics:}{56}{paragraph*.83}% 
+\contentsline {paragraph}{Worker:}{56}{paragraph*.84}% 
 \contentsline {subsection}{\numberline {6.2.2}Scaling the Apache Worker Service}{57}{subsection.6.2.2}% 
-\contentsline {subsubsection}{Estimation of Necessary Scaling Actions}{57}{subsubsection*.85}% 
-\contentsline {paragraph}{}{57}{paragraph*.86}% 
-\contentsline {subsubsection}{Calculating the Number of Needed Worker Nodes}{57}{subsubsection*.87}% 
-\contentsline {subsubsection}{Performing a Scaling Action}{58}{subsubsection*.88}% 
+\contentsline {subsubsection}{Estimation of Necessary Scaling Actions}{57}{subsubsection*.86}% 
+\contentsline {paragraph}{}{57}{paragraph*.87}% 
+\contentsline {subsubsection}{Calculating the Number of Needed Worker Nodes}{57}{subsubsection*.88}% 
+\contentsline {subsubsection}{Performing a Scaling Action}{58}{subsubsection*.89}% 
 \contentsline {subsection}{\numberline {6.2.3}Docker Image}{58}{subsection.6.2.3}% 
 \contentsline {section}{\numberline {6.3}Deployment of a Docker Swarm}{58}{section.6.3}% 
 \contentsline {subsection}{\numberline {6.3.1}Hardware}{58}{subsection.6.3.1}% 
@@ -145,17 +145,17 @@
 \contentsline {subsection}{\numberline {6.3.3}Swarm}{58}{subsection.6.3.3}% 
 \contentsline {subsection}{\numberline {6.3.4}Build Script}{58}{subsection.6.3.4}% 
 \contentsline {subsection}{\numberline {6.3.5}Apache Spark Cluster with GPU Acceleration}{58}{subsection.6.3.5}% 
-\contentsline {paragraph}{}{58}{paragraph*.89}% 
-\contentsline {paragraph}{}{59}{paragraph*.90}% 
-\contentsline {subsubsection}{Apache Spark Base Image Installation Details}{59}{subsubsection*.91}% 
-\contentsline {paragraph}{}{59}{paragraph*.92}% 
-\contentsline {subsubsection}{Standalone Master and Worker Image}{59}{subsubsection*.93}% 
-\contentsline {paragraph}{Master image:}{60}{paragraph*.94}% 
-\contentsline {paragraph}{Worker image:}{60}{paragraph*.95}% 
-\contentsline {subsubsection}{Submit Image}{60}{subsubsection*.96}% 
+\contentsline {paragraph}{}{58}{paragraph*.90}% 
+\contentsline {paragraph}{}{59}{paragraph*.91}% 
+\contentsline {subsubsection}{Apache Spark Base Image Installation Details}{59}{subsubsection*.92}% 
+\contentsline {paragraph}{}{59}{paragraph*.93}% 
+\contentsline {subsubsection}{Standalone Master and Worker Image}{59}{subsubsection*.94}% 
+\contentsline {paragraph}{Master image:}{60}{paragraph*.95}% 
+\contentsline {paragraph}{Worker image:}{60}{paragraph*.96}% 
+\contentsline {subsubsection}{Submit Image}{60}{subsubsection*.97}% 
 \contentsline {subsection}{\numberline {6.3.6}Autonomic Manager}{60}{subsection.6.3.6}% 
-\contentsline {paragraph}{}{60}{paragraph*.97}% 
-\contentsline {subsubsection}{Prometheus Target Configuration}{61}{subsubsection*.98}% 
+\contentsline {paragraph}{}{60}{paragraph*.98}% 
+\contentsline {subsubsection}{Prometheus Target Configuration}{61}{subsubsection*.99}% 
 \contentsline {section}{\numberline {6.4}Automatic Deployment of Apache Spark Applications}{61}{section.6.4}% 
 \contentsline {chapter}{\numberline {7}Evaluation}{63}{chapter.7}% 
 \contentsline {section}{\numberline {7.1}Experimental Environment}{63}{section.7.1}% 
@@ -170,5 +170,5 @@
 \contentsline {section}{\numberline {8.3}Pro Active Auto-Scaler}{65}{section.8.3}% 
 \contentsline {chapter}{\numberline {9}Conclusion}{67}{chapter.9}% 
 \contentsline {section}{\numberline {9.1}Cluster architecture}{67}{section.9.1}% 
-\contentsline {part}{Anhang}{74}{section*.100}% 
+\contentsline {part}{Anhang}{74}{section*.101}% 
 \contentsline {chapter}{\numberline {A}Apache Spark Cluster Implementation}{75}{appendix.A}% 

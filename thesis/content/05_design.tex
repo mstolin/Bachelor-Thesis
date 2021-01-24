@@ -373,25 +373,37 @@ To support to analyze multiple metrics, the user should be able to create a dyna
 
 
 \subsection{Control Loop}
+\paragraph{}
+% The control loop
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{images/05_conceptual_design/autonomic_manager/control_loop}
+\caption{Full MAPE control loop architecture}
+\label{fig:05_am_monitoring_loop_arch}
+\end{figure}
+% Explain 
+\Fig{fig:05_am_monitoring_loop_arch} provides an overview about the complete control loop
+% Each phases
+The monitoring system monitors performance metrics from Docker containers and the GPUs on the machine.
+% Auto-scaler
+Next, the Auto-Scaler analyses the performance metrics, creates scaling plans and sends instructions to the Docker engine to scale the Apache Spark cluster.
 
-\paragraph{ert} The workflow of the autonomic manager is implemented as a loop.
 
-% Workflow
+\paragraph{}
+% Workflow figure
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.50]{images/05_conceptual_design/autonomic_manager/autonomic_manager_workflow}
 \caption{UML activity model of the autonomic manager process - Source: Authors own model.}
-\label{fig:am-workflow}
+\label{fig:05_am_monitoring_loop_workflow}
 \end{figure}
-% Explain figure
-\paragraph{wert} \Fig{fig:am-workflow} illustrates all steps of each component of the autonomic manager process according to the MAPE architecture.
-
-
+% Explain
+The control-loop workflow is illustrated in \Fig{fig:05_am_monitoring_loop_workflow}.
 % Monitor
-The workflow starts with collecting metrics in the monitor phase. cAdvisor is responsible to collect metrics from the Docker engine. After that, Prometheus stores the collected metrics as time-series data in its database.
+It starts in the Monitor phase. All monitoring agents (cAdvisor and dcgm-exporter) collect performance metrics from their targets. Next, Prometheus pulls the metrics from all monitoring agents and saves the data in its time-series database.
 % Analyze
-Next, in the analyze phase, the Auto-Scaler needs to determine if a scaling action is needed. If scaling the Apache Spark worker nodes is not needed, the process has finished and will repeat from the beginning in the next period.
+In the analyse phase, the Auto-scaler determines if a scaling action is necessary. If a scaling action is not needed, the workflow ends and starts again in the Monitor phase in the iteration.
 % Plan
-If the performance is over- or under-utilized, a scaling action is needed. Then, the Auto-Scaler needs to determine how many Apache Spark worker nodes are needed to reach the performance goal.
+Otherwise if a scaling action is needed, the Auto-Scaler determines the number of Apache Spark worker replicas in the Plan phase.
 % Execute
-Lastly, the Auto-Scaler is responsible to send the scaling instructions to the Docker engine.
+Lastly, in the Execute phase, the Auto-scaler scales the Apache Spark worker nodes.
