@@ -115,6 +115,13 @@ These utilization metrics will be based on the time when the Aapche Spark cluste
 
 
 \subsection{CPU Utilization}
+
+%The CPU Utilization means the percentage of time that the CPU runs our program for. Since CPU Utilization is a discrete state, it is not the metric that could reﬂect on how much power of the CPU we have used, but the proportion of the time our program occupies CPU cycles. That is also why the CPU Utilization can only be raised to 100%, whereas the computational load metric (CPU Load) could go beyond 100%.
+
+%Unlike CPU Utilization, CPU Load could go beyond 100%. The CPU Load metric could give us the actual ‘demand’ of the computer’s resources (not only CPU power), whereas CPU Utilization could only reﬂect how busy the CPU is. The analogy of the difference between CPU Load and CPU Utilization is the high way trafﬁc. CPU Utilization is how often the freeway is found to have cars running on it, CPU Load is how many cars are demanding the freeway both running on the freeway or waiting to enter the freeway [34]. In Figure 3.2, we can see if the freeway is fully used the CPU Load is 100%, if only half of the freeway is used the CPU Load is 50% and if the freeway is fully used and there are some cars waiting to enter the freeway the CPU Load will go beyond 100% and it is 170% in the ﬁgure. In a single core computer like t2.micro, ideally the 100% of the CPU Load indicates that the computational resource is fully utilized and if the value is 200%, it means we need one more instance to handle the load. Since the CPU Load could reﬂect the overall usage of the resources, the CPU Load could be a crucial performance indicator metric in our fuzzy logic based auto-scaler.
+
+%The CPU Load is initially designed to show the demand of the CPU resource that the task is using the CPU cycles and the task which is waiting to run but not blocked by IO. However the Linux kernel later evolve the CPU Load metric to become different from other non-Linux based operating system. The Linux based operating system will have CPU Load metrics included the TASK UNINTERRUPTIBLE which are the task waiting for IO and locks [35]. Therefore, the CPU Load metric in Linux based operation should be correctly named as the ’System average load’ which represent the demand of the computational resources as whole. Therefore, the CPU Load metric could be a perfect indicator metric for estimating the number of virtual machines needed to satisfy the SLA.
+
 % Sharing CPU cores
 All Apache Spark worker run on the same machine. Therefore, all available CPU cores on the machine will be shared across each running Apache Spark worker.
 
@@ -147,7 +154,7 @@ U_{GPU} = \dfrac{\sum bla\_bla}{ActiveGPUs}
 
 % ===========================================
 % ===========================================
-\section{Computing environment Architecture}
+\section{Computing Environment Architecture}
 % Single machine
 The computing environment will be deployed on a single machine.
 % Autonomic

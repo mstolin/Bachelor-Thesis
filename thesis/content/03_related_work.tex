@@ -2,7 +2,7 @@
 \label{chap:03_related-work}
 
 
-This chapter provides an overview of related literature for this thesis. It introduces work about auto-scaling computing environments, GPU accelerated Apache Spark cluster and the implementation of an automated deployment pipeline. These topics are related to the choice of technologies (\Chap{chap:04_background}), the proposed conceptual design of this thesis (\Chap{chap:05_design}), and the resulting implementation (\Chap{chap:06_implementation}).
+This chapter provides an overview of related literature for this thesis. Furthermore, the surveyed literature is build on the theoretical foundation introduced in \Chap{chap:02_foundation}. This chapter introduces work about auto-scaling computing environments, GPU accelerated Apache Spark cluster and the implementation of an automated deployment pipeline. These topics are related to the choice of technologies (\Chap{chap:04_background}), the proposed conceptual design of this thesis (\Chap{chap:05_design}), and the resulting implementation (\Chap{chap:06_implementation}).
 
 
 % ===========================================
@@ -11,7 +11,7 @@ This chapter provides an overview of related literature for this thesis. It intr
 % State of the art monitoring
 In recent years, container technologies have been used efficiently in complex computing environments. Dynamic scaling of containerized applications is an active area of research.
 % WHich is important for this thesis
-To accommodate this thesis research objective, the literature research according to auto-scaling environments was focused on two topics: Concepts of Auto-Scalers  and auto-scaling algorithms.
+To accommodate this thesis research objective, the literature research according to auto-scaling environments was focused on two topics: Concepts of \textit{Auto-Scalers}  and auto-scaling algorithms.
 
 
 \subsection{Auto-Scaler Concepts}
@@ -19,11 +19,11 @@ To accommodate this thesis research objective, the literature research according
 \paragraph{}
 Lorido-Botrán et al. \cite{Lorido2014Review} reviewed state-of-the-art literatures about auto-scaling and explain proposals of an auto-scaling process in a cloud environment.
 % SLA and costs
-It is mentioned that an Auto-Scaler is responsible to find a trade-off between meeting the SLA and keeping the cost of renting resources low.
+It is mentioned that an \textit{Auto-Scaler} is responsible to find a trade-off between meeting the Service Level Agreement (SLA) and keeping the cost of renting resources low.
 % SLA
-
+Two types of SLA exists while maintaining an acceptable trade-off: The application SLA and the resource SLA. The former is a contract between the application owner and the end users (e.g. a certain response time). The resource SLA is agreed by the infrastructure provider and the application owner (e.g. 99.9\% availability).
 % Auto-scaling problems
-They introduced three problems an Auto-Scaler faces while scaling an environment and meeting the SLA:
+They introduced three problems an \textit{Auto-Scaler} faces while scaling an environment, and meeting the SLA:
 % The problems
 \begin{enumerate}
 %1
@@ -32,64 +32,68 @@ An application is under-provisioned if it needs more resources to process the in
 To make resources available and return the application to its normal state may take some time which causes SLA violations.
 % 2
 \item Over-provisioning:
-If an application has more resources available than needed will lead to unnecessary costs for the client.
+Applications which have more resources available than needed, will lead to unnecessary costs for the client.
 % 3
 \item Oscillation:
-If scaling-actions are being executed too quickly before the impact is available, a combination of over-provisioned and under-provisioned applications can occur.
-A cooldown period after a scaling-action can be activated to prevent oscillation.
+If scaling-actions are executed too quickly before the impact is available, a combination of over-provisioned and under-provisioned applications can occur.
+A cooldown period after a scaling-action allows to prevent oscillation.
 \end{enumerate}
 % MAPE
-To prevent the mentioned problems from occurring, the authors mentioned and explained the MAPE architecture (described in detail in \Sec{sec:02_ac}).
+To prevent the mentioned problems from occurring, the authors introduced and explained the MAPE architecture (cf. \Sec{sec:02_ac}).
 % MAPE phases
-MAPE consists of four different phases: Monitor, analyse, plan, and execute.
+MAPE consists of four different phases: Monitor, Analyse, Plan, and Execute.
 % Only AP
-The authors mention that some Auto-Scaler proposals only focus on the analyse and planning phase. 
+There exist Auto-Scaler proposals which only focus on the Analyse, and Planning phase architecture of the MAPE architecture.
 % Analysing and planning techniques
-Several techniques for the analyse phase are being introduced: Queuing theory and time-series analysis.
+Several techniques for the analyse phase are being introduced: Queuing theory, and time-series analysis.
 As well as for the planning phase: Threshold-based rules, reinforcement learning, and control theory.
 % Active proactive grouping
-Some Auto-Scaler uses techniques to predict the future state of the environment (e.g. reinforcement learning). These are called reactive Auto-Scalers.
+There exist Auto-Scaler which uses techniques to predict the future state of the environment (e.g. reinforcement learning). These are called reactive Auto-Scalers.
 Proactive Auto-Scalers use techniques to respond to the current status of the environment (e.g. threshold-based rules).
 
 
 % Application deployment using containers with auto-scaling for microservices in cloud environment
 \paragraph{}
-Srirama et al. \cite{Srirama2020AppDeplyCont} designed a heuristic-based auto-scaling strategy for container-based microservices in a cloud environment. The purpose of the auto-scaling strategy was to balance the overall resource utilization across microservices in the environment.
+Srirama et al. \cite{Srirama2020AppDeplyCont} designed a heuristic-based auto-scaling strategy for container-based microservices in a cloud environment. The purpose of the auto-scaling strategy is to balance the overall resource utilization across microservices in the environment.
 % Results
-The proposed auto-scaling strategy performed better results than state-of-the-art algorithms in processing time, processing cost and resource utilization. The processing cost of microservices could be reduced by 12-20\% and the CPU and memory utilization of cloud-servers have been maximized by 9-15\% and 10-18\%.
+The proposed auto-scaling strategy performed better than state-of-the-art algorithms in processing time, processing cost, and resource utilization. The processing cost of microservices was reduced by 12-20\% and the CPU and memory utilization of cloud-servers were maximized by 9-15\% and 10-18\% respectively.
 
 
 % Comparison of auto-scaling techniques for cloud environments
 \paragraph{}
 Lorido-Botrán et al.  \cite{Botran2013AutoScalingComp} compared different representative auto-scaling techniques in a simulation in terms of cost and SLO violations. They compared load balancing with static threshold-based rules, reactive and proactive techniques based on CPU load.
-Load balancing is based on static rules defining the upper and lower thresholds of a specific load (e.g. \textit{if CPU > 80\% then scale-out; if CPU < 20\% then scale-in}). The difficulty of this technique is to set the ideal rules. False rules can lead to bad performance. Proactive techniques try to predict the future values of performance metrics based on historical data. Reactive techniques are based on control theory to automate the system management. To overcome the difficulties of static thresholds, the authors proposed a new auto-scaling technique using rules with dynamic thresholds. The results showed, that for auto-scaling techniques to scale well, it highly depends on parameter tuning. The best result was achieved with proactive results with a minimum threshold of 20\% and a maximum threshold of 60\%.
+Load balancing is based on static rules defining the upper and lower thresholds of a specific load (e.g. \textit{if CPU > 80\% then scale-out; if CPU < 20\% then scale-in}). The difficulty of this technique is to set the ideal rules. False rules can lead to bad performance. Proactive techniques try to predict the future values of performance metrics based on historical data. Reactive techniques are based on control theory to automate the system management. To overcome the difficulties of static thresholds, the authors proposed a new auto-scaling technique using rules with dynamic thresholds. The results showed, that for auto-scaling techniques to scale well, it highly depends on parameter tuning. The best result was achieved with proactive results with a minimum threshold of 20\%, and a maximum threshold of 60\%.
 
 
 \subsection{Auto-Scaling Algorithms}
 % Delivering elastic ...
 \paragraph{}Barna et al. \cite{Barna2017ElasticContainerApps} proposed an autonomic scaling architecture approach for containerized microservices. Their approach focused on creating an autonomic management system, following the autonomic computing concept \cite{Kephart2003VisionComputing}, using a self-tuning performance model. The demonstrated architecture frequently monitors the environment and gathers performance metrics from components. It has the ability to analyze the data and dynamically scale components. In addition, to determine if a scaling action is needed, they proposed the \textit{Scaling Heat Algorithm}. The Scaling Heat algorithm is used to prevent unnecessary scaling actions, which can throw the environment temporarily off.
 % Is ised in this thesis
-The Scaling Heat algorithm will be used for decision making in this thesis work, it is explained in detail in \Sec{sec:04_background_scaling-heat}.
+The Scaling Heat algorithm will be used for decision making in this thesis and is explained in detail in \Sec{sec:04_background_scaling-heat}.
 
 
 % Auto-scaling of Containers: the Impact of Relative and Absolute Metrics
-\paragraph{}Casalicchio et al. \cite{Casalicchio2017AutoScaleCont} focused on the difference of absolute and relative metrics for container-based auto-scaling algorithms. They analysed the mechanism of the \textit{Kubernetes Horizontal Pod Auto-Scaling} (KHPA) algorithm and proposed a new auto-scaling algorithm based on KHPA using absolute metrics called \textit{KHPA-A}. The results showed, that KHPA-A can reduce response time between 0.5x and 0.66x compared to KHPA. In addition, their work proposed an architecture using cAdvisor for collecting container performance metrics, Prometheus for monitoring, alerting and storing time-series data and Grafana for visualizing metrics.
+\paragraph{}Casalicchio et al. \cite{Casalicchio2017AutoScaleCont} focused on the difference of absolute and relative metrics for container-based auto-scaling algorithms. They analysed the mechanism of the \textit{Kubernetes Horizontal Pod Auto-Scaling} (KHPA) algorithm and proposed a new auto-scaling algorithm based on KHPA using absolute metrics called \textit{KHPA-A}. The results showed, that KHPA-A can reduce response time between 0.5x and 0.66x compared to KHPA. In addition, their work proposed an architecture using cAdvisor for collecting container performance metrics, Prometheus for monitoring, alerting and storing time-series data, as well as Grafana for visualizing metrics.
 % KHPA
-KHPA-A is more efficient with the vertical scaling approach. In this thesis, the focus for scaling strategies is based on the horizontal scaling approach. Therefore, the KHPA algorithm will be used throughout this thesis and is explained in detail in \Sec{sec:04_background_khpa}.
+Absolute metrics are more appropriate when it comes to efficient resource allocation. Therefore, the KHPA-A algorithm is more efficient in vertical scaling of resources.
+% This thesis
+In this thesis, the focus for scaling strategies is based on the horizontal scaling approach. Therefore, the KHPA algorithm will be used throughout this thesis and is explained in detail in \Sec{sec:04_background_khpa}.
 
 
 % ===========================================
 % ===========================================
 \section{GPU accelerated Apache Spark Cluster}
-This thesis is targeting at enabling GPU acceleration for Apache Spark.
-Several solutions exist which are trying to solve the problem in similar ways.
-In research, many solutions have been proposed.
-In the following, three different approaches will be introduced.
+% Short intro
+This thesis aims to enable GPU acceleration for Apache Spark.
+% Research
+In research, many solutions have been proposed which try to solve the problem in similar ways.
+% Following
+In the following, three different approaches are introduced.
 
 
 % HeteroSpark
 \paragraph{}
-Li et al. \cite{Li2015HeteroSpark} developed a middleware framework called \textit{HeteroSpark} to enable GPU acceleration on Apache Spark worker nodes. HeteroSpark listens for function calls in Apache Spark applications and invokes the GPU kernel for acceleration. For communication between CPU and GPU, HeteroSpark implements a CPU-GPU communication layer for each worker node using the Java RMI API. To execute operations on the GPU, the CPU JVM will send serialized data to the GPU JVM using the RMI communication interface. The GPU JVM will deserialize the received data for execution.
+Li et al. \cite{Li2015HeteroSpark} developed a middleware framework called \textit{HeteroSpark} to enable GPU acceleration on Apache Spark worker nodes. HeteroSpark listens for function calls in Apache Spark applications and invokes the GPU kernel for acceleration. For communication between CPU and GPU, HeteroSpark implements a CPU-GPU communication layer for each worker node using the Java RMI\todo{Abbr} API. To execute operations on the GPU, the CPU Java Virtual Machine (JVM) will send serialized data to the GPU JVM using the RMI communication interface. The GPU JVM will deserialize the received data for execution.
 % Design
 The design provides a plug-n-play approach and an API for the user to call functions with GPU support.
 % Results
@@ -168,13 +172,13 @@ SparkGPU accomplished to improve the performance of machine learning algorithms 
 % ===========================================
 % ===========================================
 \section{Implementation of an Automated Deployment Pipeline}
-Implementing an automated deployment pipeline is a more applied topic and well described in many literature. In this section the main literature which has been used throughout the implementation of this thesis work is being introduced.
+Implementing an automated deployment pipeline is a more applied topic and well described in many literature. In this section the main literature used throughout the implementation of this thesis work is being introduced.
 
 
 % continuous delivery
 \paragraph{}The conceptual design and implementation of an automated deployment pipeline in this thesis was mostly inspired by the proposed solution of the book \textit{Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation} by Humble et al. \cite{Farley2010CI}.
 % Short intro about the content of this book
-Throughout this book, the authors explain the theoretical idea behind an automated deployment pipeline and explaining an example implementation.
+The authors explain the theoretical idea behind an automated deployment pipeline and explaining an example implementation.
 % Implementation
-The proposed implementation covers the software lifecycle from compiling source to delivering the software to a production environment.
+The proposed implementation covers the software lifecycle from compiling source code to delivering the software to a production environment.
 The commit stage which covers the build and test part of the software can be applied in parts for this thesis work.

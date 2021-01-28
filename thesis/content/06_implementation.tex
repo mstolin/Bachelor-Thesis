@@ -1,40 +1,135 @@
 \chapter{Implementation}
 \label{chap:06_implementation}
-\todo{Describe Chapter}
+
+This chapter explains the implementation process of the conceptual detail introduced in \Chap{chap:05_design}.
 
 
 % ===========================================
 % ===========================================
-\section{Background}
-\todo{NVIDIA RUNTIME MUSS INSTALLIERT SEIN UND ALS DEFAULT}
-Mentioned before, the goal is to create a self-healing and self-adapting computing environment. In addition, Apache Spark applications  should be able to deploy automatically via a CI pipeline to the cluster. Therefore, to implement the conceptual design described in SECTION XY, the following requirements need to be implemented:
+\section{General}
+% Docker swarm
+To implement the introduced conceptual design, several requirement on the host machine have to be provided.
 
-\begin{enumerate}
-% 1
-\item Implementing the Auto-Scaler Python module
-% 2
-\item Dockerizing the Auto-Scaler
-% 3
-\item Creating the computing environment in a Docker swarm
+
+\subsection{The Host Machine}
+% SHort intro
+The host machine is NVIDIA DGX.
+% Live system
+It is important to mentioned that the machine is a shared live system. Many applications from different departments are performing on the machine. All application are sharing the same resource on the machine.
+
+
+% Resources
+The hardware specification of the machine is the following:
 \begin{itemize}
-\item Create an Apache Spark cluster with GPU acceleration
-\item Create an autonomic manager with a monitoring system and an Auto-Scaler
+\item 11GB RAM
+\item 300 TB DIsk space 
+\item 8x NVIDIA Tesla GPU a 32GB
+\item 500x Intel CPU COre 29876
 \end{itemize}
+
+
+% Available software
+The following software is installed on the machine:
+\begin{itemize}
+\item Ubuntu 30.5
+\item Docker 19.5
+\item NVIDIA Docker runtime 1
+\end{itemize}
+
+
+- Docker Swarm 
+- Each component as a Docker file to create services
+- Nvidia runtime to use GPUs
+
+
+\subsection{Problem Statement}
+% nvidia runtime
+To deploy Docker container with access to GPU resources, the NVIDIA runtime for Docker has to be installed.
+% What?
+The NVIDIA runtime for Docker allows to access GPU resources from inside a Docker container. \todo{besser erklären}
+% The problem
+The NVIDIA runtime has to be enabled as default runtime for Docker to use it in Docker services.
+% How
+Just install the following and set it in the file XY.
+% Already installed
+The NVIDIA runtime 4.x is already installed on the host machine but is not set as the default runtime.
+% The problem
+Changing the default runtime requires a restart of the Docker service. Restarting the Docker service is not possible because it requires to quit all running application on the system which require Docker. Therefore, components which require access to GPU resources (Apache Spark worker nodes and the dcgm-exporter) cannot be deployed as Docker services.
+% The solution
+The solution to this problem is, to deploy these components as Docker container. The docker run command provides a runtime attribute to set the NVIDIA runtime as default runtime for this container.
+% Example
+
+% Describe example
+LST AB provides an example about deploying a Docker container with the NVIDIA runtime enabled.
+
+
+% Finish
+Given this problem statement, the Auto-Scaler has to be implemented to deploy Apache Spark worker Docker container instead of scaling the replicas of the worker service.
+
+
+%\subsection{Development Steps}
+%Vll auch irgendwie ala Scrum etc
+%Wasserfall modell ....
+
+%\begin{enumerate}
+% 1
+%\item Implementing the Auto-Scaler Python module
+% 2
+%\item Dockerizing the Auto-Scaler
+% 3
+%\item Creating the computing environment in a Docker swarm
+%\begin{itemize}
+%\item Create an Apache Spark cluster with GPU acceleration
+%\item Create an autonomic manager with a monitoring system and an Auto-Scaler
+%\end{itemize}
 % 4
-\item Implement a GitLab CI pipeline to deploy Apache Spark applications to the cluster
-\end{enumerate}
+%\item Implement a GitLab CI pipeline to deploy Apache Spark applications to the cluster
+%\end{enumerate}
 
 
 % ===========================================
 % ===========================================
 \section{Auto-Scaler}
-\todo{AUto-Scaler control loop: Periodically checks if the number of desired worker replicas is running, vll auch eher in design}
-% Concept
-The conceptual design of the Auto-Scaler is described in detail in \Sec{sec:05_auto-scaler}. 
-% Python module
-The Auto-Scaler will be implemented as a module in Python 3.8.
-% Docker
-To deploy the Auto-Scaler in a Docker swarm, the Auto-Scaler needs to be dockerized in a Docker Image.
+% SHort intro 
+The Auto-Scaler is a main module of the autonomic manager. It is responsible to analyse performance metrics, plan scaling actions in accordance to the performance metrics and execute scaling actions to adapt the number of Apache Spark worker in the computing environment.
+% Mention conceptual design
+It will be implement after the conceptual design described in SECTION XY.
+
+
+\subsection{Technical Background}
+% Technical background
+The Auto-Scaler is implement in Python 3.8. It consists of different classes, each having different responsibilities.
+% A list of the Python libs
+The following Python libraries have been used for the implementation:
+% The list
+\begin{itemize}
+\item aiohttp\footnote{\url{https://pypi.org/project/aiohttp/} (Accessed: 2021-01-26)}
+\item APScheduler\footnote{\url{https://pypi.org/project/APScheduler/} (Accessed: 2021-01-26)}
+\item docker\footnote{\url{https://pypi.org/project/docker/} (Accessed: 2021-01-26)}
+\item PyYAML\footnote{\url{https://pypi.org/project/PyYAML/} (Accessed: 2021-01-26)}
+\end{itemize}
+% Explain libs
+To make asynchronous HTTP calls, the aiohttp library was used. Asynchronous HTTP calls are important because the performance metrics have to analysed at runtime.
+% apscheduler
+The APScheduler is needed to periodically tasks.
+% docker
+To interact with the Docker engine, Docker provides a Python SDK.
+% pyyaml
+The configuration for the Auto-Scaler is defined in YAML files. The PyYAML library is used to parse YAML files.
+
+
+% Auto-Scaler workflow MAPE
+%The workflow is the following:
+%\begin{enumerate}
+%\item Analyse: Fetch performance metrics from the Prometheus API, Next 
+
+
+%\item Fetch performance metrics from Prometheus
+%\item Analyse the performance metrics given specified threshold based rules
+%\item Determine if a scaling action is needed using the Scaling-Heat algorithm
+%\item Calculate the number of active Apache Spark worker using the KHPA algorithm
+%\item Scale the number of Apache Spark worker
+%\end{enumerate}
 
 %
 % Keine prom alertmanager weil wegen neustart und dann db weg
@@ -138,9 +233,13 @@ max                       & Float   & 0.5               \\ \bottomrule
 \end{table}
 
 
-\subsection{Scaling the Apache Worker Service}
-docker service apache-worker scale replicas=4
-Not possible to use nvidia-runtime because of restart -> scale docker container
+\subsection{Scaling Apache Worker Nodes}
+% Periodically performing
+The Auto-Scaler performs periodically. Each period it fetches performance metrics, analyses the metrics, plans scaling actions, and executes them if necessary.
+% Tasks
+To perform tasks periodically, it uses the APScheduler library. This allows to perform a tasks each $n$ seconds.
+% Explain tasks
+In each task, the Analyse, Plan, and Execute phase is performed in order.
 
 
 \subsubsection{Estimation of Necessary Scaling Actions}
@@ -157,13 +256,35 @@ During each interval, after performance metrics have been received from the moni
 % Recurrence factor
 The algorithm uses a recurrence factor which has to be defined in design time. The Auto-Scaler configuration provides a parameter called \textit{recurrence\_factor} (see \Tab{table:06_auto-scaler_config_parameter} for details). 
 
-
 % HeatStore
 \paragraph{}To store and calculate the heat for each performance metric, a class called \texttt{HeatStore} was created.
 % Explain UML
 FIGURE XY describes the UML class diagram for the \texttt{HeatStore} Python class.
 % For what can it be used
 The class can be used to retrieve, update and reset the heat for a list of performance metrics.
+
+% ------
+
+% SHort intro
+The Auto-scaler begins with the Analyse phase of the MAPE architecture.
+% fetch metrics
+First it fetches the performance metrics from the specified Prometheus API.
+% How it makes HTTP calls
+To make HTTP requests, the Auto-Scaler uses the aiohttp library. This library allow to make asynchronous HTTP requests.
+% Why async
+Performing asynchronous HTTP calls is important, because this does not block the current thread, the application is running on. This will not stop the loop.
+% Performance violations
+After receiving the performance metrics, the Auto-Scaler analyses the metric by checking if they violate the defined performance thresholds. If no performance violation has occured, the current task has finished and the Auto-Scaler for the next interval.
+% Violation
+Otherwise, the Auto-Scaler will perform the Plan phase.
+% Conditions
+To execute the Plan phase, a set of conditions have to be given:
+\begin{enumerate}
+\item The Scaling Heat algorithm has to reach the recurrence factor
+\item No cooldown period should be activated
+\end{enumerate}
+
+% Vll ein http response zeigen
 
 
 \subsubsection{Calculating the Number of Needed Worker Nodes}
@@ -177,6 +298,20 @@ The class can be used to retrieve, update and reset the heat for a list of perfo
 The KHPA algorithm will be used to calculate how many worker are needed to reach the target utilization (see SECTION XY for algorithm details). 
 % More metrics then one
 In this project, the calculation is done for the CPU and GPU utilization. The highest number of the desired worker node replicas is chosen.
+
+% --------------
+
+In the Plan phase, the Auto-Scaler calculates the number of needed Apache Spark worker nodes using the KHPA algorithm.
+% The python impl
+\begin{lstlisting}[label=lst:06_auto-scaler_plan_khpa, caption=KHPA implementation using Python 3.8, language=Python]
+def calculate_number_of_needed_worker(active_worker: int,
+    utilization: float,
+    target_utilization: float):
+  return math.ceil(
+    active_worker * (utilization / target_utilization))
+\end{lstlisting}
+% Explain
+\Lst{lst:06_auto-scaler_plan_khpa} shows the implementation of the KHPA algorithm in Python.
 
 
 \subsubsection{Performing a Scaling Action}
@@ -198,6 +333,17 @@ To check if applications
 
 % Cooldown
 After a scaling action has been performed, a cooldown period will be applied. The cooldown period is needed because the number of desired worker nodes can keep fluctuating due to the dynamic nature of performance metrics.
+
+% -----------
+
+% short intro
+After the number of desired Apache Spark worker has been calculated, the Auto-Scaler adds or removes worker container.
+% No romoving while applictions are running
+During the execution of Apache Spark applications, it is not possible to remove worker nodes. Because of the bla bla. An alerantive approach is described in SECTION DISCUSSION.
+% How ti check if apps are running
+In each interval, the Auto-Scaler checks if an application is actively performing. To get this value, the Auto-Scaler uses the Prometheus HTTP API and sends the BBLA BLA PromQL query. Therefore, thr Apache Spark master node has to be defined as Prometheus target (described in SECTION XY).
+% Add worker
+Docker SDK bla bla
 
 
 \subsection{Docker Image}
