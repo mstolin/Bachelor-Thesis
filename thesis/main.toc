@@ -77,18 +77,19 @@
 \contentsline {subsection}{\numberline {4.3.1}Extension of the Spark programming model}{32}{subsection.4.3.1}% 
 \contentsline {paragraph}{}{32}{paragraph*.54}% 
 \contentsline {paragraph}{}{32}{paragraph*.56}% 
-\contentsline {subsection}{\numberline {4.3.2}Installation Requirements for Apache Spark Standalone Mode}{32}{subsection.4.3.2}% 
-\contentsline {section}{\numberline {4.4}Prometheus}{33}{section.4.4}% 
+\contentsline {subsection}{\numberline {4.3.2}GPU Accelerated Machine Learning with XGBoost}{32}{subsection.4.3.2}% 
+\contentsline {subsection}{\numberline {4.3.3}Installation Requirements for Apache Spark Standalone Mode}{33}{subsection.4.3.3}% 
+\contentsline {section}{\numberline {4.4}Prometheus}{34}{section.4.4}% 
 \contentsline {subsection}{\numberline {4.4.1}Prometheus Architecture}{34}{subsection.4.4.1}% 
-\contentsline {subsubsection}{Prometheus Server}{34}{subsubsection*.58}% 
+\contentsline {subsubsection}{Prometheus Server}{35}{subsubsection*.58}% 
 \contentsline {subsubsection}{Optional Components}{35}{subsubsection*.59}% 
 \contentsline {subsection}{\numberline {4.4.2}Prometheus Configuration}{36}{subsection.4.4.2}% 
-\contentsline {section}{\numberline {4.5}cAdvisor}{36}{section.4.5}% 
-\contentsline {section}{\numberline {4.6}GitLab CI/CD}{36}{section.4.6}% 
+\contentsline {section}{\numberline {4.5}cAdvisor}{37}{section.4.5}% 
+\contentsline {section}{\numberline {4.6}GitLab CI/CD}{37}{section.4.6}% 
 \contentsline {subsection}{\numberline {4.6.1}CI/CD Pipeline}{37}{subsection.4.6.1}% 
-\contentsline {subsection}{\numberline {4.6.2}Example of a Basic CI/CD Pipeline Architecture}{37}{subsection.4.6.2}% 
-\contentsline {subsection}{\numberline {4.6.3}Job Execution}{38}{subsection.4.6.3}% 
-\contentsline {section}{\numberline {4.7}Scaling Heat}{38}{section.4.7}% 
+\contentsline {subsection}{\numberline {4.6.2}Example of a Basic CI/CD Pipeline Architecture}{38}{subsection.4.6.2}% 
+\contentsline {subsection}{\numberline {4.6.3}Job Execution}{39}{subsection.4.6.3}% 
+\contentsline {section}{\numberline {4.7}Scaling Heat}{39}{section.4.7}% 
 \contentsline {subsection}{\numberline {4.7.1}Recurrence Factor}{39}{subsection.4.7.1}% 
 \contentsline {paragraph}{}{39}{paragraph*.61}% 
 \contentsline {paragraph}{}{39}{paragraph*.62}% 

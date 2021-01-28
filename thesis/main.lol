@@ -9,7 +9,7 @@
 \contentsline {lstlisting}{\numberline {4.3}Usage of worker launch script}{31}{lstlisting.4.3}% 
 \contentsline {lstlisting}{\numberline {4.4}Example usage of the spark-submit executable}{31}{lstlisting.4.4}% 
 \contentsline {lstlisting}{\numberline {4.5}Prometheus configuration file example}{36}{lstlisting.4.5}% 
-\contentsline {lstlisting}{\numberline {4.6}Prometheus rules configuration file example}{36}{lstlisting.4.6}% 
+\contentsline {lstlisting}{\numberline {4.6}Prometheus rules configuration file example}{37}{lstlisting.4.6}% 
 \contentsline {lstlisting}{\numberline {4.7}Example of a \texttt {.gitlab-ci.yml} configuration file}{38}{lstlisting.4.7}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }

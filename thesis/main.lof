@@ -18,7 +18,7 @@
 \contentsline {figure}{\numberline {\relax 4.4}{\ignorespaces Overview of a Spark cluster architecture - Source: Authors own model, based on \cite {Apache2020Spark}.\relax }}{30}{figure.caption.43}% 
 \contentsline {figure}{\numberline {\relax 4.5}{\ignorespaces Catalyst optimization with RAPIDS accelerator for Apache Spark - Source: Authors own model, based on \cite {Mcdonald2020SparkRapids}.\relax }}{33}{figure.caption.55}% 
 \contentsline {figure}{\numberline {\relax 4.6}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Brazil2018Prom}.\relax }}{34}{figure.caption.57}% 
-\contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{37}{figure.caption.60}% 
+\contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{38}{figure.caption.60}% 
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Automated Deployment Pipeline concept\relax }}{44}{figure.caption.66}% 
 \contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Deployment of a spark-submit container\relax }}{45}{figure.caption.69}% 
