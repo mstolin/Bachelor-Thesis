@@ -125,52 +125,48 @@
 \contentsline {paragraph}{}{52}{paragraph*.78}% 
 \contentsline {paragraph}{}{52}{paragraph*.80}% 
 \contentsline {chapter}{\numberline {6}Implementation}{55}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}General}{55}{section.6.1}% 
-\contentsline {subsection}{\numberline {6.1.1}The Host Machine}{55}{subsection.6.1.1}% 
-\contentsline {subsection}{\numberline {6.1.2}Problem Statement}{56}{subsection.6.1.2}% 
+\contentsline {section}{\numberline {6.1}Implementation Environment}{55}{section.6.1}% 
+\contentsline {subsection}{\numberline {6.1.1}Technical Details}{55}{subsection.6.1.1}% 
+\contentsline {subsection}{\numberline {6.1.2}NVIDIA Runtime Problem Statement}{56}{subsection.6.1.2}% 
 \contentsline {section}{\numberline {6.2}Auto-Scaler}{56}{section.6.2}% 
-\contentsline {subsection}{\numberline {6.2.1}Technical Background}{56}{subsection.6.2.1}% 
+\contentsline {subsection}{\numberline {6.2.1}Technical Background}{57}{subsection.6.2.1}% 
 \contentsline {subsection}{\numberline {6.2.2}Configuration}{57}{subsection.6.2.2}% 
 \contentsline {paragraph}{}{57}{paragraph*.82}% 
-\contentsline {paragraph}{General:}{57}{paragraph*.83}% 
-\contentsline {paragraph}{Metrics:}{57}{paragraph*.84}% 
-\contentsline {paragraph}{Worker:}{57}{paragraph*.85}% 
 \contentsline {subsection}{\numberline {6.2.3}Scaling Apache Worker Nodes}{58}{subsection.6.2.3}% 
-\contentsline {subsubsection}{Estimation of Necessary Scaling Actions}{58}{subsubsection*.87}% 
-\contentsline {paragraph}{}{59}{paragraph*.88}% 
-\contentsline {subsubsection}{Calculating the Number of Needed Worker Nodes}{59}{subsubsection*.89}% 
-\contentsline {subsubsection}{Performing a Scaling Action}{60}{subsubsection*.90}% 
+\contentsline {subsubsection}{Estimation of Necessary Scaling Actions}{59}{subsubsection*.84}% 
+\contentsline {subsubsection}{Calculating the Number of Needed Worker Nodes}{59}{subsubsection*.85}% 
+\contentsline {subsubsection}{Performing a Scaling Action}{59}{subsubsection*.86}% 
 \contentsline {subsection}{\numberline {6.2.4}Docker Image}{60}{subsection.6.2.4}% 
-\contentsline {section}{\numberline {6.3}Deployment of a Docker Swarm}{60}{section.6.3}% 
-\contentsline {subsection}{\numberline {6.3.1}Hardware}{60}{subsection.6.3.1}% 
-\contentsline {subsection}{\numberline {6.3.2}Software info}{60}{subsection.6.3.2}% 
-\contentsline {subsection}{\numberline {6.3.3}Swarm}{60}{subsection.6.3.3}% 
-\contentsline {subsection}{\numberline {6.3.4}Build Script}{61}{subsection.6.3.4}% 
-\contentsline {subsection}{\numberline {6.3.5}Apache Spark Cluster with GPU Acceleration}{61}{subsection.6.3.5}% 
-\contentsline {paragraph}{}{61}{paragraph*.91}% 
-\contentsline {paragraph}{}{61}{paragraph*.92}% 
-\contentsline {subsubsection}{Apache Spark Base Image Installation Details}{61}{subsubsection*.93}% 
-\contentsline {paragraph}{}{61}{paragraph*.94}% 
-\contentsline {subsubsection}{Standalone Master and Worker Image}{62}{subsubsection*.95}% 
-\contentsline {paragraph}{Master image:}{62}{paragraph*.96}% 
-\contentsline {paragraph}{Worker image:}{62}{paragraph*.97}% 
-\contentsline {subsubsection}{Submit Image}{62}{subsubsection*.98}% 
-\contentsline {subsection}{\numberline {6.3.6}Autonomic Manager}{62}{subsection.6.3.6}% 
-\contentsline {paragraph}{}{63}{paragraph*.99}% 
-\contentsline {subsubsection}{Prometheus Target Configuration}{63}{subsubsection*.100}% 
-\contentsline {section}{\numberline {6.4}Automatic Deployment of Apache Spark Applications}{63}{section.6.4}% 
-\contentsline {chapter}{\numberline {7}Evaluation}{65}{chapter.7}% 
-\contentsline {section}{\numberline {7.1}Experimental Environment}{65}{section.7.1}% 
-\contentsline {section}{\numberline {7.2}Workload}{65}{section.7.2}% 
-\contentsline {subsection}{\numberline {7.2.1}K-Means}{65}{subsection.7.2.1}% 
-\contentsline {section}{\numberline {7.3}Efficiency of GPU Acceleration}{66}{section.7.3}% 
-\contentsline {section}{\numberline {7.4}Auto-Scaling using CPU Metrics}{66}{section.7.4}% 
-\contentsline {section}{\numberline {7.5}Results}{66}{section.7.5}% 
-\contentsline {chapter}{\numberline {8}Outlook}{67}{chapter.8}% 
-\contentsline {section}{\numberline {8.1}Optimizing Scaling}{67}{section.8.1}% 
-\contentsline {section}{\numberline {8.2}Reinforcement Learning for Auto-Scaling}{67}{section.8.2}% 
-\contentsline {section}{\numberline {8.3}Pro Active Auto-Scaler}{67}{section.8.3}% 
-\contentsline {chapter}{\numberline {9}Conclusion}{69}{chapter.9}% 
-\contentsline {section}{\numberline {9.1}Cluster architecture}{69}{section.9.1}% 
-\contentsline {part}{Anhang}{76}{section*.103}% 
-\contentsline {chapter}{\numberline {A}Apache Spark Cluster Implementation}{77}{appendix.A}% 
+\contentsline {section}{\numberline {6.3}Computing Environment}{61}{section.6.3}% 
+\contentsline {subsection}{\numberline {6.3.1}Deployment of the Computing Environment}{61}{subsection.6.3.1}% 
+\contentsline {subsection}{\numberline {6.3.2}Apache Spark Cluster with GPU Acceleration}{62}{subsection.6.3.2}% 
+\contentsline {subsubsection}{Apache Spark Base Image}{62}{subsubsection*.87}% 
+\contentsline {subsubsection}{Apache Spark Master Image}{62}{subsubsection*.88}% 
+\contentsline {subsubsection}{Apache Spark Worker Image}{63}{subsubsection*.89}% 
+\contentsline {subsubsection}{Apache Spark Submit Image}{63}{subsubsection*.90}% 
+\contentsline {subsubsection}{Apache Spark Base Image Installation Details}{63}{subsubsection*.91}% 
+\contentsline {paragraph}{}{63}{paragraph*.92}% 
+\contentsline {subsubsection}{Standalone Master and Worker Image}{64}{subsubsection*.93}% 
+\contentsline {paragraph}{Master image:}{64}{paragraph*.94}% 
+\contentsline {paragraph}{Worker image:}{64}{paragraph*.95}% 
+\contentsline {subsubsection}{Submit Image}{64}{subsubsection*.96}% 
+\contentsline {subsection}{\numberline {6.3.3}Autonomic Manager}{65}{subsection.6.3.3}% 
+\contentsline {paragraph}{}{65}{paragraph*.97}% 
+\contentsline {subsubsection}{Prometheus Target Configuration}{65}{subsubsection*.98}% 
+\contentsline {section}{\numberline {6.4}Automatic Deployment of Apache Spark Applications}{65}{section.6.4}% 
+\contentsline {chapter}{\numberline {7}Evaluation}{67}{chapter.7}% 
+\contentsline {section}{\numberline {7.1}Experimental Environment}{67}{section.7.1}% 
+\contentsline {section}{\numberline {7.2}Workload}{67}{section.7.2}% 
+\contentsline {subsection}{\numberline {7.2.1}K-Means}{67}{subsection.7.2.1}% 
+\contentsline {section}{\numberline {7.3}Efficiency of GPU Acceleration}{68}{section.7.3}% 
+\contentsline {section}{\numberline {7.4}Auto-Scaling using CPU Metrics}{68}{section.7.4}% 
+\contentsline {section}{\numberline {7.5}Results}{68}{section.7.5}% 
+\contentsline {chapter}{\numberline {8}Outlook}{69}{chapter.8}% 
+\contentsline {section}{\numberline {8.1}Optimizing Scaling}{69}{section.8.1}% 
+\contentsline {section}{\numberline {8.2}Reinforcement Learning for Auto-Scaling}{69}{section.8.2}% 
+\contentsline {section}{\numberline {8.3}Pro Active Auto-Scaler}{69}{section.8.3}% 
+\contentsline {chapter}{\numberline {9}Conclusion}{71}{chapter.9}% 
+\contentsline {section}{\numberline {9.1}Cluster architecture}{71}{section.9.1}% 
+\contentsline {part}{Anhang}{78}{section*.101}% 
+\contentsline {chapter}{\numberline {A}Computing Environment Implementation}{79}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Apache Spark Cluster Implementation}{81}{appendix.B}% 

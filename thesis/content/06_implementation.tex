@@ -6,19 +6,17 @@ This chapter explains the implementation process of the conceptual detail introd
 
 % ===========================================
 % ===========================================
-\section{General}
-% Docker swarm
-To implement the introduced conceptual design, several requirement on the host machine have to be provided.
-
-
-\subsection{The Host Machine}
-% SHort intro
-The host machine is NVIDIA DGX.
+\section{Implementation Environment}
+% DGX
+To implement the introduced concept, a NVIDIA DGX machine is available.
 % Live system
-It is important to mentioned that the machine is a shared live system. Many applications from different departments are performing on the machine. All application are sharing the same resource on the machine.
+This system is a shared live system. Many applications from different departments are performing on the machine. All applications are sharing the same resources prided by the machine.
+% GPUs
+Overall two of eight GPUs are available for the implementation of this thesis.
 
 
-% Resources
+\subsection{Technical Details}
+% Hardware Resources
 The hardware specification of the machine is the following:
 \begin{itemize}
 \item 11GB RAM
@@ -37,34 +35,19 @@ The following software is installed on the machine:
 \end{itemize}
 
 
-- Docker Swarm 
-- Each component as a Docker file to create services
-- Nvidia runtime to use GPUs
-
-
-\subsection{Problem Statement}
+\subsection{NVIDIA Runtime Problem Statement}
 % nvidia runtime
-To deploy Docker container with access to GPU resources, the NVIDIA runtime for Docker has to be installed.
-% What?
-The NVIDIA runtime for Docker allows to access GPU resources from inside a Docker container. \todo{besser erklären}
+To enable GPU support for Docker containers, the NVIDIA Container Toolkit\footnote{NVIDIA Cloud Native technologies documentation - \url{https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html} (Accessed: 2021-01-28)} has to be installed on the host machine. This toolkit provides a runtime library which automatically enables Docker containers to leverage NVIDIA GPUs.
 % The problem
-The NVIDIA runtime has to be enabled as default runtime for Docker to use it in Docker services.
-% How
-Just install the following and set it in the file XY.
+It is possible to define the runtime of a Docker container with the docker \texttt{run} command. However, this is not supported for Docker services. To deploy Docker services with the NVIDIA runtime enabled, the NVIDIA runtime has to be set as the default runtime for Docker.
 % Already installed
-The NVIDIA runtime 4.x is already installed on the host machine but is not set as the default runtime.
+On the host machine, the NVIDIA Container Toolkit is installed, however the NVIDIA runtime is not set as default runtime.
 % The problem
-Changing the default runtime requires a restart of the Docker service. Restarting the Docker service is not possible because it requires to quit all running application on the system which require Docker. Therefore, components which require access to GPU resources (Apache Spark worker nodes and the dcgm-exporter) cannot be deployed as Docker services.
+Changing the default runtime requires a restart of the Docker service. Restarting the Docker service is not possible because it requires to quit all running Docker containers on the machine. Therefore, components which require access to GPU resources (Apache Spark worker nodes and the dcgm-exporter) cannot be deployed as Docker services.
 % The solution
-The solution to this problem is, to deploy these components as Docker container. The docker run command provides a runtime attribute to set the NVIDIA runtime as default runtime for this container.
-% Example
-
-% Describe example
-LST AB provides an example about deploying a Docker container with the NVIDIA runtime enabled.
-
-
+The solution to this problem is, to deploy these components as Docker container instead of Docker services.
 % Finish
-Given this problem statement, the Auto-Scaler has to be implemented to deploy Apache Spark worker Docker container instead of scaling the replicas of the worker service.
+Given this problem statement, the \textit{Auto-Scaler} has to be implemented to use the Docker container API instead of the Docker service API to create Apache Spark worker nodes in the environment. Additionally, the dcgm-exporter Docker container has to be created manually and cannot be created with the Docker stack command.
 
 
 %\subsection{Development Steps}
@@ -93,12 +76,27 @@ Given this problem statement, the Auto-Scaler has to be implemented to deploy Ap
 % SHort intro 
 The Auto-Scaler is a main module of the autonomic manager. It is responsible to analyse performance metrics, plan scaling actions in accordance to the performance metrics and execute scaling actions to adapt the number of Apache Spark worker in the computing environment.
 % Mention conceptual design
-It will be implement after the conceptual design described in SECTION XY.
+It is implemented as a custom module in Python. There is no existing solution that satisfies the requirements of the conceptual Auto-Scaler design.
+% DOcker
+Furthermore to deploy the Auto-Scaler as a Docker container, a Dockerfile is created to build a Docker image.
+
+
+% Concept
+The Auto-Scaler integrates the Analyse, Plan, and Execute phase of the MAPE architecture. Furthermore it scales the Apache Worker horizontally by adding and removing Apache Spark worker Docker containers.
+% A Loop
+The Auto-Scaler runs as a background services that periodically performs each phase in order.
+% Configuration
+A file which defines runtime configuration can be set.
+% Start the sclaer
+The Auto-Scaler can be started with the following command:
+\begin{lstlisting}[label=lst:06_auto-scaler_start, caption=Auto-Scaler start command, language=sh]
+$ python3 run.py --config=config.yml
+\end{lstlisting}
 
 
 \subsection{Technical Background}
 % Technical background
-The Auto-Scaler is implement in Python 3.8. It consists of different classes, each having different responsibilities.
+The Auto-Scaler is implemented in Python 3.8. It consists of different classes, each having different responsibilities.
 % A list of the Python libs
 The following Python libraries have been used for the implementation:
 % The list
@@ -108,72 +106,62 @@ The following Python libraries have been used for the implementation:
 \item docker\footnote{\url{https://pypi.org/project/docker/} (Accessed: 2021-01-26)}
 \item PyYAML\footnote{\url{https://pypi.org/project/PyYAML/} (Accessed: 2021-01-26)}
 \end{itemize}
-% Explain libs
-To make asynchronous HTTP calls, the aiohttp library was used. Asynchronous HTTP calls are important because the performance metrics have to analysed at runtime.
-% apscheduler
-The APScheduler is needed to periodically tasks.
-% docker
-To interact with the Docker engine, Docker provides a Python SDK.
-% pyyaml
-The configuration for the Auto-Scaler is defined in YAML files. The PyYAML library is used to parse YAML files.
 
-
-% Auto-Scaler workflow MAPE
-%The workflow is the following:
-%\begin{enumerate}
-%\item Analyse: Fetch performance metrics from the Prometheus API, Next 
-
-
-%\item Fetch performance metrics from Prometheus
-%\item Analyse the performance metrics given specified threshold based rules
-%\item Determine if a scaling action is needed using the Scaling-Heat algorithm
-%\item Calculate the number of active Apache Spark worker using the KHPA algorithm
-%\item Scale the number of Apache Spark worker
-%\end{enumerate}
-
-%
-% Keine prom alertmanager weil wegen neustart und dann db weg
-% Mehr flexibilität, unabhängig von prom
-%
-
-%
-% WARUM NICHT GPU MIT IN DIE AUTO-SCALER METRICS?
-% weil alle worker sich die GPUs teilen ...
-%
-
-% Only horizontal
-%During this thesis work, the horizontal scaling approach is being used because of its suitability to solve this thesis problems and therefore being %introduced in this section.
-% Vertical
-%Vertical scaling will not be used due to its limitations explained in \Sec{subsec:02_foundations_scalability_limits}.
 
 \subsection{Configuration}
 % Design
-\paragraph{}The configuration parameter for the Auto-Scaler have been introduced in \Sec{subsec:05_auto-scaler_configuration}.
+\paragraph{}The configuration parameter for the Auto-Scaler have been introduced in \Sec{subsubsec:05_am_auto-scaler_config}.
 % Its yaml
-The configuration for the Auto-Scaler will be specified in a YAML file.
+All parameter are defined in the YAML file format
 % The yaml file
-\Lst{lst:06_auto-scaler_config_example} describes an example of an Auto-Scaler configuration.
+\Lst{lst:06_auto-scaler_config_example} provides an example of a configuration.
 % Overall structure
-Overall, a configuration file is structured in three sections: General, metrics and worker.
-% The table
-\Tab{table:06_auto-scaler_config_parameter} lists all available configuration parameters. It describes the value type and the default value of each parameter. Some parameters are required to be defined by the administrator and have no default value.
-
+Overall, a configuration file is structured in three sections: General, metrics, and worker.
+% The sections
+\begin{itemize}
 % General
-\paragraph{General:}
+\item General:
 The general section defines details about the scaling and heat algorithm and the Prometheus URL.
 
-
 % Metrics
-\paragraph{Metrics:}
-\todo{Multi-dimensional metrics/queries}
-Metrics is a list of performance metrics configuration parameters. The name of a metric (\textit{cpu} and \textit{gpu} in the example \Lst{lst:06_auto-scaler_config_example}) can be set by the administrator. A performance metric requires a query in the PromQL syntax. Additionally a target utilization is needed and the minimum and maximum utilization of the performance metric.
-
+\item Metrics:
+Metrics is a list of performance metrics configuration parameters. A performance metric requires a query in the PromQL syntax. Additionally a target utilization is needed and the minimum and maximum utilization of the performance metric.
 
 % Worker
-\paragraph{Worker:}
+\item Worker:
 To scale the replicas of the Apache Spark worker service, the name of the Docker service needs to be set. In addition, the minimum and maximum number of concurrent worker nodes needs to be defined to prevent an overhead of running worker nodes.
+\end{itemize}
 
+% The table
+\Tab{table:06_auto-scaler_config_parameter} lists all available configuration parameters. It describes the value type and the default value of each parameter. Some parameters are required to be defined by the administrator and have no default value.
+% Parameter table
+\begin{table}[]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+Name                      & Type    & Default           \\ \midrule
+\multicolumn{3}{l}{\textbf{general}}                    \\ \midrule
+interval\_seconds         & Integer & 1                 \\
+cooldown\_period\_seconds & Integer & 180               \\
+recurrence\_factor        & Integer & 1                 \\
+prometheus\_url           & String  & \textit{Required} \\
+\multicolumn{3}{l}{\textbf{metrics}}                    \\ \midrule
+query                     & String  & \textit{Required} \\
+target\_utilization       & Float   & 0.5               \\
+\multicolumn{3}{l}{thresholds}                          \\
+min                       & Float   & 0.5               \\
+max                       & Float   & 0.5               \\
+\multicolumn{3}{l}{\textbf{worker}}                     \\ \midrule
+service\_name             & String  & \textit{Required} \\
+\multicolumn{3}{l}{thresholds}                          \\
+min                       & Float   & 0.5               \\
+max                       & Float   & 0.5               \\ \bottomrule
+\end{tabular}
+\caption{Auto-Scaler configuration parameter}
+\label{table:06_auto-scaler_config_parameter}
+\end{table}
 
+\todo{Update weil kein DOcker swarm mehr}
 % Example
 \begin{lstlisting}[label=lst:06_auto-scaler_config_example, caption=Auto-Scaler configuration YAML file]
 general:
@@ -205,34 +193,6 @@ worker:
 \end{lstlisting}
 
 
-% Parameter table
-\begin{table}[]
-\centering
-\begin{tabular}{@{}lll@{}}
-\toprule
-Name                      & Type    & Default           \\ \midrule
-\multicolumn{3}{l}{\textbf{general}}                    \\ \midrule
-interval\_seconds         & Integer & 1                 \\
-cooldown\_period\_seconds & Integer & 180               \\
-recurrence\_factor        & Integer & 1                 \\
-prometheus\_url           & String  & \textit{Required} \\
-\multicolumn{3}{l}{\textbf{metrics}}                    \\ \midrule
-query                     & String  & \textit{Required} \\
-target\_utilization       & Float   & 0.5               \\
-\multicolumn{3}{l}{thresholds}                          \\
-min                       & Float   & 0.5               \\
-max                       & Float   & 0.5               \\
-\multicolumn{3}{l}{\textbf{worker}}                     \\ \midrule
-service\_name             & String  & \textit{Required} \\
-\multicolumn{3}{l}{thresholds}                          \\
-min                       & Float   & 0.5               \\
-max                       & Float   & 0.5               \\ \bottomrule
-\end{tabular}
-\caption{Auto-Scaler configuration parameter}
-\label{table:06_auto-scaler_config_parameter}
-\end{table}
-
-
 \subsection{Scaling Apache Worker Nodes}
 % Periodically performing
 The Auto-Scaler performs periodically. Each period it fetches performance metrics, analyses the metrics, plans scaling actions, and executes them if necessary.
@@ -243,65 +203,19 @@ In each task, the Analyse, Plan, and Execute phase is performed in order.
 
 
 \subsubsection{Estimation of Necessary Scaling Actions}
-
-%
-% ANALYZE !!!!!
-%
-
-The Scaling Heat algorithm, introduced in \Sec{sec:04_scal-heat}, is being used to estimate if a scaling action is necessary.
-% Why
-The algorithm is being used because it will prevent the Auto-Scaler to perform unnecessary scaling actions.
-% For each performance metric
-During each interval, after performance metrics have been received from the monitoring system, a heat value will be calculated for each performance metric specified in the configuration under \textit{metrics}.
-% Recurrence factor
-The algorithm uses a recurrence factor which has to be defined in design time. The Auto-Scaler configuration provides a parameter called \textit{recurrence\_factor} (see \Tab{table:06_auto-scaler_config_parameter} for details). 
-
-% HeatStore
-\paragraph{}To store and calculate the heat for each performance metric, a class called \texttt{HeatStore} was created.
-% Explain UML
-FIGURE XY describes the UML class diagram for the \texttt{HeatStore} Python class.
-% For what can it be used
-The class can be used to retrieve, update and reset the heat for a list of performance metrics.
-
-% ------
-
-% SHort intro
-The Auto-scaler begins with the Analyse phase of the MAPE architecture.
-% fetch metrics
-First it fetches the performance metrics from the specified Prometheus API.
-% How it makes HTTP calls
-To make HTTP requests, the Auto-Scaler uses the aiohttp library. This library allow to make asynchronous HTTP requests.
-% Why async
-Performing asynchronous HTTP calls is important, because this does not block the current thread, the application is running on. This will not stop the loop.
-% Performance violations
-After receiving the performance metrics, the Auto-Scaler analyses the metric by checking if they violate the defined performance thresholds. If no performance violation has occured, the current task has finished and the Auto-Scaler for the next interval.
-% Violation
-Otherwise, the Auto-Scaler will perform the Plan phase.
-% Conditions
-To execute the Plan phase, a set of conditions have to be given:
-\begin{enumerate}
-\item The Scaling Heat algorithm has to reach the recurrence factor
-\item No cooldown period should be activated
-\end{enumerate}
-
-% Vll ein http response zeigen
+To estimate of a scaling actions is necessary, the Auto-Scaler uses the Scaling Heat algorithm (introduced in SECTION XY).
+The algorithm takes the utilization of a performance metric, the lower- and upper-threshold, and the calculated heat of the last iteration as input parameters.
+The utilization is received from the Prometheus HTTP API. Furthermore, the Auto-Scaler fetches the utilization of all given performance metrics in each iteration. It calculates the heat value for each single performance metrics. If the upper-threshod value gets violated, the heat value is increased by 1. Otherwise, if the lower-threshold is violated, the heat is reduced by one.
+Until the heat value reaches positive or negative of the recurrence-factor a scaling action will be executed.
+This phase will not be performed if a cooldown period has been activated in the previous iteration.
 
 
 \subsubsection{Calculating the Number of Needed Worker Nodes}
+To calculate the number of needed Apache Spark worker, the Auto-Scaler uses the KHPA algorithm.
+As input parameters, the algorithm takes the current number of active worker nodes, the utilization of the performance metric, and target utilization.
 
-%
-% PLAN !!!
-%
-
-
-% Intro KHPA
-The KHPA algorithm will be used to calculate how many worker are needed to reach the target utilization (see SECTION XY for algorithm details). 
-% More metrics then one
-In this project, the calculation is done for the CPU and GPU utilization. The highest number of the desired worker node replicas is chosen.
-
-% --------------
-
-In the Plan phase, the Auto-Scaler calculates the number of needed Apache Spark worker nodes using the KHPA algorithm.
+\Lst{lst:06_auto-scaler_plan_khpa} shows the implementation of the KHPA algorithm in Python.
+To receive the number of active worker nodes, the Apache Spark master node has to be defined as a Prometheus target (described in SECTION). This enables to fetch the \texttt{metrics\_master\_aliveWorkers\_Value} metric from the Prometheus HTTP API. The current utilization of a performance metric has been received previously in the Analyse phase. Lastly, the target utilization for the performance metric is defined in the Auto-Scaler configuration. 
 % The python impl
 \begin{lstlisting}[label=lst:06_auto-scaler_plan_khpa, caption=KHPA implementation using Python 3.8, language=Python]
 def calculate_number_of_needed_worker(active_worker: int,
@@ -310,90 +224,185 @@ def calculate_number_of_needed_worker(active_worker: int,
   return math.ceil(
     active_worker * (utilization / target_utilization))
 \end{lstlisting}
-% Explain
-\Lst{lst:06_auto-scaler_plan_khpa} shows the implementation of the KHPA algorithm in Python.
 
 
 \subsubsection{Performing a Scaling Action}
-
-%
-% EXEVUTE !!!
-%
-
-
-% Python Docker SDK
-Docker provides a Python library for the Docker Engine\footnote{Docker SDK for Python 4.4.1 Documentation - \url{https://docker-py.readthedocs.io/en/4.4.1/} (Accessed: 2021-01-05)}. This library will be used to perform the swarm scaling action.
-
-
+After the number of needed Apache Spark worker nodes are calculated, the Auto-Scaler is responsible to add or remove the necessary worker Docker container to reach the desired performance goal.
+To add or remove Docker container, Docker provides a Python library for the Docker Engine\footnote{Docker SDK for Python 4.4.1 Documentation - \url{https://docker-py.readthedocs.io/en/4.4.1/} (Accessed: 2021-01-05)}. This library is used to send instructions to the Docker engine running on the host machine.
 % Check if worker is busy
 If worker need to be removed, it is necessary to check if the worker are running any applications. Removing a worker while an application is performing will cause the cancellation of the application.
 % How to check if applications are running
-To check if applications 
-
-
+To check if applications are actively running on the Apache Spark cluster, the Auto-Scaler fetches the \texttt{metrics\_master\_apps\_Value} metric from the Prometheus HTTP API. To receive this metric, the Apache Spark master node has to be set as a target in Prometheus.
 % Cooldown
-After a scaling action has been performed, a cooldown period will be applied. The cooldown period is needed because the number of desired worker nodes can keep fluctuating due to the dynamic nature of performance metrics.
-
-% -----------
-
-% short intro
-After the number of desired Apache Spark worker has been calculated, the Auto-Scaler adds or removes worker container.
-% No romoving while applictions are running
-During the execution of Apache Spark applications, it is not possible to remove worker nodes. Because of the bla bla. An alerantive approach is described in SECTION DISCUSSION.
-% How ti check if apps are running
-In each interval, the Auto-Scaler checks if an application is actively performing. To get this value, the Auto-Scaler uses the Prometheus HTTP API and sends the BBLA BLA PromQL query. Therefore, thr Apache Spark master node has to be defined as Prometheus target (described in SECTION XY).
-% Add worker
-Docker SDK bla bla
+After a scaling action has been executed successfully by the Docker engine, a cooldown period is activated. The duration of the cooldown period can be set in the configuration. During this cooldown no scaling actions are executed.
 
 
 \subsection{Docker Image}
-- Dockerfile hier erklären
-- Wie den Auto-Scaler per konsole starten (mit config parameter)
+% Why dockerfile
+A Docker image is needed to deploy the Auto-Scaler as a Docker service in the computing environment. Therefore a custom Dockerfile is created to build an Auto-Scaler Docker image.
+% Explain Dockerfile
+\Lst{lst:06_auto-scaler_dockerfile} shows the Auto-Scaler Dockerfile implementation. The python:3 Docker image is set as the parent image. 
+Next, the Auto-Scaler source code is copied to image. Afterwards, a Python virtual environment is created with all dependencies installed.
+As entrypoint, the Docker image starts the Auto-Scaler process.
+\begin{lstlisting}[label=lst:06_auto-scaler_dockerfile, caption=Auto-Scaler Dockerfile]
+FROM python:3
+ 
+WORKDIR /usr/src/auto_scaler
+ 
+# Copy the python module
+COPY setup.py .
+COPY src src/
+ 
+# Update and install packages
+RUN pip3 install -e .
+ 
+ENTRYPOINT [ "python3", "src/run.py" ]
+\end{lstlisting}
 
+
+% Building the Docker image
+To build the \textit{Auto-Scaler} Docker image, a build script was implemented. \Lst{lst:06_auto-scaler_build} shows the build script implementation.
+The script takes the version of the \textit{Auto-Scaler} module as input attribute and uses the version to tag the Docker image.
+It builds two versions of the \textit{Auto-Scaler}, one tagged with the current \textit{Auto-Scaler} version (e.g. \textit{auto-scaler:1.0}) and one tagged as \textit{latest} (e.g. \textit{auto-scaler:latest}).
+\begin{lstlisting}[label=lst:06_auto-scaler_build, caption=Auto-Scaler build script, language=sh]
+#!/bin/bash
+ 
+if [ $# -ge 1 ]
+  then
+    VERSION=$1
+ 
+    PWD=$(pwd)
+ 
+    CI_REGISTRY=${CI_REGISTRY-local}
+    IMAGE_TAG_PATH="${CI_REGISTRY}/cci/distributed-computing-framework"
+ 
+    docker build \
+      -t $IMAGE_TAG_PATH/auto-scaler:$VERSION \
+      $PWD
+ 
+    docker build \
+      -t $IMAGE_TAG_PATH/auto-scaler:latest \
+      $PWD
+  else
+    echo "No arguments supplied\n"
+      echo "Use the script as follows:"
+      echo "build-image.sh <VERSION>"
+      exit 1
+fi
+\end{lstlisting}
+% How to use the script
+The script can be used from the command line as \texttt{sh build-image.sh "1.0"}.
 
 % ===========================================
 % ===========================================
-\section{Deployment of a Docker Swarm}
+\section{Computing Environment}
+% SHort intro
+The computing environment is deployed as a Docker swarm (described in SECTION AB). It consists of several components which are all deployed as Docker services. The conceptual design is explained in SECTION XY.
+% Problem
+As mentioned in SECTION XY, components which require GPUs are not created as Docker services. These components are deployed as Docker containers in the same swarm network.
+% The whole thing
+Overall, the computing environment consists of the following components:
+\begin{itemize}
+% AM
+\item Autonomic Manager
+\begin{itemize}
+\item Auto-Scaler
+\item Prometheus
+\item cAdvisor
+\item dcgm-exporter
+\end{itemize}
+
+% Spark cluster
+\item Apache Spark Cluster
+\end{itemize}
 
 
-\subsection{Hardware}
-% DGX erklären
-
-
-\subsection{Software info}
-Hier tabelle mit versionen von eingesetzter software
-
-
-\subsection{Swarm}
-Vielleicht euch einfach das ganze kapitel Swarm nennen?
-- Dockerfile erläutern
-- GPUs (nur die 2 bestimmten)
-
-
-\subsection{Build Script}
+\subsection{Deployment of the Computing Environment}
+%
+To simplify the deployment of a stack of services, Docker proved to define all services in a docker-compose file.
+% 
+The computing environment docker-compose file is defined in \Lst{lst:appendix_env_compose}.
+%
+It defines all services, except the Apache Spark worker and the dcgm-export because these services require the NVIDIA Docker runtime.
+%
+To deploy all services defined in the docker-compose file, Docker provides the docker stack command.
+%
+After the Docker stack has been deployed, the dcgm-exporter container has to be deployed and added to the same network.
+%
+\Lst{lst:06_env_depl_docker-stack} provides the process how to deploy the stack and the dcgm-exporter container.
+\begin{lstlisting}[label=lst:06_env_depl_docker-stack, caption=Auto-Scaler start command, language=sh]
+$ docker stack deploy -c docker-compose.yml computing
+...
+$ docker run -d --rm -p "9400:9400" \
+    --runtime=nvidia \
+    --name dcgm-exporter \
+    --network computing_net \
+    nvidia/dcgm-exporter:2.0.13-2.1.1-ubuntu18.04
+\end{lstlisting}
 
 
 \subsection{Apache Spark Cluster with GPU Acceleration}
-% Standalone
-\paragraph{}The Apache Spark cluster is created in standalone mode, see \SubSec{subsec:04_spark_standalone} for deployment details.
-% Master and worker
-The cluster consists of a single Apache Spark master node and a dynamic number of Apache Spark worker nodes. The master and worker container will run as a service in a swarm (see \Sec{subsec:04_docker_swarm}).
-% Submit
-For submitting an application to the cluster, an individual container performing the spark-submit executable will be deployed.
-% Docker
-Each node runs in an independent Docker container.
+The Apache Spark cluster consists of a single master node, a dynamic number of worker nodes, and spark-submit nodes.
+A spark-submit is deployed, whenever an application is submitted to cluster.
+The master worker nodes are deployed in standalone mode.
 
 
-% How many images are needed
-\paragraph{}Overall four Docker images are needed to create the Apache Spark cluster introduced in \SubSec{subsec:05_arch_spark}:
-\begin{itemize}
-\item Base image
-\item Master image
-\item Worker image
-\item Submit image
-\end{itemize}
-% The base image
-The master, worker and submit image require common packages to be installed and a set of common configuration. Therefore, an additional base image will serve as a base image.
+\subsubsection{Apache Spark Base Image}
+All services in the Apache Spark cluster have the same dependencies but perform different services. To simplifiy the creation of the Docker images, a base image is created. This base image serves as the parent image for all other images.
+Additionally, this contributes to the homgenity of running services in cluster.
+
+
+%
+To install a specific Apache Spark version on the Docker image, two arguments are provides. The arguments can be set in the Docker build command with the \texttt{--build-arg} flag. LISTING BLA provides 
+%
+The base image is build from the \texttt{nvidia/cuda:11.0-devel-ubuntu16.04} Docker image. This image is provided by NVIDIA and has alerady install all neded dependecnies to leverage GPUs to Docker images.
+%
+The Dockerfile installs all required dependecies to run a standalone Apache Spark node with GPU acceleration. This includes the Apache Spark, JRE 1.8, Python3, GPU discovery script, RAPIDS Java binary, cuDF Java binary, XGBoost4j binary, and XGBoost4j-spark binary.
+
+
+\subsubsection{Apache Spark Master Image}
+% Intro Dockerfile
+The Apache Spark master node Docker image is created from a custom Dockerfile (see \Lst{lst:appendix_spark_master_dockerfile}).
+% Base image
+This image is build on top the spark-base image and therefore has already all dependencies installed.
+% Ports
+It configures the Apache Spark master port to 7077 and the port for the web user interface to 4040.
+% entrypoint
+Additionally, \texttt{the start-master.sh} script is set as entrypoint. Therefore, when a service is build from this image, it will automatically start an Apache Spark master node in standalone mode.
+
+
+\subsubsection{Apache Spark Worker Image}
+% Intro
+The Apache Spark worker image is created from a custom Dockerfile as well.
+%
+This Dockerfile uses the \textit{spark-base} image as parent.
+%
+Therefore, no additional dependencies have to be installed.
+%
+To configure the worker nodes resources, the spark-env.sh is copied to the Apache Spar conf/ folder. \Lst{lst:06_env_depl_worker-env} shows the configuration file. It sets the number of GPUs for each executor and the path to the GPU discovery script on the node host.
+%
+The entrypoint is set to \texttt{start-slave.sh} to start an Apache Spark worker in standalone mode. To connect to Apache Spark master node, the URI has to be set as an environment variable.
+\begin{lstlisting}[label=lst:06_env_depl_worker-env, caption=Environment configuration for all worker nodes, language=sh]
+SPARK_WORKER_OPTS="-Dspark.worker.resource.gpu.amount=1 -Dspark.worker.resource.gpu.discoveryScript=/opt/sparkRapidsPlugin/getGpusResources.sh"
+\end{lstlisting}
+
+
+\subsubsection{Apache Spark Submit Image}
+% Intro
+An Apache Spark submit container is deployed by the CI pipeline whenever an application is submitted to the cluster. This container is created from a \textit{spark-submit} Docker image.
+% Parent
+The spark-submit Dockerfile uses the spark-base image as parent.
+% submit
+It copies a custom submit script to the image which is used as the image entrypoint.
+% spark-submit
+The submit script is introduced in \Lst{lst:06_env_depl_submit}. It provides a simplified interface for the spark-submit executable.
+% CI pipeline
+The usage is described in detail in SECTION CI PIPELINE.
+% The script
+\begin{lstlisting}[label=lst:06_env_depl_submit, caption=Custom submit script, language=sh]
+spark-submit bla bla
+\end{lstlisting}
+
 
 \subsubsection{Apache Spark Base Image Installation Details}
 \paragraph{}The base image Dockerfile is available at \Lst{lst:appendix_spark_base_dockerfile}.
