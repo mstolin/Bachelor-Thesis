@@ -17,19 +17,21 @@
 \contentsline {lstlisting}{\numberline {6.2}Auto-Scaler configuration YAML file}{57}{lstlisting.6.2}% 
 \contentsline {lstlisting}{\numberline {6.3}KHPA implementation using Python 3.8}{59}{lstlisting.6.3}% 
 \contentsline {lstlisting}{\numberline {6.4}Auto-Scaler Dockerfile}{60}{lstlisting.6.4}% 
-\contentsline {lstlisting}{\numberline {6.5}Auto-Scaler build script}{60}{lstlisting.6.5}% 
-\contentsline {lstlisting}{\numberline {6.6}Auto-Scaler start command}{62}{lstlisting.6.6}% 
-\contentsline {lstlisting}{\numberline {6.7}Environment configuration for all worker nodes}{63}{lstlisting.6.7}% 
-\contentsline {lstlisting}{\numberline {6.8}Custom submit script}{63}{lstlisting.6.8}% 
-\contentsline {lstlisting}{\numberline {6.9}Environment configuration for all worker nodes}{64}{lstlisting.6.9}% 
+\contentsline {lstlisting}{\numberline {6.5}Auto-Scaler build script}{61}{lstlisting.6.5}% 
+\contentsline {lstlisting}{\numberline {6.6}Environment configuration for all worker nodes}{62}{lstlisting.6.6}% 
+\contentsline {lstlisting}{\numberline {6.7}Usage of the submit script}{63}{lstlisting.6.7}% 
+\contentsline {lstlisting}{\numberline {6.8}Auto-Scaler start command}{64}{lstlisting.6.8}% 
+\contentsline {lstlisting}{\numberline {6.9}Prometheus target configuration in YAML syntax}{64}{lstlisting.6.9}% 
 \contentsline {lstlisting}{\numberline {6.10}Prometheus target configuration in YAML syntax}{65}{lstlisting.6.10}% 
+\contentsline {lstlisting}{\numberline {6.11}CLI command to start a GitLab runner in a Docker container}{67}{lstlisting.6.11}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {lstlisting}{\numberline {A.1}Computing environment docker-compose file}{79}{lstlisting.A.1}% 
+\contentsline {lstlisting}{\numberline {A.1}Computing environment docker-compose file}{83}{lstlisting.A.1}% 
 \addvspace {10\p@ }
-\contentsline {lstlisting}{\numberline {B.1}Apache Spark base image Dockerfile}{81}{lstlisting.B.1}% 
-\contentsline {lstlisting}{\numberline {B.2}Apache Spark master image Dockerfile}{82}{lstlisting.B.2}% 
-\contentsline {lstlisting}{\numberline {B.3}Apache Spark worker image Dockerfile}{82}{lstlisting.B.3}% 
-\contentsline {lstlisting}{\numberline {B.4}GPU discovery script - Source: \url {https://github.com/apache/spark/blob/v3.0.1/examples/src/main/scripts/getGpusResources.sh} (Accessed: 2021-01-03)}{82}{lstlisting.B.4}% 
+\contentsline {lstlisting}{\numberline {B.1}Apache Spark base image Dockerfile}{85}{lstlisting.B.1}% 
+\contentsline {lstlisting}{\numberline {B.2}Apache Spark master image Dockerfile}{86}{lstlisting.B.2}% 
+\contentsline {lstlisting}{\numberline {B.3}Apache Spark worker image Dockerfile}{86}{lstlisting.B.3}% 
+\contentsline {lstlisting}{\numberline {B.4}GPU discovery script - Source: \url {https://github.com/apache/spark/blob/v3.0.1/examples/src/main/scripts/getGpusResources.sh} (Accessed: 2021-01-03)}{86}{lstlisting.B.4}% 
+\contentsline {lstlisting}{\numberline {B.5}Custom submit script}{87}{lstlisting.B.5}% 

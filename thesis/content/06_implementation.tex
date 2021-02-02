@@ -7,12 +7,10 @@ This chapter explains the implementation process of the conceptual detail introd
 % ===========================================
 % ===========================================
 \section{Implementation Environment}
-% DGX
-To implement the introduced concept, a NVIDIA DGX machine is available.
+% The DGX
+For the implementation of the conceptual design this thesis, a NVIDIA DGX machine is available. 
 % Live system
-This system is a shared live system. Many applications from different departments are performing on the machine. All applications are sharing the same resources prided by the machine.
-% GPUs
-Overall two of eight GPUs are available for the implementation of this thesis.
+This machine is a shared live-system. Therefore, multiple application are performing simultaneously on this machine which share the same resources.
 
 
 \subsection{Technical Details}
@@ -35,11 +33,13 @@ The following software is installed on the machine:
 \end{itemize}
 
 
-\subsection{NVIDIA Runtime Problem Statement}
+\subsection{NVIDIA Docker Runtime}
 % nvidia runtime
 To enable GPU support for Docker containers, the NVIDIA Container Toolkit\footnote{NVIDIA Cloud Native technologies documentation - \url{https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html} (Accessed: 2021-01-28)} has to be installed on the host machine. This toolkit provides a runtime library which automatically enables Docker containers to leverage NVIDIA GPUs.
 % The problem
 It is possible to define the runtime of a Docker container with the docker \texttt{run} command. However, this is not supported for Docker services. To deploy Docker services with the NVIDIA runtime enabled, the NVIDIA runtime has to be set as the default runtime for Docker.
+
+\paragraph{Problem statement:}
 % Already installed
 On the host machine, the NVIDIA Container Toolkit is installed, however the NVIDIA runtime is not set as default runtime.
 % The problem
@@ -50,41 +50,21 @@ The solution to this problem is, to deploy these components as Docker container 
 Given this problem statement, the \textit{Auto-Scaler} has to be implemented to use the Docker container API instead of the Docker service API to create Apache Spark worker nodes in the environment. Additionally, the dcgm-exporter Docker container has to be created manually and cannot be created with the Docker stack command.
 
 
-%\subsection{Development Steps}
-%Vll auch irgendwie ala Scrum etc
-%Wasserfall modell ....
-
-%\begin{enumerate}
-% 1
-%\item Implementing the Auto-Scaler Python module
-% 2
-%\item Dockerizing the Auto-Scaler
-% 3
-%\item Creating the computing environment in a Docker swarm
-%\begin{itemize}
-%\item Create an Apache Spark cluster with GPU acceleration
-%\item Create an autonomic manager with a monitoring system and an Auto-Scaler
-%\end{itemize}
-% 4
-%\item Implement a GitLab CI pipeline to deploy Apache Spark applications to the cluster
-%\end{enumerate}
-
-
 % ===========================================
 % ===========================================
+%- Screenshots from Output
+%- Logging allgemein beschreiben
 \section{Auto-Scaler}
 % SHort intro 
-The Auto-Scaler is a main module of the autonomic manager. It is responsible to analyse performance metrics, plan scaling actions in accordance to the performance metrics and execute scaling actions to adapt the number of Apache Spark worker in the computing environment.
+The \textit{Auto-Scaler} is a main module of the autonomic manager. It is responsible to analyse performance metrics, plan scaling actions in accordance to the performance metrics and execute scaling actions to adapt the number of Apache Spark worker in the computing environment.
 % Mention conceptual design
-It is implemented as a custom module in Python. There is no existing solution that satisfies the requirements of the conceptual Auto-Scaler design.
-% DOcker
-Furthermore to deploy the Auto-Scaler as a Docker container, a Dockerfile is created to build a Docker image.
+It is implemented as a custom module in Python 3.8 and deployed as a Docker image using a custom Dockerfile to deploy the \textit{Auto-Scaler} running in a Docker container.
 
 
 % Concept
-The Auto-Scaler integrates the Analyse, Plan, and Execute phase of the MAPE architecture. Furthermore it scales the Apache Worker horizontally by adding and removing Apache Spark worker Docker containers.
+The \textit{Auto-Scaler} integrates the Analyse, Plan, and Execute phase of the MAPE architecture. Furthermore it scales the Apache Worker horizontally by adding and removing Apache Spark worker Docker containers.
 % A Loop
-The Auto-Scaler runs as a background services that periodically performs each phase in order.
+The Auto-Scaler runs as a background service that periodically performs each phase in order.
 % Configuration
 A file which defines runtime configuration can be set.
 % Start the sclaer
@@ -96,7 +76,7 @@ $ python3 run.py --config=config.yml
 
 \subsection{Technical Background}
 % Technical background
-The Auto-Scaler is implemented in Python 3.8. It consists of different classes, each having different responsibilities.
+The \textit{Auto-Scaler} is implemented in Python 3.8. It consists of different classes, each having different responsibilities.
 % A list of the Python libs
 The following Python libraries have been used for the implementation:
 % The list
@@ -110,7 +90,7 @@ The following Python libraries have been used for the implementation:
 
 \subsection{Configuration}
 % Design
-\paragraph{}The configuration parameter for the Auto-Scaler have been introduced in \Sec{subsubsec:05_am_auto-scaler_config}.
+\paragraph{}The configuration parameter for the \textit{Auto-Scaler} have been introduced in \Sec{subsubsec:05_am_auto-scaler_config}.
 % Its yaml
 All parameter are defined in the YAML file format
 % The yaml file
@@ -195,27 +175,35 @@ worker:
 
 \subsection{Scaling Apache Worker Nodes}
 % Periodically performing
-The Auto-Scaler performs periodically. Each period it fetches performance metrics, analyses the metrics, plans scaling actions, and executes them if necessary.
-% Tasks
-To perform tasks periodically, it uses the APScheduler library. This allows to perform a tasks each $n$ seconds.
-% Explain tasks
-In each task, the Analyse, Plan, and Execute phase is performed in order.
+The \textit{Auto-Scaler} performs periodically. Each period fetches performance metrics, analyses the metrics, plans scaling actions, and executes them if necessary.
+% AP jobs
+To perform periodically, it uses the \textit{APScheduler}\footnote{\url{https://pypi.org/project/APScheduler/} (Accessed: 2021-01-26)} Python library. The \textit{APScheduler} provides to schedule jobs periodically.
+% Explain jobs
+In each job, the Analyse, Plan, and Execute phase is performed in order.
 
 
 \subsubsection{Estimation of Necessary Scaling Actions}
-To estimate of a scaling actions is necessary, the Auto-Scaler uses the Scaling Heat algorithm (introduced in SECTION XY).
+To estimate of a scaling actions is necessary, the Auto-Scaler uses the Scaling Heat algorithm (introduced in \Sec{alg:04_scal-heat_concept_algo}).
+% input
 The algorithm takes the utilization of a performance metric, the lower- and upper-threshold, and the calculated heat of the last iteration as input parameters.
-The utilization is received from the Prometheus HTTP API. Furthermore, the Auto-Scaler fetches the utilization of all given performance metrics in each iteration. It calculates the heat value for each single performance metrics. If the upper-threshod value gets violated, the heat value is increased by 1. Otherwise, if the lower-threshold is violated, the heat is reduced by one.
+% utilization
+The utilization is received from the Prometheus HTTP API. Furthermore, the \textit{Auto-Scaler} fetches the utilization of all given performance metrics in each iteration. It calculates the heat value for each single performance metric. If the upper-threshod value gets violated, the heat value is increased by 1. Otherwise, if the lower-threshold is violated, the heat is reduced by one.
+% the limit
 Until the heat value reaches positive or negative of the recurrence-factor a scaling action will be executed.
+% cooldown
 This phase will not be performed if a cooldown period has been activated in the previous iteration.
 
 
 \subsubsection{Calculating the Number of Needed Worker Nodes}
-To calculate the number of needed Apache Spark worker, the Auto-Scaler uses the KHPA algorithm.
+To calculate the number of needed Apache Spark worker, the \textit{Auto-Scaler} uses the KHPA algorithm (introduced in \Sec{sec:04_background_khpa}).
 As input parameters, the algorithm takes the current number of active worker nodes, the utilization of the performance metric, and target utilization.
 
+
+% Explain implementation
 \Lst{lst:06_auto-scaler_plan_khpa} shows the implementation of the KHPA algorithm in Python.
-To receive the number of active worker nodes, the Apache Spark master node has to be defined as a Prometheus target (described in SECTION). This enables to fetch the \texttt{metrics\_master\_aliveWorkers\_Value} metric from the Prometheus HTTP API. The current utilization of a performance metric has been received previously in the Analyse phase. Lastly, the target utilization for the performance metric is defined in the Auto-Scaler configuration. 
+To receive the number of active worker nodes, the Apache Spark master node has to be defined as a Prometheus target (described in SECTION). This enables to fetch the \texttt{metrics\_master\_aliveWorkers\_Value} metric from the Prometheus HTTP API. This metrics returns the number of alive Apache Spark worker nodes in the cluster.
+
+The utilization of the performance metric, which is used for the KHPA algorithm, has already been received in the previous phase. Lastly, the target utilization for the performance metric is defined in the \textit{Auto-Scaler} configuration. 
 % The python impl
 \begin{lstlisting}[label=lst:06_auto-scaler_plan_khpa, caption=KHPA implementation using Python 3.8, language=Python]
 def calculate_number_of_needed_worker(active_worker: int,
@@ -227,23 +215,36 @@ def calculate_number_of_needed_worker(active_worker: int,
 
 
 \subsubsection{Performing a Scaling Action}
-After the number of needed Apache Spark worker nodes are calculated, the Auto-Scaler is responsible to add or remove the necessary worker Docker container to reach the desired performance goal.
-To add or remove Docker container, Docker provides a Python library for the Docker Engine\footnote{Docker SDK for Python 4.4.1 Documentation - \url{https://docker-py.readthedocs.io/en/4.4.1/} (Accessed: 2021-01-05)}. This library is used to send instructions to the Docker engine running on the host machine.
-% Check if worker is busy
-If worker need to be removed, it is necessary to check if the worker are running any applications. Removing a worker while an application is performing will cause the cancellation of the application.
-% How to check if applications are running
-To check if applications are actively running on the Apache Spark cluster, the Auto-Scaler fetches the \texttt{metrics\_master\_apps\_Value} metric from the Prometheus HTTP API. To receive this metric, the Apache Spark master node has to be set as a target in Prometheus.
+After the number of needed Apache Spark worker nodes are calculated, the \textit{Auto-Scaler} is responsible to scale the replicas of the worker service to reach the desired performance goal.
+% Docker lib
+To scale a Docker service using Python, Docker provides a Python library for the Docker Engine\footnote{Docker SDK for Python 4.4.1 Documentation - \url{https://docker-py.readthedocs.io/en/4.4.1/} (Accessed: 2021-01-05)}. 
 % Cooldown
 After a scaling action has been executed successfully by the Docker engine, a cooldown period is activated. The duration of the cooldown period can be set in the configuration. During this cooldown no scaling actions are executed.
 
 
+\subsubsection{Removing Apache Spark worker}
+% RDD intro
+As being introduced in SECTION RDD, Apache Spark is build on top of a data structure called RDD. A RDD can be compose of bla bla bla.
+% Shuffle data
+Executors are launched on workers to process data. Therefore, a worker node stores temporary data of an executor containing cache data and shuffle-data.
+% No downsscaling
+If a worker node store important shuffle data, even if the overall performance is underutilized, the worker cannot be removed.
+% How
+% Check if worker is busy
+Therefore, worker will not be removed if applications are actively performed on the Apache Spark cluster.
+% The metric
+Prometheus provides a metrics called \texttt{metrics\_master\_apps\_Value} which returns the number of running applications on the cluster. To fetch this metrics, the Apache Spark master node has to be set as Prometheus target.
+% auto-scaler
+The Auto-Scaler only reduces the number of worker replicas, if this metric returns 0.
+
+
 \subsection{Docker Image}
 % Why dockerfile
-A Docker image is needed to deploy the Auto-Scaler as a Docker service in the computing environment. Therefore a custom Dockerfile is created to build an Auto-Scaler Docker image.
+A Docker image is needed to deploy the \textit{Auto-Scaler} as a Docker service in the computing environment. Therefore a custom Dockerfile is created to build an \textit{Auto-Scaler} Docker image.
 % Explain Dockerfile
 \Lst{lst:06_auto-scaler_dockerfile} shows the Auto-Scaler Dockerfile implementation. The python:3 Docker image is set as the parent image. 
-Next, the Auto-Scaler source code is copied to image. Afterwards, a Python virtual environment is created with all dependencies installed.
-As entrypoint, the Docker image starts the Auto-Scaler process.
+Next, the \textit{Auto-Scaler} source code is copied to image. Afterwards, a Python virtual environment is created with all dependencies installed.
+As entrypoint, the Docker image starts the \textit{Auto-Scaler} process.
 \begin{lstlisting}[label=lst:06_auto-scaler_dockerfile, caption=Auto-Scaler Dockerfile]
 FROM python:3
  
@@ -295,6 +296,80 @@ The script can be used from the command line as \texttt{sh build-image.sh "1.0"}
 
 % ===========================================
 % ===========================================
+\section{Apache Spark Cluster with GPU Acceleration}
+The Apache Spark cluster consists of a single master node, a dynamic number of worker nodes, and \textit{spark-submit} nodes.
+A \textit{spark-submit} is deployed, whenever an application is submitted to cluster.
+The master worker nodes are deployed in standalone mode.
+
+
+\subsection{Apache Spark Base Image}
+All services in the Apache Spark cluster have the same dependencies but perform different services. To simplify the creation of the Docker images, a base image is created. This base image serves as the parent image for all other images.
+Additionally, this contributes to the homogeneity of running services in cluster.
+
+
+%
+To install a specific Apache Spark version on the Docker image, two arguments are provides. The arguments can be set in the Docker build command with the \texttt{--build-arg} flag. LISTING BLA provides 
+%
+The base image is build from the \texttt{nvidia/cuda:11.0-devel-ubuntu16.04} Docker image. This image is provided by NVIDIA and has already installed all needed dependencies to leverage GPUs to Docker images.
+%
+The Dockerfile installs all required dependencies to run a standalone Apache Spark node with GPU acceleration. This includes the Apache Spark, JRE 1.8, Python3, GPU discovery script, RAPIDS Java binary, cuDF Java binary, XGBoost4j binary, and XGBoost4j-spark binary.
+
+
+\subsection{Apache Spark Master Image}
+% Intro Dockerfile
+The Apache Spark master node Docker image is created from a custom Dockerfile (see \Lst{lst:appendix_spark_master_dockerfile}).
+% Base image
+This image is build on top the \textit{spark-base} image and therefore has already all dependencies installed.
+% Ports
+It configures the Apache Spark master port to 7077 and the port for the web user interface to 4040.
+% entrypoint
+Additionally, the \texttt{start-master.sh} script is set as entrypoint. Therefore, when a service is build from this image, it will automatically start an Apache Spark master node in standalone mode.
+
+
+\subsection{Apache Spark Worker Image}
+% Intro
+The Apache Spark worker image is created from a custom Dockerfile as well.
+%
+This Dockerfile uses the \textit{spark-base} image as parent.
+% Homo
+As being mentioned in SECTION THEO, the horizontal scaling approach is more effective with homogeneous nodes. Each Apache Spark worker node is being created from the same Docker image given the same resources.
+%
+Therefore, no additional dependencies have to be installed.
+%
+To configure the worker nodes resources, the \texttt{spark-env.sh} is copied to the Apache Spark \texttt{conf/} folder. \Lst{lst:06_env_depl_worker-env} shows the configuration file. It sets the number of GPUs for each executor and the path to the GPU discovery script on the node host.
+%
+The entrypoint is set to \texttt{start-slave.sh} to start an Apache Spark worker in standalone mode. To connect to Apache Spark master node, the URI has to be set as an environment variable.
+\begin{lstlisting}[label=lst:06_env_depl_worker-env, caption=Environment configuration for all worker nodes, language=sh]
+SPARK_WORKER_OPTS="-Dspark.worker.resource.gpu.amount=1 -Dspark.worker.resource.gpu.discoveryScript=/opt/sparkRapidsPlugin/getGpusResources.sh"
+\end{lstlisting}
+
+
+\subsection{Apache Spark Submit Image}
+% Intro
+An Apache Spark submit container is deployed by the CI pipeline whenever an application is submitted to the cluster. This container is created from a \textit{spark-submit} Docker image.
+% Parent
+The spark-submit Dockerfile uses the spark-base image as parent.
+% submit
+It copies a custom submit script to the image which is used as the image entrypoint. When it a spark-submit container is started, it executes the custom submit script with all given arguments.
+% spark-submit
+The custom submit script is provided at \Lst{lst:appendix_spark-submit_script}. It provides a simplified interface for the spark-submit executable. Furthermore, it includes all necessary libraries and configuration parameters to perform an application with GPU acceleration enabled. Additionally, if the \texttt{CPU\_ONLY} environment variable is set to \textit{true}, the script will disable GPU acceleration for the given application.
+% task-parallelism
+This feature is useful when algorithms optimized for task-parallelism are being executed.
+% Example
+\Lst{st:06_env_depl_submit} demonstrates an usage example of the the custom submit script.
+% Exaplin
+In the example, the \texttt{train.py} application is executed with a \texttt{--max-depth=5} runtime argument given. All provided arguments are forwarded to the spark-submit executable (explain in SECTION XY). 
+% The script
+\begin{lstlisting}[label=lst:06_env_depl_submit, caption=Usage of the submit script, language=bash]
+$ sh submit.sh train.py --max-depth=5
+\end{lstlisting}
+% CI pipeline
+The script is part of the training state of the CI pipeline which is described in detail in SECTION CI.
+\todo{List mit allen envs variablen}
+
+
+% ===========================================
+% ===========================================
 \section{Computing Environment}
 % SHort intro
 The computing environment is deployed as a Docker swarm (described in SECTION AB). It consists of several components which are all deployed as Docker services. The conceptual design is explained in SECTION XY.
@@ -341,172 +416,21 @@ $ docker run -d --rm -p "9400:9400" \
 \end{lstlisting}
 
 
-\subsection{Apache Spark Cluster with GPU Acceleration}
-The Apache Spark cluster consists of a single master node, a dynamic number of worker nodes, and spark-submit nodes.
-A spark-submit is deployed, whenever an application is submitted to cluster.
-The master worker nodes are deployed in standalone mode.
-
-
-\subsubsection{Apache Spark Base Image}
-All services in the Apache Spark cluster have the same dependencies but perform different services. To simplifiy the creation of the Docker images, a base image is created. This base image serves as the parent image for all other images.
-Additionally, this contributes to the homgenity of running services in cluster.
-
-
-%
-To install a specific Apache Spark version on the Docker image, two arguments are provides. The arguments can be set in the Docker build command with the \texttt{--build-arg} flag. LISTING BLA provides 
-%
-The base image is build from the \texttt{nvidia/cuda:11.0-devel-ubuntu16.04} Docker image. This image is provided by NVIDIA and has alerady install all neded dependecnies to leverage GPUs to Docker images.
-%
-The Dockerfile installs all required dependecies to run a standalone Apache Spark node with GPU acceleration. This includes the Apache Spark, JRE 1.8, Python3, GPU discovery script, RAPIDS Java binary, cuDF Java binary, XGBoost4j binary, and XGBoost4j-spark binary.
-
-
-\subsubsection{Apache Spark Master Image}
-% Intro Dockerfile
-The Apache Spark master node Docker image is created from a custom Dockerfile (see \Lst{lst:appendix_spark_master_dockerfile}).
-% Base image
-This image is build on top the spark-base image and therefore has already all dependencies installed.
-% Ports
-It configures the Apache Spark master port to 7077 and the port for the web user interface to 4040.
-% entrypoint
-Additionally, \texttt{the start-master.sh} script is set as entrypoint. Therefore, when a service is build from this image, it will automatically start an Apache Spark master node in standalone mode.
-
-
-\subsubsection{Apache Spark Worker Image}
-% Intro
-The Apache Spark worker image is created from a custom Dockerfile as well.
-%
-This Dockerfile uses the \textit{spark-base} image as parent.
-%
-Therefore, no additional dependencies have to be installed.
-%
-To configure the worker nodes resources, the spark-env.sh is copied to the Apache Spar conf/ folder. \Lst{lst:06_env_depl_worker-env} shows the configuration file. It sets the number of GPUs for each executor and the path to the GPU discovery script on the node host.
-%
-The entrypoint is set to \texttt{start-slave.sh} to start an Apache Spark worker in standalone mode. To connect to Apache Spark master node, the URI has to be set as an environment variable.
-\begin{lstlisting}[label=lst:06_env_depl_worker-env, caption=Environment configuration for all worker nodes, language=sh]
-SPARK_WORKER_OPTS="-Dspark.worker.resource.gpu.amount=1 -Dspark.worker.resource.gpu.discoveryScript=/opt/sparkRapidsPlugin/getGpusResources.sh"
-\end{lstlisting}
-
-
-\subsubsection{Apache Spark Submit Image}
-% Intro
-An Apache Spark submit container is deployed by the CI pipeline whenever an application is submitted to the cluster. This container is created from a \textit{spark-submit} Docker image.
-% Parent
-The spark-submit Dockerfile uses the spark-base image as parent.
-% submit
-It copies a custom submit script to the image which is used as the image entrypoint.
-% spark-submit
-The submit script is introduced in \Lst{lst:06_env_depl_submit}. It provides a simplified interface for the spark-submit executable.
-% CI pipeline
-The usage is described in detail in SECTION CI PIPELINE.
-% The script
-\begin{lstlisting}[label=lst:06_env_depl_submit, caption=Custom submit script, language=sh]
-spark-submit bla bla
-\end{lstlisting}
-
-
-\subsubsection{Apache Spark Base Image Installation Details}
-\paragraph{}The base image Dockerfile is available at \Lst{lst:appendix_spark_base_dockerfile}.
-% Ubuntu base docker image
-As parent, the base image uses the \texttt{nvidia/cuda:11.0-devel-ubuntu16.04} Docker image. The parent image runs Ubuntu\footnote{Enterprise Open Source and Linux - \url{https://www.ubuntu.com/} (Accessed: 2021-01-03)} in version 16.04. Additionally the CUDA Toolkit and the NVIDIA GPU driver are already installed.
-% Args for spark and hadoop version
-Docker provides the ability to set build arguments. To be able to install a specific Apache Spark version, two arguments,  can be set when building the Docker image.
-% Apache Spark
-Apache Spark will be installed at \texttt{/opts/Spark}.
-% Work dir
-This directory will be set as the working directory for the Docker image as well.
-% Ubuntu packages
-Furthermore, required Ubuntu packages will be installed. This includes the Java Runtime Environment Version 8, which is a requirement for Apache Spark.
-% RAPIDS
-To enable GPU acceleration on all Apache Spark nodes, the base image will install the compiled Java files for the RAPIDS plugin at \texttt{/opt/sparkRapidsPlugin} (for RAPIDS installation requirements, see \SubSec{subsec:04_rapids_req}). The .jar files can be downloaded in the maven repository.
-% Discovery script
-To enable Apache Spark to discover available GPUs, a GPU discovery script is needed (see \SubSec{subsubsec:04_spark_standalone_res-alloc} for details about resource allocation). This discovery script will be placed at \texttt{/opt/sparkRapidsPlugin} as well. The discovery script is introduced at \Lst{lst:appendix_spark_gpu-discovery}.
-
-%% HETEROGEN
-
-
-% Building
-%\paragraph{}Listing XY demonstrates how the base image can be build 
-
-
-% Env var table
-%The table \ref{table:1} is an example of referenced \LaTeX elements.
-
-%\begin{table}[h!]
-%\centering
-%\begin{tabular}{||c c||} 
- %\hline
- %Environment variable & Value \\ [0.5ex] 
- %\hline\hline
- %$SPARK\_RAPIDS\_DIR$ & /opt/sparkRapidsPlugin \\ 
- %$SPARK\_CUDF\_JAR$ & opt/sparkRapidsPlugin/cudf-0.15-cuda11.jar \\
- %$SPARK\_RAPIDS\_PLUGIN\_JAR$ & opt/sparkRapidsPlugin/rapids-4-spark_2.12-0.2.0.jar \\
- %$JAVA\_HOME$ & /usr/lib/jvm/java-8-openjdk-amd64 \\
- %$PYSPARK\_PYTHON$ & python3 \\ [1ex] 
- %\hline
-%\end{tabular}
-%\caption{Table to test captions and labels}
-%\label{table:1}
-%\end{table}
-
-
-\subsubsection{Standalone Master and Worker Image}
-% Base image
-The master and worker image are build on top of the  Apache Spark base image.
-% no additional installation
-Therefore, no additional installation steps are required.
-% standalone
-The master and worker nodes will be launched in standalone mode (see \SubSec{subsec:04_spark_standalone} for standalone mode details).
-
-
-\paragraph{Master image:}
-Implementation of the master node Dockerfile is available at \Lst{lst:appendix_spark_master_dockerfile}.
-% Ports
-The master node image needs two ports configured: The Apache Spark service port and the port for the web user interface.
-% web ui port
-The Apache Spark service port ist set to 7077 and the web user interface port to 4040. 
-% Start in standalone
-To start the master node in standalone mode, the start-master.sh launchable will be set as image entrypoint which requires no additional arguments.
-
-
-\paragraph{Worker image:}
-\Lst{lst:appendix_spark_worker_dockerfile} describes the implementation of the worker node Dockerfile.
-% web ui port
-The port for the worker web interface will be exposed at 4041.
-% Port
-To start the worker in standalone mode, the start-slave.sh executable will be set as entrypoint for the image.
-% Master uri
-The launch script requires the master node URI as a parameter. To keep the configuration simple, the environment variable HIER DIE VAR will be set in the compose file.
-% Worker configuration
-\Lst{lst:06_computing_spark_worker-env} describes the configuration environment for the worker. As mentioned previously (in \Sec{sec:05_restrictions}), for this project two GPUs are available on the DGX workstation. Furthermore, the worker needs to know where to find the GPU resource discovery script.
-
-% Building script
-\begin{lstlisting}[label=lst:06_computing_spark_worker-env, caption=Environment configuration for all worker nodes, language=bash]
-SPARK_WORKER_OPTS="-Dspark.worker.resource.gpu.amount=2 -Dspark.worker.resource.gpu.discoveryScript=/opt/sparkRapidsPlugin/getGpusResources.sh"
-\end{lstlisting}
-
-
-\subsubsection{Submit Image}
-% Pyspark
-As mentioned in \Sec{sec:05_restrictions}, a requirements is, that Apache Spark application will be implemented in Python. Accordingly, the pyspark Python module needs to installed on all submit nodes.
-% Application workspace
-Apache Spark application will be placed at \textit{/opt/spark-apps}. SECTION CI describes how an Apache Spark application will be copied to a submit node.
-% Entrypoint
-As entrypoint, the image will perform a custom submit script (available at LISTING AB). This script performs the spark-submit executable (usage described in detail in \SubSec{subsubsec:04_spark_standalone_submit}).
-
-
 \subsection{Autonomic Manager}
-As mentioned in \SubSec{subsec:05_arch_am}, the autonomic manager will consist of a monitoring system and the Auto-Scaler to create a complete control loop.
+The autonomic manager is responsible to monitor the computing environment and scale the number of Apache Spark worker.
+It is composed of a monitoring system and the previously mentioned \textit{Auto-Scaler}.
+Furthermore, the monitoring system is build of a Prometheus, cadvisor, and dcgm-exporter.
+Together, all components build an autonomic manager according to the MAPE architecture.
+The monitoring system monitors the components in the computing environment while the \textit{Auto-Scaler} analyses the performance metrics and adapt the number of Apache Spark worker.
 
-\paragraph{}The monitoring system conceptual design was introduced in SECTION XY.
-It consists of a cAdvisor (SECTION XY) service and a Prometheus (SECTION XY) service.
-All modules will run as individual Docker services in the overall swarm.
-% Docker images
-The following DOcker images will be used for the monitoring system:
-% List all images
-\begin{itemize}
-\item \textbf{cAdvisor:} google/cadvisor
-\item \textbf{Prometheus:} prom/prometheus
-\end{itemize}
+% Prometheus:
+% - rules
+% - targets
+
+% cAdvisor
+
+% dcgm-exporter
+% deploy
 
 \subsubsection{Prometheus Target Configuration}
 
@@ -517,37 +441,184 @@ The following DOcker images will be used for the monitoring system:
 
 
 % Pull based
-As mentioned in \Sec{sec:04_prom}, Prometheus is a pull-based monitoring tool.
+As being introduced in \Sec{sec:04_prom}, Prometheus is a pull-based monitoring tool.
 % Target list
 It requires a list of targets to pull performance metrics from.
 
 
 % Describe config
 \Lst{lst:06_computing_am_prom-config} specifies the scrape configuration of the Prometheus system.
-% cAdvisor target
-The cAdvisor service is specified as a target. Prometheus will scrape every 5 seconds performance metrics from cAdvisor. All performance metrics will be labeled with the cAdvisor lable. The cAdvisor service is available at  cadvisor:8080.
-
-
-% Building script
+% scrape interval
+The \texttt{scrape\_interval} parameter is set to \textit{5s}. This means, that Prometheus scrapes all defined targets every 5 seconds.
+% 
+Additionally, a the 
+% All targets
+To scrape all needed performance metrics three different targets are set: cAdvisor, dcgm-exporter, and the Apache Spark master node. The configuration is explained in SECTION TECHNICAL PROM.
+% describe
+All container related performance metrics are received from the cAdvisor target. The GPU performance metrics are provided by the dcgm-exporter target. As mentioned in SECTION AS, the \textit{Auto-Scaler} needs to know how many Apache Spark worker nodes are active at runtime and how man applications are being executed. This metrics are scraped from the Apache Spark master node which has native support for Prometheus.
+% Label
+Each target is given a specific label which to identify the source.
+% Target config
 \begin{lstlisting}[label=lst:06_computing_am_prom-config, caption=Prometheus target configuration in YAML syntax]
-scrape_configs:
-    - job_name: prometheus
-      scrape_interval: 5s
-      static_configs:
-          - targets: ["localhost:9090"]
+global:
+  scrape_interval: 5s
  
+rule_files:
+  - "/etc/prometheus/recording_rules.yml"
+ 
+scrape_configs:
     - job_name: cadvisor
-      scrape_interval: 5s
       static_configs:
           - targets: ["cadvisor:8080"]
             labels:
                 group: "cadvisor"
+ 
+    - job_name: dcgm-exporter
+      static_configs:
+          - targets: ["dcgm-exporter:9400"]
+            labels:
+                group: "dcgm-exporter"
+    
+    - job_name: spark-master
+      metrics_path: /metrics/master/prometheus/
+      static_configs:
+          - targets: ["spark-master:4040"]
+            labels:
+              group: "spark"
+\end{lstlisting}
+
+
+\subsubsection{Prometheus Recording Rules Configuration}
+% mention the suitable metrics
+In SECTION YB, suitable metrics for monitoring the target performance have been introduced.
+%
+These two metrics are created as recording rules in \Lst{lst:06_env_depl_am_prom-rules}  (see SECTION XY for details about recording rules).
+%
+\begin{lstlisting}[label=lst:06_env_depl_am_prom-rules, caption=Prometheus target configuration in YAML syntax]
+groups:
+    - name: performance_usage_percent
+      rules:
+        - record: instance:worker_nodes:cpu_usage:percent
+          expr: SUM(RATE(container_cpu_usage_seconds_total{image="spark-worker:3.0.1-hadoop2.7"}[30s])) BY (image)
+        - record: instance:gpu:usage:percent
+          expr: SUM(DCGM_FI_DEV_GPU_UTIL{device=~"(?:nvidia4|nvidia5)"}) / 2
 \end{lstlisting}
 
 
 % ===========================================
 % ===========================================
-\section{Automatic Deployment of Apache Spark Applications}
-Vielleicht eher das Kapitel so nennen
-- gitlab-ci.yml erklären
+\section{GitLab CI/CD Pipeline for Automated Deployment of Machine Learning Applications}
+%
+The CI pipeline is responsible to test, and submit the application to the Apache Spark cluster.
+%
+Important to notice, that Python is an interpreted programming language. It is possible to package the Python app as ZIP document or as an egg file. However, to keep the implementation simple, only raw Python files are submitted to the Apache Spark cluster. Therefore, there is no build stage in this CI pipeline architecture.
+%
+To be able to deploy a \textit{spark-submit} container on the host machine, a GitLab runner (introduced in SECTION XY) instance has to run on the same machine.
+
+
+\subsection{GitLab Runner}
+
+As being explained in SECTION THEO, GitLab CI/CD jobs are being executed by a GitLab runner.
+To deploy a spark-submit container in the swarm network of the Apache Spark cluster, the GitLab needs to run on the same host to get access to the Docker engine.
+
+
+%
+As mentioned before, to deploy a spark-submit node on the host machine, a GitLab Runner instance is needed.
+% Docker is needed
+To be able to create Docker container in the same swarm network, the GitLab runner needs access to the Docker engine of the host machine.
+
+
+% In this impl
+In this implementation, the GitLab Runner is deployed as a Docker container.
+% Docker as parent
+The Docker container is build from the \texttt{gitlab/gitlab-runner:latest} image. This image provides an installation of the GitLab runner service and command-line-interface.
+% Volumes
+To enable Docker support in the context of the GitLab Runner Docker container, the Docker socket has to be mounted to the container. This \textit{socket-binding} approach is explained in detail on the GitLab online documentation\footnote{Building Docker images with GitLab CI/CD  - \url{https://docs.gitlab.com/ee/ci/docker/using_docker_build.html\#use-docker-socket-binding} (Accessed: 2021-01-31)}.
+
+
+% Create a runner
+The \texttt{gitlab-runner} command is set as image entrypoint. It initialises a new GitLab runner on the container.
+% ENable docker on gitlab runner
+To enable Docker access to the GitLab runner, various settings have to be set. First the docker excutor has to be activated. This enables the runner to perform jobs with user defined Docker images, which is required to use the \textit{spark-submit} image. Second, the runner needs access to the Docker socket as well. Therefore, the mounted Docker socket has to be set as volume for the runner. Lastly, the \texttt{docker:latest} image is used for the container where jobs are performed on. This gives jobs the ability to use the Docker CLI. This ability is needed to run the \texttt{docker run} command from a job.
+
+
+% /builds volume
+The \texttt{/builds} directory of a runner is the location where the source code of a repository is located. By default, this directory is only available to the job container deployed by the runner. To share this container with container deployed by a job, it has to be shared with the host system. Docker container cannot shaire their filesystem with other containers, because Docker run in isolation. This is described in detail in SECTION BLA NEXT.
+% the listing
+\Lst{lst:06_ci_runner_container_cmd} provides the command to create a GitLab runner in a Docker container.
+% token and url
+In addition to the previously mentioned configuration settings, a GitLab Runner requires a URL to a GitLab server and a registration token.
+%
+The registraktion token identifies a specific repository or a GitLab group. Then, the runner can only used from the 
+%
+This GitLab runner is reposnsible to perform submit Apache Spark application to the cluster. Therefore the spark-submit tag was set, so it only performs CI jobs tagged with this.
+
+\begin{lstlisting}[label=lst:06_ci_runner_container_cmd, caption=CLI command to start a GitLab runner in a Docker container, language=bash]
+$ docker run -d \
+    --name gitlab-runner \
+    --restart always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /builds:/builds \
+    gitlab/gitlab-runner:latest \
+    gitlab-runner register \
+    -n \
+    --name "Spark-Cluster Runner" \
+    --executor docker \
+    --docker-image docker:latest \
+    --docker-volumes /var/run/docker.sock:/var/run/docker.sock \
+    --docker-volumes /builds:/builds \
+    --docker-privileged=true
+    --url https://gitlab.com/ \
+    --registration-token mpCBWzZzhaaJrdqjXYZq \
+    --tag-list spark-submit
+\end{lstlisting}
+
+
+\subsection{Pipeline Architecture}
+%
+As explained in SECTION AB, a GitLab CI/CD pipeline is configured by a \texttt{.gitlab-ci.yml} file in the root directory of the source code repository.
+%
+LST XY shows the .gitlab-ci.yml configuration file. The pipeline consists of a \textit{test} and a \textit{train} stage.
+
+
+\subsubsection{Test Stage}
+% test stage
+The first stage is the test stage which consists of a single job called \textit{unit-tests} to perform unit tests.
+% The image
+It uses the \texttt{python:3.8-slim} Docker image, which has already Python 3.8 installed. To perform the unit tests, first a Python virtual environment with all dependencies is created. Lastly, all tests in the \texttt{tests/} directory are performed using the pytest\footnote{pytest - \url{https://docs.pytest.org/en/latest/} (Accessed: 2021-02-01)} library.
+
+
+\paragraph{}
+It is important to mention, that the train stage depends on the application. This implementation focuses on simplicity and provides a general concept of a train stage which can be used and extended for other projects.
+
+
+\subsubsection{Train Stage}
+% train stage
+After the test stage has been performed successfully, the train stage is responsible to perform the Apache Spark application on the Apache Spark cluster.
+% Jobs
+The train stage consists of a single job called \textit{train-model}.
+% submit
+This jobs executes the \texttt{submit.sh} build script, which is located in the repository root directory. The script executes the \texttt{docker run} command to deploy a \textit{spark-submit} Docker container in the Apache Spark cluster. It takes the path to the application Python file and all needed parameters as input and forwards them to the \texttt{docker run} command. To be able to execute the applications Python file, it has to be mounted to the host filesystem, which is explained in this section.
+% Config
+To configure the \textit{spark-submit} container, all configuration parameters listed in TABLE CONFIG PARAM OF SPARK-SUBMIT can be set as environment variables in the \texttt{variables} section of the job.
+% Tag
+The job has to be tagged with \textit{spark-submit} to get executed by the runner on the host machine.
+
+
+\paragraph{Creating a mount-point:}
+% Isolation
+As mentioned before in SECTION OBEN, Docker container run in isolation and do not share the same filesystem with each other.
+% The runner
+Each runner registered on the GitLab Runner Docker container runs its jobs on separate Docker container on the host system. All commands are being performed in the context of its container.
+%
+When the \textit{train-job} deploys a \textit{spark-submit} Docker container with the \texttt{docker run} command, it tries to mount the \texttt{/builds} directory from its own filesystem to the \textit{spark-submit} container.
+%
+To share the source code between the job container and the \textit{spark-submit} container, the \texttt{/builds} directory is mounted to the host system, as being explained in SECTION OBEN.
+%
+To overcome this problem, the \textit{train-model} job creates a new folder inside the \texttt{/builds} directory as mount-point and moves the application source code files to this location.
+%
+This mount-point is available to the \textit{spark-submit} container when given as a volume.
+%
+The approach of a mount-point is mentioned in a discussion on the GitLab website\footnote{Docker volumes not mounted when using docker:dind - \url{https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227} (Accessed: 2021-02-01)}.
+
 - Screenshot von webui output
