@@ -18,43 +18,130 @@ Two of the eight GPUs have been available to conduct the experiments.
 
 The DGX is a live-system as being mentioned in Section XY. Therefore not all available hardware resource have been exclusively available to conduct these experiments.
 
-\section{Workload}
+\section{Experiments}
 % Intro
-The performance evaluation of the implementation was conducted using two ML algorithms: K-Means and Naive Bayes.
-% Implementation
-To implement the algorithms, Apache Sparks ML library has been used. The K-Means implementation is available at ANHANG A and the Naive Bayes implementation at ANHANG B.
+The performance of the computing environment is measured on two widely used machine learning algorithms.
+% Explain
+In both experiments, a machine learning model is trained on the computing environment using Apache Spark. Furthermore, each benchmark is evaluated using three different configurations:
+\begin{enumerate}
+\item Using a static number of Apache Spark worker to evaluate the performance of using only CPUs 
+\item Using a static number of Apache Spark worker with GPU acceleration enabled
+\item Dynamically scaling the number of CPU-only Apache Spark worker nodes using the \textit{Auto-Scaler}
+\end{enumerate}
+% DIfference between GPU and CPU
+The performance difference between GPU accelerated worker nodes and CPU-only worker nodes is explored using two different configurations of the implementation.
+
+
+% The algorithm
+The two benchmarks are:
+\begin{itemize}
+\item XGBoost classification model using the \textit{Fannie Mae’s Single-Family Historical Loan Performance Dataset}\footnote{Downloaded from: \url{https://docs.rapids.ai/datasets/mortgage-data} (Accessed: 2021-02-06)}\cite{Fannie2021Mortgage}
+
+\item XGBoost regression model using a Taxi fare dataset\footnote{The Taxi dataset is available at: \url{https://github.com/NVIDIA/spark-xgboost-examples/tree/spark-3} (Accessed: 2021-02-06)}
+\end{itemize}
+% Source
+The source code and the dataset used in these experiments are available on Github on the \textit{spark-xgboost-examples}\footnote{spark-xgboost-examples - \url{https://github.com/NVIDIA/spark-xgboost-examples/tree/spark-3} (Accessed: 2021-02-06)} repository from NVIDIA.
+% The two diff impl conf
+The repository provides a \textit{mortgage} and a \textit{taxi} application. Both applications come with a CPU-only implementation and a GPU implementation.
+
+% supervised
+Both classification and regression algorithms are supervised machine learning algorithms.
+% whats supervised
+The goal of supervised machine learning algorithms is to train a model by finding patterns in labeled data. Then, the model is used to predict labels on new data based on the learned labels.
+% Classification
+The classification algorithm identifies the category of a label.
+% Regression
+A regression algorithm predicts a continuous numeric value \cite{Mcdonald2020SparkRapids}.
+
+
+\subsection{Mortgage Experiment}
+% Intro
+In this experiment a XGBoost classification model is trained.
+% What it tries
+The model is trained to 
 
 
 % Dataset
-The \textit{infinite MNIST dataset}\cite{loosli2006InfiniteMNIST} has been used to to perform the algorithms. It consists of  8 million datapoints.
+
+%The goal of this notebook is to show how to train a XGBoost Model with Spark RAPIDS XGBoost library on GPUs. The dataset used with this notebook is derived from Fannie Mae’s Single-Family Loan Performance Data with all rights reserved by Fannie Mae. This processed dataset is redistributed with permission and consent from Fannie Mae. This notebook uses XGBoost to train 12-month mortgage loan delinquency prediction model .
 
 
-\subsection{K-Means}
-K-Means is a unsupervised machine learning algorithm for clustering.
-The algorithm aims to place unlabelled data, that appear to be related, into cluster.
+\subsection{Taxi Experiment}
+% Intro
+This experiment train a XGBoost regression model to predict a fare amount of a taxi trip based on the amount of passengers and the trip distance.
+% The dataset
+The dataset used to train the model is provided on the Github repository. FIGURE XY shows the first five lines of the dataset.
 
 
-In this section, we introduce perhaps the simplest unsupervised machine learning algorithms—k-means clustering. This algorithm analyzes unlabeled samples and attempts to place them in clusters that appear to be related. The k in “k-means” represents the number of clusters you’d like to see imposed on your data.The algorithm organizes samples into the number of clusters you specify in advance, using distance calculations similar to the k-nearest neighbors clustering algorithm. Each cluster of samples is grouped around a centroid—the cluster’s center point. Initially, the algorithm chooses k centroids at random from the dataset’s samples. Then the remaining samples are placed in the cluster whose centroid is the closest. The centroids are iteratively recalculated and the samples re-assigned to clusters until, for all clusters, the distances from a given centroid to the samples in its cluster are minimized. The algorithm’s results are:
-
-\section{Efficiency of GPU Acceleration}
-
-
-\section{Auto-Scaling using CPU Metrics}
-
-
-\section{Results}
-Ab wie viele worker ist CPU besser wie GPU
-
+\section{Static Worker CPU only}
+% Intro
+The first experiment is conducted using a static number of Apache Spark worker using only CPUs to evaluate each benchmark.
+% Why
+The goal of this experiment is, to conduct performance results which can be compared to the GPU accelerated experiment and the Auto-Scaler experiment.
+% Specs
+Each worker was given a set of resources for each executor: 80 CPU core per executor and 16GB of RAM.
+% results
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{images/07_evaluation/gpu_spark-job-mean-time}
+\includegraphics[scale=1]{images/07_evaluation/mortgage/mortgage_cpu_spark-job-mean-time}
 \caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
-\label{fig:04_gitlab_pipeline_basic_arch}
+\label{fig:07_mortgage_static-cpu_results}
 \end{figure}
-
+%---
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.2]{images/07_evaluation/gpu1_performance}
+\includegraphics[scale=1]{images/07_evaluation/taxi/taxi_cpu_spark-job-mean-time}
 \caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
-\label{fig:04_gitlab_pipeline_basic_arch}
+\label{fig:07_taxi_static-cpu_results}
 \end{figure}
+% Explain fig
+FIG XY illustrates the observed results. It represents the mean execution time in seconds a spark-job needed with the given Apache Spark worker nodes.
+% classification
+For the classification benchmark, the best result was achieved with 10 worker nodes. Running on 15 worker nodes, the spark job time increased about 6 seconds.
+% regression
+The regression benchmark achieved the best result with 10 worker nodes as well. Using 15 workers nodes took the spark job time to 109s increased by 7 seconds.
+% performance
+The performance of all 10 iterations for the classification benchmark is available at ANHANG A and for the regression benchmark at ANHANG B.
+
+
+\section{GPU Acceleration}
+% vs figure
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{images/07_evaluation/mortgage/mortgage_gpu_vs_cpu}
+\caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
+\label{fig:07_mortgage_static-gpu_results}
+\end{figure}
+%---
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{images/07_evaluation/taxi/taxi_gpu_vs_cpu}
+\caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
+\label{fig:07_taxi_static-gpu_results}
+\end{figure}
+% explain
+it is visible that with 1 GPU, the performance is 2.9x better. Using 2 GPUs is 2.4x better than 2 only CPU worker.
+
+
+\section{Auto-Scaler}
+lieber Beide algos in einem diagramm und dann auf die verschiedenen einstellungen in einer tabelle eingehen.
+
+
+% Settings
+The Auto-Scaler was evaluated using at least 2 Worker and maximum 10 Worker, because in the static experiments, 10 Worker had the best results.
+% Figure
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{images/07_evaluation/mortgage/mortgage_auto_scaler_2_worker}
+\caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
+\label{fig:07_mortgage_auto-scaler_results}
+\end{figure}
+%---
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{images/07_evaluation/taxi/taxi_auto_scaler_2_worker}
+\caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
+\label{fig:07_taxi_auto-scaler_results}
+\end{figure}
+% Explain
+Using the Auto-Scaler costs significantly more time. In ANHANG it is also visible that in iteration A and B the Auto-Scaler did not scale the worker replicas.

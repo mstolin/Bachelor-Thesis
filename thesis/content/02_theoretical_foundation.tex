@@ -16,6 +16,7 @@ Different approaches exist to increase the scalability of a system. The two main
 
 
 \subsection{Horizontal Scaling}
+\label{subsec:02_foundations_scalability_horizontal-scaling}
 % What is horizontal scaling
 Horizontal scaling is accomplished by adding nodes to the computing environment to increase the overall capacity.
 Each node typically adds the equal amount of computing capacity (e.g. amount of memory) \cite{Wilder2012CloudPatterns}.
@@ -52,6 +53,7 @@ Additionally, changing physical hardware of a running system can require a downt
 % ===========================================
 % ===========================================
 \section{Deployment Pipeline}
+\label{sec:02_depl-pipeline}
 % Short Abstract
 A deployment pipeline is an implementation of the process of getting software from source code to production.
 % Based on CI
@@ -86,6 +88,7 @@ This ensures that the software is in a deployable state at all times \cite{Duval
 
 
 \subsection{Requirements of a Continuous Integration Process}
+\label{sec:02_depl-pipeline_requirements}
 % Requirements
 The implementation of a CI process is based on several requirements:
 % The list
@@ -100,7 +103,7 @@ The build server is responsible to monitor the code base for changes.
 % Execute
 If a change is committed, the build server automatically executes the CI scripts in order \cite{Rossel2017CICD, Duvall2007CI}.
 
-\item Build script:
+\item Build scripts:
 This includes all automation scripts to validate the source code \cite{Duvall2007CI}. Typical examples are:
 \begin{itemize}
 \item Building the software binaries (e.g. \texttt{.jar} binaries for Java source code).
@@ -204,7 +207,7 @@ The core element of the autonomic architecture is the control-loop. \Fig{fig:ac_
 
 
 \subsection{Managed Resources}
-
+\label{subsec:02_ac_resources}
 % Figure
 \begin{figure}[h]
 \centering

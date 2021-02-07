@@ -20,18 +20,29 @@
 \contentsline {figure}{\numberline {\relax 4.6}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Brazil2018Prom}.\relax }}{34}{figure.caption.57}% 
 \contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{38}{figure.caption.60}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Automated Deployment Pipeline concept\relax }}{44}{figure.caption.66}% 
-\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Deployment of a spark-submit container\relax }}{45}{figure.caption.69}% 
-\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces Overall cluster architecture - Source: Authors own model.\relax }}{47}{figure.caption.70}% 
-\contentsline {figure}{\numberline {\relax 5.4}{\ignorespaces Autonomic manager component design - Source: Authors own model.\relax }}{49}{figure.caption.71}% 
-\contentsline {figure}{\numberline {\relax 5.5}{\ignorespaces Autonomic manager component design - Source: Authors own model.\relax }}{50}{figure.caption.72}% 
-\contentsline {figure}{\numberline {\relax 5.6}{\ignorespaces Full MAPE control loop architecture\relax }}{53}{figure.caption.79}% 
-\contentsline {figure}{\numberline {\relax 5.7}{\ignorespaces UML activity model of the autonomic manager process - Source: Authors own model.\relax }}{53}{figure.caption.81}% 
+\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Full MAPE control loop architecture\relax }}{45}{figure.caption.66}% 
+\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces UML activity model of the autonomic manager process\relax }}{46}{figure.caption.68}% 
+\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces Apache Spark cluster architecture\relax }}{47}{figure.caption.69}% 
+\contentsline {figure}{\numberline {\relax 5.4}{\ignorespaces Autonomic manager component design\relax }}{48}{figure.caption.70}% 
+\contentsline {figure}{\numberline {\relax 5.5}{\ignorespaces Monitoring system conceptual design\relax }}{49}{figure.caption.71}% 
+\contentsline {figure}{\numberline {\relax 5.6}{\ignorespaces Automated Deployment Pipeline concept\relax }}{52}{figure.caption.77}% 
+\contentsline {figure}{\numberline {\relax 5.7}{\ignorespaces Deployment of a spark-submit container\relax }}{53}{figure.caption.80}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 7.1}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{71}{figure.caption.95}% 
-\contentsline {figure}{\numberline {\relax 7.2}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{72}{figure.caption.96}% 
+\contentsline {figure}{\numberline {\relax 7.1}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{71}{figure.caption.94}% 
+\contentsline {figure}{\numberline {\relax 7.2}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{71}{figure.caption.95}% 
+\contentsline {figure}{\numberline {\relax 7.3}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{72}{figure.caption.96}% 
+\contentsline {figure}{\numberline {\relax 7.4}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{72}{figure.caption.97}% 
+\contentsline {figure}{\numberline {\relax 7.5}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{73}{figure.caption.98}% 
+\contentsline {figure}{\numberline {\relax 7.6}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{73}{figure.caption.99}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax B.1}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker\relax }}{92}{figure.caption.102}% 
+\contentsline {figure}{\numberline {\relax B.2}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker\relax }}{93}{figure.caption.103}% 
+\contentsline {figure}{\numberline {\relax B.3}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 5 Apache Spark worker\relax }}{94}{figure.caption.104}% 
+\contentsline {figure}{\numberline {\relax B.4}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 10 Apache Spark worker\relax }}{95}{figure.caption.105}% 
+\contentsline {figure}{\numberline {\relax B.5}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker and GPU acceleration enabled\relax }}{96}{figure.caption.106}% 
+\contentsline {figure}{\numberline {\relax B.6}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker and GPU acceleration enabled\relax }}{97}{figure.caption.107}% 
+\contentsline {figure}{\numberline {\relax B.7}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{98}{figure.caption.108}% 
