@@ -160,14 +160,16 @@
 \contentsline {subsection}{\numberline {7.2.2}Taxi Experiment}{70}{subsection.7.2.2}% 
 \contentsline {section}{\numberline {7.3}Static Worker CPU only}{70}{section.7.3}% 
 \contentsline {section}{\numberline {7.4}GPU Acceleration}{71}{section.7.4}% 
-\contentsline {section}{\numberline {7.5}Auto-Scaler}{72}{section.7.5}% 
+\contentsline {section}{\numberline {7.5}Auto-Scaler}{73}{section.7.5}% 
 \contentsline {chapter}{\numberline {8}Outlook}{75}{chapter.8}% 
 \contentsline {section}{\numberline {8.1}Optimizing Scaling}{75}{section.8.1}% 
 \contentsline {section}{\numberline {8.2}Reinforcement Learning for Auto-Scaling}{75}{section.8.2}% 
 \contentsline {section}{\numberline {8.3}Pro Active Auto-Scaler}{75}{section.8.3}% 
 \contentsline {chapter}{\numberline {9}Conclusion}{77}{chapter.9}% 
 \contentsline {section}{\numberline {9.1}Cluster architecture}{77}{section.9.1}% 
-\contentsline {part}{Anhang}{84}{section*.101}% 
+\contentsline {part}{Anhang}{84}{section*.102}% 
 \contentsline {chapter}{\numberline {A}Computing Environment Implementation}{85}{appendix.A}% 
 \contentsline {chapter}{\numberline {B}Apache Spark Cluster Implementation}{87}{appendix.B}% 
 \contentsline {section}{\numberline {B.1}Evaluation Data}{91}{section.B.1}% 
+\contentsline {subsection}{\numberline {B.1.1}Classification Benchmarks}{91}{subsection.B.1.1}% 
+\contentsline {subsection}{\numberline {B.1.2}Regression Benchmarks}{92}{subsection.B.1.2}% 

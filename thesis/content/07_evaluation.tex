@@ -105,6 +105,11 @@ The performance of all 10 iterations for the classification benchmark is availab
 
 
 \section{GPU Acceleration}
+% Intro
+The goal of this experiment is to explore the impact of GPU accelerated Apache Spark worker nodes while training machine learning models.
+% coars grained
+For this experiment, two GPUs have been available. Each benchmark was evaluated 10 times with 1 and 2 GPUs.
+%
 % vs figure
 \begin{figure}[h]
 \centering
@@ -119,16 +124,46 @@ The performance of all 10 iterations for the classification benchmark is availab
 \caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
 \label{fig:07_taxi_static-gpu_results}
 \end{figure}
-% explain
-it is visible that with 1 GPU, the performance is 2.9x better. Using 2 GPUs is 2.4x better than 2 only CPU worker.
+% Explain results
+The results illustrate the mean time of the spark-job execution time in seconds.
+% classification
+For the classification algorithm, using 1 GPU accelerated worker was able to decrease the execution time by 1143 seconds, using 2 GPUs a betternes of 486 seconds. Using 1 GPU thats an 2.9x increase and for 2 GPUs an increase of 2.4x.
+% regression
 
 
 \section{Auto-Scaler}
 lieber Beide algos in einem diagramm und dann auf die verschiedenen einstellungen in einer tabelle eingehen.
 
+% Intro
+To test the impact of the Auto-Scaler while training machine learning applications, both benchmarks have been tested with different configurations. \Tab{table:07_auto-scaler_config_parameter} shows the Auto-Scaler configuration parameters for each benchmark.
+% Wheres it from
+The configuration parameters are have been choosen in accordance to the results of the static worker experiment.
+% Max worker
+Both benchmarks in the static worker experiment achieved the best overall performance using 10 worker nodes. Therefore, this value is chosen as the maximum number of worker nodes.
+% recurrence
+The recurrence factor for the regression experiment was set to 1, because an iteration using 2 worker nodes took 80 SECONDS in mean. Using a higher recurrence factor for this experiment lead to no scaling actions. The target CPU utilization is the mean utilization of each benchmark using 2 worker nodes.
+% CPU utilization
+The CPU utilization values have been chosen in accordance to the minimum and maximum values of the static worker experiment.
+% The configurations
+\begin{table}[]
+\centering
+\begin{tabular}{@{}l|ll@{}}
+\toprule
+Parameter               & Classification & Regression \\ \midrule
+Interval                & 5 seconds      & 5 seconds  \\
+Recurrence factor       & 3              & 1          \\
+Cooldown period         & 60 seconds     & 60 seconds \\
+Target CPU utilization  & 20\%           & 5\%        \\
+Minimum CPU utilization & 10\%           & 2\%       \\
+Maximum CPU utilization & 25\%           & 10\%       \\
+Minimum worker nodes    & 2              & 10         \\
+Maximum worker nodes    & 2              & 10         \\ \bottomrule
+\end{tabular}
+\caption{Auto-Scaler configuration parameter}
+\label{table:07_auto-scaler_config_parameter}
+\end{table}
 
-% Settings
-The Auto-Scaler was evaluated using at least 2 Worker and maximum 10 Worker, because in the static experiments, 10 Worker had the best results.
+
 % Figure
 \begin{figure}[h]
 \centering
@@ -144,4 +179,10 @@ The Auto-Scaler was evaluated using at least 2 Worker and maximum 10 Worker, bec
 \label{fig:07_taxi_auto-scaler_results}
 \end{figure}
 % Explain
-Using the Auto-Scaler costs significantly more time. In ANHANG it is also visible that in iteration A and B the Auto-Scaler did not scale the worker replicas.
+The results, illustrated in FIG A, showed that scaling the number of Apache Spark worker nodes during the training of a machine learning model increased the overall time of the spark-jobs.
+% Classification
+In the classification benchmark, the Auto-Scaler caused an increase of 216 seconds in comparison of no auto-scaling.
+% Regression
+Dynamically scaling worker nodes during the regresssion benchmark increased the mean time by 38 seconds.
+% Meaning
+Given this result, 
