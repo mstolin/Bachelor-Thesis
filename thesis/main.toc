@@ -156,15 +156,18 @@
 \contentsline {chapter}{\numberline {7}Evaluation}{69}{chapter.7}% 
 \contentsline {section}{\numberline {7.1}Experimental Environment}{69}{section.7.1}% 
 \contentsline {section}{\numberline {7.2}Experiments}{69}{section.7.2}% 
-\contentsline {subsection}{\numberline {7.2.1}Mortgage Experiment}{70}{subsection.7.2.1}% 
-\contentsline {subsection}{\numberline {7.2.2}Taxi Experiment}{70}{subsection.7.2.2}% 
 \contentsline {section}{\numberline {7.3}Static Worker CPU only}{70}{section.7.3}% 
 \contentsline {section}{\numberline {7.4}GPU Acceleration}{71}{section.7.4}% 
+\contentsline {paragraph}{}{72}{paragraph*.96}% 
 \contentsline {section}{\numberline {7.5}Auto-Scaler}{73}{section.7.5}% 
 \contentsline {chapter}{\numberline {8}Outlook}{75}{chapter.8}% 
-\contentsline {section}{\numberline {8.1}Optimizing Scaling}{75}{section.8.1}% 
-\contentsline {section}{\numberline {8.2}Reinforcement Learning for Auto-Scaling}{75}{section.8.2}% 
-\contentsline {section}{\numberline {8.3}Pro Active Auto-Scaler}{75}{section.8.3}% 
+\contentsline {section}{\numberline {8.1}Results}{75}{section.8.1}% 
+\contentsline {subsection}{\numberline {8.1.1}GPU accelerated Apache Spark Worker}{75}{subsection.8.1.1}% 
+\contentsline {subsection}{\numberline {8.1.2}Auto-Scaling}{75}{subsection.8.1.2}% 
+\contentsline {section}{\numberline {8.2}Outlook}{76}{section.8.2}% 
+\contentsline {subsection}{\numberline {8.2.1}Scaling}{76}{subsection.8.2.1}% 
+\contentsline {subsection}{\numberline {8.2.2}Reinforcement Learning for Auto-Scaling}{76}{subsection.8.2.2}% 
+\contentsline {subsection}{\numberline {8.2.3}Pro Active Auto-Scaler}{76}{subsection.8.2.3}% 
 \contentsline {chapter}{\numberline {9}Conclusion}{77}{chapter.9}% 
 \contentsline {section}{\numberline {9.1}Cluster architecture}{77}{section.9.1}% 
 \contentsline {part}{Anhang}{84}{section*.102}% 

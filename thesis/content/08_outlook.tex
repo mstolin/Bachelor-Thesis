@@ -1,18 +1,62 @@
 \chapter{Outlook}
 \label{chap:08_outlook}
-%
-\todo{Describe Chapter}
 
-\section{Optimizing Scaling}
+This chapter discusses the results of the evaluation. Furthermore, an outlook is given for further research.
+
+
+% ===========================================
+% ===========================================
+\section{Results}
+
+
+\subsection{GPU accelerated Apache Spark Worker}
+% The results
+\begin{table}[]
+\centering
+\begin{tabular}{@{}l|ll|ll@{}}
+\toprule
+  & \multicolumn{2}{c|}{Classification} & \multicolumn{2}{c}{Regression} \\
+\multicolumn{1}{c|}{\# Workers} & \multicolumn{1}{c}{CPU} & \multicolumn{1}{c|}{GPU} & \multicolumn{1}{c}{CPU} & \multicolumn{1}{c}{CPU} \\ \midrule
+1 & 1740s       & 597s        & 328s      & 72s     \\
+2 & 828s       & 342s        & 139s      & 46s     \\ \bottomrule
+\end{tabular}
+\caption{Evaluation results of CPU vs. GPU}
+\label{table:08_results_cpu-gpu}
+\end{table}
+% describe results
+An overview about the results of the impact of GPU accelerated  Apache Spark workers is provided in \Tab{table:08_results_cpu-gpu}.
+
+
+% classification
+For the classification benchmark, the execution time had an improvement of 2.9x by using 1 GPU accelerated worker node. Using 2 GPU accelerated nodes impoved the execution by 2.4x.
+% regression
+For the regression benchmark, an improvement of 4.5x was achieved by using 1 GPU and 3x for 2 GPUs.
+
+
+\subsection{Auto-Scaling}
+Given the result of TABLE XY, it is clear, that the Auto-Scaler had an overall bad impact on the execution time.
+% Classification
+
+% Regression
+For the regression benchmark, the Auto-Scaler experiment increased the mean execution time by 38 seconds.
+
+
+% ===========================================
+% ===========================================
+\section{Outlook}
+
+
+\subsection{Scaling}
 Current approach: Wait until all applications have finished.
 Better approach: Blacklist worker for removing so no executor will be launchend on the worker.
 Create an external shuffle service, so worker can be remove on runtime.
 
 
-\section{Reinforcement Learning for Auto-Scaling}
+\subsection{Reinforcement Learning for Auto-Scaling}
 bla bla
 
-\section{Pro Active Auto-Scaler}
+
+\subsection{Pro Active Auto-Scaler}
 Nicht ganz sicher ob Pro Active hier das richtige Wort ist
 Punkt is: KHPA ist kacke frür Spark -> Reinforcement Learning besser.
 Noch besser: Gew. Anzahl an Worker bereit stellen und erst bei bedarf aktivieren. Docker up Zeit sparen
