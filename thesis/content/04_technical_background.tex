@@ -410,6 +410,7 @@ Prometheus follows the pull-based approach, as described in detail in \SubSec{su
 
 
 \subsection{Prometheus Architecture}
+\label{sec:04_prom_arch}
 % Architecture image
 \begin{figure}[h]
 \centering
@@ -479,6 +480,7 @@ Prometheus supports various tools for virtualization of the scraped data. Grafan
 
 
 \subsection{Prometheus Configuration}
+\label{sec:04_prom_config}
 % Short intro
 Configuration related to scraping jobs and rules are configured in configuration files. Configuration are written in the YAML file format \cite{Prom2020Docs}.
 
@@ -623,6 +625,7 @@ integration-test-job:
 
 
 \subsection{Job Execution}
+\label{sec:04_background_gitlab_job}
 % Runner pick up jobs
 Jobs which are defined in the configuration file will be performed by GitLab runners.
 % What is runner

@@ -13,25 +13,27 @@
 \contentsline {lstlisting}{\numberline {4.7}Example of a \texttt {.gitlab-ci.yml} configuration file}{38}{lstlisting.4.7}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {lstlisting}{\numberline {6.1}Auto-Scaler start command}{56}{lstlisting.6.1}% 
-\contentsline {lstlisting}{\numberline {6.2}Auto-Scaler configuration YAML file}{57}{lstlisting.6.2}% 
-\contentsline {lstlisting}{\numberline {6.3}KHPA implementation using Python 3.8}{59}{lstlisting.6.3}% 
-\contentsline {lstlisting}{\numberline {6.4}Auto-Scaler Dockerfile}{60}{lstlisting.6.4}% 
-\contentsline {lstlisting}{\numberline {6.5}Auto-Scaler build script}{61}{lstlisting.6.5}% 
-\contentsline {lstlisting}{\numberline {6.6}Environment configuration for all worker nodes}{62}{lstlisting.6.6}% 
-\contentsline {lstlisting}{\numberline {6.7}Usage of the submit script}{63}{lstlisting.6.7}% 
-\contentsline {lstlisting}{\numberline {6.8}Auto-Scaler start command}{64}{lstlisting.6.8}% 
-\contentsline {lstlisting}{\numberline {6.9}Prometheus target configuration in YAML syntax}{64}{lstlisting.6.9}% 
-\contentsline {lstlisting}{\numberline {6.10}Prometheus target configuration in YAML syntax}{65}{lstlisting.6.10}% 
-\contentsline {lstlisting}{\numberline {6.11}CLI command to start a GitLab runner in a Docker container}{67}{lstlisting.6.11}% 
+\contentsline {lstlisting}{\numberline {6.1}Docker run command to deploy a container using the NVIDIA runtime}{56}{lstlisting.6.1}% 
+\contentsline {lstlisting}{\numberline {6.2}Auto-Scaler start command}{57}{lstlisting.6.2}% 
+\contentsline {lstlisting}{\numberline {6.3}Prometheus target configuration in YAML syntax}{58}{lstlisting.6.3}% 
+\contentsline {lstlisting}{\numberline {6.4}Prometheus target configuration in YAML syntax}{59}{lstlisting.6.4}% 
+\contentsline {lstlisting}{\numberline {6.5}Auto-Scaler start command}{59}{lstlisting.6.5}% 
+\contentsline {lstlisting}{\numberline {6.6}Auto-Scaler configuration YAML file}{60}{lstlisting.6.6}% 
+\contentsline {lstlisting}{\numberline {6.7}KHPA implementation using Python 3.8}{62}{lstlisting.6.7}% 
+\contentsline {lstlisting}{\numberline {6.8}Auto-Scaler Dockerfile}{63}{lstlisting.6.8}% 
+\contentsline {lstlisting}{\numberline {6.9}Auto-Scaler build script}{64}{lstlisting.6.9}% 
+\contentsline {lstlisting}{\numberline {6.10}Environment configuration for all worker nodes}{65}{lstlisting.6.10}% 
+\contentsline {lstlisting}{\numberline {6.11}Usage of the submit script}{66}{lstlisting.6.11}% 
+\contentsline {lstlisting}{\numberline {6.12}Example of the spark-submit image}{67}{lstlisting.6.12}% 
+\contentsline {lstlisting}{\numberline {6.13}CLI command to start a GitLab runner in a Docker container}{68}{lstlisting.6.13}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {lstlisting}{\numberline {A.1}Computing environment docker-compose file}{85}{lstlisting.A.1}% 
+\contentsline {lstlisting}{\numberline {A.1}Computing environment docker-compose file}{87}{lstlisting.A.1}% 
 \addvspace {10\p@ }
-\contentsline {lstlisting}{\numberline {B.1}Apache Spark base image Dockerfile}{87}{lstlisting.B.1}% 
-\contentsline {lstlisting}{\numberline {B.2}Apache Spark master image Dockerfile}{88}{lstlisting.B.2}% 
-\contentsline {lstlisting}{\numberline {B.3}Apache Spark worker image Dockerfile}{88}{lstlisting.B.3}% 
-\contentsline {lstlisting}{\numberline {B.4}GPU discovery script - Source: \url {https://github.com/apache/spark/blob/v3.0.1/examples/src/main/scripts/getGpusResources.sh} (Accessed: 2021-01-03)}{88}{lstlisting.B.4}% 
-\contentsline {lstlisting}{\numberline {B.5}Custom submit script}{89}{lstlisting.B.5}% 
+\contentsline {lstlisting}{\numberline {B.1}Apache Spark base image Dockerfile}{89}{lstlisting.B.1}% 
+\contentsline {lstlisting}{\numberline {B.2}Apache Spark master image Dockerfile}{90}{lstlisting.B.2}% 
+\contentsline {lstlisting}{\numberline {B.3}Apache Spark worker image Dockerfile}{90}{lstlisting.B.3}% 
+\contentsline {lstlisting}{\numberline {B.4}GPU discovery script - Source: \url {https://github.com/apache/spark/blob/v3.0.1/examples/src/main/scripts/getGpusResources.sh} (Accessed: 2021-01-03)}{90}{lstlisting.B.4}% 
+\contentsline {lstlisting}{\numberline {B.5}Custom submit script}{91}{lstlisting.B.5}% 
