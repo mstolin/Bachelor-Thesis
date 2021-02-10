@@ -57,13 +57,14 @@ $ docker run -d --rm --runtime=nvidia --name dcgm-exporter nvidia/dcgm-exporter:
 \end{lstlisting}
 
 \paragraph{Auto-Scaler}
-The Auto-Scaler will still be implemented using the Docker service approach. The reson is that for the evaluation, only CPU-only worker nodes will be scaled using the Auto-Scaler. Because as mentioned above, only 2 GPUs are available for the implementation and the evaluation.
+The Auto-Scaler will still be implemented using the Docker service approach. The reason is that for the evaluation, only CPU-only worker nodes will be scaled using the Auto-Scaler. Because as mentioned above, only 2 GPUs are available for the implementation and the evaluation.
 However, the Auto-Scaler is still implemented that after enabling NVIDIA as the default runtime it should work.
 
 
 % ===========================================
 % ===========================================
 \section{Computing Environment}
+\label{sec:06_env}
 % SHort intro
 The computing environment is deployed as a Docker swarm (described in \Sec{subsec:04_docker_swarm}). It consists of several components which are all deployed as Docker services. The conceptual design is explained in \Sec{sec:05_env}.
 % Problem
@@ -74,7 +75,7 @@ Overall, the computing environment consists of the following components:
 % AM
 \item Autonomic Manager
 \begin{itemize}
-\item Auto-Scaler
+\item Auto-Scaler Version 0.1 ##############asdfasdf#########asdasdf
 \item Prometheus
 \item cAdvisor
 \item dcgm-exporter
@@ -86,9 +87,10 @@ Overall, the computing environment consists of the following components:
 
 
 \subsection{Deployment of the Computing Environment}
-%
-To simplify the deployment of a stack of services, Docker provides to define all services in a \textit{docker-compose} file.
-% 
+\label{subsec:06_env_depl} 
+% Uses compose
+To simplify the deployment of a stack of services, Docker provides to define all services in a \textit{docker-compose}\footnote{Overview of docker-compose - \url{https://docs.docker.com/compose/} (Accesses: 2021-02-10)} file.
+% What is compose
 The computing environment \textit{docker-compose} file is defined in \Lst{lst:appendix_env_compose}.
 %
 It defines all services, except the dcgm-exporter because it requires the NVIDIA Docker runtime.
@@ -211,7 +213,7 @@ The \textit{Auto-Scaler} integrates the Analyse, Plan, and Execute phase of the 
 % A Loop
 The Auto-Scaler runs as a background service that periodically performs each phase in order.
 % Configuration
-A file which defines runtime configuration can be set.
+It can be configured with a configuration in the YAML file format. The path to the configuration file has to be set as argument.
 % Start the sclaer
 The Auto-Scaler can be started with the following command:
 \begin{lstlisting}[label=lst:06_auto-scaler_start, caption=Auto-Scaler start command, language=sh, numbers=none]
@@ -219,29 +221,29 @@ $ python3 run.py --config=config.yml
 \end{lstlisting}
 
 
-\subsection{Technical Background}
-% Technical background
-The \textit{Auto-Scaler} is implemented in Python 3.8. It consists of different classes, each having different responsibilities.
-% A list of the Python libs
-The following Python libraries have been used for the implementation:
-% The list
-\begin{itemize}
-\item aiohttp\footnote{\url{https://pypi.org/project/aiohttp/} (Accessed: 2021-01-26)}
-\item APScheduler\footnote{\url{https://pypi.org/project/APScheduler/} (Accessed: 2021-01-26)}
-\item docker\footnote{\url{https://pypi.org/project/docker/} (Accessed: 2021-01-26)}
-\item PyYAML\footnote{\url{https://pypi.org/project/PyYAML/} (Accessed: 2021-01-26)}
-\end{itemize}
+\paragraph{}
+% bause of the problem
+Given the problem statement defined in SEC BLA, two different implementation versions of the Auto-Scaler exist.
+% the diff
+The difference of both version is the way how the Apache Spark workers are scaled during runtime.
+
+
+% first version
+The first version scales the replicas of the Apache Spark worker service using the Docker service API. Therefore, this version is only able to scale CPU-only worker nodes on the host machine.
+
+
+% second version
+The second version uses the Docker container API to add or remove Apache Spark worker Docker containers to the given network. Using the Docker container API, the \textit{Auto-Scaler} can use the NVIDIA runtime for the worker containers. This version is a \textit{hot-fix} to only evaluate the impact of the \textit{Auto-Scaler} using GPU-accelerated worker nodes.
 
 
 \subsection{Configuration}
+% Diff
+Two different configuration settings for each \textit{Auto-Scaler} version exists. The difference between each configuration setting is the worker section were Apache Spark worker related settings are defined.
 % Design
-\paragraph{}The configuration parameter for the \textit{Auto-Scaler} have been introduced in \Sec{subsubsec:05_am_auto-scaler_config}.
+\paragraph{}
+The configuration parameters for the \textit{Auto-Scaler} have been introduced in \Sec{subsubsec:05_am_auto-scaler_config}.
 % Its yaml
-All parameter are defined in the YAML file format
-% The yaml file
-\Lst{lst:06_auto-scaler_config_example} provides an example of a configuration.
-% Overall structure
-Overall, a configuration file is structured in three sections: General, metrics, and worker.
+The configuration is defined in the YAML file format and is structured in three sections: General, metrics, and worker.
 % The sections
 \begin{itemize}
 % General
@@ -254,41 +256,19 @@ Metrics is a list of performance metrics configuration parameters. A performance
 
 % Worker
 \item Worker:
-To scale the replicas of the Apache Spark worker service, the name of the Docker service needs to be set. In addition, the minimum and maximum number of concurrent worker nodes needs to be defined to prevent an overhead of running worker nodes.
+To scale the replicas of the worker service, the Auto-Scaler needs to know the service name. To add or remove Docker container the Auto-Scaler needs to know container specific configurations. In addition, the minimum and maximum number of concurrent worker nodes needs to be defined to prevent an overhead of concurrently running worker nodes.
 \end{itemize}
 
-% The table
-\Tab{table:06_auto-scaler_config_parameter} lists all available configuration parameters. It describes the value type and the default value of each parameter. Some parameters are required to be defined by the administrator and have no default value.
-% Parameter table
-\begin{table}[]
-\centering
-\begin{tabular}{@{}lll@{}}
-\toprule
-Name                      & Type    & Default           \\ \midrule
-\multicolumn{3}{l}{\textbf{general}}                    \\ \midrule
-interval\_seconds         & Integer & 1                 \\
-cooldown\_period\_seconds & Integer & 180               \\
-recurrence\_factor        & Integer & 1                 \\
-prometheus\_url           & String  & \textit{Required} \\
-\multicolumn{3}{l}{\textbf{metrics}}                    \\ \midrule
-query                     & String  & \textit{Required} \\
-target\_utilization       & Float   & 0.5               \\
-\multicolumn{3}{l}{thresholds}                          \\
-min                       & Float   & 0.5               \\
-max                       & Float   & 0.5               \\
-\multicolumn{3}{l}{\textbf{worker}}                     \\ \midrule
-service\_name             & String  & \textit{Required} \\
-\multicolumn{3}{l}{thresholds}                          \\
-min                       & Float   & 0.5               \\
-max                       & Float   & 0.5               \\ \bottomrule
-\end{tabular}
-\caption{Auto-Scaler configuration parameter}
-\label{table:06_auto-scaler_config_parameter}
-\end{table}
 
-\todo{Update weil kein DOcker swarm mehr}
+\subsubsection{Configuration for Scaling a Docker Service}
+% The yaml file
+\Lst{lst:06_auto-scaler_config_service_example} provides an example of a configuration for scaling a Docker service.
+%
+To scale a service using the service API of the Docker SDK, only the service name is needed.
+%
+Docker related configuration settings (e.g. environment variables) are defined in the \texttt{docker-compose.yml} explained in \Sec{subsec:06_env_depl}
 % Example
-\begin{lstlisting}[label=lst:06_auto-scaler_config_example, caption=Auto-Scaler configuration YAML file]
+\begin{lstlisting}[label=lst:06_auto-scaler_config_service_example, caption=\textit{Auto-Scaler} configuration for scaling Docker Services]
 general:
   interval_seconds: 5
   cooldown_period_seconds: 180
@@ -302,16 +282,57 @@ metrics:
     thresholds:
       min: 0.2
       max: 0.6
-  
-  gpu:
+ 
+worker:
+  service_name: "computing_spark-worker"
+  thresholds:
+    min: 1
+    max: 30
+\end{lstlisting}
+
+
+\subsubsection{Configuration for scaling Docker Containers}
+%
+To add or remove Docker containers the \textit{Auto-Scaler} needs to the following container related properties:
+% the props
+\begin{itemize}
+\item Image: A image name is required where the Docker containers have to be deployed from.
+
+\item Prefix: To identify the containers deployed by the Auto-Scaler, each container name starts with the provided prefix. Additionally, a UUID is appended to the prefix to guarantee that each container is given a unique name.
+
+\item Network: The name of the Docker network where the container should be attached to.
+
+\item Runtime: The runtime used for the image.
+
+\item Environment: A list of environment variables.
+
+\item Volumes: All volumes which should be mounted to the Docker container.
+\end{itemize}
+% Explain example config
+\Lst{lst:06_auto-scaler_config_container_example} provides an example of the configuration file using the container related settings. 
+%example
+\begin{lstlisting}[label=lst:06_auto-scaler_config_container_example, caption=\textit{Auto-Scaler} configuration for scaling Docker Containers]
+general:
+  interval_seconds: 5
+  cooldown_period_seconds: 180
+  recurrence_factor: 3
+  prometheus_url: "http://localhost:9090"
+ 
+metrics:
+  cpu:
     query: 'sum(rate(container_cpu_user_seconds_total{image="spark-worker:3.0.1-hadoop2.7"}[30s]))'
-    target_utilization: 0.3
+    target_utilization: 0.5
     thresholds:
       min: 0.2
       max: 0.6
  
 worker:
-  service_name: "computing_spark-worker"
+  image: 'spark-worker:3.0.1-hadoop2.7'
+  name_prefix: 'spark-worker'
+  network: 'computing_net'
+  runtime: 'nvidia'
+  environment:
+    - 'SPARK_MASTER_URI=spark://spark-master:7077'
   thresholds:
     min: 1
     max: 30
@@ -443,17 +464,18 @@ The script can be used from the command line as \texttt{sh build-image.sh "1.0"}
 % ===========================================
 % ===========================================
 \section{Apache Spark Cluster with GPU Acceleration}
+\label{sec:07_spark}
 The conceptual design of the Apache Spark cluster is introduced in \Sec{sec:05_spark}. It consists of a single master node, a dynamic number of worker nodes, and \textit{spark-submit} nodes. A \textit{spark-submit} node is deployed, whenever an application is submitted to cluster.
 % standalone mode
 All master and worker nodes are deployed in standalone mode (described in \Sec{subsec:04_spark_standalone}).
 
 
 \subsection{Apache Spark Base Image}
-All services in the Apache Spark cluster have share the same dependencies. To simplify the creation of the Docker images, a base image is created. This base image serves as the parent image for all other images. Furthermore, this contributes to the homogeneity of running services in cluster.
+All services in the Apache Spark cluster share the same dependencies. To simplify the creation of the Docker images, a base image is created. This base image serves as the parent image for all other images.
 %
 \Lst{lst:appendix_spark_base_dockerfile} provides the implementation of the \textit{base-image} Dockerfile.
 %
-To install a specific Apache Spark version on the Docker image, two arguments are provided. The arguments can be set in the Docker build command with the \texttt{--build-arg} flag. This is hown in CHAPTER BUILDING TH IMAGES WEITER UNTEN.
+To install a specific Apache Spark version on the Docker image, the \texttt{SPARK\_VERSION}, and \texttt{HADOOP\_VERSION} build arguments are provided. The build process of the images is explained in \Sec{subsec:07_spark_building-images}.
 %
 The base image uses the \texttt{nvidia/cuda:11.0-devel-ubuntu16.04} Docker image as parent image. This image is provided by NVIDIA and has already installed the NVIDIA GPU driver and the CUDA toolkit dependencies.
 %
@@ -564,7 +586,8 @@ $ docker run \
 \end{lstlisting}
 
 
-\subsection{Build the Images}
+\subsection{Building the Apache Spark Docker Images}
+\label{subsec:07_spark_building-images}
 % Intro
 A script is used to automate the build process of all images.
 % source
@@ -586,49 +609,42 @@ $ sh build-images.sh 3.0.1 2.7
 % ===========================================
 % ===========================================
 \section{GitLab CI/CD Pipeline for Automated Deployment of Machine Learning Applications}
+\label{sec:06_pipeline}
 %
-The CI pipeline is responsible to test, and submit the application to the Apache Spark cluster.
-%
-Important to notice, that Python is an interpreted programming language. It is possible to package the Python app as ZIP document or as an egg file. However, to keep the implementation simple, only raw Python files are submitted to the Apache Spark cluster. Therefore, there is no build stage in this CI pipeline architecture.
+The CI pipeline is responsible to automatically validate, and submit an application to the Apache Spark cluster whenever a change has been committed to the source code of the application.
+% Build
+It is important to notice, that Python is an interpreted programming language and does not need to be compiled into a binary file. However, Apache Spark supports \texttt{.zip}, \texttt{.egg}, and raw \texttt{.py} files when submitting a Python application. To keep the implementation simple, only raw \texttt{.py} files are submitted to the Apache Spark cluster. Therefore, there is no build stage in this CI pipeline architecture.
 %
 To be able to deploy a \textit{spark-submit} container on the host machine, a GitLab runner (introduced in \Sec{sec:04_background_gitlab_job}) instance has to run on the same machine.
 
 
 \subsection{GitLab Runner}
+\label{subsec:06_pipeline_runner}
 GitLab CI/CD jobs are being executed by a GitLab runner.
-To deploy a \textit{spark-submit} container in the swarm network of the Apache Spark cluster, the GitLab Runner needs to run on the same host to get access to the Docker engine.
-
-
-%
-As mentioned before, to deploy a \textit{spark-submit} node on the host machine, a GitLab Runner instance is needed which has access to the overlaying Docker engine.
+To deploy a \textit{spark-submit} container to the swarm network of the Apache Spark cluster through a CI/CD job, the GitLab Runner needs to run on the same host with access to the overlaying Docker engine.
 
 
 % In this impl
-In this implementation, the GitLab Runner is deployed as a Docker container.
+In this implementation, GitLab Runners are deployed on a Docker container.
 % Docker as parent
-The Docker container is build from the \texttt{gitlab/gitlab-runner:latest} image. This image provides an installation of the GitLab runner service and command-line-interface.
+The Docker container is build from the \texttt{gitlab/gitlab-runner:latest} image.
 % Volumes
-To enable Docker support in the context of the GitLab Runner Docker container, the Docker socket has to be mounted to the container. This \textit{socket-binding} approach is explained in detail on the GitLab online documentation\footnote{Building Docker images with GitLab CI/CD  - \url{https://docs.gitlab.com/ee/ci/docker/using_docker_build.html\#use-docker-socket-binding} (Accessed: 2021-01-31)}.
+To enable Docker support in the context of the GitLab Runner Docker container, the Docker socket has to be mounted to the container. The \textit{socket-binding} approach is explained in detail on the GitLab online documentation\footnote{Building Docker images with GitLab CI/CD  - \url{https://docs.gitlab.com/ee/ci/docker/using_docker_build.html\#use-docker-socket-binding} (Accessed: 2021-01-31)}.
 
 
-% Create a runner
-The \texttt{gitlab-runner} command is set as image entrypoint. It initialises a new GitLab runner on the container.
-% ENable docker on gitlab runner
-To enable Docker access to the GitLab runner, various settings have to be set. First the docker executor has to be activated. This enables the runner to perform jobs with user defined Docker images, which is required to use the \textit{spark-submit} image. Second, the runner needs access to the Docker socket as well. Therefore, the mounted Docker socket has to be set as volume for the runner. Lastly, the \texttt{docker:latest} image is used for the container where jobs are performed on. This gives jobs the ability to perform Docker commands, e.g. the \texttt{docker run} command
-
-
-% /builds volume
-The \texttt{/builds} directory of a runner is the location where the source code of a repository is located. By default, this directory is only available to the job container deployed by the runner. To share this container with container deployed by a job, it has to be shared with the host system. Docker container cannot share their filesystem with other containers, because Docker run in isolation. This is described in detail in SECTION BLA NEXT.
-% the listing
-\Lst{lst:06_ci_runner_container_cmd} provides the command to create a GitLab runner in a Docker container.
-% token and url
-In addition to the previously mentioned configuration settings, a GitLab Runner requires a URL to a GitLab server and a registration token.
+\subsubsection{Create a GitLab Runner Instance}
+% Intro
+\Lst{lst:06_ci_runner_container_cmd} shows the command to create a GitLab runner in a Docker container.
+% socket binding
+The command creates a Docker container using the \texttt{gitlab/gitlab-runner:latest} image. This image provides an installation of the GitLab runner service and command-line-interface (CLI). Additionally, the Docker engine and the \texttt{/build} directory is mounted to the container. The reason to mount the \texttt{/build} directory is explained in the next section.
+% Create image
+Next, the \texttt{gitlab-runner register} command is performed in the context of the Docker container.
+% Settings
+To enable Docker access for the GitLab Runner, various settings have to be set. First the docker executor has to be activated. This enables the runner to perform jobs with with access to user defined Docker images, which is required to deploy a \textit{spark-submit} Docker container from a CI/CD job. Second, the \texttt{docker:latest} image is set as Docker image for CI/CD job containers which enables to perform Docker CLI commands from CI/CD job containers.
 %
-The registration token identifies a specific repository or a GitLab group. Then, the runner can only used from the 
-%
-The GitLab Runner created in the example is given the \textit{spark-submit} tag. GitLab CI/CD jobs which are tagged using this tag are performed by this runner.
+The support of the Docker CLI within CI/CD jobs is required to deploy a \textit{spark-submit} container.
 % the example
-\begin{lstlisting}[label=lst:06_ci_runner_container_cmd, caption=CLI command to start a GitLab runner in a Docker container, language=bash]
+\begin{lstlisting}[label=lst:06_ci_runner_container_cmd, caption=CLI command to start a GitLab runner in a Docker container, language=bash, numbers=none]
 $ docker run -d \
     --name gitlab-runner \
     --restart always \
@@ -649,18 +665,29 @@ $ docker run -d \
 \end{lstlisting}
 
 
+\subsubsection{Sharing the Applications Source Code between Docker Containers}
+% /builds volume
+The source code is located in the \texttt{/builds} directory on the jobs Docker container local filesystem. Docker container run in isolations and cannot share their local filesystem with other containers. To share the \texttt{/builds} directory with other Docker containers it has to be mounted to the host machines filesystem.
+% Back to host
+As described in the previous section, a job container is deployed by a GitLab Runner and mounts the \texttt{/builds} directory to the GitLab Runner Docker container filesystem. Additionally, the GitLab Runner container mounts the \texttt{/builds} directory to the host filesystem.
+%
+From the host filesystem, the \texttt{/builds} directory can be mounted to other Docker containers.
+%
+This approach is important to share the source code from a CI/CD job with a \textit{spark-submit} container. Otherwise the \textit{spark-submit} container is not able to access and submit the application.
+
+
 \subsection{Pipeline Architecture}
 %
-As explained in SECTION AB, a GitLab CI/CD pipeline is configured by a \texttt{.gitlab-ci.yml} file in the root directory of the source code repository.
+As explained in \Sec{subsec:04_background_gitlab_pipeline}, a GitLab CI/CD pipeline is configured by a \texttt{.gitlab-ci.yml} file in the root directory of the source code repository.
 %
-LST XY shows the .gitlab-ci.yml configuration file. The pipeline consists of a \textit{test} and a \textit{train} stage.
+\Lst{lst:appendix_ci-pipeline_job} shows the \texttt{.gitlab-ci.yml}  configuration file of this implementation. The pipeline consists of a \textit{test} and a \textit{train} stage as explained in the conceptual design in \Sec{sec:05_pipeline}.
 
 
 \subsubsection{Test Stage}
 % test stage
-The first stage is the test stage which consists of a single job called \textit{unit-tests} to perform unit tests.
+The first stage is the test stage which consists of a single job called \textit{unit-tests}.
 % The image
-It uses the \texttt{python:3.8-slim} Docker image, which has already Python 3.8 installed. To perform the unit tests, first a Python virtual environment with all dependencies is created. Lastly, all tests in the \texttt{tests/} directory are performed using the pytest\footnote{pytest - \url{https://docs.pytest.org/en/latest/} (Accessed: 2021-02-01)} library.
+It uses the \texttt{python:3.8-slim} Docker image, which has already Python 3.8 installed. To perform the tests, first a Python virtual environment with all dependencies is created. Lastly, all tests in the \texttt{tests/} directory are performed using the pytest\footnote{pytest - \url{https://docs.pytest.org/en/latest/} (Accessed: 2021-02-01)} library.
 
 
 \paragraph{}
@@ -669,29 +696,31 @@ It is important to mention, that the train stage depends on the application. Thi
 
 \subsubsection{Train Stage}
 % train stage
-After the test stage has been performed successfully, the train stage is responsible to perform the Apache Spark application on the Apache Spark cluster.
+After the test stage has been performed successfully, the train stage is responsible to submit the Apache Spark application to the Apache Spark cluster.
 % Jobs
 The train stage consists of a single job called \textit{train-model}.
 % submit
-This jobs executes the \texttt{submit.sh} build script, which is located in the repository root directory. The script executes the \texttt{docker run} command to deploy a \textit{spark-submit} Docker container in the Apache Spark cluster. It takes the path to the application Python file and all needed parameters as input and forwards them to the \texttt{docker run} command. To be able to execute the applications Python file, it has to be mounted to the host filesystem, which is explained in this section.
+This jobs executes the \texttt{submit.sh} build script, which is located in the repository root directory. The script executes the \texttt{docker run} command to deploy a \textit{spark-submit} Docker container in the Apache Spark cluster. It takes the path to the application Python file and all needed parameters as input and forwards them to the \texttt{docker run} command. To be able to execute the applications Python file, it has to be mounted to the host filesystem, which is explained previously in \Sec{subsec:06_pipeline_runner}.
 % Config
-To configure the \textit{spark-submit} container, all configuration parameters listed in \Tab{table:06_env_depl_submit-envs} can be set as environment variables in the \texttt{variables} section of the job.
+To configure the \textit{spark-submit} container, all configuration parameters listed in \Tab{table:06_env_depl_submit-envs} can be set as environment variables in the \texttt{variables} section of the CI/CD job.
 % Tag
-The job has to be tagged with \textit{spark-submit} to get executed by the runner on the host machine.
+To perform this job with the in \Sec{subsec:06_pipeline_runner} created runner, the \textit{train-model} job has to be tagged with the \textit{spark-submit} tag.
 
 
-\paragraph{Creating a mount-point:}
+%\paragraph{}
+%Intro
+%At the start, the textit{train-model} job creates a mount-point to share the applications source code with other Docker containers.
 % Isolation
-As mentioned before, Docker container run in isolation and do not share the same filesystem with each other.
+%As mentioned before, Docker container run in isolation and do not share the same filesystem with each other. Therefore, the /builds directory is mounted to the host filesystem.
 % The runner
-Each runner registered on the GitLab Runner Docker container runs its jobs on a separate Docker container on the host system. All commands are being performed in the context of its container.
+%Each runner registered on the GitLab Runner Docker container runs its jobs on a separate Docker container on the host system. All commands are being performed in the context of its container.
 %
-When the \textit{train-job} deploys a \textit{spark-submit} Docker container with the \texttt{docker run} command, it tries to mount the \texttt{/builds} directory from its own filesystem to the \textit{spark-submit} container.
+%When the \textit{train-job} deploys a \textit{spark-submit} Docker container with the \texttt{docker run} command, it tries to mount the \texttt{/builds} directory from its own filesystem to the \textit{spark-submit} container.
 %
-To share the source code between the \textit{train-job} container and the \textit{spark-submit} container, the \texttt{/builds} directory is mounted to the host system, as being explained in SECTION OBEN.
+%To share the source code between the \textit{train-job} container and the \textit{spark-submit} container, the \texttt{/builds} directory is mounted to the host system, as being explained in SECTION OBEN.
 %
-To overcome this problem, the \textit{train-model} job creates a new folder inside the \texttt{/builds} directory as mount-point and moves the application source code files to this location.
+%To overcome this problem, the \textit{train-model} job creates a new folder inside the \texttt{/builds} directory as mount-point and moves the application source code files to this location.
 %
-This mount-point is available to the \textit{spark-submit} container when given as a volume.
+%This mount-point is available to the \textit{spark-submit} container when given as a volume.
 %
-The approach of a mount-point is mentioned in a discussion on the GitLab website\footnote{Docker volumes not mounted when using docker:dind - \url{https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227} (Accessed: 2021-02-01)}.
+%The approach of a mount-point is mentioned in a discussion on the GitLab website\footnote{Docker volumes not mounted when using docker:dind - \url{https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227} (Accessed: 2021-02-01)}.

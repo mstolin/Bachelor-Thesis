@@ -133,46 +133,50 @@
 \contentsline {subsubsection}{Prometheus Target Configuration}{58}{subsubsection*.83}% 
 \contentsline {subsubsection}{Prometheus Recording Rules Configuration}{59}{subsubsection*.84}% 
 \contentsline {section}{\numberline {6.3}Auto-Scaler}{59}{section.6.3}% 
-\contentsline {subsection}{\numberline {6.3.1}Technical Background}{60}{subsection.6.3.1}% 
-\contentsline {subsection}{\numberline {6.3.2}Configuration}{60}{subsection.6.3.2}% 
 \contentsline {paragraph}{}{60}{paragraph*.85}% 
-\contentsline {subsection}{\numberline {6.3.3}Scaling Apache Worker Nodes}{61}{subsection.6.3.3}% 
-\contentsline {subsubsection}{Estimation of Necessary Scaling Actions}{62}{subsubsection*.87}% 
-\contentsline {subsubsection}{Calculating the Number of Needed Worker Nodes}{62}{subsubsection*.88}% 
-\contentsline {subsubsection}{Performing a Scaling Action}{63}{subsubsection*.89}% 
-\contentsline {subsubsection}{Removing Apache Spark worker}{63}{subsubsection*.90}% 
-\contentsline {subsection}{\numberline {6.3.4}Docker Image}{63}{subsection.6.3.4}% 
-\contentsline {section}{\numberline {6.4}Apache Spark Cluster with GPU Acceleration}{64}{section.6.4}% 
+\contentsline {subsection}{\numberline {6.3.1}Configuration}{60}{subsection.6.3.1}% 
+\contentsline {paragraph}{}{60}{paragraph*.86}% 
+\contentsline {subsubsection}{Configuration for Scaling a Docker Service}{60}{subsubsection*.87}% 
+\contentsline {subsubsection}{Configuration for scaling Docker Containers}{61}{subsubsection*.88}% 
+\contentsline {subsection}{\numberline {6.3.2}Scaling Apache Worker Nodes}{62}{subsection.6.3.2}% 
+\contentsline {subsubsection}{Estimation of Necessary Scaling Actions}{62}{subsubsection*.89}% 
+\contentsline {subsubsection}{Calculating the Number of Needed Worker Nodes}{62}{subsubsection*.90}% 
+\contentsline {subsubsection}{Performing a Scaling Action}{63}{subsubsection*.91}% 
+\contentsline {subsubsection}{Removing Apache Spark worker}{63}{subsubsection*.92}% 
+\contentsline {subsection}{\numberline {6.3.3}Docker Image}{63}{subsection.6.3.3}% 
+\contentsline {section}{\numberline {6.4}Apache Spark Cluster with GPU Acceleration}{65}{section.6.4}% 
 \contentsline {subsection}{\numberline {6.4.1}Apache Spark Base Image}{65}{subsection.6.4.1}% 
 \contentsline {subsection}{\numberline {6.4.2}Apache Spark Master Image}{65}{subsection.6.4.2}% 
 \contentsline {subsection}{\numberline {6.4.3}Apache Spark Worker Image}{65}{subsection.6.4.3}% 
 \contentsline {subsection}{\numberline {6.4.4}Apache Spark Submit Image}{66}{subsection.6.4.4}% 
-\contentsline {subsubsection}{Custom Submit Script}{66}{subsubsection*.91}% 
-\contentsline {subsubsection}{Environment Variables}{66}{subsubsection*.92}% 
-\contentsline {subsubsection}{Executing an Application with the spark-submit Image}{66}{subsubsection*.94}% 
-\contentsline {subsection}{\numberline {6.4.5}Build the Images}{67}{subsection.6.4.5}% 
-\contentsline {section}{\numberline {6.5}GitLab CI/CD Pipeline for Automated Deployment of Machine Learning Applications}{67}{section.6.5}% 
-\contentsline {subsection}{\numberline {6.5.1}GitLab Runner}{67}{subsection.6.5.1}% 
-\contentsline {subsection}{\numberline {6.5.2}Pipeline Architecture}{69}{subsection.6.5.2}% 
-\contentsline {subsubsection}{Test Stage}{69}{subsubsection*.95}% 
-\contentsline {paragraph}{}{69}{paragraph*.96}% 
-\contentsline {subsubsection}{Train Stage}{69}{subsubsection*.97}% 
-\contentsline {paragraph}{Creating a mount-point:}{70}{paragraph*.98}% 
+\contentsline {subsubsection}{Custom Submit Script}{66}{subsubsection*.93}% 
+\contentsline {subsubsection}{Environment Variables}{66}{subsubsection*.94}% 
+\contentsline {subsubsection}{Executing an Application with the spark-submit Image}{67}{subsubsection*.96}% 
+\contentsline {subsection}{\numberline {6.4.5}Building the Apache Spark Docker Images}{67}{subsection.6.4.5}% 
+\contentsline {section}{\numberline {6.5}GitLab CI/CD Pipeline for Automated Deployment of Machine Learning Applications}{68}{section.6.5}% 
+\contentsline {subsection}{\numberline {6.5.1}GitLab Runner}{68}{subsection.6.5.1}% 
+\contentsline {subsubsection}{Create a GitLab Runner Instance}{68}{subsubsection*.97}% 
+\contentsline {subsubsection}{Sharing the Applications Source Code between Docker Containers}{69}{subsubsection*.98}% 
+\contentsline {subsection}{\numberline {6.5.2}Pipeline Architecture}{70}{subsection.6.5.2}% 
+\contentsline {subsubsection}{Test Stage}{70}{subsubsection*.99}% 
+\contentsline {paragraph}{}{70}{paragraph*.100}% 
+\contentsline {subsubsection}{Train Stage}{70}{subsubsection*.101}% 
 \contentsline {chapter}{\numberline {7}Evaluation}{71}{chapter.7}% 
 \contentsline {section}{\numberline {7.1}Experimental Environment}{71}{section.7.1}% 
 \contentsline {section}{\numberline {7.2}Experiments}{71}{section.7.2}% 
 \contentsline {section}{\numberline {7.3}Static Worker CPU only}{72}{section.7.3}% 
 \contentsline {section}{\numberline {7.4}GPU Acceleration}{73}{section.7.4}% 
-\contentsline {paragraph}{}{74}{paragraph*.101}% 
+\contentsline {paragraph}{}{74}{paragraph*.104}% 
 \contentsline {section}{\numberline {7.5}Auto-Scaler}{75}{section.7.5}% 
 \contentsline {chapter}{\numberline {8}Outlook}{77}{chapter.8}% 
 \contentsline {section}{\numberline {8.1}Scaling}{77}{section.8.1}% 
 \contentsline {section}{\numberline {8.2}Shuffle bla bla}{78}{section.8.2}% 
 \contentsline {chapter}{\numberline {9}Conclusion}{79}{chapter.9}% 
 \contentsline {section}{\numberline {9.1}Cluster architecture}{79}{section.9.1}% 
-\contentsline {part}{Anhang}{86}{section*.106}% 
+\contentsline {part}{Anhang}{86}{section*.109}% 
 \contentsline {chapter}{\numberline {A}Computing Environment Implementation}{87}{appendix.A}% 
 \contentsline {chapter}{\numberline {B}Apache Spark Cluster Implementation}{89}{appendix.B}% 
-\contentsline {section}{\numberline {B.1}Evaluation Data}{93}{section.B.1}% 
-\contentsline {subsection}{\numberline {B.1.1}Classification Benchmarks}{93}{subsection.B.1.1}% 
-\contentsline {subsection}{\numberline {B.1.2}Regression Benchmarks}{94}{subsection.B.1.2}% 
+\contentsline {section}{\numberline {B.1}GitLab CI/CD Pipeline Implementation}{93}{section.B.1}% 
+\contentsline {section}{\numberline {B.2}Evaluation Data}{94}{section.B.2}% 
+\contentsline {subsection}{\numberline {B.2.1}Classification Benchmarks}{94}{subsection.B.2.1}% 
+\contentsline {subsection}{\numberline {B.2.2}Regression Benchmarks}{94}{subsection.B.2.2}% 
