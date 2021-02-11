@@ -14,20 +14,20 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {lstlisting}{\numberline {6.1}Docker run command to deploy a container using the NVIDIA runtime}{56}{lstlisting.6.1}% 
-\contentsline {lstlisting}{\numberline {6.2}Auto-Scaler start command}{57}{lstlisting.6.2}% 
+\contentsline {lstlisting}{\numberline {6.2}Commands to deploy the computing environment}{57}{lstlisting.6.2}% 
 \contentsline {lstlisting}{\numberline {6.3}Prometheus target configuration in YAML syntax}{58}{lstlisting.6.3}% 
 \contentsline {lstlisting}{\numberline {6.4}Prometheus target configuration in YAML syntax}{59}{lstlisting.6.4}% 
-\contentsline {lstlisting}{\numberline {6.5}Auto-Scaler start command}{59}{lstlisting.6.5}% 
+\contentsline {lstlisting}{\numberline {6.5}Auto-Scaler start command}{60}{lstlisting.6.5}% 
 \contentsline {lstlisting}{\numberline {6.6}\textit {Auto-Scaler} configuration for scaling Docker Services}{60}{lstlisting.6.6}% 
-\contentsline {lstlisting}{\numberline {6.7}\textit {Auto-Scaler} configuration for scaling Docker Containers}{61}{lstlisting.6.7}% 
-\contentsline {lstlisting}{\numberline {6.8}KHPA implementation using Python 3.8}{63}{lstlisting.6.8}% 
-\contentsline {lstlisting}{\numberline {6.9}Auto-Scaler Dockerfile}{64}{lstlisting.6.9}% 
-\contentsline {lstlisting}{\numberline {6.10}Auto-Scaler build script}{64}{lstlisting.6.10}% 
-\contentsline {lstlisting}{\numberline {6.11}Environment configuration for all worker nodes}{66}{lstlisting.6.11}% 
-\contentsline {lstlisting}{\numberline {6.12}Usage of the submit script}{66}{lstlisting.6.12}% 
-\contentsline {lstlisting}{\numberline {6.13}Example of the spark-submit image}{67}{lstlisting.6.13}% 
-\contentsline {lstlisting}{\numberline {6.14}Example of the spark-submit image}{68}{lstlisting.6.14}% 
-\contentsline {lstlisting}{\numberline {6.15}CLI command to start a GitLab runner in a Docker container}{69}{lstlisting.6.15}% 
+\contentsline {lstlisting}{\numberline {6.7}KHPA implementation using Python 3.8}{61}{lstlisting.6.7}% 
+\contentsline {lstlisting}{\numberline {6.8}Auto-Scaler Dockerfile}{62}{lstlisting.6.8}% 
+\contentsline {lstlisting}{\numberline {6.9}Auto-Scaler build script}{63}{lstlisting.6.9}% 
+\contentsline {lstlisting}{\numberline {6.10}Environment configuration for all worker nodes}{64}{lstlisting.6.10}% 
+\contentsline {lstlisting}{\numberline {6.11}Usage of the submit script}{65}{lstlisting.6.11}% 
+\contentsline {lstlisting}{\numberline {6.12}Example of the spark-submit image}{66}{lstlisting.6.12}% 
+\contentsline {lstlisting}{\numberline {6.13}Example of the spark-submit image}{66}{lstlisting.6.13}% 
+\contentsline {lstlisting}{\numberline {6.14}CLI command to start a GitLab runner in a Docker container}{68}{lstlisting.6.14}% 
+\contentsline {lstlisting}{\numberline {6.15}Submit script to execute \texttt {docker run} with all needed configuration parameters}{69}{lstlisting.6.15}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

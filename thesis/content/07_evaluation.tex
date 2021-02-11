@@ -24,6 +24,8 @@ In both experiments, a machine learning model is trained on the computing enviro
 \item Using a static number of Apache Spark worker with GPU acceleration enabled
 \item Dynamically scaling the number of CPU-only Apache Spark worker nodes using the \textit{Auto-Scaler}
 \end{enumerate}
+% Why no auto gpu
+The Auto-Scaler is not evaluated using GPU-accelerated worker nodes. As mentioned, for this experiment only 2 GPUs are available. The RAPIDS plugin allocates a GPU exclusively for each executor. When the Auto-Scaler creates a new worker node, the worker allocates an available GPU on the host machine and tries to allocate it completely. Due that the host machine is a live-system and other applications are running on the system, this is not possible. Therefore, the impact of GPU-accelerated worker nodes is evaluated using a static number of worker nodes which use a GPU which was exclusively reserved for the experiment during that time.
 % DIfference between GPU and CPU
 The performance difference between GPU accelerated worker nodes and CPU-only worker nodes is explored using two different configurations of the implementation.
 

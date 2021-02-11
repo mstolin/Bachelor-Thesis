@@ -1,5 +1,7 @@
-\chapter{Computing Environment Implementation}
+\chapter{Implementation}
 
+\section{Computing Environment}
+% docker compose file
 \begin{lstlisting}[label=lst:appendix_env_compose, caption=Computing environment docker-compose file]
 version: "3.7"
  
@@ -67,7 +69,6 @@ services:
 \end{lstlisting}
 
 \chapter{Apache Spark Cluster Implementation}
-
 % Base image dockerfile
 \begin{lstlisting}[label=lst:appendix_spark_base_dockerfile, caption=Apache Spark base image Dockerfile]
 FROM nvidia/cuda:11.0-devel-ubuntu16.04
@@ -111,7 +112,6 @@ ENV PATH /usr/bin/spark/bin:/usr/bin/spark/sbin:$PATH
 WORKDIR ${SPARK_HOME}
 \end{lstlisting}
 
-
 % Master image dockerfile
 \begin{lstlisting}[label=lst:appendix_spark_master_dockerfile, caption=Apache Spark master image Dockerfile]
 ARG SPARK_VERSION
@@ -130,7 +130,6 @@ EXPOSE 4040 7077
 # Start master-node in standalone mode
 ENTRYPOINT [ "sbin/start-master.sh" ]
 \end{lstlisting}
-
 
 % Worker image Dockerfile
 \begin{lstlisting}[label=lst:appendix_spark_worker_dockerfile, caption=Apache Spark worker image Dockerfile]
@@ -152,7 +151,6 @@ EXPOSE 4041
 # Start worker-node
 ENTRYPOINT ./sbin/start-slave.sh ${SPARK_MASTER_URI}
 \end{lstlisting}
-
 
 % GPU discovery script
 \begin{lstlisting}[label=lst:appendix_spark_gpu-discovery, caption=GPU discovery script - Source: \url{https://github.com/apache/spark/blob/v3.0.1/examples/src/main/scripts/getGpusResources.sh} (Accessed: 2021-01-03), language=bash]
