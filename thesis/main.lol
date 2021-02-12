@@ -5,12 +5,15 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {lstlisting}{\numberline {4.1}Basic example of a Dockerfile}{24}{lstlisting.4.1}% 
-\contentsline {lstlisting}{\numberline {4.2}Usage of master launch script}{31}{lstlisting.4.2}% 
-\contentsline {lstlisting}{\numberline {4.3}Usage of worker launch script}{31}{lstlisting.4.3}% 
-\contentsline {lstlisting}{\numberline {4.4}Example usage of the spark-submit executable}{31}{lstlisting.4.4}% 
-\contentsline {lstlisting}{\numberline {4.5}Prometheus configuration file example}{36}{lstlisting.4.5}% 
-\contentsline {lstlisting}{\numberline {4.6}Prometheus rules configuration file example}{37}{lstlisting.4.6}% 
-\contentsline {lstlisting}{\numberline {4.7}Example of a \texttt {.gitlab-ci.yml} configuration file}{38}{lstlisting.4.7}% 
+\contentsline {lstlisting}{\numberline {4.2}Basic example of stack describes in the docker-compose file format}{26}{lstlisting.4.2}% 
+\contentsline {lstlisting}{\numberline {4.3}Usage of the docker stack command to deploy a stack}{27}{lstlisting.4.3}% 
+\contentsline {lstlisting}{\numberline {4.4}Usage of master launch script}{31}{lstlisting.4.4}% 
+\contentsline {lstlisting}{\numberline {4.5}Usage of worker launch script}{31}{lstlisting.4.5}% 
+\contentsline {lstlisting}{\numberline {4.6}Example usage of the spark-submit executable}{32}{lstlisting.4.6}% 
+\contentsline {lstlisting}{\numberline {4.7}Prometheus configuration file example}{37}{lstlisting.4.7}% 
+\contentsline {lstlisting}{\numberline {4.8}Prometheus rules configuration file example}{37}{lstlisting.4.8}% 
+\contentsline {lstlisting}{\numberline {4.9}DCGM-Exporter deployment using a Docker container}{38}{lstlisting.4.9}% 
+\contentsline {lstlisting}{\numberline {4.10}Example of a \texttt {.gitlab-ci.yml} configuration file}{39}{lstlisting.4.10}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {lstlisting}{\numberline {6.1}Docker run command to deploy a container using the NVIDIA runtime}{56}{lstlisting.6.1}% 

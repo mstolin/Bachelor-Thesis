@@ -1,7 +1,7 @@
 \chapter{Technical Background}
 \label{chap:04_background}
 
-This chapter provides information about the technologies and algorithms used for this thesis work. It explains the fundamental concepts of Docker, Apache Spark, RAPIDS accelerator plugin, Prometheus, cAdvisor, and GitLab CI/CD. Additionally the Scaling Heat and the Kubernetes Horizontal Pod Autoscaler algorithms are introduced.
+This chapter provides information about the technologies and algorithms used for this thesis. It explains the fundamental concepts of Docker, Apache Spark, RAPIDS accelerator plugin, Prometheus, cAdvisor, and GitLab CI/CD. Additionally, the Scaling Heat, and Kubernetes Horizontal Pod Autoscaler algorithms are introduced.
 
 % ===========================================
 % ===========================================
@@ -11,7 +11,7 @@ This chapter provides information about the technologies and algorithms used for
 \section{Docker}
 \label{sec:04_docker}
 % Short docker intro
-Docker is an open-source platform that enables containerization of applications. Containerization is a technology to package, ship and run applications and their environment in individual containers.
+Docker is an open-source platform that enables the containerization of applications. Containerization is a technology to package, ship, and run applications and their environment in individual containers.
 % Make clear
 Docker is not a container technology itself. It hides the complexity of working with container technologies directly and instead provides an abstraction and the tools to work with containers \cite{Nickoloff2019Docker, Bullington2020Docker, Potdar2020Docker}.
 
@@ -27,17 +27,17 @@ Docker is not a container technology itself. It hides the complexity of working 
 \end{figure}
 
 % Explain figure
-\Fig{fig:04_docker_architecture_architecture} illustrates the client server architecture of Docker. It consists of a Docker Client, the Docker Deamon, and a Docker Registry.
+\Fig{fig:04_docker_architecture_architecture} illustrates the client-server architecture of Docker. It consists of a Docker Client, the Docker Deamon, and a Docker Registry.
 
 \begin{itemize}
 % Docker client
-\item Docker Client: The Docker client is an interface for the user to send commands to the Docker deamon \cite{Docker2020Docs}.
+\item Docker Client: The Docker client is an interface for the user to send commands to the Docker daemon \cite{Docker2020Docs}.
 
 % Docker deamon
-\item Docker Deamon: The Docker deamon manages all containers running on the host system and handles the containers resources, networks and volumes \cite{Bullington2020Docker}.
+\item Docker Deamon: The Docker daemon manages all containers running on the host system and handles container resources, networks and, volumes \cite{Bullington2020Docker}.
 
 % Docker registry
-\item Docker Registry: A Docker registry stores images. Images can be pushed to a public or private registry and pulled from it to build a container \cite{Docker2020Docs}.
+\item Docker Registry: A Docker registry stores images. Images can be pushed to or pulled from public or private registries to build a container \cite{Docker2020Docs}.
 \end{itemize}
 
 
@@ -45,27 +45,25 @@ Docker is not a container technology itself. It hides the complexity of working 
 \label{subsec:04_docker_image}
 \paragraph{}
 % What is an image
-An Image is a snapshot of the environment that is needed to run an application in a Docker container. The environment consists of all files, libraries and configurations that are needed for the application to run properly \cite{Docker2020Docs, Nickoloff2019Docker}.
+An Image is a snapshot of the environment to run an application in a Docker container. The environment consists of all files, libraries, and configurations that are needed for the application to run correctly \cite{Docker2020Docs, Nickoloff2019Docker}.
 % How to create an image
 Images can be created from existing containers or from executing a build script called \textit{Dockerfile} \cite{Nickoloff2019Docker}.
 
 
 \paragraph{}
-Images can be build automatically by executing instructions defined in a Dockerfile.
-% Instructions
-A Dockerfile is a text documents that contains instructions. Instructions are commands which will be executed in order to assemble an image. They are defined in the \texttt{INSTRUCTION argument} format.
+Images can be built automatically by executing a build script called Dockerfile, a text document that contains specific build instructions. Instructions are commands which are executed in order to assemble an image.
 % Parent
-A Dockerfile must begin with a \texttt{FROM} instruction. The \texttt{FROM} instruction defines the parent image from which the image is build \cite{Docker2020Docs}.
+A Dockerfile must begin with a \texttt{FROM} instruction which defines the parent image from which the image is built \cite{Docker2020Docs}.
 
 
 % Example
 \Lst{lst:04_docker_image_dockerfile} provides a basic example of a Dockerfile.
 % Parent
-In the example, \textit{ubuntu} is defined as the parent image.
+In the example, \textit{ubuntu} is defined as the parent image at line 1.
 % apt
-Next, the Ubuntu package list is updated and the \textit{nginx} package is installed using the \texttt{apt-get} command.
+Next, from 3 to 4, the Ubuntu package list is updated, and the \textit{nginx} package is installed using the \texttt{apt-get} command.
 % Expose
-Finally, the Docker image is instructed to listen to the port 80 at runtime with the \texttt{EXPOSE} instruction.
+Finally, at line 6, the Docker image is instructed to listen to port 80 at runtime with the \texttt{EXPOSE} instruction.
 
 % Dockerfile example
 \begin{lstlisting}[label=lst:04_docker_image_dockerfile, caption=Basic example of a Dockerfile]
@@ -91,58 +89,92 @@ A container is an execution environment running on the host-system kernel.
 \end{figure}
 
 % Container advantages
-The advantage of a container is its lightweight nature. As illustrated in \Fig{fig:04_docker_container_container-structure}, containers take advantage of OS-level virtualization instead of hardware-virtualization without the need of a hypervisor \cite{Docker2020Docs, Nickoloff2019Docker}. Containers share the resources of the host-system instead of using reserved resources \cite{Bullington2020Docker}. Multiple containers can run on the host-system kernel and are by default isolated from each other \cite{Docker2020Docs}.
+The advantage of a container is its lightweight nature. As illustrated in \Fig{fig:04_docker_container_container-structure}, containers take advantage of OS-level virtualization instead of hardware-virtualization without the need for a hypervisor \cite{Docker2020Docs, Nickoloff2019Docker}. Containers share the resources of the host system instead of using reserved resources \cite{Bullington2020Docker}. Multiple containers can run on the host-system kernel and are by default isolated from each other \cite{Docker2020Docs}.
 % Docker container
-In Docker, a container is a runnable unit of an image and is used for distributing and testing applications. A container can be configured to expose certain resources to the host system, e.g. network ports \cite{Bullington2020Docker}.
+In Docker, a container is a runnable unit of an image used to distribute and test applications. A container can be configured to expose specific resources to the host system, e.g., network ports \cite{Bullington2020Docker}.
 
 
 \subsection{Docker Swarm Mode}
 \label{subsec:04_docker_swarm}
 % What is Docker swarm
-Docker Swarm mode is the native cluster orchestration and management tool embedded in the Docker engine.
+Docker Swarm mode is the native cluster orchestration and management tool embedded in the Docker Engine.
 % What is a swarm
 In Docker Swarm mode, a cluster of multiple nodes is called a swarm. All nodes run in Swarm mode and act as managers or workers.
 % Whats the purpose
-In a swarm, multiple services can be deployed. The manager node is responsible to maintain the desired state of a service \cite{Docker2020Docs}.
+In a swarm, multiple services can be deployed. The manager node is responsible for maintaining the desired state of a service \cite{Docker2020Docs}.
 
 
 % 
-Many properties of Docker Swarm mode contribute the fact that it is an ideal tool to create self-healing and self-adapting environment:
+Many properties of Docker Swarm mode contribute the fact that it is an ideal tool to create a self-healing and self-adapting environment:
 \begin{itemize}
-\item Desired state: The manager node monitors the state of each service in the swarm and adapts the environment to maintain the desired state \cite{Docker2020Docs}.
+\item Desired state: The manager node monitors each service's state in the swarm and adapts the environment to maintain the desired state\cite{Docker2020Docs}.
 
-\item Cluster management and orchestration: Docker Swarm mode is integrated within the Docker engine. A swarm can be created and managed using the Docker CLI \cite{Docker2020Docs}.
+\item Cluster management and orchestration: Docker Swarm mode is integrated within the Docker Engine. A swarm can be created and managed using the Docker command-line interface (CLI) \cite{Docker2020Docs}.
 
-\item Service model: The Docker engine allows to define the desired state of a service. The manager node maintains the desired state of all services in the swarm \cite{Docker2020Docs}.
+\item Service model: The Docker Engine allows to define the desired state of a service. The manager node maintains the desired state of all services in the swarm \cite{Docker2020Docs}.
 
-\item Scaling: The number of replicas can be defined for each service. The manager node will automatically adapt the number of replicas for a service to keep the desired state \cite{Docker2020Docs}.
+\item Scaling: The number of replicas is defined for each service. The manager node automatically adapts the number of replicas for a service to keep the desired state \cite{Docker2020Docs}.
 
-\item Multi-host networking: A swarm runs all services in an overlay network. New services will automatically be added to the overlay network \cite{Docker2020Docs}.
+\item Multi-host networking: A swarm runs all services in an overlay network, and new services will automatically be added to it \cite{Docker2020Docs}.
 \end{itemize}
+
+
+\subsubsection{Services and Tasks}
+% What is a service
+A service defines the desired state of a task. The state is defined by the number of replicas of a service and the configuration for the Docker container, e.g., Docker image, resources, network, and more \cite{Docker2020Docs}.
+
+
+%What is a node
+A task is a running Docker container. The task is defined by the corresponding service and is managed by the manager node. A task can be executed on worker and manager nodes \cite{Docker2020Docs}.
 
 
 \subsubsection{Nodes}
 % What is a node
 A Docker engine participating in the swarm is called a node.
 % What about the node role
-Nodes can act as manager nodes, worker nodes or both \cite{Docker2020Docs}.
+Nodes can act as manager nodes, worker nodes, or both \cite{Docker2020Docs}.
 
 
 % What about the manager
-The manager node is responsible for cluster orchestration an management. It maintains the desired state of all services and tasks in the swarm. In addition, the manager node dispatches tasks to worker nodes when service definitions will be submitted to the manager node \cite{Docker2020Docs}.
+The manager node is responsible for cluster orchestration and management. It maintains the desired state of all services and tasks in the swarm. In addition, the manager node dispatches tasks to worker nodes when service definitions are submitted to the manager node \cite{Docker2020Docs}.
 
 
 % What about worker
-Worker nodes are responsible to execute the tasks receives by the manager node. While performing the tasks, the worker node notifies the manager node about the tasks state \cite{Docker2020Docs}.
+Worker nodes are responsible for executing the tasks received by the manager node. While performing tasks, the worker node notifies the manager node about each task state \cite{Docker2020Docs}.
 
 
-\subsubsection{Services and Tasks}
-% What is a service
-A services defines the desired state of a task. The state is defined by the number of replicas of a service and the configuration for the Docker container, e.g. Docker Image, resources, network, and more \cite{Docker2020Docs}.
+\subsubsection{Stack}
+%
+A stack is a named collection of first-class Docker resources (e.g., services, volumes, networks) that can be deployed to a swarm.
+%
+The docker-compose file format allows describing a stack in a single YAML file. With the \texttt{docker stack} command, a docker-compose file can be used to create a stack and deploy it to a swarm.
+% Example
+\Lst{lst:04_docker_swarm_stack_compose} provides an example of a stack described in the docker-compose file format.
+% Explain
+It defines two services called \textit{prometheus} and \textit{cadvisor}. Both services are attached to the \textit{computing-net} network.
+\begin{lstlisting}[label=lst:04_docker_swarm_stack_compose, caption=Basic example of stack describes in the docker-compose file format]
+version: "3.7"
 
+networks:
+    computing-net:
+        name: computing_net
 
-%What is a node
-A task is a running Docker container. The task is defined by the corresponding service and will be managed by the manager node. A task can be performed on worker and manager nodes \cite{Docker2020Docs}.
+services:
+    prometheus:
+        image: prom/prometheus:latest
+        networks:
+            - computing-net
+            
+    cadvisor:
+        image: google/cadvisor:latest
+        networks:
+            - computing-net        
+\end{lstlisting}
+% Deploy
+\Lst{lst:04_docker_swarm_stack_deploy} shows the usage of the \texttt{docker stack} command. It deploys a stack with the name \textit{computing-stack} using a docker-compose file.
+\begin{lstlisting}[label=lst:04_docker_swarm_stack_deploy, caption=Usage of the docker stack command to deploy a stack, language=bash, numbers=none]
+$ docker stack deploy -c computing-stack.yml computing-stack     
+\end{lstlisting}
 
 
 % ===========================================
@@ -152,49 +184,49 @@ A task is a running Docker container. The task is defined by the corresponding s
 % ===========================================
 \section{Apache Spark}
 \label{sec:04_spark}
-Apache Spark is an open-source computing framework for parallel data processing on a large computer cluster. Apache Spark manages the available resources and distributes computation tasks across a cluster to perform big-data processing operations at large scale \cite{Chambers2018Spark}. Before Apache Spark was developed, Hadoop MapReduce \cite{Dean2010MapReduce} was the framework of choice for parallel operations on a computer cluster \cite{Zaharia2010Spark}. Spark accomplished to outperform Hadoop by 10x for iterative Machine Learning \cite{Zaharia2010Spark}. It is implemented in Scala\footnote{The Scala programming language - \url{https://www.scala-lang.org/} (Accessed: 2020-12-18)}, a JVM-based language and provides a programming interface for Scala, Java\footnote{Java Software - \url{https://www.oracle.com/java/} (Accessed: 2020-12-18)}, Python\footnote{Python programming language - \url{https://www.python.org/} (Accessed: 2020-12-18)}, and R\footnote{The R Project for Statistical Computing - \url{https://www.r-project.org/} (Accessed: 2020-12-18)}. Additionally, Apache Spark includes an interactive SQL shell and libraries to implement Machine Learning and streaming applications \cite{Chambers2018Spark}.
+Apache Spark is an open-source computing framework for parallel data processing on a large computer cluster. Apache Spark manages the available resources and distributes computation tasks across a cluster to perform big-data processing operations at a large scale \cite{Chambers2018Spark}. Before Apache Spark was developed, Hadoop MapReduce \cite{Dean2010MapReduce} was the framework of choice for parallel operations on a computer cluster \cite{Zaharia2010Spark}. However, Spark accomplished to outperform Hadoop by 10x for iterative Machine Learning \cite{Zaharia2010Spark} and is now one of the most popular frameworks for distributed computing. It is implemented in Scala\footnote{The Scala programming language - \url{https://www.scala-lang.org/} (Accessed: 2020-12-18)}, a JVM-based programming language. It provides a programming interface for Scala, Java\footnote{Java Software - \url{https://www.oracle.com/java/} (Accessed: 2020-12-18)}, Python\footnote{Python programming language - \url{https://www.python.org/} (Accessed: 2020-12-18)}, and R\footnote{The R Project for Statistical Computing - \url{https://www.r-project.org/} (Accessed: 2020-12-18)}. Additionally, Apache Spark includes an interactive Structured Query Language (SQL) shell and libraries to implement Machine Learning and streaming applications \cite{Chambers2018Spark}.
 
 
 \subsection{Spark Programming Model}
 \label{subsec:04_spark_pr-model}
 % Explain RDDs
-Apache Spark provides resilient distributed datasets (RDDs) as the main abstraction for parallel operations \cite{Zaharia2010Spark}. Core types of the higher-level structured API are built on top of RDDs and will automatically be optimized by the Catalyst optimizer to run operations quick and efficient \cite{Chambers2018Spark, Hien2018Spark}.
-
-
-\subsubsection{Resilient Distributed Datasets}
-% What are RDDs
-Resilient distributed datasets are fault-tolerant, parallel data structures to enable data sharing across cluster applications \cite{Zaharia2012RDDs}. They allow to express different cluster programming models like MapReduce, SQL and batched stream processing \cite{Zaharia2012RDDs}. RDDs have been implemented in Apache Spark and serve as the underlying data structure for higher level APIs (Spark structured API) \cite{Zaharia2012RDDs}.
-% How can RDDs be used in applications
-RDDs are a immutable, partitioned collection of records and can only be initiated through transformations (e.g. map, filter) on data or other RDDs.
-% What are the advantages of RDDs
-An advantage of RDDs is, that they can be recovered through lineage. Lost partitions of an RDD can be recomputed from other RDDs in parallel on different nodes \cite{Zaharia2012RDDs}. 
-% Better use structured API
-RDDs are lower level APIs and should only be used in applications if custom data partitioning is needed \cite{Chambers2018Spark}. It is recommended to use Sparks structured API objects instead. Optimizations for RDDs have to be implemented manually while Apache Spark automatically optimizes the execution for structured API operations \cite{Chambers2018Spark}.
+Apache Spark provides Resilient Distributed Datasets (RDDs) as the main abstraction for parallel operations \cite{Zaharia2010Spark}. Core types of the higher-level structured API are built on top of RDDs and are automatically optimized by the Catalyst optimizer to run operations quickly and efficient \cite{Chambers2018Spark, Hien2018Spark}.
 
 
 \subsubsection{Apache Spark Structured API}
 % What is the structured API
-Apache Spark provides high level structured APIs for manipulating all kinds of data. The three distributed core types are Datasets, DataFrames and SQL Tables and Views \cite{Chambers2018Spark}.
+Apache Spark provides high level structured APIs for manipulating all kinds of data. The three distributed core types are Datasets, DataFrames, and SQL Tables and Views \cite{Chambers2018Spark}.
 % About DataFrames, Datasets and SQL
 Datasets and DataFrames are immutable, lazy evaluated collections that provide execution plans for operations \cite{Chambers2018Spark}. SQL Tables and Views work the same way as DataFrames, except that SQL is used as the interface instead of using the DataFrame programming interface \cite{Chambers2018Spark}.
 % Differences between Datasets ad Dataframes
 Datasets use JVM types and are therefore only available for JVM based languages. DataFrames are Datasets of type \texttt{Row}, which is the optimized format for computations \cite{Chambers2018Spark}.
 
 
+\subsubsection{Resilient Distributed Datasets}
+% What are RDDs
+Resilient Distributed Datasets are fault-tolerant, parallel data structures to enable data sharing across cluster applications \cite{Zaharia2012RDDs}. They express different cluster programming models like MapReduce, SQL, and batched stream processing \cite{Zaharia2012RDDs}. RDDs have been implemented in Apache Spark and serve as the Spark structured API's underlying data structure \cite{Zaharia2012RDDs}.
+% How can RDDs be used in applications
+RDDs are an immutable, partitioned collection of records. They can only be initiated through transformations (e.g., map, filter) on data or other RDDs.
+% What are the advantages of RDDs
+An advantage of RDDs is that they can be recovered through lineage. Lost partitions of an RDD can be recomputed from other RDDs in parallel on different nodes \cite{Zaharia2012RDDs}. 
+% Better use structured API
+RDDs are lower-level APIs and should only be used in applications if custom data partitioning is needed \cite{Chambers2018Spark}. It is recommended to use Sparks structured API objects instead. Optimizations for RDDs have to be implemented manually, while Apache Spark automatically optimizes the execution for structured API operations \cite{Chambers2018Spark}.
+
+
 \subsubsection{Apache Spark Catalyst}
 \label{subsubsec:04_spark_pr-model_catalyst}
+\todo{Welcher Art tree, Wie werden kosten berechnet.}
 % What is the Catalyst optimizer
-Apache Spark also provides a query optimizer engine called Apache Spark Catalyst. \Fig{fig:04_spark_pr-model_catalyst_process} illustrates how the Spark Catalyst optimizer automatically optimizes Apache Spark applications to run quickly and efficient.
+Apache Spark also provides a query optimizer engine called Apache Spark Catalyst. \Fig{fig:04_spark_pr-model_catalyst_process} illustrates how Spark Catalyst automatically optimizes Apache Spark applications to run quickly and efficient.
 % Short How
-Before executing the users code, the Catalyst optimizer translates the data-processing logic into a logical plan and optimizes the plan using heuristics \cite{Hien2018Spark}. After that, the Catalyst optimizer converts the logical plan into a physical plan to create code that can be executed \cite{Hien2018Spark}.
+Before executing the user code, the Catalyst optimizer translates the data-processing logic into a logical plan and optimizes it using heuristics such as rules \cite{Hien2018Spark}. After that, the Catalyst optimizer converts the logical plan into a physical plan to create executable code \cite{Hien2018Spark}.
 
 
 % What are logical plans
-Logical plans get created from a DataFrame or a SQL query. A logical plan represents the data-processing logic as a tree of operators and expressions where the Catalyst optimizer can apply sets of rule-based and cost-based optimizations \cite{Hien2018Spark}.
-For example, the Catalyst can position a filter transformation in front of a join operation \cite{Hien2018Spark}.
+Logical plans are created from a DataFrame or a SQL query and represent the data-processing logic as a tree of operators and expressions where the Catalyst optimizer can apply sets of rule-based and cost-based optimizations \cite{Hien2018Spark}.
 
 % What are physical plans
-From the logical plan, the Catalyst optimizer creates one ore more physical plans which consist of RDD operations \cite{Chambers2018Spark}. The cheapest physical plan will be generated into Java bytecode for execution across the cluster \cite{Hien2018Spark}.
+From the logical plan, the Catalyst optimizer creates more physical plans consisting of RDD operations \cite{Chambers2018Spark}. The cheapest physical plan will be generated into Java bytecode for execution across the cluster \cite{Hien2018Spark}.
 
 % Spark Catalyst figure
 \begin{figure}[h]
@@ -227,36 +259,36 @@ Furthermore, the cluster manager decides on which nodes the processes will be ex
 
 \subsubsection{Driver Process}
 \label{subsubsec:04_spark_architecture_driver}
-The driver process is a JVM process running on a physical machine and responsible to maintain the execution of an Apache Spark application \cite{Chambers2018Spark}. It coordinates the application tasks onto each available executor \cite{Hien2018Spark}. 
+The driver process is a JVM process running on a physical machine and is responsible for maintaining the execution of an Apache Spark application \cite{Chambers2018Spark}. It coordinates the application tasks and schedules them on available executors \cite{Hien2018Spark}. 
 The driver interacts with the cluster manager to launch executors and allocate hardware resources \cite{Chambers2018Spark, Hien2018Spark}.
 
 
 \subsubsection{Executor Process}
 % JVM
-The executor process is a JVM process, that runs through the whole duration of an application \cite{Hien2018Spark, Apache2020Spark}.
+The executor process is a JVM process that runs through the whole duration of an application \cite{Hien2018Spark, Apache2020Spark}.
 % Tasks
-It is responsible to perform all tasks (units of work) assigned by the driver process \cite{Chambers2018Spark}.
+It is responsible for performing all tasks (units of work) assigned by the driver process \cite{Chambers2018Spark}.
 % Report
-After the executor process finish, it reports back to the driver process \cite{Chambers2018Spark}.
+After the executor process finishes, it reports back to the driver process \cite{Chambers2018Spark}.
 % CPU
-Each task will be performed on a separate CPU core to enable parallel processing \cite{Hien2018Spark}.
+Each task is performed on a separate CPU core to enable parallel processing \cite{Hien2018Spark}.
 
 
 \subsubsection{Cluster Manager}
 \label{subsubsec:04_spark_architecture_manager}
 The cluster manager is an external service that orchestrates the work between available machines in the cluster \cite{Hien2018Spark, Apache2020Spark}.
 % Worker and master nodes
-It decides on which nodes in the cluster the driver process and the executor processes will be launched.
+It decides on which nodes the driver- and executor processes are launched in the cluster.
 % Resources
-Additionally, the cluster manager manages the resources of each node in the cluster \cite{Hien2018Spark, Chambers2018Spark}.
+Additionally, the cluster manager maintains each node's resources in the cluster \cite{Hien2018Spark, Chambers2018Spark}.
 % Different cluster types
-Apache Spark supports different services that can run as cluster manager: Standalone mode (introduced in \Sec{subsec:04_spark_standalone}), Apache Mesos\footnote{Apache Mesos - \url{https://mesos.apache.org/} (Accessed: 2021-01-02)}, Hadoop YARN\cite{Murthy2013Yarn}, and Kubernetes\footnote{Kubernetes - \url{https://kubernetes.io/} (Accessed: 2021-01-02)} \cite{Apache2020Spark}.
+Apache Spark supports different services that can run as cluster manager, such as Standalone mode (introduced in \Sec{subsec:04_spark_standalone}), Apache Mesos\footnote{Apache Mesos - \url{https://mesos.apache.org/} (Accessed: 2021-01-02)}, Hadoop YARN\cite{Murthy2013Yarn}, and Kubernetes\footnote{Kubernetes - \url{https://kubernetes.io/} (Accessed: 2021-01-02)} \cite{Apache2020Spark}.
 % Explain different cluster deploy modes
 The cluster manager provides three different deploy modes for acquiring resources in the cluster.
 \begin{itemize}
 % Cluster mode
 \item Cluster mode:
-To run an application in cluster mode, the user has to submit a precompiled JAR, python script or R script to the cluster manager \cite{Chambers2018Spark}. After that, the cluster manager starts the driver process and executor processes exclusively for the Apache Spark application on machines inside the cluster \cite{Chambers2018Spark, Hien2018Spark}.
+To run an application in cluster mode, the user must submit a precompiled JAR, python script, or R script to the cluster manager \cite{Chambers2018Spark}. After that, the cluster manager starts the driver process and executor processes exclusively for the Apache Spark application on machines inside the cluster \cite{Chambers2018Spark, Hien2018Spark}.
 
 % Client mode
 \item Client mode:
@@ -264,44 +296,45 @@ The difference between the client mode and the cluster mode is that, the driver 
 
 % Local mode
 \item Local mode:
-The local mode starts an Apache Spark application on a single computer \cite{Chambers2018Spark}. It is important to mention, that the local mode is not recommended to use in production. Instead it should be used for testing Apache Spark applications \cite{Chambers2018Spark}.
+The local mode starts an Apache Spark application on a single computer \cite{Chambers2018Spark}. It is important to mention that the local mode is not recommended to use in production. Instead, it should be used for testing Apache Spark applications \cite{Chambers2018Spark}.
 \end{itemize}
 
 
 \subsection{Standalone Cluster Deployment}
 \label{subsec:04_spark_standalone}
 % What is a standalone cluster
-The standalone mode is a basic cluster-manager build specifically for Apache Spark. It is developed to only run Apache Spark but supports workloads at large scale \cite{Chambers2018Spark}.
+The standalone mode is a basic cluster-manager build specifically for Apache Spark. It is developed only to run Apache Spark but supports workloads at a large scale \cite{Chambers2018Spark}.
 % Why standalone cluster mode, advantages
 
 
 \subsubsection{Starting Master and Worker Nodes}
-\paragraph{}Apache Spark provides executable launch scripts to start master and worker nodes in standalone mode.
+\paragraph{}
+Apache Spark provides executable launch scripts to start master and worker nodes in standalone mode.
 % Where to find them
-The executables can be found at \texttt{sbin/start-master.sh} to start a master node and at \texttt{/start-slave.sh} to start a worker node.
+Inside the Apache Spark installation directory, the executables can be found at \texttt{sbin/start-master.sh} to start a master node and at \texttt{/start-slave.sh} to start a worker node.
 % parameter for worker script
-The worker launch executable requires the master node URI as parameter \cite{Apache2020Spark}. 
+The worker launch executable requires the master node URI as a parameter \cite{Apache2020Spark}. 
 
 
 % Example master
-\begin{lstlisting}[label=lst:04_spark_standalone_launch-master, caption=Usage of master launch script, language=bash]
+\begin{lstlisting}[label=lst:04_spark_standalone_launch-master, caption=Usage of master launch script, language=bash, numbers=none]
 $ ./sbin/start-master.sh
 \end{lstlisting}
 
 
 % Example worker
-\begin{lstlisting}[label=lst:04_spark_standalone_launch-worker, caption=Usage of worker launch script, language=bash]
+\begin{lstlisting}[label=lst:04_spark_standalone_launch-worker, caption=Usage of worker launch script, language=bash, numbers=none]
 $ ./sbin/start-slave.sh spark://spark-master:7077
 \end{lstlisting}
 
 
 % Introduce examples
-\paragraph{}\Lst{lst:04_spark_standalone_launch-master} and \Lst{lst:04_spark_standalone_launch-worker} provide an example of how to use both executables to start a master and a worker node. The URI \texttt{spark://spark-master:7077} in \Lst{lst:04_spark_standalone_launch-worker} is an example of a master node URI. The master node launch script will print out the master URI after being executed successfully \cite{Apache2020Spark}.
+\paragraph{}\Lst{lst:04_spark_standalone_launch-master} and \Lst{lst:04_spark_standalone_launch-worker} provide an example of using both executables to start a master and a worker node. The URI \texttt{spark://spark-master:7077} in \Lst{lst:04_spark_standalone_launch-worker} is an example of a master node URI. The master node launch script will print out the master URI after being executed successfully \cite{Apache2020Spark}.
 
 
 \subsubsection{Resource Allocation}
 \label{subsubsec:04_spark_standalone_res-alloc}
-In standalone mode, worker need a set of resources configured. Therefore, a worker can assign resources to executors.
+In standalone mode, workers need a set of resources configured. Therefore, a worker can assign resources to executors.
 % Discovery script
 To specify how a worker discovers resources, a discovery script has to be available \cite{Apache2020Spark}.
 
@@ -309,25 +342,27 @@ To specify how a worker discovers resources, a discovery script has to be availa
 \subsubsection{Submitting Applications with spark-submit}
 \label{subsubsec:04_spark_standalone_submit}
 % Which executable
-\paragraph{}To submit an application to a standalone cluster, Apache Spark provides the \texttt{spark-submit} executable. The executable file is available at \texttt{bin/spark-submit} in the installation folder of Apache Spark.
+\paragraph{}
+To submit an application to a standalone cluster, Apache Spark provides the \texttt{spark-submit} executable. The executable file is available at \texttt{bin/spark-submit} in the installation folder of Apache Spark.
 % Cluster mode
-In cluster mode the driver of an Apache Spark application (see \Sec{subsubsec:04_spark_architecture_driver}) will be launched from one of the worker processes inside the cluster.
+In cluster mode, the driver of an Apache Spark application (see \Sec{subsubsec:04_spark_architecture_driver}) is launched from one of the worker processes inside the cluster.
 % When does it finish
 The submit process will finish after it has submitted the application. It does not wait for the submitted application to finish \cite{Apache2020Spark}.
 
 
 % Example
-\begin{lstlisting}[label=lst:04_spark_standalone_submit_example, caption=Example usage of the spark-submit executable, language=bash]
+\begin{lstlisting}[label=lst:04_spark_standalone_submit_example, caption=Example usage of the spark-submit executable, language=bash, numbers=none]
 $ bin/spark-submit --master spark://spark-master:7077 application.py
 \end{lstlisting}
 
 
 % How to use it
-\paragraph{}\Lst{lst:04_spark_standalone_submit_example} shows how the spark-submit executable can be used to submit a Python application to a standalone Apache Spark cluster.
+\paragraph{}
+\Lst{lst:04_spark_standalone_submit_example} shows how the spark-submit executable can be used to submit a Python application to a standalone Apache Spark cluster.
 % required parameter
 Spark-submit requires the master node URI and the path to the desired Spark application file.
 % Which files
-With the spark-submit executable it is possible to submit Python, Java and R applications \cite{Apache2020Spark}.
+With the spark-submit executable, it is possible to submit Python, Java, and R applications \cite{Apache2020Spark}.
 
 
 % ===========================================
@@ -348,7 +383,7 @@ The plugin uses the RAPIDS AI cuDF\footnote{Open GPU Data Science - \url{https:/
 % How does it extends DataFrame and SQL
 \paragraph{}The plugin suite extends the Apache Spark programming model with a new DataFrame based on Apache Arrow\footnote{Arrow. A cross-language development platform for in-memory data - \url{https://arrow.apache.org/} (Accessed: 2020-12-03)} data structures. The new DataFrame API aims to accelerate loading, filtering, and manipulation operations on large datasets. In addition, the Catalyst optimizer (described in \SubSec{subsubsec:04_spark_pr-model_catalyst}) is extended to generate GPU-aware query plans \cite{Mcdonald2020SparkRapids, Aguerzame2019GPUAO}.
 % What is Apache Arrow
-Apache arrow is a data platform to build high performance applications that work with large datasets and to improve analytic algorithms. A component of Apache Arrow is the Arrow Columnar Format, an in-memory data structure specification for efficient analytic operations on GPUs and CPUs \cite{ApacheArrow2020Docs}.
+Apache arrow is a data platform to build high-performance applications that work with large datasets and improve analytic algorithms. A component of Apache Arrow is the Arrow Columnar Format, an in-memory data structure specification for efficient analytic operations on GPUs and CPUs \cite{ApacheArrow2020Docs}.
 
 
 % RAPIDS query plan image
@@ -360,32 +395,32 @@ Apache arrow is a data platform to build high performance applications that work
 \end{figure}
 \paragraph{}\Fig{fig:04_rapids_ext_query-plan} illustrates how the RAPIDS plugin suite extends the Catalyst optimization process illustrated previously in \Fig{fig:04_spark_pr-model_catalyst_process}.
 % How does the Catalyst create GPU aware plans
-The Spark Catalyst optimizer identifies operators in a query plan that are supported by the RAPIDS API. To execute the query plan, these operators can be scheduled on a GPU within the Spark cluster \cite{Mcdonald2020SparkRapids}. If operators are not supported by the RAPIDS APIs, a physical plan for CPUs will be generated by the Catalyst optimizer to execute RDD operations \cite{Mcdonald2020SparkRapids}.
+The Spark Catalyst optimizer identifies operators in a query plan that are supported by the RAPIDS API. To execute the query plan, these operators can be scheduled on a GPU within the Spark cluster \cite{Mcdonald2020SparkRapids}. If the RAPIDS APIs do not support operators, a physical plan for CPUs is generated by the Catalyst optimizer to execute RDD operations \cite{Mcdonald2020SparkRapids}.
 
 
 \subsection{GPU Accelerated Machine Learning with XGBoost}
 % SHort Intro
-RAPIDS accelerates SparkSQL operations, and operations on a DataFrame. Additionally RAPIDS aims to accelerate the training process of machine learning models.
+RAPIDS accelerates SparkSQL operations and operations on a DataFrame. Additionally, RAPIDS aims to accelerate the training process of machine learning models.
 % Only XGBoost
 Currently, RAPIDS only supports GPU-acceleration for Extreme Gradient Boosting (XGBoost) in SparkML \cite{Mcdonald2020SparkRapids}.
 
 
 % Whats XGBoost
-XGBoost is a scalable, distributed gradient-boosted machine learning library. It trys to solve many data science problems, by implementing machine learning algorithms using the gradient boosting technique.
+XGBoost is a scalable, distributed gradient-boosted machine learning library. It tries to solve many data science problems, by implementing machine learning algorithms using the gradient boosting technique.
 % XGBoost4j-Spark
 With the XGBoost4j-Spark\footnote{XGBoost Documentation - \url{https://xgboost.readthedocs.io/en/latest/jvm/xgboost4j_spark_tutorial.html} (Accessed: 2021-01-28)} library, XGBoost integrates into the Apache Spark ML library \cite{XGBoost2021Docs}. 
 
 
 \subsection{Installation Requirements for Apache Spark Standalone Mode}
 \label{subsec:04_rapids_req}
-The RAPIDS accelerator for Apache Spark is available for a standalone mode Apache Spark cluster. To operate effectively, the following requirements need to be installed on all Apache Spark nodes in the cluster \cite{SparkRapids2020Docs}:
+The RAPIDS accelerator for Apache Spark is available for a standalone mode Apache Spark cluster. To operate efficiently, the following requirements need to be installed on all Apache Spark nodes in the cluster \cite{SparkRapids2020Docs}:
 % requirements
 \begin{itemize}
 \item Java Runtime Environment (JRE)
 \item NVIDIA GPU driver
 \item CUDA Toolkit\footnote{CUDA Toolkit - \url{https://developer.nvidia.com/cuda-toolkit} (Accessed: 2021-01-01)}
 \item RAPIDS accelerator for Apache Spark Java library
-\item cuDF Java library which is supported by the RAPIDS accelerator Java library, and the installed CUDA toolkit
+\item cuDF Java library that is supported by the RAPIDS accelerator Java library, and the installed CUDA toolkit
 \item XGBoost4j Java library
 \item XGBoost4j-Spark Java library
 \item GPU resource discovery script
@@ -402,11 +437,11 @@ The RAPIDS accelerator for Apache Spark is available for a standalone mode Apach
 % What is Prometheus
 Prometheus is an open-source monitoring and alerting system \cite{Prom2020Docs}.
 % Time-series format + PromQL
-To collect and store data, Prometheus supports a multi-dimensional key-value pair based data model, according to \SubSec{subsec:02_monitoring_db_multi-metrics}, which can be analyzed in using the PromQL query language \cite{Pandey2020Monitoring}.
+To collect and store data, Prometheus supports a multi-dimensional key-value pair based data model, according to \SubSec{subsec:02_monitoring_db_multi-model}, which can be analyzed by using the PromQL query language \cite{Pandey2020Monitoring}.
 % SHort PromQL
 PromQL is a functional query language for selecting and aggregating time-series data in real-time \cite{Prom2020Docs}.
 % Pull-based approach
-Prometheus follows the pull-based approach, as described in detail in \SubSec{subsec:02_monitoring_push-pull}, to scrape metrics from hosts and services \cite{Bastos2019Prom}.
+Prometheus follows the pull-based approach described in \SubSec{subsec:02_monitoring_push-pull} to scrape metrics from hosts and services \cite{Bastos2019Prom}.
 
 
 \subsection{Prometheus Architecture}
@@ -422,33 +457,33 @@ Prometheus follows the pull-based approach, as described in detail in \SubSec{su
 % High level architecture
 \Fig{fig:prom_architecture} illustrates the high-level architecture of Prometheus.
 % Description of components
-The Prometheus ecosystem provides multiple components. Components can be optional, depending on the monitoring needs of the environment \cite{Bastos2019Prom}. The main components of a Prometheus system are Prometheus Server, Alertmanager, service discovery, exporters, Push Gateway, and data visualization \cite{Prom2020Docs}.
+The Prometheus ecosystem provides multiple components, which can be optional, depending on the environment's monitoring needs \cite{Bastos2019Prom}. The main components of a Prometheus system are Prometheus Server, Alertmanager, service discovery, exporters, Push Gateway, and data visualization \cite{Prom2020Docs}.
 
 \subsubsection{Prometheus Server}
 % SHort intro
-The Prometheus server is the main component of a Prometheus system. It is responsible to collect metrics as time-series data from targets and stores the collected data in the built-in TSDB \cite{Bastos2019Prom}. Prometheus uses the concept of scraping to collect metrics from a target. A target host has to expose an endpoint to make metrics available in the Prometheus data format \cite{Pandey2020Monitoring}. Additionally, the Prometheus server triggers alerts to the Alertmanager if a configured condition becomes true \cite{Prom2020Docs}.
+The Prometheus server is the main component of a Prometheus system. It is responsible for collecting metrics as time-series data from targets and stores the collected data in the built-in TSDB \cite{Bastos2019Prom}. Prometheus uses the concept of scraping to collect metrics from a target. A target host has to expose an endpoint to make metrics available in the Prometheus data format \cite{Pandey2020Monitoring}. Additionally, the Prometheus server triggers alerts to the Alertmanager if a configured condition becomes true \cite{Prom2020Docs}.
 % The figure
-The core components of the Prometheus Server, as illustrated in \Fig{fig:prom_architecture}, are the following:
+The core components of the Prometheus server, as illustrated in \Fig{fig:prom_architecture}, are the following:
 
 \begin{itemize}
 % Service discovery
 \item Service Discovery:
-As being mentioned before, Prometheus follows a pull-based approach to fetch metrics from a target. To know about all targets, Prometheus needs a list of the corresponding hosts. The service discovery manages the complexity of maintaining a list of hosts manually in an changing infrastructure \cite{Bastos2019Prom}. Therefore, Prometheus is able to notice targets which are not responding \cite{Brazil2018Prom}.
+As being mentioned before, Prometheus follows a pull-based approach to fetch metrics from a target. To know about all targets, Prometheus needs a list of the corresponding hosts. The service discovery manages the complexity of maintaining a list of hosts manually in a changing infrastructure \cite{Bastos2019Prom}. Therefore, Prometheus is able to notice targets that are not responding \cite{Brazil2018Prom}.
 
 % Retrieval
 \item Retrieval:
-Prometheus sends a HTTP request to each target to scrape metrics. The request is send each interval, which can be set in the configuration \cite{Brazil2018Prom}.
+Prometheus sends an HTTP request to each target to scrape metrics. The request is sent each interval, which can be set in the configuration \cite{Brazil2018Prom}.
 
 % HTTP API
 \item HTTP API:
-Prometheus provides a HTTP API. This API can be used to request raw data and evaluate PromQL queries.
-Data visualisation tool can use this API to create visualisations of the requested metrics \cite{Brazil2018Prom}.
+Prometheus provides an HTTP API. This API can be used to request raw data and evaluate PromQL queries.
+A data visualization tool can use this API to create visualizations of the requested metrics \cite{Brazil2018Prom}.
 
 % Recording rules and alerts
 \item Recording and alert rules:
 Recording rules enable to precompute frequently needed or compute-intensive PromQL expressions. The result will be saved as a set of time-series in the local storage. This enables to query a recording rule at a much faster speed than the original PromQL expression \cite{Brazil2018Prom, Prom2020Docs}.
 
-Alert rules define conditions based on PromQL expressions. If a condition becomes true, an alert will be send to an external service \cite{Prom2020Docs}.
+Alert rules define conditions based on PromQL expressions. If a condition becomes true, an alert will be sent to an external service \cite{Prom2020Docs}.
 
 % Storage
 \item Storage:
@@ -457,7 +492,7 @@ Received data is stored in a custom highly efficient format on a local on-disk t
 
 
 \subsubsection{Optional Components}
-The Prometheus ecosystem offers a set of components which are optional and can be activated depending on the monitoring needs.
+The Prometheus ecosystem offers a set of optional components and can be activated depending on the monitoring needs.
 The optional components illustrated in \Fig{fig:prom_architecture} are the following:
 
 \begin{itemize}
@@ -475,16 +510,14 @@ If a target is not designed to be scraped, metrics can be pushed against the Pus
 
 % Data vis
 \item Data Visualisation:
-Prometheus supports various tools for virtualization of the scraped data. Grafana\footnote{Grafana: The open observability platform - \url{https://grafana.com/} (Accessed: 2021-01-19)} is one of the widely used tools for this occasion.
+Prometheus supports various visualization tools, such as its built-in visualization or third-party tools. One of the widely used tools for this occasion is Grafana\footnote{Grafana: The open observability platform - \url{https://grafana.com/} (Accessed: 2021-01-19)}.
 \end{itemize}
 
 
 \subsection{Prometheus Configuration}
 \label{sec:04_prom_config}
 % Short intro
-Configuration related to scraping jobs and rules are configured in configuration files. Configuration are written in the YAML file format \cite{Prom2020Docs}.
-
-
+Prometheus scraping jobs and rules can be configured using external YAML files \cite{Prom2020Docs}.
 % Explain listing
 \Lst{lst:04_prom_config_example} shows a valid configuration file example.
 % global section
@@ -511,9 +544,9 @@ rule_files:
 \end{lstlisting}
 
 % rules example
-\Lst{lst:04_prom_config_rule-example} is an configuration example of a recording rule.
+\Lst{lst:04_prom_config_rule-example} shows a configuration example of a recording rule which are defined in groups. 
 % Rule config
-Rules are defined in a rule group. Each rule is defined by a name and a valid PromQL expression \cite{Prom2020Docs}.
+Each rule is defined by a name and a valid PromQL expression \cite{Prom2020Docs}.
 
 % Recording rule example
 \begin{lstlisting}[label=lst:04_prom_config_rule-example, caption=Prometheus rules configuration file example]
@@ -531,13 +564,31 @@ groups:
 % ===========================================
 \section{cAdvisor}
 % What is cAdvisor
-Container Advisor (cAdvisor) is a running deamon that collects, aggregates, analyses and exposes performance metrics from running containers.
+Container Advisor (cAdvisor) is a running daemon that collects, aggregates, analyses, and exposes performance metrics from running containers.
 % How to run
-It has native support for Docker container and is deployed as a Docker container.
+It has native support and is deployed as a Docker container.
 % How it collects
-cAdvisor collects metrics from the container deamon and Linux cgroups.
-% How it exposes
-Collected metrics will be exposed in the Prometheus file format \cite{Bastos2019Prom, cadvisor2020Docs}.
+cAdvisor collects metrics from the container daemon and Linux cgroups and exposes them in the Prometheus file format \cite{Bastos2019Prom, cadvisor2020Docs}.
+
+
+% ===========================================
+% ===========================================
+% DCGM-EXPORTER
+% ===========================================
+% ===========================================
+\section{DCGM-Exporter}
+% Intro
+DCGM-Exporter is a monitoring agent for collecting health and performance metrics from NVIDIA GPUs. It exports collected metrics in the Prometheus format and makes them available using an HTTP endpoint \footnote{DCGM-Exporter - \url{https://ngc.nvidia.com/catalog/containers/nvidia:k8s:dcgm-exporter} (Accessed: 2021-02-12)}.
+% DCGM
+The DCGM-Exporter is built on top of the NVIDIA Data Center GPU Manager (DCGM), a tool-suite for managing and monitoring NVIDIA GPUs in a cluster \footnote{NVIDIA DCGM - \url{https://developer.nvidia.com/dcgm} (Accessed: 2021-02-12)}.
+%
+It can be deployed to a cluster using a Docker container. \Lst{lst:04_dcgm_deploy} provides an example of deploying the DCGM-Exporter using a Docker container. As a requirement, the NVIDIA Container Toolkit\footnote{NVIDIA Cloud Native technologies documentation - \url{https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html} (Accessed: 2021-01-28)} has to be installed on the host.
+\begin{lstlisting}[label=lst:04_dcgm_deploy, caption=DCGM-Exporter deployment using a Docker container, language=bash, numbers=none]
+$ docker run -d --rm \
+    -p 9400:9400 \
+    --runtime nvidia \
+    nvidia/dcgm-exporter:2.0.13-2.1.1-ubuntu18.04
+\end{lstlisting}
 
 
 % ===========================================
@@ -547,31 +598,31 @@ Collected metrics will be exposed in the Prometheus file format \cite{Bastos2019
 % ===========================================
 \section{GitLab CI/CD}
 \label{sec:04_background_gitlab}
-GitLab CI/CD is a tool integrated into the GitLab platform that enables Continuous Integration (CI), Continuous Delivery (CD) and Continuous Deployment (CD) for software development.
+GitLab CI/CD is a tool integrated into the GitLab platform that enables Continuous Integration (CI) and Continuous Delivery/Deployment (CD) for software development.
 % Gitlab platform
 The GitLab platform integrates many development features like Git repository management and CI/CD.
 % How it works
-By pushing code changes to the codebase, GitLab CI/CD executes a pipeline of scripts to automate CI and CD processes of the software development cycle.
+By pushing code changes to the codebase, GitLab CI/CD executes a pipeline of scripts to automate the software development cycle's CI and CD processes.
 % CI
-A CI pipeline will consist of scripts that builds, tests and validate the updated codebase.
+A CI pipeline consists of scripts that build, test, and validate the updated codebase.
 % CD
-A CD pipeline is responsible to deploy the application for production after the CI pipeline has executed successfully.
+A CD pipeline is responsible for deploying the application for production after the CI pipeline was executed successfully.
 % Summary
-Adding CI/CD pipelines to the software development cycle of an application, allows to catch bugs an errors early. This ensures that an application deployed to production will conform to established standards \cite{Gitlab2020Docs}.
+Adding CI/CD pipelines to the software development cycle of an application allows to catch bugs and errors early. This ensures that an application deployed to production will conform to established standards \cite{Gitlab2020Docs}.
 
 \subsection{CI/CD Pipeline}
 \label{subsec:04_background_gitlab_pipeline}
-The fundamental component of GitLab CI/CD is called a pipeline. Pipelines will perform based on conditions. A conditions might be a push to the main branch of the repository \cite{Gitlab2020Docs}. A pipeline comprises two components:
+The fundamental component of GitLab CI/CD is called a pipeline. Pipelines perform based on conditions. A condition might be a push to the main branch or a specific branch of the repository \cite{Gitlab2020Docs}. A pipeline comprises of two components:
 
 \begin{itemize}
 \item Stages: A stage consists of one or multiple jobs that run in parallel. Furthermore, a stage defines how jobs will be executed. For example, a build stage only performs after a test stage has performed successfully \cite{Gitlab2020Docs}.
 
-\item Jobs: Jobs are responsible to perform the scripts defined by administrators. The scripts define necessary actions. For example compiling the source code or performing tests \cite{Gitlab2020Docs}.
+\item Jobs: Jobs are responsible for performing the scripts defined by administrators. The scripts define necessary actions. For example compiling the source code or performing tests \cite{Gitlab2020Docs}.
 \end{itemize}
 
 
 % How to configurate a pipeline (.gitlab-ci.yml)
-GitLab CI/CD is configured by a \texttt{.gitlab-ci.yml} file. It is necessary that this file is located in the repositories root directory.
+GitLab CI/CD is configured by a \texttt{.gitlab-ci.yml} file. The file must be located in the repository root directory.
 % What does this file
 The configuration file will create a pipeline that performs after a push to the repository \cite{Gitlab2020Docs}.
 
@@ -588,11 +639,11 @@ The configuration file will create a pipeline that performs after a push to the 
 % Explain figure
 \Fig{fig:04_gitlab_pipeline_basic_arch} illustrates an architecture of a basic CI/CD pipeline.
 % Two stages
-The pipeline consists of a build and a test stage. Stages will be performed in order. The test stage will only be performed after the build stage was successful.
+The pipeline consists of a build and a test stage, which are performed in order. The test stage will only be performed after the build stage was successful.
 % Build stage
-The build stage consists of a single job named \textit{build\_job}. This job is executed first, after a change is pushed to the repository.
+The build stage consists of a single job named \textit{build-job}, which is executed first after a change is pushed to the repository.
 % Test stage
-Two jobs exist in the test stage. These jobs are executed in parallel when the test stage is triggered.
+The test stage consists of two jobs called \textit{unit-test-job} and \textit{integration-test-job}. If a stage consists of more than one job, then all jobs are executed in parallel when the stage is triggered.
 
 
 % Example config
@@ -627,15 +678,13 @@ integration-test-job:
 \subsection{Job Execution}
 \label{sec:04_background_gitlab_job}
 % Runner pick up jobs
-Jobs which are defined in the configuration file will be performed by GitLab runners.
+GitLab runners will perform jobs that are defined in the configuration file. 
 % What is runner
-A GitLab runner is an agent that performs the jobs in its own environment and responds the result back to the GitLab instance. A runner is a lightweight and highly scalable application that runs on a server and performs one or multiple executors.
+A GitLab runner is a lightweight and highly scalable application that runs on a server and performs one or multiple executors. Furthermore, it performs given jobs in its environment and responds the result back to the GitLab instance.
 % WHat is an executor
-An executor provides the environment where jobs will be executed in. GitLab runner provides multiple variants of executors.
-% The docker executor
-For example the Docker executor that connects to the underlying Docker engine. In addition, the Docker executor performs a job in a separate and isolated Docker container.
+An executor provides the environment where jobs are executed in. GitLab runner provides multiple executors, such as the Docker executor that connects to the underlying Docker engine. In addition, the Docker executor performs a job in a separate and isolated Docker container.
 % Runner config
-GitLab runner can be set up only for specific projects or be available to all project on the GitLab platform \cite{Gitlab2020Docs}.
+GitLab runner can be set up for specific projects or be available to all projects on the GitLab platform \cite{Gitlab2020Docs}.
 
 
 % ===========================================
@@ -653,19 +702,20 @@ It was introduced by Barna et al. \cite{Barna2017ElasticContainerApps} to overco
 
 \subsection{Recurrence Factor}
 % Why recurrence factor
-\paragraph{}In an Autonomic Computing environment, a scaling decision is made in each interval after data has been retrieved from the monitoring system (see \Sec{sec:02_ac} for the Autonomic Computing architecture). 
+\paragraph{}
+In an autonomic computing environment, a scaling decision is made in each interval after data has been retrieved from the monitoring system (see \Sec{sec:02_ac} for the autonomic computing architecture). 
 % Performance spikes
-Sudden performance spikes can occur and can cause the decision algorithm to perform unnecessary scaling actions.
+Sudden performance spikes can occur, and the decision algorithm performs unnecessary scaling actions.
 % The problem
 These unnecessary scaling actions can have a negative impact on the overall computing performance.
 % The recurrence factor
 To overcome this issue, a recurrence factor needs to be introduced to the decision making algorithm.
 % What it does
-With a recurrence factor ($n$), a scaling action will only be performed until a performance threshold has been violated $n$ times \cite{Barna2017ElasticContainerApps}.
+With a recurrence factor ($n$), a scaling action is only performed until a performance threshold is violated $n$ times \cite{Barna2017ElasticContainerApps}.
 
 
 % Problems of traditional recurrence factor algos
-\paragraph{}Traditional recurrence factor algorithm require violations to occur regularly. If a performance violation of the opposite direction occurs, the algorithm can get stuck in the violation process. Therefore, no scaling actions will be performed \cite{Barna2017ElasticContainerApps}.
+\paragraph{}Traditional recurrence factor algorithms require violations to occur regularly. If a performance violation of the opposite direction occurs, the algorithm can get stuck in the violation process. Then, no scaling actions are performed \cite{Barna2017ElasticContainerApps}.
 
 
 \subsection{Scaling Heat Algorithm Concept}
@@ -722,13 +772,13 @@ $heat \leftarrow 0$\;
 % Describe the concept
 \paragraph{}\Alg{alg:04_scal-heat_concept_algo} introduces the Scaling Heat algorithm.
 % The base
-The algorithm is based in a concept called \textit{heat}. The value of heat indicates if a scaling action of removing or adding components is necessary.
+The algorithm is based on a concept called \textit{heat}. The value of heat indicates if a scaling action of adding or removing components is necessary.
 % Violations
-If the given utilization of a performance metric violates the upper threshold, the heat value will increase. Violations of the lower threshold will cause a decrease respectively.
+If the given utilization of a performance metric violates the upper threshold, the heat value will increase. Violations of the lower threshold will cause a decrease, respectively.
 % Recurrence
-When the heat reaches the recurrence factor $n$, positive for adding and negative for removing nodes, a scaling action will be executed.
+When the heat reaches the recurrence factor $n$, positive for adding and negative for removing nodes, a scaling action is executed.
 % Reset
-After executing a scaling action, the heat value will be set to 0 \cite{Barna2017ElasticContainerApps}.
+After executing a scaling action, the heat value is reset to 0 \cite{Barna2017ElasticContainerApps}.
 
 
 % ===========================================
@@ -740,9 +790,7 @@ After executing a scaling action, the heat value will be set to 0 \cite{Barna201
 \label{sec:04_background_khpa}
 \paragraph{}
 % Short intro
-Kubernetes Horizontal Pod Autoscaler (KHPA) is an auto-scaling algorithm used in Kubernetes.
-% Pod?
-Kubernetes is an orchestration tool that allows to create and deploy units called Pods. A Pod is a running process on a cluster that encapsulates an application.
+Kubernetes Horizontal Pod Autoscaler (KHPA) is an auto-scaling algorithm used in Kubernetes, which is an orchestration tool that allows to create and deploy units called Pods. A Pod is a running process on a cluster that encapsulates an application.
 % What
 KHPA scales the number of replicas per Pod based on the utilization of performance metrics.
 % Interval
