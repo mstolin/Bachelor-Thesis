@@ -2,7 +2,7 @@
 \label{chap:03_related-work}
 
 
-This chapter provides an overview of related literature for this thesis. Furthermore, the surveyed literature is build on the theoretical foundation introduced in \Chap{chap:02_foundation}. This chapter introduces work about auto-scaling computing environments, GPU accelerated Apache Spark cluster and the implementation of an automated deployment pipeline. These topics are related to the choice of technologies (\Chap{chap:04_background}), the proposed conceptual design of this thesis (\Chap{chap:05_design}), and the resulting implementation (\Chap{chap:06_implementation}).
+This chapter provides an overview of related literature for this thesis. Furthermore, the surveyed literature is built on the theoretical foundation introduced in \Chap{chap:02_foundation}. This chapter introduces work about auto-scaling computing environments, GPU accelerated Apache Spark cluster, and the implementation of an automated deployment pipeline. These topics are related to the choice of technologies (\Chap{chap:04_background}), the proposed conceptual design of this thesis (\Chap{chap:05_design}), and the resulting implementation (\Chap{chap:06_implementation}).
 
 
 % ===========================================
@@ -17,7 +17,7 @@ To accommodate this thesis research objective, the literature research according
 \subsection{Auto-Scaler Concepts}
 % A review of auto-scaling techniques for elastic application in cloud environments
 \paragraph{}
-Lorido-Botrán et al. \cite{Lorido2014Review} reviewed state-of-the-art literatures about auto-scaling and explain proposals of an auto-scaling process in a cloud environment.
+Lorido-Botrán et al. \cite{Lorido2014Review} reviewed state-of-the-art literature about auto-scaling and explain proposals of an auto-scaling process in a cloud environment.
 % SLA and costs
 It is mentioned that an \textit{Auto-Scaler} is responsible to find a trade-off between meeting the Service Level Agreement (SLA) and keeping the cost of renting resources low.
 % SLA
@@ -43,13 +43,13 @@ To prevent the mentioned problems from occurring, the authors introduced and exp
 % MAPE phases
 MAPE consists of four different phases: Monitor, Analyse, Plan, and Execute.
 % Only AP
-There exist Auto-Scaler proposals which only focus on the Analyse, and Planning phase architecture of the MAPE architecture.
+There exist \textit{Auto-Scaler} proposals which only focus on the Analyse, and Planning phase architecture of the MAPE architecture.
 % Analysing and planning techniques
 Several techniques for the analyse phase are being introduced: Queuing theory, and time-series analysis.
 As well as for the planning phase: Threshold-based rules, reinforcement learning, and control theory.
 % Active proactive grouping
-There exist Auto-Scaler which uses techniques to predict the future state of the environment (e.g. reinforcement learning). These are called reactive Auto-Scalers.
-Proactive Auto-Scalers use techniques to respond to the current status of the environment (e.g. threshold-based rules).
+There exist \textit{Auto-Scaler} which uses techniques to predict the future state of the environment (e.g. reinforcement learning). These are called reactive Auto-Scalers.
+Proactive \textit{Auto-Scalers} use techniques to respond to the current status of the environment (e.g. threshold-based rules).
 
 
 % Application deployment using containers with auto-scaling for microservices in cloud environment

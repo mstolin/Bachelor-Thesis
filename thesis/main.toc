@@ -163,20 +163,34 @@
 \contentsline {chapter}{\numberline {7}Evaluation}{71}{chapter.7}% 
 \contentsline {section}{\numberline {7.1}Experimental Environment}{71}{section.7.1}% 
 \contentsline {section}{\numberline {7.2}Experiments}{71}{section.7.2}% 
+\contentsline {paragraph}{}{71}{paragraph*.100}% 
+\contentsline {paragraph}{}{72}{paragraph*.101}% 
 \contentsline {section}{\numberline {7.3}Static Worker CPU only}{72}{section.7.3}% 
+\contentsline {paragraph}{}{72}{paragraph*.103}% 
+\contentsline {paragraph}{}{73}{paragraph*.104}% 
 \contentsline {section}{\numberline {7.4}GPU Acceleration}{73}{section.7.4}% 
-\contentsline {paragraph}{}{74}{paragraph*.102}% 
+\contentsline {paragraph}{}{75}{paragraph*.106}% 
 \contentsline {section}{\numberline {7.5}Auto-Scaler}{75}{section.7.5}% 
-\contentsline {chapter}{\numberline {8}Outlook}{77}{chapter.8}% 
-\contentsline {section}{\numberline {8.1}Scaling}{77}{section.8.1}% 
-\contentsline {section}{\numberline {8.2}Shuffle bla bla}{78}{section.8.2}% 
-\contentsline {chapter}{\numberline {9}Conclusion}{79}{chapter.9}% 
-\contentsline {section}{\numberline {9.1}rtz}{79}{section.9.1}% 
-\contentsline {part}{Anhang}{86}{section*.107}% 
-\contentsline {chapter}{\numberline {A}Implementation}{87}{appendix.A}% 
-\contentsline {section}{\numberline {A.1}Computing Environment}{87}{section.A.1}% 
-\contentsline {chapter}{\numberline {B}Apache Spark Cluster Implementation}{89}{appendix.B}% 
-\contentsline {section}{\numberline {B.1}GitLab CI/CD Pipeline Implementation}{93}{section.B.1}% 
-\contentsline {section}{\numberline {B.2}Evaluation Data}{94}{section.B.2}% 
-\contentsline {subsection}{\numberline {B.2.1}Classification Benchmarks}{94}{subsection.B.2.1}% 
-\contentsline {subsection}{\numberline {B.2.2}Regression Benchmarks}{94}{subsection.B.2.2}% 
+\contentsline {subsection}{\numberline {7.5.1}Auto-Scaler Benchmark Configurations}{75}{subsection.7.5.1}% 
+\contentsline {subsection}{\numberline {7.5.2}Execution Time Evaluation}{76}{subsection.7.5.2}% 
+\contentsline {paragraph}{}{76}{paragraph*.111}% 
+\contentsline {paragraph}{}{76}{paragraph*.112}% 
+\contentsline {paragraph}{}{77}{paragraph*.114}% 
+\contentsline {section}{\numberline {7.6}Experimental Results Summary}{78}{section.7.6}% 
+\contentsline {chapter}{\numberline {8}Conclusion and Outlook}{79}{chapter.8}% 
+\contentsline {section}{\numberline {8.1}Conclusion}{79}{section.8.1}% 
+\contentsline {section}{\numberline {8.2}Outlook}{80}{section.8.2}% 
+\contentsline {subsection}{\numberline {8.2.1}Reactive Auto-Scaler Approach}{80}{subsection.8.2.1}% 
+\contentsline {subsection}{\numberline {8.2.2}Vertical Scaling Approach}{80}{subsection.8.2.2}% 
+\contentsline {subsection}{\numberline {8.2.3}Automatically GPUs}{80}{subsection.8.2.3}% 
+\contentsline {subsection}{\numberline {8.2.4}Shuffle bla bla}{81}{subsection.8.2.4}% 
+\contentsline {chapter}{\numberline {9}Conclusion}{83}{chapter.9}% 
+\contentsline {section}{\numberline {9.1}rtz}{83}{section.9.1}% 
+\contentsline {part}{Anhang}{90}{section*.116}% 
+\contentsline {chapter}{\numberline {A}Implementation}{91}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}Computing Environment}{91}{section.A.1}% 
+\contentsline {chapter}{\numberline {B}Apache Spark Cluster Implementation}{93}{appendix.B}% 
+\contentsline {section}{\numberline {B.1}GitLab CI/CD Pipeline Implementation}{97}{section.B.1}% 
+\contentsline {section}{\numberline {B.2}Evaluation Data}{98}{section.B.2}% 
+\contentsline {subsection}{\numberline {B.2.1}Classification Benchmarks}{98}{subsection.B.2.1}% 
+\contentsline {subsection}{\numberline {B.2.2}Regression Benchmarks}{98}{subsection.B.2.2}% 

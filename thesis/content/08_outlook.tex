@@ -1,4 +1,4 @@
-\chapter{Outlook}
+\chapter{Conclusion and Outlook}
 \label{chap:08_outlook}
 
 In this chapter , an outlook is given for further research based on the results of \Chap{chap:07_evaluation}.
@@ -6,49 +6,99 @@ In this chapter , an outlook is given for further research based on the results 
 
 % ===========================================
 % ===========================================
-\section{Scaling}
+\section{Conclusion}
 % Intro
-The results of SECTION XY show that, the implementation of the Auto-Scaler is nit sufficient for scaling Apache Spark worker nodes. Furthermore, it has increased the overall execution time for a spark-job.
+In this thesis, a scalable computing environment for training machine learning models using Apache Spark was implemented. In addition, the training process is automated using an automated deployment pipeline.
+% The research questions
+In CHAPTER 1, three research questions and the  for this thesis are defined.
 
 
-% Reasons
-A possible reason for this is result is, that Apache Spark is not able to efficiently distribute the workload between existing worker nodes and newly created worker nodes.
-% a solution
-A solution for this problem is, to activate worker nodes when they are needed instead of deploying new nodes. Apache Spark supports to blacklist worker nodes to creates executors.
-% the concept
-Then, instead of deploying new worker nodes, the Auto-Scaler whitelists a specific number of already existing worker.
+% RQ1
+The first research question is about how to implement a solution to automatically scale the number of workers in an Apache Spark cluster.
+% The solution
+For this research question, a computing environment according to autonomic computing architecture  is implemented for this thesis.
+% Autonomic computing
+It consists of an autonomic manager and an Apache Spark cluster.
+% Docker
+For simplicity, all components of the computing environment were deployed with Docker.
+% manager
+The autonomic manager is implemented in accordance to the MAPE architecture and responsible to monitor and automatically scale the Apache Spark workers.
+% monitoring system
+For the implementation of the autonomic manager, Prometheus, cadvisor, and DCGM-Exporter are used to create a monitoring system.
+% Auto-Scaler
+In addition, an \textit{Auto-Scaler} is implemented using Python 3 that automatically fetches performance metrics from the monitoring system and scales the Apache Spark workers.
+% Results
+%The evaluation shows, that the \textit{Auto-Scaler} implementation was not able to improve the performance of the computing environment. Furthermore, the \textit{Auto-Scaler} caused an increase of the spark-job execution time.
 
 
-% Reactive scaler
-The current design of the Auto-Scaler follows a proactive approach by responding to the current status of the computing environment (see SEC RELATED WORK).
-% pro active
-The efficiency of the Auto-Scaler can be optimized by following a reactive approach. Then the Auto-Scaler uses techniques to predict the future state of the computing environment.
-% MAPE-K
-The MAPE architecture used for the autonomic manager can be extended to gain knowledge (MAPE-K).
-% reinformcement learning
-The knowledge can be used to predict the future state of the computing environment using reinforcement-learning models.
-
-
-% scaling executor
-In the experiment of CHAP EVAL, all workers only executed their work on one executor.
-% another approach
-The number of executors can be scaled as well.
-% Rapids
-In accordance with the RAPIDS plugin, for each executor 1 GPU has to be available.
-
-
-
-% Vertical scaling
-Another approach to scale the performance of Apache Spark worker is vertical scaling.
-% in this thesis
-In this thesis, the horizontal scaling approach is used to scale the number of actively performing worker nodes.
+% RQ2
+The second research question is about how to accelerate the computation power of the Apache Spark cluster using GPUs.
+% RAPIDS
+The solution for this research question is implemented by extending the existing Apache Spark cluster with the NVIDIA RAPIDS Accelerator for Apache Spark plugin.
 %
-By using the vertical scaling approach, the resources of executors can be scaled. This can have the effect, that a worker is able to compute faster.
+The impact of GPUs have been tested using a classification and a regression benchmark. For the experiments, 2 GPUs have been available. 
+% results
+%The evaluation results show, that 2 GPU-accelerated Apache Spark worker are able to outperform 2 CPU-only Apache Spark worker by 2.42x for the classification benchmark and 3.02x for the regression benchmark.
+
+
+% RQ3
+The final research question is about how to automate the training of a machine learning model.
+%
+To accommodate this research question, a CI pipeline is implemented using GitLab CI/CD. The CI pipeline is performed when a change is committed to the machine learning applications source code.
+% How
+It consists of a \textit{train-stage} which automatically deploys a \textit{spark-submit} Docker container to the Apache Spark cluster.
+% spark-submit
+The \textit{spark-submit} container executes the spark-submit executable to perform the application on the Apache Spark cluster.
+% Gitlab runner
+To able to deploy a \textit{spark-submit} container from the \textit{train-stage} inside the Apache Spark cluster, a GitLab Runner is created which runs in the same host.
+
+
+% Results
+The impact of a GPU-accelerated Apache Spark cluster and of the \textit{Auto-Scaler} are evaluated with two different machine learning algorithms.
+% GPU results
+The results show, that enabling Apache Spark to use GPUs improved the spark-job execution time significantly.
+% Auto-Scaler
+However, the implementation of the \textit{Auto-Scaler} is not able to improve the spark-job execution time. Furthermore, the execution time increases by enabling the \textit{Auto-Scaler} in the cluster.
 
 
 % ===========================================
 % ===========================================
-\section{Shuffle bla bla}
+\section{Outlook}
+% Intro
+The implementation of the \textit{Auto-Scaler} was not able to improve the performance of training machine learning models on the Apache Spark cluster.
+% A possible reason
+A possible reason for the execution time increase is, that Apache Spark is able to efficiently distribute the workload of an application while workers are added to cluster during the execution of an application.
+% Differet approaches
+Therefore, different \textit{Auto-Scaler} implementations approaches for further research are introduced.
+
+
+\subsection{Reactive Auto-Scaler Approach}
+% Currently
+The current implementation of the \textit{Auto-Scaler} follows a proactive approach. It uses static threshold-based rules (e.g., maximum and minimum CPU utilization) to define when a scaling action is necessary.
+% Not sufficient
+The \textit{Auto-Scaler} can be optimized using a reactive approach with dynamic thresholds. A proactive \textit{Auto-Scaler} tries to predict the future state of the computing environment (e.g. reinforcement learning) using historical data.
+
+
+\subsection{Vertical Scaling Approach}
+% evaluations
+The evaluation of the static CPU-only workers experiment showed, that from a specific number of workers no significant performance improvement is made.
+% vertical
+Therefore, instead of scaling the replicas of worker nodes, a vertical-scaling approach for the \textit{Auto-Scaler} should be explored. The Auto-Scaler would then scale the available resources for an executor.
+% results
+Providing more powerful resources increases the computational power of the Apache Spark cluster and should lead to lower execution times for training machine learning models.
+
+
+\subsection{Automatically GPUs}
+\label{subsec:08_outlook_gpus}
+% Currently no GPUs
+The \textit{Auto-Scaler} was able to be evaluated using GPU-accelerated workers because it is not able to distribute GPUs exclusivley for each worker.
+% GPU approach
+Extending the Auto-Scaler to be able to keep track of GPUs which are free or already allocated by a worker should be explored.
+%
+Auto-scaling GPU-accelerated worker nodes can cause an improvement of the spark-job execution time.
+
+
+\subsection{Shuffle bla bla}
 As mentioned in SECTION DESIGN ODER IMPL, the current approach is, that no worker nodes are removed while applications re actively performed.
 % Why
 Worker nodes cant be removed while applications are performed because each participating worker, keeps temporary data. If a node is removed, the application will not succeed.

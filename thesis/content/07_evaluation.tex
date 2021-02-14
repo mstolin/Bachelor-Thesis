@@ -1,15 +1,13 @@
 \chapter{Evaluation}
 \label{chap:07_evaluation}
 
-In this chapter, the implementation of \Chap{chap:06_implementation} is evaluated in various experiments. Furthermore, the results are discussed.
+In this chapter, the implementation of \Chap{chap:06_implementation} is evaluated in various experiments. Furthermore, the experimental results are discussed.
 
 \section{Experimental Environment}
-The experiments have been conducted on a NVIDIA DGX.
-Table AB describes the hardware available on the DGX.
-Two of the eight GPUs have been available to conduct the experiments.
-
-
-The DGX is a live-system as being mentioned in Section XY. Therefore not all available hardware resource have been exclusively available to conduct these experiments.
+%
+The experiments are conducted on the DGX introduced in \Sec{sec:06_env}.
+% 2 GPUs
+As for the implementation, 2 GPUs have been available for the experiments.
 
 
 % ===========================================
@@ -20,18 +18,24 @@ The performance of the computing environment is measured on two widely used mach
 % Explain
 In both experiments, a machine learning model is trained on the computing environment using Apache Spark. Furthermore, each benchmark is evaluated using three different configurations:
 \begin{enumerate}
-\item Using a static number of Apache Spark worker to evaluate the performance of using only CPUs 
-\item Using a static number of Apache Spark worker with GPU acceleration enabled
-\item Dynamically scaling the number of CPU-only Apache Spark worker nodes using the \textit{Auto-Scaler}
+\item Using a static number of CPU-only Apache Spark workers
+\item Using a static number of GPU-accelerated Apache Spark workers
+\item Dynamically scaling the replicas of CPU-only Apache Spark workers using the \textit{Auto-Scaler}
 \end{enumerate}
-% Why no auto gpu
-The Auto-Scaler is not evaluated using GPU-accelerated worker nodes. As mentioned, for this experiment only 2 GPUs are available. The RAPIDS plugin allocates a GPU exclusively for each executor. When the Auto-Scaler creates a new worker node, the worker allocates an available GPU on the host machine and tries to allocate it completely. Due that the host machine is a live-system and other applications are running on the system, this is not possible. Therefore, the impact of GPU-accelerated worker nodes is evaluated using a static number of worker nodes which use a GPU which was exclusively reserved for the experiment during that time.
+% 10 times
+For each benchmark configuration, the experiment is conducted 10 times. The spark-job execution-time mean value over all 10 iterations per experiment is used as result.
 % DIfference between GPU and CPU
-The performance difference between GPU accelerated worker nodes and CPU-only worker nodes is explored using two different configurations of the implementation.
+The performance difference between GPU accelerated worker nodes and CPU-only worker nodes is explored using a CPU-only, and a GPU-only version of the benchmark implementation.
 
+\paragraph{}
+% Why no auto gpu
+The \textit{Auto-Scaler} is not evaluated using GPU-accelerated worker nodes. As mentioned, for this experiment only 2 GPUs are available. The RAPIDS plugin allocates a GPU exclusively for each executor. When the \textit{Auto-Scaler} creates a new worker node, the worker allocates a random available GPU.
+% Live system
+However, the host machine is a live system and it is not possible to allocate a random GPU which may be in use by another application. Furthermore, the \textit{Auto-Scaler} does not support to allocate a specific GPU for each newly created worker. An approach to overcome this problem is introduced in \Sec{subsec:08_outlook_gpus}.
 
+\paragraph{}
 % The algorithm
-The two benchmarks are:
+The two benchmarks to evaluate the performance are:
 \begin{itemize}
 \item XGBoost classification model using the \textit{Fannie Mae’s Single-Family Historical Loan Performance Dataset}\footnote{Downloaded from: \url{https://docs.rapids.ai/datasets/mortgage-data} (Accessed: 2021-02-06)}\cite{Fannie2021Mortgage}
 
@@ -40,12 +44,12 @@ The two benchmarks are:
 % Source
 The source code and the dataset used in these experiments are available on Github on the \textit{spark-xgboost-examples}\footnote{spark-xgboost-examples - \url{https://github.com/NVIDIA/spark-xgboost-examples/tree/spark-3} (Accessed: 2021-02-06)} repository from NVIDIA.
 % The two diff impl conf
-The repository provides a \textit{mortgage} and a \textit{taxi} application. Both applications come with a CPU-only implementation and a GPU implementation.
+The repository provides a \textit{mortgage} and a \textit{taxi} application. Both applications provide a CPU and a GPU configuration.
 
 % supervised
-Both classification and regression algorithms are supervised machine learning algorithms.
+Classification and regression algorithms are supervised machine learning algorithms.
 % whats supervised
-The goal of supervised machine learning algorithms is to train a model by finding patterns in labeled data. Then, the model is used to predict labels on new data based on the learned labels.
+The goal of supervised machine learning algorithms is to train a model by finding patterns in labelled data. Then, the model is used to predict labels on new data based on the learned labels.
 % Classification
 The classification algorithm identifies the category of a label.
 % Regression
@@ -55,79 +59,90 @@ A regression algorithm predicts a continuous numeric value \cite{Mcdonald2020Spa
 % ===========================================
 % ===========================================
 \section{Static Worker CPU only}
+\label{sec:07_static}
 % Intro
-The first experiment is conducted using fixed numbers of CPU-only Apache Spark workers to evaluate both benchmarks.
+The first experiment is conducted using a fixed number of CPU-only Apache Spark workers to evaluate the performance of both benchmarks.
+% Appendix
+The performance for each iteration is available at \Section{sec:appendix_eval}.
 % results
 \begin{figure}[h]
 \centering
-\includegraphics[scale=1]{images/07_evaluation/overall_cpu}
-\caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.9]{images/07_evaluation/overall_cpu}
+\caption{Mean execution time using CPU-only worker nodes}
+\label{fig:07_static_results}
 \end{figure}
 % Explain fig
-FIG XY shows the mean execution times for both benchmarks.
-% Best results
-The classification benchmark achieved the best performance with 15 worker nodes with an overall speed-up of 6.61x in comparison to 1 worker node. The regression benchmark achieved best using 10 worker nodes with an improvement of 3.21x in comparison to 1 worker node.
-%  Execution time increase
-It can be seen, that for both benchmarks the mean time increased for the last two experiments. For the classification benchmark, the execution time increased by 18 seconds when using 20 worker nodes. Furthermore, the execution time increased by 7 seconds for the regression benchmark when using 15 worker nodes.
-% Over provisioning
-This performance decrease is caused by over-provisioning the Apache Spark cluster. Too many worker nodes manage the available resources poorly.
-% Appendix
-The performance data for all iteration of both benchmarks is available at ANHANG A.
+\Fig{fig:07_static_results} illustrates the mean execution time for both benchmarks.
+
+\paragraph{}
+% best results
+The best performance for the classification benchmark was achieved with 247 seconds using 30 workers with an improvement of 7.04x in comparison to 1 worker. The regression benchmark achieved best with 102 seconds using 10 workers. The execution has an improvement of 3.21x in comparison to 1 worker. In addition, the regression benchmark achieved an execution time of 102 seconds by using 30 workers as well. However, using 10 workers is considered the best result for the regression benchmark because less workers have been used.
+
+\paragraph{}
+% The improvement curve
+For the classification benchmark, the execution time had no significant improvement from 15 workers. Using 20 workers increased the execution time by 18 seconds. Using 35 workers improved the execution time by only 5 seconds in comparison to 15 workers.
+% regression
+The regression benchmark shows a similar result. As mentioned, the best result was achieved with 10 workers. The same results was achieved with 30 workers. Furthermore, using 35 workers increased the best performance by 7 seconds.
+
+
+% and?
+This result shows that over-provisioning the Apache Spark cluster by adding more workers from a certain number of workers can have a negative impact on the performance.
 
 
 % ===========================================
 % ===========================================
 \section{GPU Acceleration}
 % Intro
-To explore the impact of GPU accelerated Apache Spark worker nodes, two GPUs of the DGX are available.
+The impact of GPU-accelerated Apache Spark worker nodes for both benchmarks have been evaluated using 2 configurations: Using 1 GPU accelerated worker node, and using 2 GPU accelerated worker nodes.
 %
-The benchmarks have been performed with two different cluster configurations. First, both benchmarks were tested with one worker node in the cluster and second with two worker nodes. Each worker node allocates a GPU.
+The performance for each GPU experiment is available at ANHANG A.
 % vs figure
 \begin{figure}[h]
 \centering
-\includegraphics[scale=1]{images/07_evaluation/overall_cpu_vs_gpu}
-\caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
+\includegraphics[scale=0.9]{images/07_evaluation/overall_cpu_vs_gpu}
+\caption{Mean execution time of GPU-accelerated worker nodes vs. Mean execution time of CPU-only worker nodes}
 \label{fig:07_gpu_results}
 \end{figure}
 % Explain results
-The experiment results are illustrated in FIG XY. 
+The results of the experiment are illustrated in \Fig{fig:07_gpu_results}.
 % vs
-The mean execution times using GPU accelerated worker nodes are plotted against the mean execution times using CPU-only worker nodes.
+The mean execution time using GPU accelerated worker nodes are plotted against the mean execution time using CPU-only worker nodes.
 % overall
-Overall, GPU accelerated worker nodes significantly outperformed CPU-only worker nodes.
+Overall, GPU accelerated worker nodes significantly outperformed the equivalent number of CPU-only worker nodes.
 % classification
-For the classification algorithm, Apache Spark performed best using two GPUs with an improvement of 2.42x in comparison of two CPU-only worker nodes. Using one GPU accelerated worker node had a speed-up of 2.91x in comparison to one CPU-only worker node.
+For the classification benchmark, the best execution-time was achieved using 2 GPU-accelerated worker nodes with 342 seconds in comparison to 828 seconds using 1 CPU-only worker node. This an 2.42x improvement. Using 1 GPU-accelerated worker node achieved an improvement of 2.91x with 597 seconds in comparison to 1 CPU-only worker node with 1740 seconds.
 % regression
-The improvement of GPU accelerated worker nodes is noticeable for the regression benchmark as well. Compared to CPU-only worker nodes, using 2 GPUs increases the execution time by 3.02x and 4.55x using 1 GPU.
-
+The regression benchmark achieved best with 2 GPU-accelerated worker nodes needing 342 seconds in comparison of 2 CPU-only worker nodes needing 828 seconds. Therefore, using 2 GPU-accelerated worker nodes achieved an improvement of 3.02x. Using 1 GPU-accelerated worker node achieved an improvement of 4.55x in comparison to 1 CPU-only worker node.
 
 \paragraph{}
 % The table
-\Tab{table:07_gpu_overall_results} shows the overall results by comparing the CPU and GPU results.
+\Tab{table:07_gpu_overall_results} shows the overall results by comparing the CPU and GPU results for each benchmark.
 % GPU outperforms
-GPU accelerated worker nodes outperformed their CPU-only equivalent.
+Overall, GPU-accelerated worker nodes were able to outperform their CPU-only equivalent.
 % classification
-Using 5 CPU-only worker nodes achieved to outperform 1 GPU accelerated worker node by 62s. 10 CPU-only worker were able to outperform 2 GPU accelerated worker nodes by 47s.
+However, for the classification benchmark, 5 CPU-only worker nodes achieved an improvement of 62 seconds compared to 2 GPU-accelerated worker nodes. In addition, 10 CPU-only worker nodes outperformed 2 GPU-accelerated worker nodes by 47 seconds.
 % regression
-However, CPU-only worker nodes were not able to outperform GPU accelerated worker nodes in the regression benchmark. The best CPU-only result was achieved with 10 worker nodes with 102 seconds. This result is 30s higher than using 1 GPU accelerated worker nodes and 56s higher than 2 GPU accelerated worker nodes.
+Otherwise, for the regression benchmark no CPU-only configuration was able to improve the performance of GPU-accelerated worker nodes.
 
 
 % Results as table
-\begin{table}[]
+\begin{table}[ht]
 \centering
 \begin{tabular}{@{}l|ll|ll@{}}
 \toprule
                   & \multicolumn{2}{c|}{Classification}                & \multicolumn{2}{c}{Regression}                    \\
 Number of workers & \multicolumn{1}{c}{CPU} & \multicolumn{1}{c|}{GPU} & \multicolumn{1}{c}{CPU} & \multicolumn{1}{c}{GPU} \\ \midrule
 1  & 1740s & 597s & 328s & 72s \\
-2  & 828s  & 342s & 139s & 46s \\
-5  & 535s  &      & 129s &     \\
-10 & 295s  &      & 102s &     \\
-15 & 263s  &      & 109s &     \\
-20 & 281s  &      &      &     \\ \bottomrule
+2  & 828s  & \textbf{342s} & 139s & \textbf{46s} \\
+5  & 535s  & -      & 129s & -     \\
+10 & 295s  & -      & \textbf{102s} & -     \\
+15 & 263s  & -      & 109s & -     \\
+20 & 281s  & -      & 120s & -     \\
+25 & 257s  & -      & 129s & -     \\
+30 & \textbf{247s}  & -      & 102s & -     \\
+35 & 258s  & -      & 109s & -     \\ \bottomrule
 \end{tabular}
-\caption{asfdsfg}
+\caption{Mean execution of all CPU-only and GPU-accelerated experiments for both benchmarks}
 \label{table:07_gpu_overall_results}
 \end{table}
 
@@ -136,17 +151,27 @@ Number of workers & \multicolumn{1}{c}{CPU} & \multicolumn{1}{c|}{GPU} & \multic
 % ===========================================
 \section{Auto-Scaler}
 % Intro
-To test the impact of the Auto-Scaler while training machine learning applications, both benchmarks have been tested with different configurations. \Tab{table:07_auto-scaler_config_parameter} shows the Auto-Scaler configuration parameters for each benchmark.
+To test the impact of the \textit{Auto-Scaler} while training machine learning applications, both benchmarks have been tested with different \textit{Auto-Scaler} configurations. 
+
+
+\subsection{Auto-Scaler Benchmark Configurations}
 % Wheres it from
-The configuration parameters are choosen in accordance to the results of the static worker experiment.
+The configuration parameters are chosen in accordance to the results of the static worker experiment (\Sec{sec:07_static}).
+% Table
+The \textit{Auto-Scaler} configuration parameters for each benchmark are shown in \Tab{table:07_auto-scaler_config_parameter}.
+% Iteration Figure
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.9]{images/07_evaluation/overall_auto-scaler_iterations}
+\caption{CPU utilization during all iterations of both benchmarks with 2 CPU-only workers}
+\label{fig:07_auto-scaler_iterations_results}
+\end{figure}
 % Max worker
-The classification benchmark achieved best using 15 CPU-only worker nodes and the regression benchmark using 10 CPU-only nodes.
+To prevent an cluster over-provisioning, the maximum number of worker nodes for the classification benchmark is set to 15, and 10 for the regression benchmark.
 % recurrence
-The recurrence factor is set to 1 for both benchmarks. As illustrated in FIG XY, only 2 performance spikes at he beginning and at the end occured. Overall there havent been much oscillation during the training. Having a higher recurrence factor would possibly lead to no scaling action.
-% CPU utilization
-The CPU utilization values have been chosen in accordance to the minimum and maximum values of the static worker experiment.
+\Fig{fig:07_auto-scaler_iterations_results} shows all 10 iterations of the CPU-only experiment for both benchmarks. It shows that, while the machine learning model is trained, only 2 performance spikes occurred at the beginning and at the end during a short time period. To scale while these performance spikes occur, the recurrence factor is set to 1. Additionally, the maximum CPU utilization for both benchmarks is set in accordance to the maximum CPU utilization during the performance spikes.
 % The configurations
-\begin{table}[]
+\begin{table}[ht]
 \centering
 \begin{tabular}{@{}l|ll@{}}
 \toprule
@@ -156,27 +181,72 @@ Recurrence factor       & 1              & 1          \\
 Cooldown period         & 60 seconds     & 60 seconds \\
 Target CPU utilization  & 10\%           & 5\%        \\
 Minimum CPU utilization & 5\%           & 2\%       \\
-Maximum CPU utilization & 20\%           & 10\%       \\
+Maximum CPU utilization & 25\%           & 10\%       \\
 Minimum worker nodes    & 2              & 2         \\
 Maximum worker nodes    & 15              & 10         \\ \bottomrule
 \end{tabular}
-\caption{Auto-Scaler configuration parameter}
+\caption{\textit{Auto-Scaler} configuration parameters for both benchmarks}
 \label{table:07_auto-scaler_config_parameter}
 \end{table}
 
 
+\subsection{Execution Time Evaluation}
 % Figure
 \begin{figure}[h]
 \centering
-\includegraphics[scale=1]{images/07_evaluation/overall_auto-scaler}
-\caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
+\includegraphics[scale=0.9]{images/07_evaluation/overall_auto-scaler}
+\caption{\textit{Auto-Scaler} experiment mean execution time of both benchmarks}
 \label{fig:07_auto-scaler_results}
 \end{figure}
+
+\paragraph{}
+% Figure
+\Fig{fig:07_auto-scaler_results} illustrates the results of the \textit{Auto-Scaler} experiment. The mean execution time of 2 CPU-only worker nodes is plotted against the mean execution time of the \textit{Auto-Scaler} experiment.
 % Explain
-The results, illustrated in \Fig{fig:07_auto-scaler_results}, showed that scaling the number of Apache Spark worker nodes during the training of a machine learning model increased the execution time of the spark-jobs.
-% Classification
-In the classification benchmark, the \textit{Auto-Scaler} caused an increase of 228 seconds in comparison of no auto-scaling.
-% Regression
-Dynamically scaling worker nodes during the regression benchmark increased the mean time by 38 seconds.
+The results show, that no improvement was achieved using the \textit{Auto-Scaler} implementation.
+% Results
+For the classification benchmark, the execution time of 2 CPU-only worker nodes increased by 228 seconds when enabling the \textit{Auto-Scaler} in the environment. Furthermore, the regression benchmark execution for 2 CPU-only worker nodes increased by 38 seconds with the the \textit{Auto-Scaler} enabled.
+
+\paragraph{}
+% Table
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}l|ll|ll@{}}
+\toprule
+                               & \multicolumn{2}{c|}{Classification}                   & \multicolumn{2}{c}{Regression}                       \\
+\multicolumn{1}{c|}{Iteration} & \multicolumn{1}{c}{Time} & \multicolumn{1}{c|}{Nodes} & \multicolumn{1}{c}{Time} & \multicolumn{1}{c}{Nodes} \\ \midrule
+1  & \textbf{840s} & 15 & 168s          & 5 \\
+2  & 960s          & 7  & \textbf{150s} & 2 \\
+3  & 1020s         & 15 & 186s          & 6 \\
+4  & 1140s         & 15 & 180s          & 6 \\
+5  & 1080s         & 15 & 180s          & 6 \\
+6  & 1140s         & 15 & 180s          & 6 \\
+7  & 1140s         & 15 & 180s          & 6 \\
+8  & 1080s         & 15 & 180s          & 6 \\
+9  & 1140s         & 7  & 180s          & 6 \\
+10 & 1020s         & 15 & 186s          & 6 \\ \bottomrule
+\end{tabular}
+\caption{Results of each iteration during the \textit{Auto-Scaler} experiment for both benchmarks}
+\label{table:07_auto-scaler_iterations}
+\end{table}
+% Explain
+\Tab{table:07_auto-scaler_iterations} summarizes the results for all 10 iterations of each benchmark.
+% classification
+For the classification benchmark, the best result was achieved in the first iteration with an execution time of 960 seconds and a maximum number of 15 worker nodes during the execution.
+% regression
+The regression benchmark achieved best in the second iteration, with an execution time of 150 seconds and a maximum number of 2 worker nodes during this iteration.
+% n maximum reached
+The results show that during the classification benchmark experiment, the \textit{Auto-Scaler} added the maximum number of allowed worker nodes in 8 out of 10 iterations. During the regression benchmark experiment, the maximum number of worker nodes was never reached. Furthermore, in the second iteration, when the best result was achieved, the \textit{Auto-Scaler} has not scaled the number of worker nodes.
+
+\paragraph{}
 % Meaning
-The performance decrease of horizontally scaling worker nodes is possible caused that Apache Spark is not able to efficiently distribute the workload during that time. In relation, the increase for the regression benchmark is higher.
+The performance decrease when enabling the Auto-Scaler is possibly caused by the lack of efficient workload distribution by Apache Spark.
+
+
+\section{Experimental Results Summary}
+% Intro
+The experimental results show, that GPU-accelerated worker nodes significantly outperform worker nodes using only CPUs.
+% Auto-scaler
+However, the \textit{Auto-Scaler} was not able to improve the performance of the computing environment.
+%
+Moreover, enabling the \textit{Auto-Scaler} during the training of machine learning models increased the execution time of active performing spark-jobs.
