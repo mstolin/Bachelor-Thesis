@@ -1,7 +1,7 @@
 \chapter{Conceptual Design}
 \label{chap:05_design}
 
-In this chapter, the conceptual design of the implementation is introduced. This chapter's concept is based on the theory of Chapter 2 and uses the technologies introduced in \Chap{chap:04_background}.
+In this chapter, the conceptual design of the implementation is introduced. This chapter's concept is based on the theory of \Chap{chap:02_foundation} and uses the technologies introduced in \Chap{chap:04_background}.
 
 
 % ===========================================
@@ -47,9 +47,9 @@ The dcgm-exporter is used as a monitoring agent as well. It is used to monitor t
 % SHort intro
 Suitable metrics are needed to measure the system performance while the Apache Spark cluster is actively performing work.
 % Rapids enabled GPU
-With the RAPIDS accelerator for Apache Spark, the cluster utilizes GPUs' computing power and CPUs to enable parallelization.
+With the RAPIDS accelerator for Apache Spark, the cluster utilizes CPU and GPU computing power to enable parallelization.
 % SO?
-Therefore, suitable metrics to measure the system performance are the CPU utilization and the GPU utilization when the cluster is actively performing computations.
+Therefore, suitable metrics to measure the system performance are the CPU and GPU utilization when the cluster is actively performing computations.
 
 
 \subsection{CPU Utilization}
@@ -110,7 +110,7 @@ This allows to define the state of each service, which includes the number of re
 % Explain 
 \Fig{fig:05_am_monitoring_loop_arch} provides an overview of the computing environment concept.
 % resources
-The managed resources (introduced \Sec{subsec:02_ac_resources}) in this environment are the Apache Spark cluster and the GPUs.
+The managed resources (introduced in \Sec{subsec:02_ac_resources}) in this environment are the Apache Spark cluster and the GPUs.
 % manager
 These resources are managed by the autonomic manager, which consists of the \textit{Auto-Scaler}, and the monitoring system. Furthermore, the autonomic manager implements all four phases of the MAPE architecture and executes the control-loop.
 % Docker 
@@ -132,7 +132,7 @@ It starts in the Monitor phase. All monitoring agents (cAdvisor and dcgm-exporte
 % Analyze
 In the analyse phase, the \textit{Auto-Scaler} determines if a scaling action is necessary. If a scaling action is not needed, the iteration ends.
 % Plan
-Otherwise, if a scaling action is needed, the \textit{Auto-Scaler} determines the number of Apache Spark worker replicas in the Plan phase.
+Otherwise, the \textit{Auto-Scaler} determines the number of Apache Spark worker replicas in the Plan phase.
 % Execute
 Lastly, in the Execute phase, the \textit{Auto-Scaler} scales the Apache Spark worker Docker service's replicas.
 
@@ -142,7 +142,7 @@ Lastly, in the Execute phase, the \textit{Auto-Scaler} scales the Apache Spark w
 \section{Apache Spark Cluster}
 \label{sec:05_spark}
 % Short intro
-The Apache Spark cluster is the computing unit of the computing environment. It is responsible for distributing the workload of training machine learning models.
+The Apache Spark cluster is the computing unit of the environment. It is responsible for distributing the workload of training machine learning models.
 % Figure
 \begin{figure}[h]
 \centering
@@ -172,9 +172,9 @@ Additionally, this simple approach allows running each node of the cluster in a 
 % Short intro
 The \textit{Auto-Scaler} scales the replicas of Apache Spark worker nodes. Therefore, the cluster is scaled horizontally. As explained in \Sec{subsec:02_foundations_scalability_horizontal-scaling}, the horizontal scaling approach is more efficient when scaling homogeneous nodes Each node adds the same amount of computational power to the cluster.
 % How to achieve
-To ensure that the worker nodes are homogeneous, the worker Docker service uses the same Docker image for each worker node. The Docker image is created from a custom Dockerfile.
+To ensure that the worker nodes are homogeneous, the worker service uses the same Docker image for each worker node. The Docker image is created from a custom Dockerfile.
 % Resources
-This guarantees that each worker uses the same software and has the same amount of computational resources available as each other worker.
+This guarantees that each worker uses the same software and has the same amount of computational resources available.
 % RAPIDS
 Additionally, all requirements mentioned in \Sec{subsec:04_rapids_req} to enable GPU acceleration with RAPIDS are installed in a worker image.
 
@@ -185,14 +185,14 @@ Additionally, all requirements mentioned in \Sec{subsec:04_rapids_req} to enable
 Whenever the CI pipeline submits an application to the Apache Spark cluster, it deploys a \textit{spark-submit} Docker container.
 % spark-submit purpose
 The \textit{spark-submit} container's purpose is to submit an application with the spark-submit executable (described in \Sec{subsubsec:04_spark_standalone_submit}) to the cluster.
-% No support for python in cluster mode
-Apache Spark cluster's standalone mode does not support submitting a Python application with the spark-submit executable from outside of the cluster. Therefore, the spark-submit executable must be executed on the host machine with access to the master node \cite{Apache2020Spark}.
-% Swarm
-To submit an application to the master node, the \textit{spark-submit} container needs to be in the same Docker swarm network. The node is deployed as a Docker container instead of a Docker service. Each spark-submit container is deployed with a different setting depending on the configuration and application from the CI pipeline. This configuration can be set in the CI pipeline configuration.
-% End
-After the application has been submitted, the spark-submit node automatically exits.
 % Resources
 Additionally, the \textit{spark-submit} container sets the number of resources for the executors running on the worker nodes.
+% No support for python in cluster mode
+Apache Spark cluster's standalone mode does not support submitting Python applications with the spark-submit executable from outside of the cluster. Therefore, the spark-submit executable must be executed on the host machine with access to the master node \cite{Apache2020Spark}.
+% Swarm
+To submit an application to the master node, the \textit{spark-submit} container needs to be in the same Docker swarm network. The node is deployed as a Docker container instead of a Docker service. Each spark-submit container is deployed with a different setting depending on the configuration and application of the CI pipeline.
+% End
+After the application has been submitted, the spark-submit node automatically exits.
 
 
 \section{Autonomic Manager}
@@ -200,9 +200,9 @@ Additionally, the \textit{spark-submit} container sets the number of resources f
 % SHort intro
 The autonomic manager is one of the main modules of the computing environment.
 % Responsibilites
-It is responsible for monitoring all Apache Spark worker nodes' performance metrics and automatically scales the number of worker nodes to adapt to a specified performance goal.
+It is responsible for monitoring all Apache Spark worker node performance metrics and automatically scales the number of worker nodes to adapt to a specified performance goal.
 % MAPE
-The autonomic manager will be implemented according to the MAPE architecture, as described in \Sec{subsec:02_ac_manager}. To create a complete control-loop, the autonomic manager comprises multiple components, as illustrated in \Fig{fig:05_am_concept}.
+The autonomic manager is implemented according to the MAPE architecture, as described in \Sec{subsec:02_ac_manager}. To create a complete control-loop, the autonomic manager comprises multiple components, as illustrated in \Fig{fig:05_am_concept}.
 % A figure explaining the concept
 \label{subsec:05_am}
 \begin{figure}[h]
@@ -212,20 +212,20 @@ The autonomic manager will be implemented according to the MAPE architecture, as
 \label{fig:05_am_concept}
 \end{figure}
 % Explain figure
-It consists of a monitoring system (the theory is explained in \Sec{sec:02_monitoring}) and an \textit{Auto-Scaler} module.
+It consists of a monitoring system (see \Sec{sec:02_monitoring}) and an \textit{Auto-Scaler} module.
 % Docker
 Each component in the computing environment is deployed as a Docker service. Therefore, Docker swarm takes care of the health status of each component.
 % Monitor
-To monitor Docker container's performance in the computing environment, the autonomic manager needs access to the overlaying Docker engine. Additionally, to monitor GPU performance, a monitoring agent is needed to scrape metrics from the GPUs.
+To monitor overall Docker container performance in the computing environment, the autonomic manager needs access to the overlaying Docker engine. Additionally, to monitor GPU performance, a monitoring agent is needed to scrape metrics from the GPUs.
 % Scaling
-Furthermore, the autonomic manager is responsible for scaling the replicas of Apache Spark worker nodes. As being introduced in \Sec{sec:05_spark}, a worker service takes care of all worker nodes. Therefore, the autonomic manager needs access to the host machine's Docker engine to send scaling instructions.
+Furthermore, the autonomic manager is responsible for scaling the replicas of Apache Spark worker nodes. As introduced in \Sec{sec:05_spark}, a worker service takes care of all worker nodes. Therefore, the autonomic manager needs access to the host machine's Docker Engine in order to send scaling instructions.
 
 
 \subsection{Monitoring System}
 % Short intro
-The monitoring system is responsible for performing the Monitor phase. Therefore it monitors the performance of components in the computing environment and makes them available for the \textit{Auto-Scaler}.
+The monitoring system is responsible for performing the Monitor phase. Therefore it monitors the performance of components in the computing environment and makes them available to the \textit{Auto-Scaler}.
 % Responsibilites
-In this environment, the monitoring system collects the Apache Spark worker Docker container's performance metrics and the GPU performance. It is essential to mention that the number of worker nodes varies over time because the \textit{Auto-Scaler} scales the worker nodes' replicas according to the system performance.
+In this environment, the monitoring system collects worker container performance metrics, and the GPU performance. It is essential to mention that the number of worker nodes varies over time because the \textit{Auto-Scaler} scales the worker nodes' replicas according to the system performance.
 % The figure
 \begin{figure}[h]
 \centering
@@ -234,14 +234,14 @@ In this environment, the monitoring system collects the Apache Spark worker Dock
 \label{fig:05_am_monitoring_concept}
 \end{figure}
 % Explain figure
-\Fig{fig:05_am_monitoring_concept} illustrates the architecture of the monitoring system. It consists of three components:
+\Fig{fig:05_am_monitoring_concept} illustrates the architecture of the monitoring system, which consists of three components:
 % The components
 \begin{itemize}
 \item dcgm-exporter: A monitoring agent that is responsible for collecting GPU performance metrics.
 
-\item cAdvisor: cAdvisor is a monitoring agent that collects performance metrics of Docker containers in the environment.
+\item cAdvisor: A monitoring agent that collects performance metrics of Docker containers in the environment.
 
-\item Prometheus: Prometheus collects the performance metrics from all monitoring agents and saves them as time-series data in a time-series database.
+\item Prometheus: It collects the performance metrics from all monitoring agents and saves them as time-series data in a time-series database.
 \end{itemize}
 
 
@@ -251,7 +251,7 @@ The \textit{Auto-Scaler} is the second module of the autonomic manager and respo
 % MAPE
 It implements the Analyse, Plan, and Execute phases of the MAPE architecture. Together with the monitoring system, it creates a complete autonomic manager implementing all phases of the MAPE architecture.
 % Reactive threshold based 
-The \textit{Auto-Scaler} is designed as a reactive auto-scaler and uses a threshold-based algorithm to adapt worker nodes. To define the thresholds, it can be configured using a configuration file.
+The \textit{Auto-Scaler} is designed as a reactive auto-scaler and uses a threshold-based algorithm to scale worker nodes. To define the thresholds, it can be configured using a configuration file.
 
 
 % Prom API
@@ -262,27 +262,27 @@ After it received the performance metrics, the \textit{Auto-Scaler} analyses the
 
 \subsubsection{MAPE Phases}
 % SHort intro
-As being mentioned, the \textit{Auto-Scaler} implements the Analyse, Plan, and Execute phases of the MAPE architecture. Each phase has a different workflow to accommodate its goal.
+Mentioned above, the \textit{Auto-Scaler} implements the Analyse, Plan, and Execute phases of the MAPE architecture. Each phase has a different workflow to accommodate its goal.
 
 \paragraph{Analyse:}
 % How to analyze
-During each period, the \textit{Auto-Scaler} fetches the performance metrics defined in the configuration from the Prometheus HTTP API.
+During each period, the \textit{Auto-Scaler} fetches the performance metrics defined in the configuration file from the Prometheus HTTP API.
 % Determine if scaling is needed
 After the metrics are received, the \textit{Auto-Scaler} determines if a scaling action is needed using the Scaling Heat algorithm (introduced in \Sec{sec:04_background_scaling-heat}). If scaling is not necessary, the \textit{Auto-Scaler} continues to collect and analyse performance metrics.
 
 \paragraph{Plan:}
 % Short intro
-If a scaling-action is necessary, the \textit{Auto-Scaler} is responsible for determining the number of Apache Spark worker replicas needed to reach the defined utilization goal.
+If a scaling action is necessary, the \textit{Auto-Scaler} is responsible for determining the number of Apache Spark worker replicas needed to reach the defined utilization goal.
 % Calculating Spark worker
 To calculate the number of worker nodes, the \textit{Auto-Scaler} uses the Kubernetes Horizontal Pod Auto-Scaling algorithm (introduced in \Sec{sec:04_background_khpa}).
 % Thresholds
-The number of needed replicas may violate the upper or lower thresholds of active Apache Spark worker nodes. Then, the Auto-Scaler uses the maximum or the minimum number of worker nodes as the desired replicas.
+If number of needed replicas violates the upper or lower thresholds of active Apache Spark worker nodes, the \textit{Auto-Scaler} uses the maximum or the minimum number of worker nodes as the desired replicas.
 
 \paragraph{Execute:}
 % Short intro
 After the number of needed replicas have been calculated, the \textit{Auto-Scaler} sends the instruction to scale the Apache Spark worker service to the desired number of replicas.
 % Cooldown
-Afterward, a cooldown period gets activated. This brings the effect that the Apache Spark cluster needs time to distribute the workload across all new worker nodes efficiently. During the cooldown period, no scaling actions are executed.
+Afterward, a cooldown period is activated, which has the effect that the Apache Spark cluster needs time to distribute the workload across all new worker nodes efficiently. During the cooldown period, no scaling actions are executed.
 
 
 \subsubsection{Configuration}
@@ -302,9 +302,9 @@ The \textit{Auto-Scaler} needs specific configuration properties to collect the 
 \end{itemize}
 
 \item Metrics:
-It should be possible to define a list of multiple metrics. Each metric needs to have a variety of properties configured.
+It is possible to define a list of metrics, where each metric needs to have a variety of properties configured.
 \begin{itemize}
-\item Target utilization: The target utilization of a performance metric is needed by the KHPA algorithm to calculate the number of desired replicas.
+\item Target utilization: The desired utilization of the performance metric.
 
 \item Utilization thresholds: To determine if a scaling action is needed, the scaling heat algorithm needs the minimum and maximum utilization of the performance metric.
 
@@ -331,7 +331,7 @@ This thesis aims to train Machine Learning models by automatically submitting Ap
 %
 The application development lifecycle is automated using a deployment pipeline (introduced in \Sec{sec:02_depl-pipeline}).
 %
-In this conceptual design, a CI pipeline is demonstrated to automate the training phase of an application and submits the application to an Apache Spark cluster after the testing was successful.
+In this conceptual design, a CI pipeline is used to automate the training phase of an application and submit the application to an Apache Spark cluster after the test stage was successful.
 
 
 % Conceptual figure
@@ -345,7 +345,7 @@ In this conceptual design, a CI pipeline is demonstrated to automate the trainin
 \Fig{fig:05_deployment_concept} illustrates the conceptual design of the CI pipeline, which consists of two stages:
 \begin{enumerate}
 \item Test stage: Responsible for performing all tests to validate the application source code.
-\item Train stage: If the test stage has been successful, the application is submitted to the Apache Spark cluster to train the model.
+\item Train stage: If the test stage is successful, the application is submitted to the Apache Spark cluster, in order to train the model.
 \end{enumerate}
 % No build stage
 It is important to mention that a build stage is missing in this conceptual design. The build stage includes compiling source code into a format that can be executed directly.
@@ -355,9 +355,7 @@ Python is an interpreted language and does not need to be compiled for execution
 
 \subsection{Test Stage}
 % short intro
-Before training the machine learning model, the application source must be validated by a series of tests.
-% responsibilities
-Tests can include:
+Before training the machine learning model, the application source must be validated by a series of tests, which can include:
 % Tests
 \begin{itemize}
 \item Unit tests
@@ -365,17 +363,17 @@ Tests can include:
 \item End-to-end tests
 \end{itemize}
 % Different jobs
-Each test is being performed in its own job. All jobs perform in parallel after the test stage has been triggered.
+Each test is performed as a separate job. All jobs perform in parallel after the test stage has been triggered.
 % On failure
-If a job fails, the whole test stage is marked as a failure. All participating developers will get a notification.
+If a job fails, the whole test stage is marked as a failure, which notifies participating developers.
 
 
 \subsection{Train Stage}
 \paragraph{}
 % Short intro
-The train stage is responsible for submitting the Apache Spark application to the Apache cluster after the test state was successful.
+The train stage is responsible for submitting the Apache Spark application to the Apache cluster after the test stage was successful.
 % How
-A \textit{spark-submit} Docker container has to be deployed to the same Docker network to submit an application to the Apache Spark cluster. How a \textit{spark-submit} container performs, an application is explained in \Sec{subsec:05_spark_spark-submit}.
+A \textit{spark-submit} Docker container has to be deployed to the same Docker network to submit an application to the Apache Spark cluster. How a \textit{spark-submit} container performs an application, is explained in \Sec{subsec:05_spark_spark-submit}.
 
 \paragraph{}
 % Same machine with runner
@@ -391,5 +389,5 @@ To access the Docker engine within a job of the train stage, the job has to be e
 % Explain figure
 \Fig{fig:05_deployment_train_concept} illustrates the steps to deploy a \textit{spark-submit} container in the Apache Spark cluster swarm network.
 % Runner
-The GitLab CI/CD server connects to a GitLab on the host machine and instructs it to execute the train stage.
+The GitLab CI/CD server connects to a GitLab instance on the host machine and instructs it to execute the train stage.
 The runner then performs the scripts that instruct the Docker engine to deploy a spark-submit container in the Apache Spark cluster.
