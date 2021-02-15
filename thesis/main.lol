@@ -34,11 +34,11 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {lstlisting}{\numberline {A.1}Computing environment docker-compose file}{91}{lstlisting.A.1}% 
+\contentsline {lstlisting}{\numberline {A.1}Computing environment docker-compose file}{89}{lstlisting.A.1}% 
 \addvspace {10\p@ }
-\contentsline {lstlisting}{\numberline {B.1}Apache Spark base image Dockerfile}{93}{lstlisting.B.1}% 
-\contentsline {lstlisting}{\numberline {B.2}Apache Spark master image Dockerfile}{94}{lstlisting.B.2}% 
-\contentsline {lstlisting}{\numberline {B.3}Apache Spark worker image Dockerfile}{94}{lstlisting.B.3}% 
-\contentsline {lstlisting}{\numberline {B.4}GPU discovery script - Source: \url {https://github.com/apache/spark/blob/v3.0.1/examples/src/main/scripts/getGpusResources.sh} (Accessed: 2021-01-03)}{94}{lstlisting.B.4}% 
-\contentsline {lstlisting}{\numberline {B.5}Custom submit script}{95}{lstlisting.B.5}% 
-\contentsline {lstlisting}{\numberline {B.6}texttt{.gitlab-ci.yml} configuration file}{97}{lstlisting.B.6}% 
+\contentsline {lstlisting}{\numberline {B.1}Apache Spark base image Dockerfile}{91}{lstlisting.B.1}% 
+\contentsline {lstlisting}{\numberline {B.2}Apache Spark master image Dockerfile}{92}{lstlisting.B.2}% 
+\contentsline {lstlisting}{\numberline {B.3}Apache Spark worker image Dockerfile}{92}{lstlisting.B.3}% 
+\contentsline {lstlisting}{\numberline {B.4}GPU discovery script - Source: \url {https://github.com/apache/spark/blob/v3.0.1/examples/src/main/scripts/getGpusResources.sh} (Accessed: 2021-01-03)}{92}{lstlisting.B.4}% 
+\contentsline {lstlisting}{\numberline {B.5}Custom submit script}{93}{lstlisting.B.5}% 
+\contentsline {lstlisting}{\numberline {B.6}texttt{.gitlab-ci.yml} configuration file}{95}{lstlisting.B.6}% 

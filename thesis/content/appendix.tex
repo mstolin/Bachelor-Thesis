@@ -285,114 +285,189 @@ train-model:
 \section{Evaluation Data}
 \label{sec:appendix_eval}
 
-\subsection{Classification Benchmarks}
+\subsection{Classification Benchmark}
 \label{sec:appendix_eval_classification}
 
+\subsubsection{Static CPU-only Workers}
+
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/mortgage/mortgage_1_worker_cpu_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/classification/1_worker_cpu_performance}
+\caption{Performance data of all iterations with 1 worker}
+\label{fig:appendix_eval_classification_static1}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/mortgage/mortgage_2_worker_cpu_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/classification/2_worker_cpu_performance}
+\caption{Performance data of all iterations with 2 worker}
+\label{fig:appendix_eval_classification_static2}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/mortgage/mortgage_5_worker_cpu_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 5 Apache Spark worker}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/classification/5_worker_cpu_performance}
+\caption{Performance data of all iterations with 5 worker}
+\label{fig:appendix_eval_classification_static5}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/mortgage/mortgage_10_worker_cpu_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 10 Apache Spark worker}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/classification/10_worker_cpu_performance}
+\caption{Performance data of all iterations with 10 worker}
+\label{fig:appendix_eval_classification_static10}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/mortgage/mortgage_gpu1_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker and GPU acceleration enabled}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/classification/15_worker_cpu_performance}
+\caption{Performance data of all iterations with 15 worker}
+\label{fig:appendix_eval_classification_static15}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/mortgage/mortgage_gpu2_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker and GPU acceleration enabled}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/classification/20_worker_cpu_performance}
+\caption{Performance data of all iterations with 20 worker}
+\label{fig:appendix_eval_classification_static20}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/mortgage/mortgage_auto-scaler_performance}
-\caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/classification/25_worker_cpu_performance}
+\caption{Performance data of all iterations with 25 worker}
+\label{fig:appendix_eval_classification_static25}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{images/07_evaluation/classification/30_worker_cpu_performance}
+\caption{Performance data of all iterations with 30 worker}
+\label{fig:appendix_eval_classification_static30}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{images/07_evaluation/classification/35_worker_cpu_performance}
+\caption{Performance data of all iterations with 35 worker}
+\label{fig:appendix_eval_classification_static35}
+\end{figure}
+
+\subsubsection{GPU-Accelerated Workers}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{images/07_evaluation/classification/gpu1_performance}
+\caption{Performance data of all iterations with 1 GPU-accelerated worker}
+\label{fig:appendix_eval_classification_gpu1}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{images/07_evaluation/classification/gpu2_performance}
+\caption{Performance data of all iterations with 2 GPU-accelerated workers}
+\label{fig:appendix_eval_classification_gpu2}
+\end{figure}
+
+\subsubsection{Auto-Scaler}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{images/07_evaluation/classification/auto-scaler_performance}
+\caption{Performance data of all iterations with the \textit{Auto-Scaler} enabled}
+\label{fig:appendix_eval_classification_auto-scaler}
 \end{figure}
 
 
-\subsection{Regression Benchmarks}
+\subsection{Regression Benchmark}
 \label{sec:appendix_eval_regression}
 
+\subsubsection{Static CPU-only Workers}
+
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/taxi/taxi_1_worker_cpu_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/regression/1_worker_cpu_performance}
+\caption{Performance data of all iterations with 1 worker}
+\label{fig:appendix_eval_regression_static1}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/taxi/taxi_2_worker_cpu_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/regression/2_worker_cpu_performance}
+\caption{Performance data of all iterations with 2 worker}
+\label{fig:appendix_eval_regression_static2}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/taxi/taxi_5_worker_cpu_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 5 Apache Spark worker}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/regression/5_worker_cpu_performance}
+\caption{Performance data of all iterations with 5 worker}
+\label{fig:appendix_eval_regression_static5}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/taxi/taxi_10_worker_cpu_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 10 Apache Spark worker}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/regression/10_worker_cpu_performance}
+\caption{Performance data of all iterations with 10 worker}
+\label{fig:appendix_eval_regression_static10}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/taxi/taxi_15_worker_cpu_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 15 Apache Spark worker}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/regression/15_worker_cpu_performance}
+\caption{Performance data of all iterations with 15 worker}
+\label{fig:appendix_eval_regression_static15}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/taxi/taxi_gpu1_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker and GPU acceleration enabled}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/regression/20_worker_cpu_performance}
+\caption{Performance data of all iterations with 20 worker}
+\label{fig:appendix_eval_regression_static20}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/taxi/taxi_gpu2_performance}
-\caption{Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker and GPU acceleration enabled}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/regression/25_worker_cpu_performance}
+\caption{Performance data of all iterations with 25 worker}
+\label{fig:appendix_eval_regression_static25}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/taxi/taxi_auto-scaler_performance}
-\caption{Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite{Gitlab2020Docs}.}
-\label{fig:07_mortgage_static-cpu_results}
+\includegraphics[scale=0.4]{images/07_evaluation/regression/30_worker_cpu_performance}
+\caption{Performance data of all iterations with 30 worker}
+\label{fig:appendix_eval_regression_static30}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{images/07_evaluation/regression/35_worker_cpu_performance}
+\caption{Performance data of all iterations with 35 worker}
+\label{fig:appendix_eval_regression_static35}
+\end{figure}
+
+\subsubsection{GPU-Accelerated Workers}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{images/07_evaluation/regression/gpu1_performance}
+\caption{Performance data of all iterations with 1 GPU-accelerated worker}
+\label{fig:appendix_eval_regression_gpu1}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{images/07_evaluation/regression/gpu2_performance}
+\caption{Performance data of all iterations with 2 GPU-accelerated workers}
+\label{fig:appendix_eval_regression_gpu2}
+\end{figure}
+
+\subsubsection{Auto-Scaler}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{images/07_evaluation/regression/auto-scaler_performance}
+\caption{Performance data of all iterations with the \textit{Auto-Scaler} enabled}
+\label{fig:appendix_eval_regression_auto-scaler}
 \end{figure}
