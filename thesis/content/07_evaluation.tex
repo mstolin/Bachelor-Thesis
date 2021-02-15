@@ -1,7 +1,7 @@
 \chapter{Evaluation}
 \label{chap:07_evaluation}
 
-In this chapter, the implementation of \Chap{chap:06_implementation} is evaluated in various experiments. Furthermore, the experimental results are discussed.
+In this chapter, the implementation of \Chap{chap:06_implementation} is evaluated in various experiments. Further, the experimental results are summarised and discussed.
 
 \section{Experimental Environment}
 %
@@ -23,7 +23,7 @@ In both experiments, a machine learning model is trained on the computing enviro
 \item Dynamically scaling the replicas of CPU-only Apache Spark workers using the \textit{Auto-Scaler}
 \end{enumerate}
 % 10 times
-For each benchmark configuration, the experiment is conducted 10 times. The spark-job execution-time mean value over all 10 iterations per experiment is used as result.
+For each configuration, the experiment is conducted 10 times. The spark-job execution time mean value over all 10 iterations per experiment is used as result.
 % DIfference between GPU and CPU
 The performance difference between GPU accelerated worker nodes and CPU-only worker nodes is explored using a CPU-only, and a GPU-only version of the benchmark implementation.
 
@@ -58,12 +58,14 @@ A regression algorithm predicts a continuous numeric value \cite{Mcdonald2020Spa
 
 % ===========================================
 % ===========================================
-\section{Static Worker CPU only}
+\section{Static CPU-Only Workers}
 \label{sec:07_static}
 % Intro
 The first experiment is conducted using a fixed number of CPU-only Apache Spark workers to evaluate the performance of both benchmarks.
 % Appendix
-The performance for each iteration is available at %\Section{sec:appendix_eval}.
+The performance for each iteration is available at \Sec{sec:appendix_eval}.
+
+
 % results
 \begin{figure}[h]
 \centering
@@ -72,30 +74,32 @@ The performance for each iteration is available at %\Section{sec:appendix_eval}.
 \label{fig:07_static_results}
 \end{figure}
 % Explain fig
-\Fig{fig:07_static_results} illustrates the mean execution time for both benchmarks.
-
-\paragraph{}
-% best results
-The best performance for the classification benchmark was achieved with 247 seconds using 30 workers with an improvement of 7.04x in comparison to 1 worker. The regression benchmark achieved best with 102 seconds using 10 workers. The execution has an improvement of 3.21x in comparison to 1 worker. In addition, the regression benchmark achieved an execution time of 102 seconds by using 30 workers as well. However, using 10 workers is considered the best result for the regression benchmark because less workers have been used.
+\Fig{fig:07_static_results} illustrates mean execution time of both benchmarks for different numbers of worker nodes.
+% classification
+The best performance for the classification benchmark was achieved with 247 seconds using 30 workers with an improvement of 7.04x in comparison to 1 worker.
+% regression
+The regression benchmark achieved best with 102 seconds using 10 workers with an improvement of 3.21x in comparison to 1 worker. It achieved a mean execution time of 102 seconds with 30 workers as well. However, using 10 workers is considered the best result for the regression benchmark because less workers have been used.
 
 \paragraph{}
 % The improvement curve
-For the classification benchmark, the execution time had no significant improvement from 15 workers. Using 20 workers increased the execution time by 18 seconds. Using 35 workers improved the execution time by only 5 seconds in comparison to 15 workers.
-% regression
-The regression benchmark shows a similar result. As mentioned, the best result was achieved with 10 workers. The same results was achieved with 30 workers. Furthermore, using 35 workers increased the best performance by 7 seconds.
-
-
+In addition, \Fig{fig:07_static_results} shows that from a specific number of workers, no significant improvement is made.
+% Classification
+There is no significant improvement from 15 workers onwards for the classification benchmark.
+% Regression
+A similar result can bee seen for the regression benchmark. From 10 workers onward, the execution time does not improve.
 % and?
-This result shows that over-provisioning the Apache Spark cluster by adding more workers from a certain number of workers can have a negative impact on the performance.
+This result shows, that over-provisioning the Apache Spark cluster by adding more workers from a certain number does not significantly improve the performance.
 
 
 % ===========================================
 % ===========================================
-\section{GPU Acceleration}
+\section{GPU-Accelerated Workers}
 % Intro
 The impact of GPU-accelerated Apache Spark worker nodes for both benchmarks have been evaluated using 2 configurations: Using 1 GPU accelerated worker node, and using 2 GPU accelerated worker nodes.
 %
-The performance for each GPU experiment is available at ANHANG A.
+The GPU-experiment performance for the classification benchmark is available at ANHANG A, for the regression benchmark at ANHANG B.
+
+
 % vs figure
 \begin{figure}[h]
 \centering
@@ -106,25 +110,21 @@ The performance for each GPU experiment is available at ANHANG A.
 % Explain results
 The results of the experiment are illustrated in \Fig{fig:07_gpu_results}.
 % vs
-The mean execution time using GPU accelerated worker nodes are plotted against the mean execution time using CPU-only worker nodes.
+The mean execution times using GPU-accelerated worker nodes are plotted against the mean execution times using CPU-only worker nodes.
 % overall
 Overall, GPU accelerated worker nodes significantly outperformed the equivalent number of CPU-only worker nodes.
 % classification
-For the classification benchmark, the best execution-time was achieved using 2 GPU-accelerated worker nodes with 342 seconds in comparison to 828 seconds using 1 CPU-only worker node. This an 2.42x improvement. Using 1 GPU-accelerated worker node achieved an improvement of 2.91x with 597 seconds in comparison to 1 CPU-only worker node with 1740 seconds.
+For the classification benchmark, the best execution time was achieved using 2 GPU-accelerated worker nodes with an improvement of 2.42x in comparison to 2 CPU-only worker nodes. Using 1 GPU-accelerated worker node achieved an improvement of 2.91x in comparison to 1 CPU-only worker node.
 % regression
-The regression benchmark achieved best with 2 GPU-accelerated worker nodes needing 342 seconds in comparison of 2 CPU-only worker nodes needing 828 seconds. Therefore, using 2 GPU-accelerated worker nodes achieved an improvement of 3.02x. Using 1 GPU-accelerated worker node achieved an improvement of 4.55x in comparison to 1 CPU-only worker node.
+The regression benchmark achieved best with 2 GPU-accelerated worker nodes improving the execution by 3.02x in comparison to 2 CPU-only worker nodes. Using 1 GPU-accelerated worker node achieved an improvement of 4.55x in comparison to 1 CPU-only worker node.
 
 \paragraph{}
 % The table
-\Tab{table:07_gpu_overall_results} shows the overall results by comparing the CPU and GPU results for each benchmark.
-% GPU outperforms
-Overall, GPU-accelerated worker nodes were able to outperform their CPU-only equivalent.
+\Tab{table:07_gpu_overall_results} shows the overall results by comparing CPU-only and GPU-accelerated results for each benchmark.
 % classification
-However, for the classification benchmark, 5 CPU-only worker nodes achieved an improvement of 62 seconds compared to 2 GPU-accelerated worker nodes. In addition, 10 CPU-only worker nodes outperformed 2 GPU-accelerated worker nodes by 47 seconds.
+For the classification benchmark, 5 CPU-only worker nodes achieved to outperform 1 GPU-accelerated worker node and 10 CPU-only worker nodes performed better than 2 GPU-accelerated worker nodes.
 % regression
-Otherwise, for the regression benchmark no CPU-only configuration was able to improve the performance of GPU-accelerated worker nodes.
-
-
+However, for the regression benchmark, CPU-only worker nodes were not able to outperform the performance of GPU-accelerated worker nodes.
 % Results as table
 \begin{table}[ht]
 \centering
@@ -201,11 +201,11 @@ Maximum worker nodes    & 15              & 10         \\ \bottomrule
 
 \paragraph{}
 % Figure
-\Fig{fig:07_auto-scaler_results} illustrates the results of the \textit{Auto-Scaler} experiment. The mean execution time of 2 CPU-only worker nodes is plotted against the mean execution time of the \textit{Auto-Scaler} experiment.
+\Fig{fig:07_auto-scaler_results} illustrates the results of the \textit{Auto-Scaler} experiment. The mean execution time of 2 CPU-only worker nodes is plotted against the mean execution with the \textit{Auto-Scaler} enabled.
 % Explain
 The results show, that no improvement was achieved using the \textit{Auto-Scaler} implementation.
 % Results
-For the classification benchmark, the execution time of 2 CPU-only worker nodes increased by 228 seconds when enabling the \textit{Auto-Scaler} in the environment. Furthermore, the regression benchmark execution for 2 CPU-only worker nodes increased by 38 seconds with the the \textit{Auto-Scaler} enabled.
+For the classification benchmark, the execution time increased by 228 seconds when enabling the \textit{Auto-Scaler} in comparison to 2 CPU-only worker nodes. Furthermore, the execution time is 38 seconds higher with \textit{Auto-Scaler} enabled than 2 CPU-only worker nodes.
 
 \paragraph{}
 % Table
@@ -236,17 +236,15 @@ For the classification benchmark, the best result was achieved in the first iter
 % regression
 The regression benchmark achieved best in the second iteration, with an execution time of 150 seconds and a maximum number of 2 worker nodes during this iteration.
 % n maximum reached
-The results show that during the classification benchmark experiment, the \textit{Auto-Scaler} added the maximum number of allowed worker nodes in 8 out of 10 iterations. During the regression benchmark experiment, the maximum number of worker nodes was never reached. Furthermore, in the second iteration, when the best result was achieved, the \textit{Auto-Scaler} has not scaled the number of worker nodes.
-
-\paragraph{}
-% Meaning
-The performance decrease when enabling the Auto-Scaler is possibly caused by the lack of efficient workload distribution by Apache Spark.
+The results show that, during the classification benchmark, the \textit{Auto-Scaler} scaled upon the maximum number of allowed worker nodes in 8 out of 10 iterations. During the regression benchmark experiment, the maximum number of worker nodes was never reached. Furthermore, in the second iteration, when the best result was achieved, the \textit{Auto-Scaler} has not scaled the number of worker nodes.
 
 
 \section{Experimental Results Summary}
 % Intro
-The experimental results show, that GPU-accelerated worker nodes significantly outperform worker nodes using only CPUs.
-% Auto-scaler
-However, the \textit{Auto-Scaler} was not able to improve the performance of the computing environment.
-%
-Moreover, enabling the \textit{Auto-Scaler} during the training of machine learning models increased the execution time of active performing spark-jobs.
+Overall, three different experiments have been conducted to evaluate the implementation of this thesis.
+% First experiment
+The results of the first experiment show, that over-provisioning the Apache Spark cluster does not improve the performance significantly and can have a bad impact on the performance as well.
+%  Second
+The second experiment shows, that GPU-accelerated worker nodes significantly outperformed CPU-only worker nodes. However, CPU-only workers achieved a better performance in the classification benchmark than GPU-accelerated workers with 5x the amount.
+% Third
+For the last experiment, the results show that enabling the \textit{Auto-Scaler} during the training of machine learning applications, increases the execution time compared with a fixed number of worker nodes.

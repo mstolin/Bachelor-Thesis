@@ -8,9 +8,9 @@
 \contentsline {table}{\numberline {\relax 6.1}{\ignorespaces The name and Docker image of each Docker service in the computing environment\relax }}{57}{table.caption.83}% 
 \contentsline {table}{\numberline {\relax 6.2}{\ignorespaces \textit {spark-submit} image environment variables\relax }}{66}{table.caption.93}% 
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {\relax 7.1}{\ignorespaces Mean execution of all CPU-only and GPU-accelerated experiments for both benchmarks\relax }}{75}{table.caption.107}% 
-\contentsline {table}{\numberline {\relax 7.2}{\ignorespaces \textit {Auto-Scaler} configuration parameters for both benchmarks\relax }}{77}{table.caption.109}% 
-\contentsline {table}{\numberline {\relax 7.3}{\ignorespaces Results of each iteration during the \textit {Auto-Scaler} experiment for both benchmarks\relax }}{77}{table.caption.113}% 
+\contentsline {table}{\numberline {\relax 7.1}{\ignorespaces Mean execution of all CPU-only and GPU-accelerated experiments for both benchmarks\relax }}{75}{table.caption.106}% 
+\contentsline {table}{\numberline {\relax 7.2}{\ignorespaces \textit {Auto-Scaler} configuration parameters for both benchmarks\relax }}{77}{table.caption.108}% 
+\contentsline {table}{\numberline {\relax 7.3}{\ignorespaces Results of each iteration during the \textit {Auto-Scaler} experiment for both benchmarks\relax }}{77}{table.caption.112}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

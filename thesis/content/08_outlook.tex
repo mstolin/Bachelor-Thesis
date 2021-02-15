@@ -16,7 +16,7 @@ In CHAPTER 1, three research questions and the  for this thesis are defined.
 % RQ1
 The first research question is about how to implement a solution to automatically scale the number of workers in an Apache Spark cluster.
 % The solution
-For this research question, a computing environment according to autonomic computing architecture  is implemented for this thesis.
+For this research question, a computing environment according to autonomic computing architecture  is implemented.
 % Autonomic computing
 It consists of an autonomic manager and an Apache Spark cluster.
 % Docker
@@ -32,7 +32,7 @@ In addition, an \textit{Auto-Scaler} is implemented using Python 3 that automati
 
 
 % RQ2
-The second research question is about how to accelerate the computation power of the Apache Spark cluster using GPUs.
+The second research question is about how to accelerate the computational power of the Apache Spark cluster using GPUs.
 % RAPIDS
 The solution for this research question is implemented by extending the existing Apache Spark cluster with the NVIDIA RAPIDS Accelerator for Apache Spark plugin.
 %
@@ -67,7 +67,7 @@ However, the implementation of the \textit{Auto-Scaler} is not able to improve t
 % Intro
 The implementation of the \textit{Auto-Scaler} was not able to improve the performance of training machine learning models on the Apache Spark cluster.
 % A possible reason
-A possible reason for the execution time increase is, that Apache Spark is able to efficiently distribute the workload of an application while workers are added to cluster during the execution of an application.
+A possible reason for the execution time increase is, that Apache Spark is not able to efficiently distribute the workload of an application while workers are added to cluster during the execution of an application.
 % Differet approaches
 Therefore, different \textit{Auto-Scaler} implementations approaches for further research are introduced.
 
@@ -77,6 +77,7 @@ Therefore, different \textit{Auto-Scaler} implementations approaches for further
 The current implementation of the \textit{Auto-Scaler} follows a proactive approach. It uses static threshold-based rules (e.g., maximum and minimum CPU utilization) to define when a scaling action is necessary.
 % Not sufficient
 The \textit{Auto-Scaler} can be optimized using a reactive approach with dynamic thresholds. A proactive \textit{Auto-Scaler} tries to predict the future state of the computing environment (e.g. reinforcement learning) using historical data.
+The MAPE architecture can be extended using a knowledge-base to save historicial data and us it in the analyse phase ...
 
 
 \subsection{Vertical Scaling Approach}
@@ -91,7 +92,8 @@ Providing more powerful resources increases the computational power of the Apach
 \subsection{Automatically GPUs}
 \label{subsec:08_outlook_gpus}
 % Currently no GPUs
-The \textit{Auto-Scaler} was able to be evaluated using GPU-accelerated workers because it is not able to distribute GPUs exclusivley for each worker.
+Due to ..
+The \textit{Auto-Scaler} was not able to be evaluated using GPU-accelerated workers because it is not able to distribute GPUs exclusivley for each worker.
 % GPU approach
 Extending the Auto-Scaler to be able to keep track of GPUs which are free or already allocated by a worker should be explored.
 %
