@@ -36,19 +36,18 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax B.1}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker\relax }}{100}{figure.caption.115}% 
-\contentsline {figure}{\numberline {\relax B.2}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker\relax }}{101}{figure.caption.116}% 
-\contentsline {figure}{\numberline {\relax B.3}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 5 Apache Spark worker\relax }}{102}{figure.caption.117}% 
-\contentsline {figure}{\numberline {\relax B.4}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 10 Apache Spark worker\relax }}{103}{figure.caption.118}% 
-\contentsline {figure}{\numberline {\relax B.5}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker and GPU acceleration enabled\relax }}{104}{figure.caption.119}% 
-\contentsline {figure}{\numberline {\relax B.6}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker and GPU acceleration enabled\relax }}{105}{figure.caption.120}% 
-\contentsline {figure}{\numberline {\relax B.7}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{106}{figure.caption.121}% 
-\contentsline {figure}{\numberline {\relax B.8}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker\relax }}{107}{figure.caption.122}% 
-\contentsline {figure}{\numberline {\relax B.9}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker\relax }}{108}{figure.caption.123}% 
-\contentsline {figure}{\numberline {\relax B.10}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 5 Apache Spark worker\relax }}{109}{figure.caption.124}% 
-\contentsline {figure}{\numberline {\relax B.11}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 10 Apache Spark worker\relax }}{110}{figure.caption.125}% 
-\contentsline {figure}{\numberline {\relax B.12}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 15 Apache Spark worker\relax }}{111}{figure.caption.126}% 
-\contentsline {figure}{\numberline {\relax B.13}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker and GPU acceleration enabled\relax }}{112}{figure.caption.127}% 
-\contentsline {figure}{\numberline {\relax B.14}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker and GPU acceleration enabled\relax }}{113}{figure.caption.128}% 
-\contentsline {figure}{\numberline {\relax B.15}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{114}{figure.caption.129}% 
+\contentsline {figure}{\numberline {\relax B.1}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker\relax }}{98}{figure.caption.115}% 
+\contentsline {figure}{\numberline {\relax B.2}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker\relax }}{99}{figure.caption.116}% 
+\contentsline {figure}{\numberline {\relax B.3}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 5 Apache Spark worker\relax }}{100}{figure.caption.117}% 
+\contentsline {figure}{\numberline {\relax B.4}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 10 Apache Spark worker\relax }}{101}{figure.caption.118}% 
+\contentsline {figure}{\numberline {\relax B.5}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker and GPU acceleration enabled\relax }}{102}{figure.caption.119}% 
+\contentsline {figure}{\numberline {\relax B.6}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker and GPU acceleration enabled\relax }}{103}{figure.caption.120}% 
+\contentsline {figure}{\numberline {\relax B.7}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{104}{figure.caption.121}% 
+\contentsline {figure}{\numberline {\relax B.8}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker\relax }}{105}{figure.caption.122}% 
+\contentsline {figure}{\numberline {\relax B.9}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker\relax }}{106}{figure.caption.123}% 
+\contentsline {figure}{\numberline {\relax B.10}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 5 Apache Spark worker\relax }}{107}{figure.caption.124}% 
+\contentsline {figure}{\numberline {\relax B.11}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 10 Apache Spark worker\relax }}{108}{figure.caption.125}% 
+\contentsline {figure}{\numberline {\relax B.12}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 15 Apache Spark worker\relax }}{109}{figure.caption.126}% 
+\contentsline {figure}{\numberline {\relax B.13}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 1 Apache Spark worker and GPU acceleration enabled\relax }}{110}{figure.caption.127}% 
+\contentsline {figure}{\numberline {\relax B.14}{\ignorespaces Classification algorithm performance evaluation of the computing environment with 2 Apache Spark worker and GPU acceleration enabled\relax }}{111}{figure.caption.128}% 
+\contentsline {figure}{\numberline {\relax B.15}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{112}{figure.caption.129}% 

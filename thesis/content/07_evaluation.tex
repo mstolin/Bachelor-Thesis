@@ -132,15 +132,15 @@ However, for the regression benchmark, CPU-only worker nodes were not able to ou
 \toprule
                   & \multicolumn{2}{c|}{Classification}                & \multicolumn{2}{c}{Regression}                    \\
 Number of workers & \multicolumn{1}{c}{CPU} & \multicolumn{1}{c|}{GPU} & \multicolumn{1}{c}{CPU} & \multicolumn{1}{c}{GPU} \\ \midrule
-1  & 1740s & 597s & 328s & 72s \\
-2  & 828s  & \textbf{342s} & 139s & \textbf{46s} \\
-5  & 535s  & -      & 129s & -     \\
-10 & 295s  & -      & \textbf{102s} & -     \\
-15 & 263s  & -      & 109s & -     \\
-20 & 281s  & -      & 120s & -     \\
-25 & 257s  & -      & 129s & -     \\
-30 & \textbf{247s}  & -      & 102s & -     \\
-35 & 258s  & -      & 109s & -     \\ \bottomrule
+1  & 1740s         & 597s          & 328s          & 72s \\
+2  & 828s          & \textbf{342s} & 139s          & \textbf{46s} \\
+5  & 535s          & -             & 129s          & -     \\
+10 & 295s          & -             & \textbf{102s} & -     \\
+15 & 263s          & -             & 109s          & -     \\
+20 & 281s          & -             & 120s          & -     \\
+25 & 257s          & -             & 129s          & -     \\
+30 & \textbf{247s} & -             & 102s          & -     \\
+35 & 258s          & -             & 109s          & -     \\ \bottomrule
 \end{tabular}
 \caption{Mean execution of all CPU-only and GPU-accelerated experiments for both benchmarks}
 \label{table:07_gpu_overall_results}
@@ -180,10 +180,10 @@ Interval                & 5 seconds      & 5 seconds  \\
 Recurrence factor       & 1              & 1          \\
 Cooldown period         & 60 seconds     & 60 seconds \\
 Target CPU utilization  & 10\%           & 5\%        \\
-Minimum CPU utilization & 5\%           & 2\%       \\
+Minimum CPU utilization & 5\%            & 2\%       \\
 Maximum CPU utilization & 25\%           & 10\%       \\
 Minimum worker nodes    & 2              & 2         \\
-Maximum worker nodes    & 15              & 10         \\ \bottomrule
+Maximum worker nodes    & 15             & 10         \\ \bottomrule
 \end{tabular}
 \caption{\textit{Auto-Scaler} configuration parameters for both benchmarks}
 \label{table:07_auto-scaler_config_parameter}

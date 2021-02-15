@@ -10,7 +10,7 @@ In this chapter , an outlook is given for further research based on the results 
 % Intro
 In this thesis, a scalable computing environment for training machine learning models using Apache Spark was implemented. In addition, the training process is automated using an automated deployment pipeline.
 % The research questions
-In CHAPTER 1, three research questions and the  for this thesis are defined.
+In \Chap{chap:01_introduction}, three research question for this thesis are defined.
 
 
 % RQ1
@@ -36,7 +36,7 @@ The second research question is about how to accelerate the computational power 
 % RAPIDS
 The solution for this research question is implemented by extending the existing Apache Spark cluster with the NVIDIA RAPIDS Accelerator for Apache Spark plugin.
 %
-The impact of GPUs have been tested using a classification and a regression benchmark. For the experiments, 2 GPUs have been available. 
+%The impact of GPUs have been tested using a classification and a regression benchmark. For the experiments, 2 GPUs have been available. 
 % results
 %The evaluation results show, that 2 GPU-accelerated Apache Spark worker are able to outperform 2 CPU-only Apache Spark worker by 2.42x for the classification benchmark and 3.02x for the regression benchmark.
 
@@ -54,11 +54,11 @@ To able to deploy a \textit{spark-submit} container from the \textit{train-stage
 
 
 % Results
-The impact of a GPU-accelerated Apache Spark cluster and of the \textit{Auto-Scaler} are evaluated with two different machine learning algorithms.
-% GPU results
-The results show, that enabling Apache Spark to use GPUs improved the spark-job execution time significantly.
-% Auto-Scaler
-However, the implementation of the \textit{Auto-Scaler} is not able to improve the spark-job execution time. Furthermore, the execution time increases by enabling the \textit{Auto-Scaler} in the cluster.
+The implementation is evaluated with a variety of experiments using two widely used machine learning algorithms.
+% GPU
+The GPU-accelerated Apache Spark cluster significantly outperformed a CPU-only cluster.
+% AUto-Scaler
+However, the \textit{Auto-Scaler} implementation is not able to improve the performance of the Apache Spark cluster. Furthermore, it increases the overall execution-time.
 
 
 % ===========================================
@@ -72,20 +72,19 @@ A possible reason for the execution time increase is, that Apache Spark is not a
 Therefore, different \textit{Auto-Scaler} implementations approaches for further research are introduced.
 
 
-\subsection{Proactive Auto-Scaler Approach}
+\subsection{Reactive Auto-Scaler Approach}
 % Currently
-The current implementation of the \textit{Auto-Scaler} follows a reactive approach. It uses static threshold-based rules (e.g., maximum and minimum CPU utilization) to define when a scaling action is necessary.
+The current implementation of the \textit{Auto-Scaler} follows a proactive approach. It uses static threshold-based rules (e.g., maximum and minimum CPU utilization) to define when a scaling action is necessary.
 % Not sufficient
-The \textit{Auto-Scaler} can be optimized using a proactive approach. A proactive \textit{Auto-Scaler} tries to predict the future state of the computing environment (e.g. reinforcement learning) using historical data.
-% Extansion of the MAPE architecture
-The MAPE architecture can be extended with a knowledge source (MAPE-K), which provides data about the computing environment \cite{Sinreich2006AnAB}. The autonomic manager can use the knowledge to try to predict when a scaling action is necessary.
+The \textit{Auto-Scaler} can be optimized using a reactive approach with dynamic thresholds. A reactive \textit{Auto-Scaler} tries to predict the future state of the computing environment (e.g. reinforcement learning) using historical data.
+The MAPE architecture can be extended using a knowledge-base to save historicial data and us it in the analyse phase ...
 
 
 \subsection{Vertical Scaling Approach}
 % evaluations
 The evaluation of the static CPU-only workers experiment showed, that from a specific number of workers no significant performance improvement is made.
 % vertical
-Therefore, instead of scaling the replicas of worker nodes, a vertical-scaling approach, where the \textit{Auto-Scaler} scales the available computing resources of a worker node should be explored.
+Therefore, instead of scaling the replicas of worker nodes, a vertical-scaling approach for the \textit{Auto-Scaler} should be explored. The Auto-Scaler would then scale the available resources for an executor.
 % results
 Providing more powerful resources increases the computational power of the Apache Spark cluster and should lead to lower execution times for training machine learning models.
 
@@ -93,17 +92,21 @@ Providing more powerful resources increases the computational power of the Apach
 \subsection{Automatically GPUs}
 \label{subsec:08_outlook_gpus}
 % Currently no GPUs
-Due to the lack of implementation, the \textit{Auto-Scaler} can not keep track of available GPUs in the cluster. Therefore, it was not possible to evaluate the \textit{Auto-Scalers} impact on GPU-accelerated worker nodes.
+Due to ..
+The \textit{Auto-Scaler} was not able to be evaluated using GPU-accelerated workers because it is not able to distribute GPUs exclusivley for each worker.
 % GPU approach
-Extending the \textit{Auto-Scaler} to keep track of GPUs which are free or already allocated by a worker should be explored.
+Extending the Auto-Scaler to be able to keep track of GPUs which are free or already allocated by a worker should be explored.
 %
-Auto-scaling GPU-accelerated worker nodes can improve the spark-job execution time.
+Auto-scaling GPU-accelerated worker nodes can cause an improvement of the spark-job execution time.
 
 
-\subsection{Save Temporary Data on an External Service}
-% The problem
-With the current implementation of the \textit{Auto-Scaler}, it is not possible to remove worker nodes while an application is actively performing because worker nodes save important temporary data.
-% A solution
-The worker nodes can be extended to save temporary data on an external storage service, which enabled the \textit{Auto-Scaler} to remove nodes while an application is performed.
-% 
-The impact of removing nodes during the execution of an application should be explored. In the evaluation of this thesis, only the impact of adding worker nodes is explored.
+\subsection{Shuffle bla bla}
+As mentioned in SECTION DESIGN ODER IMPL, the current approach is, that no worker nodes are removed while applications re actively performed.
+% Why
+Worker nodes cant be removed while applications are performed because each participating worker, keeps temporary data. If a node is removed, the application will not succeed.
+%
+To remove worker while applications are perform to prevent over-provisioning, an external shuffle service is needed. This enabled worker to store temporary data on an external node which is available across all worker nodes.
+% blacklisting
+Additional it is necessary to blacklist nodes which will be removed, so no executor will be deployed on that node.
+%
+Zeus, apaches external shuffle service.
