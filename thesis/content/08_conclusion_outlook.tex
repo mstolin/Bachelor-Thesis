@@ -16,7 +16,7 @@ In \Chap{chap:01_introduction}, three research question for this thesis are defi
 % RQ1
 The first research question is about how to implement a solution to automatically scale the number of workers in an Apache Spark cluster.
 % The solution
-For this research question, a computing environment according to autonomic computing architecture  is implemented.
+For this research question, a computing environment according the to autonomic computing architecture is implemented.
 % Autonomic computing
 It consists of an autonomic manager and an Apache Spark cluster.
 % Docker
@@ -26,7 +26,7 @@ The autonomic manager is implemented in accordance to the MAPE architecture and 
 % monitoring system
 For the implementation of the autonomic manager, Prometheus, cadvisor, and DCGM-Exporter are used to create a monitoring system.
 % Auto-Scaler
-In addition, an \textit{Auto-Scaler} is implemented using Python 3 that automatically fetches performance metrics from the monitoring system and scales the Apache Spark workers.
+In addition, an \textit{Auto-Scaler} is implemented using Python 3 that automatically fetches performance metrics from the monitoring system and scales the Apache Spark worker nodes.
 % Results
 %The evaluation shows, that the \textit{Auto-Scaler} implementation was not able to improve the performance of the computing environment. Furthermore, the \textit{Auto-Scaler} caused an increase of the spark-job execution time.
 
@@ -50,7 +50,7 @@ It consists of a \textit{train-stage} which automatically deploys a \textit{spar
 % spark-submit
 The \textit{spark-submit} container executes the spark-submit executable to perform the application on the Apache Spark cluster.
 % Gitlab runner
-To able to deploy a \textit{spark-submit} container from the \textit{train-stage} inside the Apache Spark cluster, a GitLab Runner is created which runs in the same host.
+To deploy a \textit{spark-submit} container from the \textit{train-stage} inside the Apache Spark cluster, a GitLab Runner is created which runs on the same host.
 
 
 % Results
@@ -72,19 +72,20 @@ A possible reason for the execution time increase is, that Apache Spark is not a
 Therefore, different \textit{Auto-Scaler} implementations approaches for further research are introduced.
 
 
-\subsection{Reactive Auto-Scaler Approach}
+\subsection{Proactive Auto-Scaler Approach}
 % Currently
-The current implementation of the \textit{Auto-Scaler} follows a proactive approach. It uses static threshold-based rules (e.g., maximum and minimum CPU utilization) to define when a scaling action is necessary.
+The current implementation of the \textit{Auto-Scaler} follows a reactive approach. It uses static threshold-based rules (e.g., maximum and minimum CPU utilization) to define when a scaling action is necessary.
 % Not sufficient
-The \textit{Auto-Scaler} can be optimized using a reactive approach with dynamic thresholds. A reactive \textit{Auto-Scaler} tries to predict the future state of the computing environment (e.g. reinforcement learning) using historical data.
-The MAPE architecture can be extended using a knowledge-base to save historicial data and us it in the analyse phase ...
+The \textit{Auto-Scaler} can be optimized using a proactive approach. A proactive \textit{Auto-Scaler} tries to predict the future state of the computing environment (e.g., reinforcement learning) using historical data.
+% Extansion of the MAPE architecture
+The MAPE architecture can be extended with a knowledge source (MAPE-K), which provides data about the computing environment \cite{Sinreich2006AnAB}. The autonomic manager can use the knowledge to try to predict when a scaling action is necessary.
 
 
 \subsection{Vertical Scaling Approach}
 % evaluations
 The evaluation of the static CPU-only workers experiment showed, that from a specific number of workers no significant performance improvement is made.
 % vertical
-Therefore, instead of scaling the replicas of worker nodes, a vertical-scaling approach for the \textit{Auto-Scaler} should be explored. The Auto-Scaler would then scale the available resources for an executor.
+Therefore, instead of scaling the replicas of worker nodes, a vertical-scaling approach, where the \textit{Auto-Scaler} scales the available computing resources of a worker node should be explored.
 % results
 Providing more powerful resources increases the computational power of the Apache Spark cluster and should lead to lower execution times for training machine learning models.
 
@@ -92,21 +93,17 @@ Providing more powerful resources increases the computational power of the Apach
 \subsection{Automatically GPUs}
 \label{subsec:08_outlook_gpus}
 % Currently no GPUs
-Due to ..
-The \textit{Auto-Scaler} was not able to be evaluated using GPU-accelerated workers because it is not able to distribute GPUs exclusivley for each worker.
+Due to the lack of implementation, the \textit{Auto-Scaler} can not keep track of available GPUs in the cluster. Therefore, it was not possible to evaluate the \textit{Auto-Scalers} impact on GPU-accelerated worker nodes.
 % GPU approach
-Extending the Auto-Scaler to be able to keep track of GPUs which are free or already allocated by a worker should be explored.
+Extending the \textit{Auto-Scaler} to keep track of GPUs which are free or already allocated by a worker should be explored.
 %
-Auto-scaling GPU-accelerated worker nodes can cause an improvement of the spark-job execution time.
+Auto-scaling GPU-accelerated worker nodes can improve the spark-job execution time.
 
 
-\subsection{Shuffle bla bla}
-As mentioned in SECTION DESIGN ODER IMPL, the current approach is, that no worker nodes are removed while applications re actively performed.
-% Why
-Worker nodes cant be removed while applications are performed because each participating worker, keeps temporary data. If a node is removed, the application will not succeed.
-%
-To remove worker while applications are perform to prevent over-provisioning, an external shuffle service is needed. This enabled worker to store temporary data on an external node which is available across all worker nodes.
-% blacklisting
-Additional it is necessary to blacklist nodes which will be removed, so no executor will be deployed on that node.
-%
-Zeus, apaches external shuffle service.
+\subsection{Save Temporary Data on an External Service}
+% The problem
+With the current implementation of the \textit{Auto-Scaler}, it is not possible to remove worker nodes while an application is actively performing because worker nodes save important temporary data.
+% A solution
+The worker nodes can be extended to save temporary data on an external storage service, which enables the \textit{Auto-Scaler} to remove nodes while an application is performed.
+% 
+The impact of removing nodes during the execution of an application should be explored. In the evaluation of this thesis, only the impact of adding worker nodes is explored.

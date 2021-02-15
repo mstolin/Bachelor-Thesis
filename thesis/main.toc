@@ -178,10 +178,10 @@
 \contentsline {chapter}{\numberline {8}Conclusion and Outlook}{81}{chapter.8}% 
 \contentsline {section}{\numberline {8.1}Conclusion}{81}{section.8.1}% 
 \contentsline {section}{\numberline {8.2}Outlook}{82}{section.8.2}% 
-\contentsline {subsection}{\numberline {8.2.1}Reactive Auto-Scaler Approach}{82}{subsection.8.2.1}% 
+\contentsline {subsection}{\numberline {8.2.1}Proactive Auto-Scaler Approach}{82}{subsection.8.2.1}% 
 \contentsline {subsection}{\numberline {8.2.2}Vertical Scaling Approach}{82}{subsection.8.2.2}% 
 \contentsline {subsection}{\numberline {8.2.3}Automatically GPUs}{82}{subsection.8.2.3}% 
-\contentsline {subsection}{\numberline {8.2.4}Shuffle bla bla}{83}{subsection.8.2.4}% 
+\contentsline {subsection}{\numberline {8.2.4}Save Temporary Data on an External Service}{83}{subsection.8.2.4}% 
 \contentsline {part}{Anhang}{90}{section*.114}% 
 \contentsline {chapter}{\numberline {A}Implementation}{91}{appendix.A}% 
 \contentsline {section}{\numberline {A.1}Computing Environment}{91}{section.A.1}% 
