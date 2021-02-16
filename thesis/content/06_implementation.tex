@@ -7,7 +7,7 @@ This chapter explains the implementation process of the conceptual detail introd
 % ===========================================
 % ===========================================
 \section{Implementation Environment}
-\label{sec:06_env}
+\label{sec:06_impl-env}
 % The DGX
 To implement this thesis concept, an NVIDIA DGX1\footnote{The Universal System for AI Infrastructure - \url{https://www.nvidia.com/en-us/data-center/dgx-1/} (Accessed: 2021-01-30)} machine is available. 
 % Live system
@@ -51,8 +51,8 @@ The solution to this problem is to deploy these components as Docker container i
 % the env
 Given this problem, the dcgm-exporter monitoring agent must be deployed as a Docker container with the NVIDIA runtime enabled.
 % Finish
-\Lst{lst:06_env_prob_cmd} shows an example of the docker run command to deploy a Docker container using the NVIDIA runtime.
-\begin{lstlisting}[label=lst:06_env_prob_cmd, caption=Docker run command to deploy a container using the NVIDIA runtime, language=sh, numbers=none]
+\Lst{lst:06_impl-env_prob_cmd} shows an example of the docker run command to deploy a Docker container using the NVIDIA runtime.
+\begin{lstlisting}[label=lst:06_impl-env_prob_cmd, caption=Docker run command to deploy a container using the NVIDIA runtime, language=sh, numbers=none]
 $ docker run -d --rm --runtime=nvidia --name dcgm-exporter nvidia/dcgm-exporter:latest
 \end{lstlisting}
 

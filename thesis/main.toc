@@ -171,9 +171,8 @@
 \contentsline {paragraph}{}{74}{paragraph*.105}% 
 \contentsline {section}{\numberline {7.5}Auto-Scaler}{75}{section.7.5}% 
 \contentsline {subsection}{\numberline {7.5.1}Auto-Scaler Benchmark Configurations}{75}{subsection.7.5.1}% 
-\contentsline {subsection}{\numberline {7.5.2}Execution Time Evaluation}{75}{subsection.7.5.2}% 
-\contentsline {paragraph}{}{75}{paragraph*.110}% 
-\contentsline {paragraph}{}{76}{paragraph*.111}% 
+\contentsline {subsection}{\numberline {7.5.2}Execution Time Evaluation}{76}{subsection.7.5.2}% 
+\contentsline {paragraph}{}{77}{paragraph*.110}% 
 \contentsline {section}{\numberline {7.6}Experimental Results Summary}{78}{section.7.6}% 
 \contentsline {chapter}{\numberline {8}Conclusion and Outlook}{79}{chapter.8}% 
 \contentsline {section}{\numberline {8.1}Conclusion}{79}{section.8.1}% 
@@ -182,17 +181,17 @@
 \contentsline {subsection}{\numberline {8.2.2}Vertical-Scaling Approach}{80}{subsection.8.2.2}% 
 \contentsline {subsection}{\numberline {8.2.3}Scaling GPU-accelerated Workers}{80}{subsection.8.2.3}% 
 \contentsline {subsection}{\numberline {8.2.4}Save Temporary Data on an External Service}{81}{subsection.8.2.4}% 
-\contentsline {part}{Anhang}{88}{section*.114}% 
+\contentsline {part}{Anhang}{88}{section*.113}% 
 \contentsline {chapter}{\numberline {A}Implementation}{89}{appendix.A}% 
 \contentsline {section}{\numberline {A.1}Computing Environment}{89}{section.A.1}% 
 \contentsline {chapter}{\numberline {B}Apache Spark Cluster Implementation}{91}{appendix.B}% 
 \contentsline {section}{\numberline {B.1}GitLab CI/CD Pipeline Implementation}{95}{section.B.1}% 
 \contentsline {section}{\numberline {B.2}Evaluation Data}{96}{section.B.2}% 
 \contentsline {subsection}{\numberline {B.2.1}Classification Benchmark}{96}{subsection.B.2.1}% 
-\contentsline {subsubsection}{Static CPU-only Workers}{96}{subsubsection*.115}% 
-\contentsline {subsubsection}{GPU-Accelerated Workers}{97}{subsubsection*.125}% 
-\contentsline {subsubsection}{Auto-Scaler}{97}{subsubsection*.128}% 
+\contentsline {subsubsection}{Static CPU-only Workers}{96}{subsubsection*.114}% 
+\contentsline {subsubsection}{GPU-Accelerated Workers}{97}{subsubsection*.124}% 
+\contentsline {subsubsection}{Auto-Scaler}{97}{subsubsection*.127}% 
 \contentsline {subsection}{\numberline {B.2.2}Regression Benchmark}{97}{subsection.B.2.2}% 
-\contentsline {subsubsection}{Static CPU-only Workers}{97}{subsubsection*.130}% 
-\contentsline {subsubsection}{GPU-Accelerated Workers}{97}{subsubsection*.140}% 
-\contentsline {subsubsection}{Auto-Scaler}{97}{subsubsection*.143}% 
+\contentsline {subsubsection}{Static CPU-only Workers}{97}{subsubsection*.129}% 
+\contentsline {subsubsection}{GPU-Accelerated Workers}{97}{subsubsection*.139}% 
+\contentsline {subsubsection}{Auto-Scaler}{97}{subsubsection*.142}% 

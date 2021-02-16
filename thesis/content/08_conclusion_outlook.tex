@@ -16,7 +16,7 @@ In \Chap{chap:01_introduction}, three research questions for this thesis are def
 % RQ1
 The first research question is about implementing a solution to automatically scale the number of workers in an Apache Spark cluster.
 % The solution
-For this research question, a computing environment according the to autonomic computing architecture is implemented.
+For this research question, a computing environment according to the autonomic computing architecture is implemented.
 % Autonomic computing
 It consists of an autonomic manager and an Apache Spark cluster.
 % Docker
@@ -27,18 +27,12 @@ The autonomic manager is implemented according to the MAPE architecture and resp
 For the implementation of the autonomic manager, Prometheus, cadvisor, and DCGM-Exporter are used to create a monitoring system.
 % Auto-Scaler
 In addition, an \textit{Auto-Scaler} is implemented using Python 3 that automatically fetches performance metrics from the monitoring system and scales the Apache Spark worker nodes.
-% Results
-%The evaluation shows, that the \textit{Auto-Scaler} implementation was not able to improve the performance of the computing environment. Furthermore, the \textit{Auto-Scaler} caused an increase of the spark-job execution time.
 
 
 % RQ2
 The second research question is about how to accelerate the Apache Spark cluster's computational power using GPUs.
 % RAPIDS
 This research question is implemented by extending the existing Apache Spark cluster with the NVIDIA RAPIDS plugin.
-%
-%The impact of GPUs have been tested using a classification and a regression benchmark. For the experiments, 2 GPUs have been available. 
-% results
-%The evaluation results show, that 2 GPU-accelerated Apache Spark worker are able to outperform 2 CPU-only Apache Spark worker by 2.42x for the classification benchmark and 3.02x for the regression benchmark.
 
 
 % RQ3

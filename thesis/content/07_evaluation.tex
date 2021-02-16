@@ -5,7 +5,7 @@ In this chapter, the implementation of \Chap{chap:06_implementation} is evaluate
 
 \section{Experimental Environment}
 %
-The experiments are conducted on the DGX introduced in \Sec{sec:06_env}.
+The experiments are conducted on the DGX introduced in \Sec{sec:06_impl-env}.
 % 2 GPUs
 As for the implementation, 2 GPUs have been available for the experiments.
 
@@ -18,9 +18,9 @@ The performance of the computing environment is measured on two widely used mach
 % Explain
 In both experiments, a machine learning model is trained on the computing environment using Apache Spark. Furthermore, each benchmark is evaluated using three different configurations:
 \begin{enumerate}
-\item Using a static number of CPU-only Apache Spark workers
-\item Using a static number of GPU-accelerated Apache Spark workers
-\item Dynamically scaling the replicas of CPU-only Apache Spark workers using the \textit{Auto-Scaler}
+\item Using a static number of CPU-only Apache Spark workers (\Sec{sec:07_static})
+\item Using a static number of GPU-accelerated Apache Spark workers (\Sec{sec:07_gpu})
+\item Dynamically scaling the replicas of CPU-only Apache Spark workers using the \textit{Auto-Scaler} (\Sec{sec:07_auto-scaler})
 \end{enumerate}
 % 10 times
 For each configuration, the experiment is conducted ten times. The spark-job execution time mean value over all ten iterations per experiment is used as the result.
@@ -48,12 +48,12 @@ The repository provides a \textit{mortgage} and a \textit{taxi} application. Bot
 
 % supervised
 Classification and regression algorithms are supervised machine learning algorithms.
-% whats supervised
-The goal of supervised machine learning algorithms is to train a model by finding patterns in labeled data. The model is then used to predict labels on new data based on the learned labels
 % Classification
 The classification algorithm identifies the category of a label.
 % Regression
-A regression algorithm predicts a continuous numeric value \cite{Mcdonald2020SparkRapids}.
+A regression algorithm predicts a continuous numeric value.
+% whats supervised
+The goal of supervised machine learning algorithms is to train a model by finding patterns in labeled data. The trained model is then used to predict labels on newly observed data based on the learned labels \cite{Mcdonald2020SparkRapids}.
 
 
 % ===========================================
@@ -78,24 +78,25 @@ The performance data of each iteration for the classification benchmark is avail
 % classification
 The best performance for the classification benchmark was achieved with 247 seconds using 30 workers with an improvement of 7.04x compared to 1 worker.
 % regression
-The regression benchmark achieved best with 102 seconds using 10 workers with an improvement of 3.21x in comparison to 1 worker. It achieved a mean execution time of 102 seconds with 30 workers as well. However, using 10 workers is considered the best result for the regression benchmark because fewer workers are used.
+The regression benchmark performed best with 102 seconds using 10 workers with an improvement of 3.21x in comparison to 1 worker. It achieved a mean execution time of 102 seconds with 30 workers as well. However, using 10 workers is considered the best result for the regression benchmark because fewer workers are used.
 
 \paragraph{}
 % The improvement curve
-In addition, \Fig{fig:07_static_results} shows that from a specific number of workers, no significant improvement is made.
+In addition, \Fig{fig:07_static_results} shows that from a specific number of workers onwards, no significant improvement is made.
 % Classification
-There is no significant improvement from 15 workers onwards for the classification benchmark.
+For the classification benchmark, this point is reached at 15 workers.
 % Regression
-A similar result can be seen for the regression benchmark. From 10 workers onward, the execution time does not improve.
+A similar result can be seen for the regression benchmark. From 10 workers onward, the execution time does not improve anymore.
 % and?
-This result shows that over-provisioning the Apache Spark cluster by adding more workers from a certain number does not significantly improve the performance.
+This result shows that over-provisioning the Apache Spark cluster by simply adding more workers does not improve the performance.
 
 
 % ===========================================
 % ===========================================
 \section{GPU-Accelerated Workers}
+\label{sec:07_gpu}
 % Intro
-The impact of GPU-accelerated Apache Spark worker nodes for both benchmarks have been evaluated using 2 configurations: Using 1 GPU accelerated worker node and using 2 GPU accelerated worker nodes.
+The impact of GPU-accelerated Apache Spark worker nodes for both benchmarks have been evaluated using 2 configurations: Using one and two GPU accelerated worker nodes respectively.
 %
 The GPU-experiment performance data for the classification benchmark is available in \Fig{fig:appendix_eval_classification_gpu1}, and \Fig{fig:appendix_eval_classification_gpu2}., for the regression benchmark at \Fig{fig:appendix_eval_regression_gpu1}, and \Fig{fig:appendix_eval_regression_gpu2}.
 
@@ -116,15 +117,15 @@ Overall, GPU accelerated worker nodes significantly outperformed the equivalent 
 % classification
 For the classification benchmark, the best execution time was achieved using 2 GPU-accelerated worker nodes with an improvement of 2.42x compared to 2 CPU-only worker nodes. Using 1 GPU-accelerated worker node achieved an improvement of 2.91x compared to 1 CPU-only worker node.
 % regression
-The regression benchmark achieved best with 2 GPU-accelerated worker nodes improving the execution by 3.02x in comparison to 2 CPU-only worker nodes. Using 1 GPU-accelerated worker node achieved an improvement of 4.55x in comparison to 1 CPU-only worker node.
+The regression benchmark performed best with 2 GPU-accelerated worker nodes improving the execution by 3.02x in comparison to 2 CPU-only worker nodes. Using 1 GPU-accelerated worker node achieved an improvement of 4.55x in comparison to 1 CPU-only worker node.
 
 \paragraph{}
 % The table
 \Tab{table:07_gpu_overall_results} shows the overall results by comparing CPU-only and GPU-accelerated results for each benchmark.
 % classification
-For the classification benchmark, 5 CPU-only worker nodes achieved to outperform 1 GPU-accelerated worker node, and 10 CPU-only worker nodes performed better than 2 GPU-accelerated worker nodes.
+For the classification benchmark, 5 CPU-only worker nodes outperformed 1 GPU-accelerated worker node, and 10 CPU-only worker nodes performed better than 2 GPU-accelerated worker nodes.
 % regression
-However, for the regression benchmark, CPU-only worker nodes could not outperform GPU-accelerated worker nodes' performance.
+However, for the regression benchmark, CPU-only worker nodes could not outperform GPU-accelerated worker node performance.
 % Results as table
 \begin{table}[ht]
 \centering
@@ -142,7 +143,7 @@ Number of workers & \multicolumn{1}{c}{CPU} & \multicolumn{1}{c|}{GPU} & \multic
 30 & \textbf{247s} & -             & 102s          & -     \\
 35 & 258s          & -             & 109s          & -     \\ \bottomrule
 \end{tabular}
-\caption{Mean execution of all CPU-only and GPU-accelerated experiments for both benchmarks}
+\caption{Mean execution time of all CPU-only and GPU-accelerated experiments for both benchmarks}
 \label{table:07_gpu_overall_results}
 \end{table}
 
@@ -150,6 +151,7 @@ Number of workers & \multicolumn{1}{c}{CPU} & \multicolumn{1}{c|}{GPU} & \multic
 % ===========================================
 % ===========================================
 \section{Auto-Scaler}
+\label{sec:07_auto-scaler}
 % Intro
 To test the impact of the \textit{Auto-Scaler} while training machine learning applications, both benchmarks have been tested with different \textit{Auto-Scaler} configurations.
 % Performance metric
@@ -169,7 +171,7 @@ The \textit{Auto-Scaler} configuration parameters for each benchmark are shown i
 \label{fig:07_auto-scaler_iterations_results}
 \end{figure}
 % Max worker
-To prevent an cluster over-provisioning, the maximum number of worker nodes for the classification benchmark is set to 15, and 10 for the regression benchmark.
+To prevent cluster over-provisioning, the maximum number of worker nodes for the classification benchmark is set to 15, and 10 for the regression benchmark respectively.
 % recurrence
 \Fig{fig:07_auto-scaler_iterations_results} shows all 10 iterations of the CPU-only experiment for both benchmarks. It shows that, while the machine learning model is trained, only 2 performance spikes occurred at the beginning and at the end during a short period. To scale while these performance spikes occur, the recurrence factor is set to 1. Additionally, the maximum CPU utilization for both benchmarks is set according to the maximum CPU utilization during the performance spikes.
 % The configurations
@@ -191,8 +193,14 @@ Maximum worker nodes    & 15             & 10         \\ \bottomrule
 \label{table:07_auto-scaler_config_parameter}
 \end{table}
 
-
+\newpage
 \subsection{Execution Time Evaluation}
+% Figure
+\Fig{fig:07_auto-scaler_results} illustrates the results of the \textit{Auto-Scaler} experiment. The mean execution time of 2 CPU-only worker nodes is plotted against the mean execution with the \textit{Auto-Scaler} enabled.
+% Explain
+The results show that no improvement was achieved using the \textit{Auto-Scaler} implementation.
+% Results
+For the classification benchmark, the execution time increased by 228 seconds when enabling the \textit{Auto-Scaler} in comparison to 2 CPU-only worker nodes. Furthermore, the execution time is 38 seconds higher with \textit{Auto-Scaler} enabled than 2 CPU-only worker nodes.
 % Figure
 \begin{figure}[h]
 \centering
@@ -201,14 +209,7 @@ Maximum worker nodes    & 15             & 10         \\ \bottomrule
 \label{fig:07_auto-scaler_results}
 \end{figure}
 
-\paragraph{}
-% Figure
-\Fig{fig:07_auto-scaler_results} illustrates the results of the \textit{Auto-Scaler} experiment. The mean execution time of 2 CPU-only worker nodes is plotted against the mean execution with the \textit{Auto-Scaler} enabled.
-% Explain
-The results show that no improvement was achieved using the \textit{Auto-Scaler} implementation.
-% Results
-For the classification benchmark, the execution time increased by 228 seconds when enabling the \textit{Auto-Scaler} in comparison to 2 CPU-only worker nodes. Furthermore, the execution time is 38 seconds higher with \textit{Auto-Scaler} enabled than 2 CPU-only worker nodes.
-
+\newpage
 \paragraph{}
 % Table
 \begin{table}[ht]
@@ -236,7 +237,7 @@ For the classification benchmark, the execution time increased by 228 seconds wh
 % classification
 For the classification benchmark, the best result was achieved in the first iteration with an execution time of 960 seconds and a maximum number of 15 worker nodes during the execution.
 % regression
-The regression benchmark achieved best in the second iteration, with an execution time of 150 seconds and a maximum number of 2 worker nodes during this iteration.
+The regression benchmark performed best in the second iteration, with an execution time of 150 seconds and a maximum number of 2 worker nodes during this iteration.
 % n maximum reached
 The results show that, during the classification benchmark, the \textit{Auto-Scaler} scaled upon the maximum number of allowed worker nodes in 8 out of 10 iterations. During the regression benchmark experiment, the maximum number of worker nodes was never reached. Furthermore, in the second iteration, the \textit{Auto-Scaler} had not scaled the number of worker nodes when the best result was achieved.
 
