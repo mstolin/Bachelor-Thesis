@@ -178,9 +178,10 @@
 \contentsline {section}{\numberline {8.1}Conclusion}{79}{section.8.1}% 
 \contentsline {section}{\numberline {8.2}Outlook}{80}{section.8.2}% 
 \contentsline {subsection}{\numberline {8.2.1}Proactive Auto-Scaler Approach}{80}{subsection.8.2.1}% 
-\contentsline {subsection}{\numberline {8.2.2}Vertical-Scaling Approach}{80}{subsection.8.2.2}% 
-\contentsline {subsection}{\numberline {8.2.3}Scaling GPU-accelerated Workers}{80}{subsection.8.2.3}% 
+\contentsline {subsection}{\numberline {8.2.2}Vertical-Scaling Approach}{81}{subsection.8.2.2}% 
+\contentsline {subsection}{\numberline {8.2.3}Scaling GPU-accelerated Workers}{81}{subsection.8.2.3}% 
 \contentsline {subsection}{\numberline {8.2.4}Save Temporary Data on an External Service}{81}{subsection.8.2.4}% 
+\contentsline {subsection}{\numberline {8.2.5}Simplify the CI Pipeline Implementation}{81}{subsection.8.2.5}% 
 \contentsline {part}{Anhang}{88}{section*.113}% 
 \contentsline {chapter}{\numberline {A}Implementation}{89}{appendix.A}% 
 \contentsline {section}{\numberline {A.1}Computing Environment}{89}{section.A.1}% 
