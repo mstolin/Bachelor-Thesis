@@ -2,7 +2,7 @@
 \label{chap:02_foundation}
 
 
-This chapter provides the theoretical foundation to understand concepts that will be used in this thesis. First, the concept of Scalability will be described. Second, the theory behind a deployment pipeline is explained. Third, the concept of autonomic computing is  introduced. Fourth, the theory of measuring system performance is explained. Lastly, the concept of monitoring is being described.
+This chapter provides the theoretical foundation to understand concepts that will be used in this thesis. First, the concept of Scalability is described. Second, the theory behind a deployment pipeline is explained. Third, the concept of autonomic computing is  introduced. Fourth, the theory of measuring system performance is explained. Lastly, the concept of monitoring is being described.
 
 
 \section{Scalability}
@@ -10,7 +10,7 @@ This chapter provides the theoretical foundation to understand concepts that wil
 % What is scalability
 Scalability defines the ability of a computing system to handle an increasing amount of load \cite{Farcic2017Toolkit21}. 
 % Limit of scalability
-The limit of scalability is reached, when a computing system is not able to serve the requests of its concurrent users \cite{Wilder2012CloudPatterns}.
+The limit of scalability is reached when a computing system cannot serve the requests of its concurrent users \cite{Wilder2012CloudPatterns}.
 % Vertical and horizontal
 Different approaches exist to increase the scalability of a system. The two main approaches are vertical scaling and horizontal scaling.
 
@@ -19,7 +19,7 @@ Different approaches exist to increase the scalability of a system. The two main
 \label{subsec:02_foundations_scalability_horizontal-scaling}
 % What is horizontal scaling
 Horizontal scaling is accomplished by adding nodes to the computing environment to increase the overall capacity.
-Each node typically adds the equal amount of computing capacity (e.g. amount of memory) \cite{Wilder2012CloudPatterns}.
+Each node typically adds an equal amount of computing capacity (e.g., amount of memory) \cite{Wilder2012CloudPatterns}.
 % DIstribution
 By increasing the number of nodes in a computing environment, the workload can be distributed more efficiently across all nodes to handle and balance an increasing workload \cite{Wilder2012CloudPatterns, Abbott2015ScalabilityArt}.
 
@@ -29,25 +29,25 @@ Scaling a computing environment horizontally is limited by the efficiency of eac
 % The simplicity of homo nodes
 The horizontal scaling approach is more efficient with the simplicity of homogeneous nodes.
 % Homogeneous nodes
-Homogeneous nodes add the same amount of computing power to the system and are able to perform the same work and response as other nodes.
+Homogeneous nodes add the same amount of computing power to the system and can perform the same work and response as other nodes.
 % Examples
 With homogeneous nodes, creating strategies for capacity planning, load balancing, and auto-scaling is more efficient.
 % Different nodes
-In an environment with different types of nodes, creating these strategies is more complex due to the need of context \cite{Wilder2012CloudPatterns}.
+In an environment with different types of nodes, creating these strategies is more complex due to the need for context \cite{Wilder2012CloudPatterns}.
 
 
 \subsection{Vertical Scaling}
 \label{subsec:02_foundations_scalability_vertical-scaling}
 % Concept
-Vertical scaling refers to increasing the overall capacity by improving the computing power with additional hardware of individual nodes (e.g. adding memory, increasing number of CPU cores) \cite{Wilder2012CloudPatterns}.
+Vertical scaling refers to increasing the overall capacity by improving the computing power with additional hardware of individual nodes (e.g., adding memory, increasing number of CPU cores) \cite{Wilder2012CloudPatterns}.
 
 
 % hardware capacity
 If additional hardware has to be added to a system, it is not guaranteed that more powerful hardware is available or affordable.
 % The limit of vertical scalability
-Therefore, vertical scaling is limited by of available hardware.
+Therefore, vertical scaling is limited by available hardware.
 % Downtime
-Additionally, changing physical hardware of a running system can require a downtime. For most system a downtime should be avoided because it will interrupt important services running on the system \cite{Wilder2012CloudPatterns}.
+Additionally, changing the physical hardware of a running system can require a downtime. For most systems, a downtime should be avoided because it will interrupt important services running on the system \cite{Wilder2012CloudPatterns}.
 
 
 % ===========================================
@@ -59,14 +59,14 @@ A deployment pipeline is an implementation of the process of getting software fr
 % Based on CI
 It is based on the concept of Continuous Integration (CI).
 % Involves what
-The process involves building, testing and deploying software through automated scripts \cite{Farley2010CI}.
+The process involves building, testing, and deploying software through automated scripts \cite{Farley2010CI}.
 
 
 \subsection{Continuous Integration}
 % Abtract def
-Continuous Integration is a development practice where each change on a primary code base is validated by automated scripts. This ensures that errors are detected and fixed in an early development stage \cite{Duvall2007CI}.
+Continuous Integration is a development practice where automated scripts validate each change on a primary codebase. This ensures that errors are detected and fixed in an early development stage \cite{Duvall2007CI}.
 % What its about
-The CI process is responsible for building and testing the software to guarantee that it is in a releasable state at all time \cite{Rossel2017CICD}.
+The CI process is responsible for building and testing the software to guarantee that it is in a releasable state at all times \cite{Rossel2017CICD}.
 % Advantages
 CI contributes with the following advantages to the development life cycle of an application:
 \begin{itemize}
@@ -75,14 +75,14 @@ The CI process runs tests and validates the software on each change. Errors are 
 
 \item Reduce manual processes:
 % Same time
-The CI process will perform every time a commit has being made to the code base.
+The CI process will perform every time a commit has been made to the code base.
 % Same process
-Each run is processed the exact same way every time.
+Each run is processed the same way every time.
 % No human
-Therefore, no human intervention is needed to start the process which saves time and cost \cite{Duvall2007CI}.
+Therefore, no human intervention is needed to start the process, which saves time and cost \cite{Duvall2007CI}.
 
 \item Generate deployable software:
-If an error occurs during a CI run, developers will be informed and fixes can be applied immediately.
+If an error occurs during a CI run, developers will be informed, and fixes can be applied immediately.
 This ensures that the software is in a deployable state at all times \cite{Duvall2007CI}.
 \end{itemize}
 
@@ -99,14 +99,14 @@ To manage changes to the code base, the source code and all other assets like th
 Each change on the code base triggers the CI process on the build server to run against the latest version available \cite{Duvall2007CI}.
 
 \item Build server:
-The build server is responsible to monitor the code base for changes.
+The build server is responsible for monitoring the code base for changes.
 % Execute
 If a change is committed, the build server automatically executes the CI scripts in order \cite{Rossel2017CICD, Duvall2007CI}.
 
 \item Build scripts:
 This includes all automation scripts to validate the source code \cite{Duvall2007CI}. Typical examples are:
 \begin{itemize}
-\item Building the software binaries (e.g. \texttt{.jar} binaries for Java source code).
+\item Building the software binaries (e.g., \texttt{.jar} binaries for Java source code).
 \item Running unit and integration tests.
 \item Deploying the binaries to a test or production environment.
 \end{itemize}
@@ -117,9 +117,9 @@ This includes all automation scripts to validate the source code \cite{Duvall200
 % Explain workflow
 \paragraph{}\Fig{fig:02_foundation_deployment_ci_scenario} demonstrates the CI scenario.
 % Commit changes
-First a developer commits changes to the version control repository.
+First, a developer commits changes to the version control repository.
 % CI
-The CI server monitors the repository for changes. After the change has been committed, the CI server pulls the latest version of the source code and executes all build scripts in order to integrate the software.
+The CI server monitors the repository for changes. After the change has been committed, the CI server pulls the latest version of the source code and executes all build scripts in sequence to integrate the software.
 % Feedback
 Finally, the CI server sends feedback to inform the developer about the build script status  \cite{Duvall2007CI}.
 
@@ -155,13 +155,13 @@ An example of a logical build script order is illustrated in \Fig{fig:02_foundat
 \section{Autonomic Computing}
 \label{sec:02_ac}
 % What is autonomic computing
-Autonomic computing is the ability of an IT infrastructure to automatically manage itself in accordance to high level objectives defined by administrators \cite{Kephart2003VisionComputing}.
+Autonomic computing is the ability of an IT infrastructure to automatically manage itself according to high-level objectives defined by administrators \cite{Kephart2003VisionComputing}.
 % Why
-Autonomic computing gives an IT infrastructure the flexibility to adapt dynamic requirements quickly and effectively to meet the challenges of modern business needs \cite{Murch2004Autonomic}. Therefore, autonomic computing environments can reduce operating costs, lower failure rates, make systems more secure and quickly respond to business needs \cite{Jacob2004AutonomicSolution}.
+Autonomic computing gives an IT infrastructure the flexibility to adapt dynamic requirements quickly and effectively to meet the challenges of modern business needs \cite{Murch2004Autonomic}. Therefore, autonomic computing environments can reduce operating costs, lower failure rates, make systems more secure, and quickly respond to business needs \cite{Jacob2004AutonomicSolution}.
 
 
 % What does it need
-Computing systems need to obtain a detailed knowledge of its environment and how to extend its resources to be truly autonomic \cite{Murch2004Autonomic}.
+Computing systems need to obtain a detailed knowledge of its environment and how to extend its resources to be truly autonomous \cite{Murch2004Autonomic}.
 % The 4 basic elements
 An autonomic computing system is defined by four elements:
 \begin{itemize}
@@ -169,13 +169,13 @@ An autonomic computing system is defined by four elements:
 Self-configuring refers to the ability of an IT environment to adapt dynamically to system changes and to be able to deploy new components automatically. Therefore, the system needs to understand and control the characteristics of a configurable item \cite{Murch2004Autonomic, Sinreich2006AnAB}.
 
 \item Self-optimizing:
-To ensure given goals and objectives, a self-optimizing environment has the ability to efficiently maximize resource allocation and utilization \cite{Jacob2004AutonomicSolution}. To accomplish this requirement, the environment has to monitor all resources to determine if an action is needed \cite{Murch2004Autonomic}.
+To ensure given goals and objectives, a self-optimizing environment can efficiently maximize resource allocation and utilization \cite{Jacob2004AutonomicSolution}. To accomplish this requirement, the environment must monitor all resources to determine if an action is needed \cite{Murch2004Autonomic}.
 
 \item Self-healing:
-Self-healing environments are able to detect problematic operations and then perform policy-based actions to ensure that the systems health is stable \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}. The policies of the actions have to be defined and should be executed without disrupting the system \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}.
+Self-healing environments can detect problematic operations and then perform policy-based actions to ensure that the system's health is stable \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}. The actions' policies have to be defined and should be executed without disrupting the system \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}.
 
 \item Self-protecting:
-The environment must identify unauthorized access and threats to the system and automatically protect itself taking appropriate actions during its runtime \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}.
+The environment must identify unauthorized access and threats to the system and automatically protect itself by taking appropriate actions during its runtime \cite{Sinreich2006AnAB, Jacob2004AutonomicSolution}.
 \end{itemize}
 
 
@@ -192,7 +192,7 @@ The environment must identify unauthorized access and threats to the system and 
 % Figure + short description
 \Fig{fig:ac_concept} demonstrates the main concept of an autonomic computing environment. The autonomic computing architecture relies on monitoring sensors and an adoption engine (autonomic manager) to manage resources in the environment \cite{Goscinski2011CloudComputing}.
 % About the environment
-In an autonomic computing environment, all components have to communicate to each other and can manage themselves. Appropriate decisions will be made by an autonomic manager that knows the given policies \cite{Jacob2004AutonomicSolution}.
+In an autonomic computing environment, all components have to communicate with each other and can manage themselves. Appropriate decisions will be made by an autonomic manager that knows the given policies \cite{Jacob2004AutonomicSolution}.
 
 % Control loop figure
 \begin{figure}[h]
@@ -217,9 +217,9 @@ The core element of the autonomic architecture is the control-loop. \Fig{fig:ac_
 \end{figure}
 
 % Explanation
-A managed resource is a single component or a combination of components in the autonomic computing environment \cite{Murch2004Autonomic, Jacob2004AutonomicSolution}. A component can be a hardware or software component, e.g. a database, a server, an application or a different entity \cite{Sinreich2006AnAB}.
+A managed resource is a single component or a combination of components in the autonomic computing environment \cite{Murch2004Autonomic, Jacob2004AutonomicSolution}. A component can be a hardware or software component, e.g., a database, a server, an application, or a different entity \cite{Sinreich2006AnAB}.
 % Sensors and Effectors
-They are controlled by their sensors and effectors, as illustrated in \Fig{fig:ac_managed_resource}. Sensors are used to collect information about the state of the resource and effectors can be used to change the state of the resource \cite{Jacob2004AutonomicSolution}. The combination of sensors and effectors is called a touchpoint, which provides an interface for communication with the autonomic manager \cite{Sinreich2006AnAB}.
+They are controlled by their sensors and effectors, as illustrated in \Fig{fig:ac_managed_resource}. Sensors are used to collect information about the state of the resource, and effectors can be used to change the state of the resource \cite{Jacob2004AutonomicSolution}. The combination of sensors and effectors is called a touchpoint, which provides an interface for communication with the autonomic manager \cite{Sinreich2006AnAB}.
 % Scalability
 The ability to manage and control managed resources makes them highly scalable \cite{Murch2004Autonomic}.
 
@@ -236,7 +236,7 @@ The ability to manage and control managed resources makes them highly scalable \
 \end{figure}
 
 % WHat is the autonomic manager
-The autonomic manager implements the control-loop to collect, aggregate, filter and report system metrics from the managed resources. It can only make adjustments within its own scope and uses predefined policies to make decisions of what actions have to be executed to accommodate the goals and objectives \cite{Murch2004Autonomic, Sinreich2006AnAB}.
+The autonomic manager implements the control-loop to collect, aggregate, filter and report system metrics from the managed resources. It can only make adjustments within its scope and uses predefined policies to decide what actions have to be executed to accommodate the goals and objectives \cite{Murch2004Autonomic, Sinreich2006AnAB}.
 % Knowledge
 In addition, the autonomic manager gains knowledge through analysing the managed resources \cite{Murch2004Autonomic}.
 % MAPE
@@ -244,10 +244,10 @@ The autonomic computing concept digests the MAPE model to implement an autonomic
 
 \begin{itemize}
 \item Monitor:
-The monitor phase is responsible to collect the needed metrics from all managed resources and applies aggregation and filter operations to the collected data \cite{Sinreich2006AnAB}.
+The monitor phase is responsible for collecting the needed metrics from all managed resources and applies aggregation and filter operations to the collected data \cite{Sinreich2006AnAB}.
 
 \item Analyze:
-The autonomic manager has to gain knowledge to determine if changes have to made to the environment \cite{Sinreich2006AnAB}. To predict future situations, the autonomic manager can model complex situation given the collected knowledge \cite{Jacob2004AutonomicSolution}.
+The autonomic manager has to gain knowledge to determine if changes have to be made to the environment \cite{Sinreich2006AnAB}. To predict future situations, the autonomic manager can model complex situations given the collected knowledge \cite{Jacob2004AutonomicSolution}.
 
 \item Plan:
 Plans have to be structured to achieve defined goals and objectives. A plan consists of policy-based actions \cite{Jacob2004AutonomicSolution, Sinreich2006AnAB}.
@@ -257,14 +257,14 @@ The execute phase applies all necessary changes to the computing system \cite{Si
 \end{itemize}
 
 % Multiple manager
-Multiple autonomic manager can exist in an autonomic computing environment to perform only certain phases. For example, an autonomic manager which is responsible to monitor and analyse the system and an autonomic manager to plan and execute. To create a complete and closed control-loop, multiple autonomic manager can be composed together \cite{Sinreich2006AnAB}.
+Multiple autonomic managers can exist in an autonomic computing environment to perform only certain phases. For example, an autonomic manager which is responsible to monitor and analyse the system and an autonomic manager to plan and execute. To create a complete and closed control-loop, multiple autonomic managers can be composed together \cite{Sinreich2006AnAB}.
 
 
 % ===========================================
 % ===========================================
 \section{Performance Metrics}
 % Short description
-Performance metrics are statistics that describe the system performance. These statistics are generated by the system, applications or other tools \cite{Greg2020SysPerf}.
+Performance metrics are statistics that describe the system's performance. These statistics are generated by the system, applications, or other tools \cite{Greg2020SysPerf}.
 % Common types
 Common types for performance metrics are:
 \begin{itemize}
@@ -275,20 +275,20 @@ Common types for performance metrics are:
 
 
 % Overhead
-\paragraph{}It is important to note that measuring performance metrics can cause an overhead. To gather and store performance metrics, additional CPU cycles must be spent. This can have a negative affect on the target performance \cite{Greg2020SysPerf}.
+\paragraph{}It is important to note that measuring performance metrics can cause an overhead. To gather and store performance metrics, additional CPU cycles must be spent. This can have a negative effect on the target performance \cite{Greg2020SysPerf}.
 
 
 \paragraph{}
 % What is utilization
-Utilization is a performance metric that describes the usage of a device, e.g. CPU device usage.
+Utilization is a performance metric that describes the usage of a device, e.g., CPU device usage.
 % What about time-based utilization
-A time-based utilization describes the usage of a component during a time period where the component was actively performing work \cite{Greg2020SysPerf}.
+A time-based utilization describes a component's usage during a period where the component was actively performing work \cite{Greg2020SysPerf}.
 
 
 % 100 utilization
 The performance of a hardware resource can degrade significantly if the utilization approaches 100\%.
 % Parallel hardware
-Hardware which is able to perform work in parallel, might not have a performance degrade at 100\%. Those hardware is able to accept additional work at a high utilization at a later time \cite{Greg2020SysPerf}.
+Hardware that can perform work in parallel might not have a performance degrade at 100\%. That hardware can accept additional work at a high utilization at a later time \cite{Greg2020SysPerf}.
 
 
 % ===========================================
@@ -296,9 +296,9 @@ Hardware which is able to perform work in parallel, might not have a performance
 \section{Monitoring}
 \label{sec:02_monitoring}
 % What is monitoring
-Monitoring is a process, that aims to detect and take care of system faults. In a dynamic environment, becoming aware of the system is a trivial process \cite{Ligus2012EffMonitoring}.
+Monitoring is a process that aims to detect and take care of system faults. In a dynamic environment, becoming aware of the system is a trivial process \cite{Ligus2012EffMonitoring}.
 % What is a monitoring system
-A monitoring system consists of a set of multiple which are responsible to perform measurements on components in the computing environment and collect, store and interpret the monitored data \cite{Ligus2012EffMonitoring}. 
+A monitoring system consists of multiple components responsible for performing measurements on components in the computing environment and collecting, storing, and interpreting the monitored data \cite{Ligus2012EffMonitoring}. 
 
 
 % The monitoring Loop/Process
@@ -308,14 +308,14 @@ A monitoring system consists of a set of multiple which are responsible to perfo
 \caption{The monitoring process}
 \label{fig:mon_mon-system-process}
 \end{figure}
-In the monitoring process, illustrated in \Fig{fig:mon_mon-system-process}, data is continuously collected by agents. An agent is a process that continuously gathers data from a target. The data can be device statistics, logs or system measurements. A pull-based monitoring system pulls the data from all specified agents. In contrast, a push-based monitoring expects data to be pushed from agents. These two approaches are described in \Sec{subsec:02_monitoring_push-pull}. After the monitoring system has received the data, it groups the data together into metrics and stores the metrics in its database \cite{Ligus2012EffMonitoring}.
+In the monitoring process, illustrated in \Fig{fig:mon_mon-system-process}, data is continuously collected by agents. An agent is a process that continuously gathers data from a target. The data can be device statistics, logs, or system measurements. A pull-based monitoring system pulls the data from all specified agents. In contrast, push-based monitoring expects data to be pushed from agents. These two approaches are described in \Sec{subsec:02_monitoring_push-pull}. After the monitoring system has received the data, it groups the data into metrics and stores the metrics in its database \cite{Ligus2012EffMonitoring}.
 
 
 % Requirements of a monitoring system
-The requirements for a monitoring system, that is able to monitor a dynamic changing environment, are the following:
+The requirements for a monitoring system that can monitor a dynamic changing environment are the following:
 \begin{itemize}
 \item An efficient database to store metrics \cite{Farcic2017Toolkit21}
-\item A push or pull based way of gathering metrics \cite{Farcic2017Toolkit21}
+\item A push or pull-based way of gathering metrics \cite{Farcic2017Toolkit21}
 \item A multi-dimensional data-model \cite{Farcic2017Toolkit21}
 \item A powerful query language \cite{Farcic2017Toolkit21}
 \end{itemize}
@@ -332,13 +332,13 @@ In a time-series database, metrics will be stored in a compact and optimized for
 
 \subsection{Push- and Pull-Based Monitoring Systems}
 \label{subsec:02_monitoring_push-pull}
-The approach how the monitoring systems gathers metrics to store in the database plays a significant role.
+The approach, how the monitoring systems gather metrics to store in the database, plays a significant role.
 % There are push and pull based systems
 Push- and pull-based systems are the two primary approaches to gather metrics from services.
 % About push
 Push-based monitoring systems expect services to push metrics to their storage.
 % About pull
-Pull-based monitoring systems scrape metrics from all defined targets. Targets do not know about the existence of the monitoring system and only need to collect and expose metrics \cite{Farcic2017Toolkit21}.
+Pull-based monitoring systems scrape metrics from all defined targets. Targets do not know about the monitoring system's existence and only need to collect and expose metrics \cite{Farcic2017Toolkit21}.
 
 
 % When to choose what (Discovery)
@@ -351,7 +351,7 @@ Service discovery is an important aspect to decide whenever to use a pull- or pu
 \label{fig:mon_push-based}
 \end{figure}
 % Push based discovery
-In a push-based environment, services only need to know the address of the monitoring service to push their data to the storage \cite{Farcic2017Toolkit21}.
+In a push-based environment, services only need to know the monitoring service's address to push their data to the storage \cite{Farcic2017Toolkit21}.
 
 
 \begin{figure}[h]
@@ -373,11 +373,11 @@ Metrics are store as time-series data, where a time-series is a combination of a
 % The name
 The name of a time-series identifies the metric which is measured.
 % Labels
-Labels provide a multi-dimensional data-model to the stored data. Each combination of labels represent a specific dimensional instantiation of a metric \cite{Prom2020Docs}.
+Labels provide a multi-dimensional data-model to the stored data. Each combination of labels represents a specific dimensional instantiation of a metric \cite{Prom2020Docs}.
 % Dynamic env
-In a dynamic environment, services are dynamically added and removed. Therefore, a dynamic environment needs a multi-dimensional data model to represent all dimension in the environment \cite{Farcic2018Toolkit22}.
+In a dynamic environment, services are dynamically added and removed. Therefore, a dynamic environment needs a multi-dimensional data model to represent all dimensions in the environment \cite{Farcic2018Toolkit22}.
 % A query language
-In addition to a multi-dimensional data model, a powerful query language that provides capabilities to perform aggregations and filtering on dimensions is needed.
+A powerful query language that provides capabilities to perform aggregations and filtering on dimensions is needed in addition to a multi-dimensional data model.
 % Example
 \begin{lstlisting}[label=lst:02_monitoring_db_multi-model_metr_dimless, caption=Example of a dimensionless-metric, numbers=none]
 container_cpu_user_seconds_total
@@ -386,4 +386,4 @@ container_cpu_user_seconds_total
 container_cpu_user_seconds_total{image="spark-worker:3.0.1-hadoop2.7"}
 \end{lstlisting}
 % Explain
-\Lst{lst:02_monitoring_db_multi-model_metr_dimless} provides of a metric without labels and \Lst{lst:02_monitoring_db_multi-model_metr_withdim} shows an example of a metric with a label. As the examples show, The metric with a label provides more efficient querying to gather specific informations about a metric.
+\Lst{lst:02_monitoring_db_multi-model_metr_dimless} provides an example of a metric without labels, and \Lst{lst:02_monitoring_db_multi-model_metr_withdim} shows an example of a metric with a label. As the examples show, The metric with a label provides more efficient querying to gather specific information about a metric.

@@ -1,5 +1,5 @@
 \chapter{Conclusion and Outlook}
-\label{chap:08_outlook}
+\label{chap:08_conclusion-outlook}
 
 In this chapter, an outlook is given for further research based on the results of \Chap{chap:07_evaluation}.
 
@@ -113,10 +113,10 @@ The worker nodes can be extended to save temporary data on an external storage s
 The impact of removing nodes during the execution of an application should be explored. In the evaluation of this thesis, only the impact of adding worker nodes is explored.
 
 
-\subsection{Simplify the CI Pipeline Implementation}
+\subsection{Train-Stage Docker Image}
 % Intro
 GitLab CI/CD requires to setup a pipeline for each project additionally using a \texttt{.gitlab-ci.yml} configuration file.
 % Current approach
-Therefore, the developer has to implement the process to share the source code between multiple Docker containers everytime a new project is created. Additionally, the custom submit script needs to be added to the project.
+Therefore, the developer has to implement the process to share the source code between multiple Docker containers everytime a new project is created. Additionally, the custom submit script needs to be added to the project source code.
 % simplification
 This process can be automated using a custom Docker image, which is then used for the \textit{train-stage} implementation. The image automatically copies the source code to a \textit{mount-point} and integrates the custom submit script.

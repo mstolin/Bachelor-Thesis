@@ -7,7 +7,7 @@
 \contentsline {section}{\numberline {1.5}Research Objective and Research Questions}{4}{section.1.5}% 
 \contentsline {paragraph}{}{4}{paragraph*.8}% 
 \contentsline {paragraph}{}{4}{paragraph*.9}% 
-\contentsline {paragraph}{}{5}{paragraph*.10}% 
+\contentsline {paragraph}{}{4}{paragraph*.10}% 
 \contentsline {section}{\numberline {1.6}Problem Statement}{5}{section.1.6}% 
 \contentsline {section}{\numberline {1.7}Thesis Structure}{5}{section.1.7}% 
 \contentsline {chapter}{\numberline {2}Theoretical Foundation}{7}{chapter.2}% 
@@ -181,7 +181,7 @@
 \contentsline {subsection}{\numberline {8.2.2}Vertical-Scaling Approach}{81}{subsection.8.2.2}% 
 \contentsline {subsection}{\numberline {8.2.3}Scaling GPU-accelerated Workers}{81}{subsection.8.2.3}% 
 \contentsline {subsection}{\numberline {8.2.4}Save Temporary Data on an External Service}{81}{subsection.8.2.4}% 
-\contentsline {subsection}{\numberline {8.2.5}Simplify the CI Pipeline Implementation}{81}{subsection.8.2.5}% 
+\contentsline {subsection}{\numberline {8.2.5}Train-Stage Docker Image}{81}{subsection.8.2.5}% 
 \contentsline {part}{Anhang}{88}{section*.113}% 
 \contentsline {chapter}{\numberline {A}Implementation}{89}{appendix.A}% 
 \contentsline {section}{\numberline {A.1}Computing Environment}{89}{section.A.1}% 
