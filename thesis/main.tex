@@ -15,6 +15,7 @@
 % Encoding der Dateien (sonst funktionieren Umlaute nicht)
 \usepackage{listings}
 \usepackage{booktabs}
+%\usepackage{acro}
 %\usepackage[ruled,vlined]{algorithm2e}
 \usepackage[utf8]{inputenc}
 \usepackage[htt]{hyphenat}
@@ -100,7 +101,7 @@
 
 \title{My Bachelor Thesis}
 \author{Marcel Pascal Stolin}
-\matrikel{32168	}
+\matrikel{32168}
 \thesis{Bachelor Thesis}
 \geburtsdatum{03.04.1993}
 \geburtsort{Kamen}
@@ -111,10 +112,10 @@
 Darüber hinaus ist durch die Popularität der DevOps-Kultur die Automatisierung von Entwicklungsprozessen zu einem trivialen Prozess geworden. Das Training eines Machine Learning-Modell ist ein komplexer Prozess, der mithilfe einer CI-Pipeline automatisiert werden kann.
 Ziel dieser Arbeit ist es, ein Entwurf und die Implementierung einer skalierbaren verteilten Rechenumgebung für das Training von Machine Learning-Modellen mit Apache Spark vorzustellen. Außerdem wird der Apache Spark-Cluster erweitert, um GPUs mit der RAPIDS-Plugin-Suite zu nutzen. Ein \textit{Auto-Scaler} wird implementiert, der es ermöglicht die Umgebung dynamisch anhand der Performance zu skalieren.
 Darüber hinaus wird ein CI-Pipeline-Entwurf und eine Implementierung mittels GitLab CI/CD vorgestellt, die das Training einer Machine Learning-Anwendung auf Apache Spark automatisiert.
-Die Leistung der Rechenumgebung wird mit zwei weit verbreiteten Machine Learning-Algorithmen evaluiert. Die Ergebnisse zeigen, dass die Leistung eines Apache Spark-Clusters durch den Einsatz von GPUs deutlich verbessert werden kann. Die \textit{Auto-Scaler-Implementierung} schafft es jedoch nicht, die Leistung des Apache Spark-Clusters zu steigern.\newpage}
+Die Leistung der Rechenumgebung wird mit zwei weit verbreiteten Machine Learning-Algorithmen evaluiert, wobei die Ergebnisse zeigen, dass die Leistung eines Apache Spark-Clusters durch den Einsatz von GPUs deutlich verbessert werden kann. Die \textit{Auto-Scaler-Implementierung} schafft es jedoch nicht, die Leistung des Apache Spark-Clusters zu steigern.\newpage}
 \abstract{The growing computational complexity of training Machine Learning models on Big Data requires increasing the scalability of computing clusters. With distributed computing, a cluster can dynamically be scaled whenever a performance threshold is reached. A popular framework for distributed computing is Apache Spark, which enables parallel data processing on a large computing cluster.  With the recent development of the RAPIDS plugin suite, the computational power can further be increased by enabling Apache Spark to leverage GPUs.
 Furthermore, due to the DevOps culture's popularity, automating development processes have become a trivial process. The training of a machine learning model is a complex process that can be automated using a CI pipeline.
-This thesis aims to present a design and implementation of a scalable distributed computing environment for training Machine Learning models using Apache Spark. Further, the Apache Spark cluster is extended to leverage GPUs with the RAPIDS plugin suite. An \textit{Auto-Scaler} is implemented to scale the environment when a performance threshold is reached. Furthermore, a CI pipeline design and implementation using GitLab CI/CD is introduced, which automates training a Machine Learning application on Apache Spark.
+This thesis aims to present a design and implementation of a scalable distributed computing environment for training Machine Learning models using Apache Spark. Further, the Apache Spark cluster is extended to leverage GPUs with the RAPIDS plugin suite. To scale the Apache Spark cluster additionally, an \textit{Auto-Scaler} is implemented to scale the environment when a performance threshold is reached. Furthermore, a CI pipeline design and implementation using GitLab CI/CD is introduced, which automates training a Machine Learning application on Apache Spark.
 The performance of the computing environment is evaluated using two widely used Machine Learning algorithms. The results show that the performance of an Apache Spark cluster can significantly be improved using GPUs. However, the \textit{Auto-Scaler} implementation did not achieve to increase the performance of the Apache Spark cluster.}
 
 \begin{document}

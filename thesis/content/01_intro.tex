@@ -13,7 +13,7 @@ Finally, the structure of this thesis is explained.
 % ===========================================
 \section{Distributed Computing}
 % Little intro accorsing to Big Data ML and so on
-Machine Learning and Big Data projects consist of combining extract-transform-load (ETL) pipelines and compute-intensive algorithms to create meaningful information from large datasets \cite{Vadapalli2018DevOps}.
+Machine Learning (\hyperlink{abbr:ml}{ML}) and Big Data projects consist of combining Extract-Transform-Load (\hyperlink{abbr:etl}{ETL}) pipelines and compute-intensive algorithms to create meaningful information from large datasets \cite{Vadapalli2018DevOps}.
 % Problem with large datasets
 Because of its computing-intensive nature, Big Data is mostly processed in parallel on distributed hardware.
 % Divide and concquer
@@ -53,13 +53,13 @@ Implementing data pipelines with MapReduce requires chaining multiple MapReduce 
 % ===========================================
 \section{Computing Acceleration with GPUs}
 % Why CPUs are limited
-Distributed computing frameworks like Apache Spark perform applications on a huge amount of CPU cores to enable parallelism. A CPU is build of multiple cores that are optimized for sequential serial processing. Performing computationally intensive applications on an Apache Spark cluster consumes many CPU cycles with a negative impact on the overall performance \cite{Li2015HeteroSpark}.
+Distributed computing frameworks like Apache Spark perform applications on a huge amount of Central Processing Unit (\hyperlink{abbr:cpu}{CPU}) cores to enable parallelism. A \hyperlink{abbr:cpu}{CPU} is build of multiple cores that are optimized for sequential serial processing. Performing computationally intensive applications on an Apache Spark cluster consumes many \hyperlink{abbr:cpu}{CPU} cycles with a negative impact on the overall performance \cite{Li2015HeteroSpark}.
 % About the growing complexity of computational power
 To handle the complexity of Big Data applications, from executing Machine Learning algorithms or training Deep Learning models, an option of distributed computing clusters is to scale-up individual nodes. Scaling-up is limited by resource capacity and can be become uneconomically at a specific point.
 % What about GPUs
-Graphical Process Units (GPUs) have become first class citizens in modern data centers to perform computationally complex applications with better performance. A GPU architecture consists of a large amount of smaller and more efficient cores, which are suitable for data-parallel data processing (handling multiple tasks simultaneously) \cite{Yuan2016SparkGPU}. In general, GPUs process data at a much faster rate than CPUs are capable.
+Graphical Process Units (\hyperlink{abbr:gpu}{GPUs}) have become first class citizens in modern data centers to perform computationally complex applications with better performance. A \hyperlink{abbr:gpu}{GPU} architecture consists of a large amount of smaller and more efficient cores, which are suitable for data-parallel data processing (handling multiple tasks simultaneously) \cite{Yuan2016SparkGPU}. In general, \hyperlink{abbr:gpu}{GPUs} process data at a much faster rate than \hyperlink{abbr:cpu}{CPUs} are capable.
 % How can apps be accelerated with GPUs
-Apache Spark applications have a data-parallel nature. Therefore, enabling Apache Spark to leverage GPUs to perform complex ML algorithms on big datasets can positively impact the performance \cite{Yuan2016SparkGPU}.
+Apache Spark applications have a data-parallel nature. Therefore, enabling Apache Spark to leverage \hyperlink{abbr:gpu}{GPUs} to perform complex ML algorithms on big datasets can positively impact the performance \cite{Yuan2016SparkGPU}.
 
 
 % ===========================================
@@ -78,7 +78,7 @@ An \textit{Auto-Scaler} takes care of watching the environment by adding and rem
 % How can auto-scaling be achieved (Horizontal and vertical)
 There exist two different scaling approaches to scale resources in a computing environment: Vertical-scaling and horizontal-scaling.
 % Vertical scaling
-Vertical scaling refers to adjusting the hardware resources of an individual node in the environment. Hardware adjustments can include adding (scale-up) or removing (scale-down) resources like memory or CPU cores \cite{Wilder2012CloudPatterns}. By adding more powerful resources to a node, it can take more throughput and perform more specialized tasks \cite{Abbott2015ScalabilityArt}.
+Vertical scaling refers to adjusting the hardware resources of an individual node in the environment. Hardware adjustments can include adding (scale-up) or removing (scale-down) resources like memory or \hyperlink{abbr:cpu}{CPU} cores \cite{Wilder2012CloudPatterns}. By adding more powerful resources to a node, it can take more throughput and perform more specialized tasks \cite{Abbott2015ScalabilityArt}.
 % Horizontal scaling
 Adjusting the nodes in a computing environment is referred to as horizontal scaling \cite{Wilder2012CloudPatterns}. Increasing the number of nodes in an environment increases the overall computing capacity. Additionally, the workload can be distributed across all nodes \cite{Wilder2012CloudPatterns, Abbott2015ScalabilityArt}.
 % Not exclusive
@@ -108,24 +108,20 @@ A fully automated deployment pipeline has many improvements over deploying appli
 \item If an application has been deployed manually, there is no guarantee that the documentation has been followed \cite{Farley2010CI}
 \end{itemize}
 % CI
-The automated deployment pipeline is based on the Continuous Integration (CI) process. Furthermore, the deployment pipeline is the logical implementation of CI \cite{Farley2010CI}.
+The automated deployment pipeline is based on the Continuous Integration (\hyperlink{abbr:ci}{CI}) process. Furthermore, the deployment pipeline is the logical implementation of \hyperlink{abbr:ci}{CI} \cite{Farley2010CI}.
 
 
 % ===========================================
 % ===========================================
 \section{Research Objective and Research Questions}
 % Fraunhofer
-The thesis work will be implemented at the Center for Cyber Cognitive Intelligence at the Fraunhofer IPA\footnote{Fraunhofer Institute for Manufacturing Engineering and Automation IPA - \url{https://www.ipa.fraunhofer.de/} (Accessed: 2021-01-07)}.
-% DGX and docker
-At the IPA, developers train ML models on Docker container running on an NVIDIA DGX\footnote{The Universal System for AI Infrastructure - \url{https://www.nvidia.com/en-us/data-center/dgx-a100/} (Accessed: 2020-01-09)} workstation.
-% resource combination
-To optimize the training of ML applications, developers combine CPU and GPU resources only limited.
-% The prototype
-Therefore a prototype of an Apache Spark cluster prototype has to be implemented which can automatically allocate resources according to the computing needs to scale its performance.
-
-
-%Rqs
-The following three research question will be investigated to implemented the mentioned prototype:
+The thesis is implemented at the Center for Cyber Cognitive Intelligence at the Fraunhofer IPA\footnote{Fraunhofer Institute for Manufacturing Engineering and Automation IPA - \url{https://www.ipa.fraunhofer.de/} (Accessed: 2021-01-07)}.
+% CPU GPU
+At the IPA, \hyperlink{abbr:cpu}{CPU} and \hyperlink{abbr:gpu}{GPU} resources have only been combined to a limited extent in order to optimize machine learning model training.
+% Prototype
+Therefore, an APache Spark cluster prototype is created, which automatically allocates resources depending on the load and thus scales itself.
+% RQs
+This results in the following research questions:
 %RQs
 \begin{itemize}
 \item RQ1: Is it possible to scale the number of Apache Spark Workers according to performance utilization?
@@ -149,9 +145,9 @@ Furthermore, a suitable scaling approach has to be investigated.
 % RQ2
 \paragraph{}
 % Main goal
-The main goal of the second research question is to enable Apache Spark to perform algorithms with GPU acceleration included.
+The main goal of the second research question is to enable Apache Spark to perform algorithms with \hyperlink{abbr:gpu}{GPU} acceleration included.
 % Tools
-Therefore, a concept needs to be investigated to extend Apache Spark to use GPUs for suitable algorithms in addition to the available CPUs.
+Therefore, a concept needs to be investigated to extend Apache Spark to use \hyperlink{abbr:gpu}{GPUs} for suitable algorithms in addition to the available \hyperlink{abbr:cpu}{CPU}.
 
 
 %RQ3
@@ -161,7 +157,7 @@ The last research question has a more applied nature.
 % Automating
 Automating the development cycle of an application is a well-investigated topic.
 % Try and error
-The IPA uses a platform called GitLab (introduced in \Sec{sec:04_background_gitlab}), which provides an API to build automated pipelines.
+The IPA uses a platform called GitLab (introduced in \Sec{sec:04_background_gitlab}), which provides an Application Programming Interface (\hyperlink{abbr:api}{API}) to build automated pipelines.
 % Anser
 To answer this research question, GitLabs functionality will be investigated to find a solution that fits the need of this project work.
 
@@ -175,14 +171,14 @@ Given the previously introduced research questions and the research objective, t
 
 \begin{enumerate}
 % Problem 1
-\item Developers at the Fraunhofer IPA perform ML model training on several Docker containers running on a DGX with limited usage of available GPUs.
+\item Developers at the Fraunhofer IPA perform \hyperlink{abbr:ml}{ML} model training on several Docker containers running on a DGX with limited usage of available \hyperlink{abbr:gpu}{GPUs}.
 % Add Apache Spark
 Apache Spark can be used to optimize the model training by distributing the workload.
 % GPU
-Additionally, the Apache Cluster should be aware of available GPUs to accelerate the model training process.
+Additionally, the Apache Cluster should be aware of available \hyperlink{abbr:gpu}{GPUs} to accelerate the model training process.
 
  % Problem 2
-\item To enable GPU acceleration for Apache Spark alone is not sufficient to increase the performance.
+\item To enable \hyperlink{abbr:gpu}{GPU} acceleration for Apache Spark alone is not sufficient to increase the performance.
 At some point, an Apache Spark Worker can reach the limit of its available computing resources.
 If this point is reached, the environment should automatically scale the number of Apache Spark worker to distribute the workload.
 
