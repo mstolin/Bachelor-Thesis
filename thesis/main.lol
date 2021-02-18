@@ -22,13 +22,13 @@
 \contentsline {lstlisting}{\numberline {6.4}Prometheus target configuration in YAML syntax}{59}{lstlisting.6.4}% 
 \contentsline {lstlisting}{\numberline {6.5}Auto-Scaler start command}{60}{lstlisting.6.5}% 
 \contentsline {lstlisting}{\numberline {6.6}\textit {Auto-Scaler} configuration for scaling Docker Services}{60}{lstlisting.6.6}% 
-\contentsline {lstlisting}{\numberline {6.7}KHPA implementation using Python 3.8}{61}{lstlisting.6.7}% 
+\contentsline {lstlisting}{\numberline {6.7}KHPA implementation using Python 3.8}{62}{lstlisting.6.7}% 
 \contentsline {lstlisting}{\numberline {6.8}Auto-Scaler Dockerfile}{62}{lstlisting.6.8}% 
 \contentsline {lstlisting}{\numberline {6.9}Auto-Scaler build script}{63}{lstlisting.6.9}% 
-\contentsline {lstlisting}{\numberline {6.10}Environment configuration for all worker nodes}{64}{lstlisting.6.10}% 
+\contentsline {lstlisting}{\numberline {6.10}Environment configuration for all worker nodes}{65}{lstlisting.6.10}% 
 \contentsline {lstlisting}{\numberline {6.11}Usage of the submit script}{65}{lstlisting.6.11}% 
 \contentsline {lstlisting}{\numberline {6.12}Example of the spark-submit image}{66}{lstlisting.6.12}% 
-\contentsline {lstlisting}{\numberline {6.13}Example of the spark-submit image}{66}{lstlisting.6.13}% 
+\contentsline {lstlisting}{\numberline {6.13}Example of the spark-submit image}{67}{lstlisting.6.13}% 
 \contentsline {lstlisting}{\numberline {6.14}CLI command to start a GitLab runner in a Docker container}{68}{lstlisting.6.14}% 
 \contentsline {lstlisting}{\numberline {6.15}Submit script to execute \texttt {docker run} with all needed configuration parameters}{69}{lstlisting.6.15}% 
 \addvspace {10\p@ }

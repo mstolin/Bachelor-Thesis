@@ -142,7 +142,7 @@
 \contentsline {subsubsection}{Performing a Scaling Action}{62}{subsubsection*.89}% 
 \contentsline {subsubsection}{Removing Apache Spark worker}{62}{subsubsection*.90}% 
 \contentsline {subsection}{\numberline {6.3.3}Docker Image}{62}{subsection.6.3.3}% 
-\contentsline {section}{\numberline {6.4}Apache Spark Cluster with GPU Acceleration}{63}{section.6.4}% 
+\contentsline {section}{\numberline {6.4}Apache Spark Cluster with GPU Acceleration}{64}{section.6.4}% 
 \contentsline {subsection}{\numberline {6.4.1}Apache Spark Base Image}{64}{subsection.6.4.1}% 
 \contentsline {subsection}{\numberline {6.4.2}Apache Spark Master Image}{64}{subsection.6.4.2}% 
 \contentsline {subsection}{\numberline {6.4.3}Apache Spark Worker Image}{64}{subsection.6.4.3}% 
@@ -157,7 +157,7 @@
 \contentsline {subsection}{\numberline {6.5.2}Pipeline Architecture}{68}{subsection.6.5.2}% 
 \contentsline {subsubsection}{Test Stage}{68}{subsubsection*.96}% 
 \contentsline {paragraph}{}{68}{paragraph*.97}% 
-\contentsline {subsubsection}{Train Stage}{68}{subsubsection*.98}% 
+\contentsline {subsubsection}{Train Stage}{69}{subsubsection*.98}% 
 \contentsline {paragraph}{}{69}{paragraph*.99}% 
 \contentsline {subsection}{\numberline {6.5.3}Sharing the Applications Source Code between Docker Containers}{70}{subsection.6.5.3}% 
 \contentsline {chapter}{\numberline {7}Evaluation}{71}{chapter.7}% 
