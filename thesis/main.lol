@@ -5,7 +5,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {lstlisting}{\numberline {4.1}Basic example of a Dockerfile}{24}{lstlisting.4.1}% 
-\contentsline {lstlisting}{\numberline {4.2}Basic example of stack describes in the docker-compose file format}{26}{lstlisting.4.2}% 
+\contentsline {lstlisting}{\numberline {4.2}Basic example of stack describes in the docker-compose file format}{27}{lstlisting.4.2}% 
 \contentsline {lstlisting}{\numberline {4.3}Usage of the docker stack command to deploy a stack}{27}{lstlisting.4.3}% 
 \contentsline {lstlisting}{\numberline {4.4}Usage of master launch script}{31}{lstlisting.4.4}% 
 \contentsline {lstlisting}{\numberline {4.5}Usage of worker launch script}{31}{lstlisting.4.5}% 

@@ -89,7 +89,7 @@ A container is an execution environment running on the host-system kernel.
 \end{figure}
 
 % Container advantages
-The advantage of a container is its lightweight nature. As illustrated in \Fig{fig:04_docker_container_container-structure}, containers take advantage of OS-level virtualization instead of hardware-virtualization without the need for a hypervisor \cite{Docker2020Docs, Nickoloff2019Docker}. Containers share the resources of the host system instead of using reserved resources \cite{Bullington2020Docker}. Multiple containers can run on the host-system kernel and are by default isolated from each other \cite{Docker2020Docs}.
+The advantage of a container is its lightweight nature. As illustrated in \Fig{fig:04_docker_container_container-structure}, containers take advantage of \hyperlink{abbr:os}{OS}-level virtualization instead of hardware-virtualization without the need for a hypervisor \cite{Docker2020Docs, Nickoloff2019Docker}. Containers share the resources of the host system instead of using reserved resources \cite{Bullington2020Docker}. Multiple containers can run on the host-system kernel and are by default isolated from each other \cite{Docker2020Docs}.
 % Docker container
 In Docker, a container is a runnable unit of an image used to distribute and test applications. A container can be configured to expose specific resources to the host system, e.g., network ports \cite{Bullington2020Docker}.
 
@@ -109,7 +109,7 @@ Many properties of Docker Swarm mode contribute the fact that it is an ideal too
 \begin{itemize}
 \item Desired state: The manager node monitors each service's state in the swarm and adapts the environment to maintain the desired state\cite{Docker2020Docs}.
 
-\item Cluster management and orchestration: Docker Swarm mode is integrated within the Docker Engine. A swarm can be created and managed using the Docker command-line interface (CLI) \cite{Docker2020Docs}.
+\item Cluster management and orchestration: Docker Swarm mode is integrated within the Docker Engine. A swarm can be created and managed using the Docker command-line interface (\hyperlink{abbr:cli}{CLI}) \cite{Docker2020Docs}.
 
 \item Service model: The Docker Engine allows to define the desired state of a service. The manager node maintains the desired state of all services in the swarm \cite{Docker2020Docs}.
 
@@ -147,7 +147,7 @@ Worker nodes are responsible for executing the tasks received by the manager nod
 %
 A stack is a named collection of first-class Docker resources (e.g., services, volumes, networks) that can be deployed to a swarm.
 %
-The docker-compose file format allows describing a stack in a single YAML file. With the \texttt{docker stack} command, a docker-compose file can be used to create a stack and deploy it to a swarm.
+The docker-compose file format allows describing a stack in a single \hyperlink{abbr:yaml}{YAML}\footnote{YAML Ain't Markup Language - \url{https://yaml.org/} (Accessed: 2021-02-18)} file. With the \texttt{docker stack} command, a docker-compose file can be used to create a stack and deploy it to a swarm.
 % Example
 \Lst{lst:04_docker_swarm_stack_compose} provides an example of a stack described in the docker-compose file format.
 % Explain
@@ -184,38 +184,37 @@ $ docker stack deploy -c computing-stack.yml computing-stack
 % ===========================================
 \section{Apache Spark}
 \label{sec:04_spark}
-Apache Spark is an open-source computing framework for parallel data processing on a large computer cluster. Apache Spark manages the available resources and distributes computation tasks across a cluster to perform big-data processing operations at a large scale \cite{Chambers2018Spark}. Before Apache Spark was developed, Hadoop MapReduce \cite{Dean2010MapReduce} was the framework of choice for parallel operations on a computer cluster \cite{Zaharia2010Spark}. However, Spark accomplished to outperform Hadoop by 10x for iterative Machine Learning \cite{Zaharia2010Spark} and is now one of the most popular frameworks for distributed computing. It is implemented in Scala\footnote{The Scala programming language - \url{https://www.scala-lang.org/} (Accessed: 2020-12-18)}, a JVM-based programming language. It provides a programming interface for Scala, Java\footnote{Java Software - \url{https://www.oracle.com/java/} (Accessed: 2020-12-18)}, Python\footnote{Python programming language - \url{https://www.python.org/} (Accessed: 2020-12-18)}, and R\footnote{The R Project for Statistical Computing - \url{https://www.r-project.org/} (Accessed: 2020-12-18)}. Additionally, Apache Spark includes an interactive Structured Query Language (SQL) shell and libraries to implement Machine Learning and streaming applications \cite{Chambers2018Spark}.
+Apache Spark is an open-source computing framework for parallel data processing on a large computer cluster. Apache Spark manages the available resources and distributes computation tasks across a cluster to perform big-data processing operations at a large scale \cite{Chambers2018Spark}. Before Apache Spark was developed, Hadoop MapReduce \cite{Dean2010MapReduce} was the framework of choice for parallel operations on a computer cluster \cite{Zaharia2010Spark}. However, Spark accomplished to outperform Hadoop by 10x for iterative Machine Learning \cite{Zaharia2010Spark} and is now one of the most popular frameworks for distributed computing. It is implemented in Scala\footnote{The Scala programming language - \url{https://www.scala-lang.org/} (Accessed: 2020-12-18)}, a \hyperlink{abbr:jvm}{JVM}-based programming language. It provides a programming interface for Scala, Java\footnote{Java Software - \url{https://www.oracle.com/java/} (Accessed: 2020-12-18)}, Python\footnote{Python programming language - \url{https://www.python.org/} (Accessed: 2020-12-18)}, and R\footnote{The R Project for Statistical Computing - \url{https://www.r-project.org/} (Accessed: 2020-12-18)}. Additionally, Apache Spark includes an interactive \hyperlink{abbr:sql}{SQL} shell and libraries to implement \hyperlink{abbr:ml}{ML} and streaming applications \cite{Chambers2018Spark}.
 
 
 \subsection{Spark Programming Model}
 \label{subsec:04_spark_pr-model}
 % Explain RDDs
-Apache Spark provides Resilient Distributed Datasets (RDDs) as the main abstraction for parallel operations \cite{Zaharia2010Spark}. Core types of the higher-level structured API are built on top of RDDs and are automatically optimized by the Catalyst optimizer to run operations quickly and efficient \cite{Chambers2018Spark, Hien2018Spark}.
+Apache Spark provides Resilient Distributed Datasets (\hyperlink{abbr:rdd}{RDDs}) as the main abstraction for parallel operations \cite{Zaharia2010Spark}. Core types of the higher-level structured \hyperlink{abbr:api}{API} are built on top of \hyperlink{abbr:rdd}{RDDs}) and are automatically optimized by the Catalyst optimizer to run operations quickly and efficient \cite{Chambers2018Spark, Hien2018Spark}.
 
 
 \subsubsection{Apache Spark Structured API}
 % What is the structured API
-Apache Spark provides high level structured APIs for manipulating all kinds of data. The three distributed core types are Datasets, DataFrames, and SQL Tables and Views \cite{Chambers2018Spark}.
+Apache Spark provides high level structured \hyperlink{abbr:api}{APIs} for manipulating all kinds of data. The three distributed core types are Datasets, DataFrames, and \hyperlink{abbr:sql}{SQL}) Tables and Views \cite{Chambers2018Spark}.
 % About DataFrames, Datasets and SQL
-Datasets and DataFrames are immutable, lazy evaluated collections that provide execution plans for operations \cite{Chambers2018Spark}. SQL Tables and Views work the same way as DataFrames, except that SQL is used as the interface instead of using the DataFrame programming interface \cite{Chambers2018Spark}.
+Datasets and DataFrames are immutable, lazy evaluated collections that provide execution plans for operations \cite{Chambers2018Spark}. \hyperlink{abbr:sql}{SQL} Tables and Views work the same way as DataFrames, except that \hyperlink{abbr:sql}{SQL} is used as the interface instead of using the DataFrame programming interface \cite{Chambers2018Spark}.
 % Differences between Datasets ad Dataframes
-Datasets use JVM types and are therefore only available for JVM based languages. DataFrames are Datasets of type \texttt{Row}, which is the optimized format for computations \cite{Chambers2018Spark}.
+Datasets use \hyperlink{abbr:jvm}{JVM} types and are therefore only available for \hyperlink{abbr:jvm}{JVM} based languages. DataFrames are Datasets of type \texttt{Row}, which is the optimized format for computations \cite{Chambers2018Spark}.
 
 
 \subsubsection{Resilient Distributed Datasets}
 % What are RDDs
-Resilient Distributed Datasets are fault-tolerant, parallel data structures to enable data sharing across cluster applications \cite{Zaharia2012RDDs}. They express different cluster programming models like MapReduce, SQL, and batched stream processing \cite{Zaharia2012RDDs}. RDDs have been implemented in Apache Spark and serve as the Spark structured API's underlying data structure \cite{Zaharia2012RDDs}.
+Resilient Distributed Datasets are fault-tolerant, parallel data structures to enable data sharing across cluster applications \cite{Zaharia2012RDDs}. They express different cluster programming models like MapReduce, \hyperlink{abbr:sql}{SQL}, and batched stream processing \cite{Zaharia2012RDDs}. \hyperlink{abbr:rdd}{RDDs} have been implemented in Apache Spark and serve as the Spark structured \hyperlink{abbr:api}{API's} underlying data structure \cite{Zaharia2012RDDs}.
 % How can RDDs be used in applications
-RDDs are an immutable, partitioned collection of records. They can only be initiated through transformations (e.g., map, filter) on data or other RDDs.
+\hyperlink{abbr:rdd}{RDDs} are an immutable, partitioned collection of records. They can only be initiated through transformations (e.g., map, filter) on data or other \hyperlink{abbr:rdd}{RDDs}.
 % What are the advantages of RDDs
-An advantage of RDDs is that they can be recovered through lineage. Lost partitions of an RDD can be recomputed from other RDDs in parallel on different nodes \cite{Zaharia2012RDDs}. 
+An advantage of \hyperlink{abbr:rdd}{RDDs} is that they can be recovered through lineage. Lost partitions of an \hyperlink{abbr:rdd}{RDD} can be recomputed from other \hyperlink{abbr:rdd}{RDDs} in parallel on different nodes \cite{Zaharia2012RDDs}. 
 % Better use structured API
-RDDs are lower-level APIs and should only be used in applications if custom data partitioning is needed \cite{Chambers2018Spark}. It is recommended to use Sparks structured API objects instead. Optimizations for RDDs have to be implemented manually, while Apache Spark automatically optimizes the execution for structured API operations \cite{Chambers2018Spark}.
+\hyperlink{abbr:rdd}{RDDs} are lower-level \hyperlink{abbr:api}{APIs} and should only be used in applications if custom data partitioning is needed \cite{Chambers2018Spark}. It is recommended to use Sparks structured \hyperlink{abbr:api}{API} objects instead. Optimizations for \hyperlink{abbr:rdd}{RDDs} have to be implemented manually, while Apache Spark automatically optimizes the execution for structured \hyperlink{abbr:api}{API} operations \cite{Chambers2018Spark}.
 
 
 \subsubsection{Apache Spark Catalyst}
 \label{subsubsec:04_spark_pr-model_catalyst}
-\todo{Welcher Art tree, Wie werden kosten berechnet.}
 % What is the Catalyst optimizer
 Apache Spark also provides a query optimizer engine called Apache Spark Catalyst. \Fig{fig:04_spark_pr-model_catalyst_process} illustrates how Spark Catalyst automatically optimizes Apache Spark applications to run quickly and efficient.
 % Short How
@@ -223,10 +222,10 @@ Before executing the user code, the Catalyst optimizer translates the data-proce
 
 
 % What are logical plans
-Logical plans are created from a DataFrame or a SQL query and represent the data-processing logic as a tree of operators and expressions where the Catalyst optimizer can apply sets of rule-based and cost-based optimizations \cite{Hien2018Spark}.
+Logical plans are created from a DataFrame or a \hyperlink{abbr:sql}{SQL} query and represent the data-processing logic as a tree of operators and expressions where the Catalyst optimizer can apply sets of rule-based and cost-based optimizations \cite{Hien2018Spark}.
 
 % What are physical plans
-From the logical plan, the Catalyst optimizer creates more physical plans consisting of RDD operations \cite{Chambers2018Spark}. The cheapest physical plan will be generated into Java bytecode for execution across the cluster \cite{Hien2018Spark}.
+From the logical plan, the Catalyst optimizer creates more physical plans consisting of \hyperlink{abbr:rdd}{RDD} operations \cite{Chambers2018Spark}. The cheapest physical plan will be generated into Java bytecode for execution across the cluster \cite{Hien2018Spark}.
 
 % Spark Catalyst figure
 \begin{figure}[h]
@@ -259,19 +258,19 @@ Furthermore, the cluster manager decides on which nodes the processes will be ex
 
 \subsubsection{Driver Process}
 \label{subsubsec:04_spark_architecture_driver}
-The driver process is a JVM process running on a physical machine and is responsible for maintaining the execution of an Apache Spark application \cite{Chambers2018Spark}. It coordinates the application tasks and schedules them on available executors \cite{Hien2018Spark}. 
+The driver process is a \hyperlink{abbr:jvm}{JVM} process running on a physical machine and is responsible for maintaining the execution of an Apache Spark application \cite{Chambers2018Spark}. It coordinates the application tasks and schedules them on available executors \cite{Hien2018Spark}. 
 The driver interacts with the cluster manager to launch executors and allocate hardware resources \cite{Chambers2018Spark, Hien2018Spark}.
 
 
 \subsubsection{Executor Process}
 % JVM
-The executor process is a JVM process that runs through the whole duration of an application \cite{Hien2018Spark, Apache2020Spark}.
+The executor process is a \hyperlink{abbr:jvm}{JVM} process that runs through the whole duration of an application \cite{Hien2018Spark, Apache2020Spark}.
 % Tasks
 It is responsible for performing all tasks (units of work) assigned by the driver process \cite{Chambers2018Spark}.
 % Report
 After the executor process finishes, it reports back to the driver process \cite{Chambers2018Spark}.
 % CPU
-Each task is performed on a separate CPU core to enable parallel processing \cite{Hien2018Spark}.
+Each task is performed on a separate \hyperlink{abbr:cpu}{CPU} core to enable parallel processing \cite{Hien2018Spark}.
 
 
 \subsubsection{Cluster Manager}
@@ -288,7 +287,7 @@ The cluster manager provides three different deploy modes for acquiring resource
 \begin{itemize}
 % Cluster mode
 \item Cluster mode:
-To run an application in cluster mode, the user must submit a precompiled JAR, python script, or R script to the cluster manager \cite{Chambers2018Spark}. After that, the cluster manager starts the driver process and executor processes exclusively for the Apache Spark application on machines inside the cluster \cite{Chambers2018Spark, Hien2018Spark}.
+To run an application in cluster mode, the user must submit a precompiled Java ARchive (\hyperlink{abbr:jar}{JAR}), python script, or R script to the cluster manager \cite{Chambers2018Spark}. After that, the cluster manager starts the driver process and executor processes exclusively for the Apache Spark application on machines inside the cluster \cite{Chambers2018Spark, Hien2018Spark}.
 
 % Client mode
 \item Client mode:
@@ -313,7 +312,7 @@ Apache Spark provides executable launch scripts to start master and worker nodes
 % Where to find them
 Inside the Apache Spark installation directory, the executables can be found at \texttt{sbin/start-master.sh} to start a master node and at \texttt{/start-slave.sh} to start a worker node.
 % parameter for worker script
-The worker launch executable requires the master node URI as a parameter \cite{Apache2020Spark}. 
+The worker launch executable requires the master node Uniform Resource Identifier (\hyperlink{abbr:uri}{URI}) as a parameter \cite{Apache2020Spark}. 
 
 
 % Example master
@@ -329,7 +328,7 @@ $ ./sbin/start-slave.sh spark://spark-master:7077
 
 
 % Introduce examples
-\paragraph{}\Lst{lst:04_spark_standalone_launch-master} and \Lst{lst:04_spark_standalone_launch-worker} provide an example of using both executables to start a master and a worker node. The URI \texttt{spark://spark-master:7077} in \Lst{lst:04_spark_standalone_launch-worker} is an example of a master node URI. The master node launch script will print out the master URI after being executed successfully \cite{Apache2020Spark}.
+\paragraph{}\Lst{lst:04_spark_standalone_launch-master} and \Lst{lst:04_spark_standalone_launch-worker} provide an example of using both executables to start a master and a worker node. The \hyperlink{abbr:uri}{URI} \texttt{spark://spark-master:7077} in \Lst{lst:04_spark_standalone_launch-worker} is an example of a master node \hyperlink{abbr:uri}{URI}. The master node launch script will print out the master \hyperlink{abbr:uri}{URI} after being executed successfully \cite{Apache2020Spark}.
 
 
 \subsubsection{Resource Allocation}
@@ -360,7 +359,7 @@ $ bin/spark-submit --master spark://spark-master:7077 application.py
 \paragraph{}
 \Lst{lst:04_spark_standalone_submit_example} shows how the spark-submit executable can be used to submit a Python application to a standalone Apache Spark cluster.
 % required parameter
-Spark-submit requires the master node URI and the path to the desired Spark application file.
+Spark-submit requires the master node \hyperlink{abbr:uri}{URI} and the path to the desired Spark application file.
 % Which files
 With the spark-submit executable, it is possible to submit Python, Java, and R applications \cite{Apache2020Spark}.
 
@@ -373,7 +372,7 @@ With the spark-submit executable, it is possible to submit Python, Java, and R a
 \section{RAPIDS Accelerator for Apache Spark}
 \label{sec:04_rapids}
 % Explain
-RAPIDS accelerator for Apache Spark is a plugin suite that aims to accelerate computing operations for Apache Spark by executing pipelines entirely on GPUs. It is available for Apache Spark 3 \cite{SparkRapids2020Docs}.
+RAPIDS accelerator for Apache Spark is a plugin suite that aims to accelerate computing operations for Apache Spark by executing pipelines entirely on \hyperlink{abbr:gpu}{GPUs}. It is available for Apache Spark 3 \cite{SparkRapids2020Docs}.
 % A little how
 The plugin uses the RAPIDS AI cuDF\footnote{Open GPU Data Science - \url{https://rapids.ai/} (Accessed: 2021-01-01)} library to extend the Apache Spark programming model, introduced in \Sec{subsec:04_spark_pr-model} \cite{SparkRapids2020Docs, Mcdonald2020SparkRapids, Aguerzame2019GPUAO}.
 
@@ -381,9 +380,9 @@ The plugin uses the RAPIDS AI cuDF\footnote{Open GPU Data Science - \url{https:/
 \subsection{Extension of the Spark programming model}
 \label{subsec:04_rapids_ext}
 % How does it extends DataFrame and SQL
-\paragraph{}The plugin suite extends the Apache Spark programming model with a new DataFrame based on Apache Arrow\footnote{Arrow. A cross-language development platform for in-memory data - \url{https://arrow.apache.org/} (Accessed: 2020-12-03)} data structures. The new DataFrame API aims to accelerate loading, filtering, and manipulation operations on large datasets. In addition, the Catalyst optimizer (described in \SubSec{subsubsec:04_spark_pr-model_catalyst}) is extended to generate GPU-aware query plans \cite{Mcdonald2020SparkRapids, Aguerzame2019GPUAO}.
+\paragraph{}The plugin suite extends the Apache Spark programming model with a new DataFrame based on Apache Arrow\footnote{Arrow. A cross-language development platform for in-memory data - \url{https://arrow.apache.org/} (Accessed: 2020-12-03)} data structures. The new DataFrame \hyperlink{abbr:api}{API} aims to accelerate loading, filtering, and manipulation operations on large datasets. In addition, the Catalyst optimizer (described in \SubSec{subsubsec:04_spark_pr-model_catalyst}) is extended to generate \hyperlink{abbr:gpu}{GPU}-aware query plans \cite{Mcdonald2020SparkRapids, Aguerzame2019GPUAO}.
 % What is Apache Arrow
-Apache arrow is a data platform to build high-performance applications that work with large datasets and improve analytic algorithms. A component of Apache Arrow is the Arrow Columnar Format, an in-memory data structure specification for efficient analytic operations on GPUs and CPUs \cite{ApacheArrow2020Docs}.
+Apache arrow is a data platform to build high-performance applications that work with large datasets and improve analytic algorithms. A component of Apache Arrow is the Arrow Columnar Format, an in-memory data structure specification for efficient analytic operations on \hyperlink{abbr:gpu}{GPUs} and \hyperlink{abbr:cpu}{CPUs} \cite{ApacheArrow2020Docs}.
 
 
 % RAPIDS query plan image
@@ -395,20 +394,20 @@ Apache arrow is a data platform to build high-performance applications that work
 \end{figure}
 \paragraph{}\Fig{fig:04_rapids_ext_query-plan} illustrates how the RAPIDS plugin suite extends the Catalyst optimization process illustrated previously in \Fig{fig:04_spark_pr-model_catalyst_process}.
 % How does the Catalyst create GPU aware plans
-The Spark Catalyst optimizer identifies operators in a query plan that are supported by the RAPIDS API. To execute the query plan, these operators can be scheduled on a GPU within the Spark cluster \cite{Mcdonald2020SparkRapids}. If the RAPIDS APIs do not support operators, a physical plan for CPUs is generated by the Catalyst optimizer to execute RDD operations \cite{Mcdonald2020SparkRapids}.
+The Spark Catalyst optimizer identifies operators in a query plan that are supported by the RAPIDS \hyperlink{abbr:api}{API}. To execute the query plan, these operators can be scheduled on a \hyperlink{abbr:gpu}{GPU} within the Spark cluster \cite{Mcdonald2020SparkRapids}. If the RAPIDS \hyperlink{abbr:api}{APIs} do not support operators, a physical plan for \hyperlink{abbr:cpu}{CPUs} is generated by the Catalyst optimizer to execute \hyperlink{abbr:rdd}{RDD} operations \cite{Mcdonald2020SparkRapids}.
 
 
 \subsection{GPU Accelerated Machine Learning with XGBoost}
 % SHort Intro
 RAPIDS accelerates SparkSQL operations and operations on a DataFrame. Additionally, RAPIDS aims to accelerate the training process of machine learning models.
 % Only XGBoost
-Currently, RAPIDS only supports GPU-acceleration for Extreme Gradient Boosting (XGBoost) in SparkML \cite{Mcdonald2020SparkRapids}.
+Currently, RAPIDS only supports \hyperlink{abbr:gpu}{GPU}-acceleration for Extreme Gradient Boosting (\hyperlink{abbr:xgboost}{XGBoost}) in SparkML \cite{Mcdonald2020SparkRapids}.
 
 
 % Whats XGBoost
-XGBoost is a scalable, distributed gradient-boosted machine learning library. It tries to solve many data science problems, by implementing machine learning algorithms using the gradient boosting technique.
+\hyperlink{abbr:xgboost}{XGBoost} is a scalable, distributed gradient-boosted machine learning library. It tries to solve many data science problems, by implementing \hyperlink{abbr:ml}{ML} algorithms using the gradient boosting technique.
 % XGBoost4j-Spark
-With the XGBoost4j-Spark\footnote{XGBoost Documentation - \url{https://xgboost.readthedocs.io/en/latest/jvm/xgboost4j_spark_tutorial.html} (Accessed: 2021-01-28)} library, XGBoost integrates into the Apache Spark ML library \cite{XGBoost2021Docs}. 
+With the XGBoost4j-Spark\footnote{XGBoost Documentation - \url{https://xgboost.readthedocs.io/en/latest/jvm/xgboost4j_spark_tutorial.html} (Accessed: 2021-01-28)} library, \hyperlink{abbr:xgboost}{XGBoost} integrates into the Apache SparkML library \cite{XGBoost2021Docs}. 
 
 
 \subsection{Installation Requirements for Apache Spark Standalone Mode}
@@ -416,14 +415,14 @@ With the XGBoost4j-Spark\footnote{XGBoost Documentation - \url{https://xgboost.r
 The RAPIDS accelerator for Apache Spark is available for a standalone mode Apache Spark cluster. To operate efficiently, the following requirements need to be installed on all Apache Spark nodes in the cluster \cite{SparkRapids2020Docs}:
 % requirements
 \begin{itemize}
-\item Java Runtime Environment (JRE)
-\item NVIDIA GPU driver
-\item CUDA Toolkit\footnote{CUDA Toolkit - \url{https://developer.nvidia.com/cuda-toolkit} (Accessed: 2021-01-01)}
+\item Java Runtime Environment (\hyperlink{abbr:jre}{JRE})
+\item NVIDIA \hyperlink{abbr:gpu}{GPU} driver
+\item \hyperlink{abbr:cuda}{CUDA} Toolkit\footnote{CUDA Toolkit - \url{https://developer.nvidia.com/cuda-toolkit} (Accessed: 2021-01-01)}
 \item RAPIDS accelerator for Apache Spark Java library
-\item cuDF Java library that is supported by the RAPIDS accelerator Java library, and the installed CUDA toolkit
+\item cuDF Java library that is supported by the RAPIDS accelerator Java library, and the installed \hyperlink{abbr:cuda}{CUDA} toolkit
 \item XGBoost4j Java library
 \item XGBoost4j-Spark Java library
-\item GPU resource discovery script
+\item \hyperlink{abbr:gpu}{GPU} resource discovery script
 \end{itemize}
 
 

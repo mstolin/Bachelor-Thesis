@@ -58,19 +58,19 @@
 \contentsline {subsubsection}{Nodes}{26}{subsubsection*.38}% 
 \contentsline {subsubsection}{Stack}{26}{subsubsection*.39}% 
 \contentsline {section}{\numberline {4.2}Apache Spark}{27}{section.4.2}% 
-\contentsline {subsection}{\numberline {4.2.1}Spark Programming Model}{27}{subsection.4.2.1}% 
+\contentsline {subsection}{\numberline {4.2.1}Spark Programming Model}{28}{subsection.4.2.1}% 
 \contentsline {subsubsection}{Apache Spark Structured API}{28}{subsubsection*.40}% 
 \contentsline {subsubsection}{Resilient Distributed Datasets}{28}{subsubsection*.41}% 
 \contentsline {subsubsection}{Apache Spark Catalyst}{28}{subsubsection*.42}% 
 \contentsline {subsection}{\numberline {4.2.2}Application Architecture}{29}{subsection.4.2.2}% 
-\contentsline {subsubsection}{Driver Process}{29}{subsubsection*.45}% 
+\contentsline {subsubsection}{Driver Process}{30}{subsubsection*.45}% 
 \contentsline {subsubsection}{Executor Process}{30}{subsubsection*.46}% 
 \contentsline {subsubsection}{Cluster Manager}{30}{subsubsection*.47}% 
 \contentsline {subsection}{\numberline {4.2.3}Standalone Cluster Deployment}{31}{subsection.4.2.3}% 
 \contentsline {subsubsection}{Starting Master and Worker Nodes}{31}{subsubsection*.48}% 
 \contentsline {paragraph}{}{31}{paragraph*.49}% 
 \contentsline {paragraph}{}{31}{paragraph*.50}% 
-\contentsline {subsubsection}{Resource Allocation}{31}{subsubsection*.51}% 
+\contentsline {subsubsection}{Resource Allocation}{32}{subsubsection*.51}% 
 \contentsline {subsubsection}{Submitting Applications with spark-submit}{32}{subsubsection*.52}% 
 \contentsline {paragraph}{}{32}{paragraph*.53}% 
 \contentsline {paragraph}{}{32}{paragraph*.54}% 
@@ -78,10 +78,10 @@
 \contentsline {subsection}{\numberline {4.3.1}Extension of the Spark programming model}{32}{subsection.4.3.1}% 
 \contentsline {paragraph}{}{32}{paragraph*.55}% 
 \contentsline {paragraph}{}{33}{paragraph*.57}% 
-\contentsline {subsection}{\numberline {4.3.2}GPU Accelerated Machine Learning with XGBoost}{33}{subsection.4.3.2}% 
+\contentsline {subsection}{\numberline {4.3.2}GPU Accelerated Machine Learning with XGBoost}{34}{subsection.4.3.2}% 
 \contentsline {subsection}{\numberline {4.3.3}Installation Requirements for Apache Spark Standalone Mode}{34}{subsection.4.3.3}% 
 \contentsline {section}{\numberline {4.4}Prometheus}{34}{section.4.4}% 
-\contentsline {subsection}{\numberline {4.4.1}Prometheus Architecture}{34}{subsection.4.4.1}% 
+\contentsline {subsection}{\numberline {4.4.1}Prometheus Architecture}{35}{subsection.4.4.1}% 
 \contentsline {subsubsection}{Prometheus Server}{35}{subsubsection*.59}% 
 \contentsline {subsubsection}{Optional Components}{36}{subsubsection*.60}% 
 \contentsline {subsection}{\numberline {4.4.2}Prometheus Configuration}{37}{subsection.4.4.2}% 
