@@ -24,7 +24,7 @@ The following technologies are used to create the conceptual design of the imple
 \item Apache Spark: Apache Spark is used to distribute the workload of training machine learning applications across multiple workers. The goal is to scale the replicas of Apache Spark workers to increase the performance of the cluster.
 
 % RAPIDS
-\item NVIDIA RAPIDS: In addition to scaling Apache Spark worker node replicas, the NVIDIA RAPIDS plugin suite is used to enable GPU acceleration on the Apache Spark cluster. Enabling Apache Spark to leverage GPUs increases the computational power as well.
+\item NVIDIA RAPIDS: In addition to scaling Apache Spark worker node replicas, the NVIDIA RAPIDS plugin suite is used to enable \hyperlink{abbr:gpu}{GPU} acceleration on the Apache Spark cluster. Enabling Apache Spark to leverage \hyperlink{abbr:gpu}{GPUs} increases the computational power as well.
 
 % Prom
 \item Prometheus: 
@@ -35,8 +35,8 @@ Prometheus fulfils all requirements of a monitoring system introduced in \Sec{se
 cAdvisor serves as a monitoring agent. It scrapes performance metrics from Docker containers. Prometheus pulls the data from cAdvisor to save it in its time-series database.
 
 % dcgm-exporter
-\item dcgm-exporter:
-The dcgm-exporter is used as a monitoring agent as well. It is used to monitor the utilization of the available GPUs.
+\item DCGM-Exporter:
+The DCGM-Exporter is used as a monitoring agent as well. It is used to monitor the utilization of the available \hyperlink{abbr:gpu}{GPUs}.
 \end{itemize}
 
 
@@ -47,22 +47,22 @@ The dcgm-exporter is used as a monitoring agent as well. It is used to monitor t
 % SHort intro
 Suitable metrics are needed to measure the system performance while the Apache Spark cluster is actively performing work.
 % Rapids enabled GPU
-With the RAPIDS accelerator for Apache Spark, the cluster utilizes CPU and GPU computing power to enable parallelization.
+With the RAPIDS accelerator for Apache Spark, the cluster utilizes \hyperlink{abbr:cpu}{CPU} and \hyperlink{abbr:gpu}{GPU} computing power to enable parallelization.
 % SO?
-Therefore, suitable metrics to measure the system performance are the CPU and GPU utilization when the cluster is actively performing computations.
+Therefore, suitable metrics to measure the system performance are the \hyperlink{abbr:cpu}{CPU} and \hyperlink{abbr:gpu}{GPU} utilization when the cluster is actively performing computations.
 
 
 \subsection{CPU Utilization}
 % Sharing CPU cores
-All Apache Spark workers run on the same machine. Therefore, all available CPU cores on the machine are shared across each Apache Spark worker.
+All Apache Spark workers run on the same machine. Therefore, all available \hyperlink{abbr:cpu}{CPU} cores on the machine are shared across each Apache Spark worker.
 %
-To get a value that indicates the CPU utilization between 0\% and 100\%, a metric is needed that represents the percentage of time all performing applications occupy CPU cycles.
+To get a value that indicates the \hyperlink{abbr:cpu}{CPU} utilization between 0\% and 100\%, a metric is needed that represents the percentage of time all performing applications occupy \hyperlink{abbr:cpu}{CPU} cycles.
 % cadvisor
-cAdvisor provides a performance metric called \texttt{container\_cpu\_usage\_seconds\_total}\footnote{Monitoring cAdvisor with Prometheus - \url{https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md} (Accessed: 2021-01-21)}. This metric provides the total amount of CPU seconds consumed by core of a container. 
+cAdvisor provides a performance metric called \texttt{container\_cpu\_usage\_seconds\_total}\footnote{Monitoring cAdvisor with Prometheus - \url{https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md} (Accessed: 2021-01-21)}. This metric provides the total amount of \hyperlink{abbr:cpu}{CPU} seconds consumed by core of a container. 
 % Overall utilization
-To calculate the overall CPU utilization for all Apache Spark worker, the value of the performance metric for each worker container over a specific rate is summed up.
+To calculate the overall \hyperlink{abbr:cpu}{CPU} utilization for all Apache Spark worker, the value of the performance metric for each worker container over a specific rate is summed up.
 %
-In this case, the CPU utilization ($U_{CPU}$) is defined by \Eq{eq:05_metrics_cpu} with $n \in \mathbb{N}$ the number of active workers.
+In this case, the \hyperlink{abbr:cpu}{CPU} utilization ($U_{CPU}$) is defined by \Eq{eq:05_metrics_cpu} with $n \in \mathbb{N}$ the number of active workers.
 
 \begin{equation}
 U_{CPU}=\sum_{n=1}^{\mathbb{N}}container\_cpu\_usage\_seconds\_total_{n}
@@ -71,11 +71,11 @@ U_{CPU}=\sum_{n=1}^{\mathbb{N}}container\_cpu\_usage\_seconds\_total_{n}
 
 \subsection{GPU Utilization}
 %
-In addition to the CPU utilization, Apache Spark workers can utilize GPUs to accelerate the computation work.	
+In addition to the \hyperlink{abbr:cpu}{CPU} utilization, Apache Spark workers can utilize \hyperlink{abbr:gpu}{GPUs} to accelerate the computation work.	
 % The metric
-The dcgm\_exporter agent provides the \texttt{dcgm\_fi\_dev\_gpu\_util} performance metric. This metric returns the percentual utilization per GPU.
+The dcgm\_exporter agent provides the \texttt{dcgm\_fi\_dev\_gpu\_util} performance metric. This metric returns the percentual utilization per \hyperlink{abbr:gpu}{GPU}.
 % How to calculate
-Therefore, the GPU utilization ($U_{GPU}$) is defined by \Eq{eq:05_metrics_gpu} with $n \in \mathbb{N}$ the number of available GPUs.
+Therefore, the \hyperlink{abbr:gpu}{GPU} utilization ($U_{GPU}$) is defined by \Eq{eq:05_metrics_gpu} with $n \in \mathbb{N}$ the number of available \hyperlink{abbr:gpu}{GPUs}.
 
 
 \begin{equation}
@@ -93,7 +93,7 @@ The computing environment is deployed on a single machine.
 % Autonomic
 The goal is to create a self-optimizing autonomic computing environment (described in \Sec{sec:02_ac}).
 % manage
-Furthermore, to manage the environment's components and resources, an autonomic manager is designed according to the MAPE architecture (introduced in \Sec{subsec:02_ac_manager}).
+Furthermore, to manage the environment's components and resources, an autonomic manager is designed according to the \hyperlink{abbr:mape}{MAPE} architecture (introduced in \Sec{subsec:02_ac_manager}).
 % Docker
 For simplicity, each node in the computing environment is deployed as a Docker service in a Docker swarm (introduced in \Sec{subsec:04_docker_swarm}).
 % swarm
@@ -110,9 +110,9 @@ This allows to define the state of each service, which includes the number of re
 % Explain 
 \Fig{fig:05_am_monitoring_loop_arch} provides an overview of the computing environment concept.
 % resources
-The managed resources (introduced in \Sec{subsec:02_ac_resources}) in this environment are the Apache Spark cluster and the GPUs.
+The managed resources (introduced in \Sec{subsec:02_ac_resources}) in this environment are the Apache Spark cluster and the \hyperlink{abbr:gpu}{GPUs}.
 % manager
-These resources are managed by the autonomic manager, which consists of the \textit{Auto-Scaler}, and the monitoring system. Furthermore, the autonomic manager implements all four phases of the MAPE architecture and executes the control-loop.
+These resources are managed by the autonomic manager, which consists of the \textit{Auto-Scaler}, and the monitoring system. Furthermore, the autonomic manager implements all four phases of the \hyperlink{abbr:mape}{MAPE} architecture and executes the control-loop.
 % Docker 
 As mentioned previously, all components are deployed using Docker. Therefore, to manage components in the computing environment, the autonomic manager needs to interact with the overlaying Docker engine.
 
@@ -128,7 +128,7 @@ As mentioned previously, all components are deployed using Docker. Therefore, to
 % Explain
 The control-loop workflow is illustrated in \Fig{fig:05_am_monitoring_loop_workflow}.
 % Monitor
-It starts in the Monitor phase. All monitoring agents (cAdvisor and dcgm-exporter) collect performance metrics from their targets. Next, Prometheus pulls the metrics from all monitoring agents and saves the data in its time-series database.
+It starts in the Monitor phase. All monitoring agents (cAdvisor and DCGM-Exporter) collect performance metrics from their targets. Next, Prometheus pulls the metrics from all monitoring agents and saves the data in its time-series database.
 % Analyze
 In the analyse phase, the \textit{Auto-Scaler} determines if a scaling action is necessary. If a scaling action is not needed, the iteration ends.
 % Plan
@@ -176,13 +176,13 @@ To ensure that the worker nodes are homogeneous, the worker service uses the sam
 % Resources
 This guarantees that each worker uses the same software and has the same amount of computational resources available.
 % RAPIDS
-Additionally, all requirements mentioned in \Sec{subsec:04_rapids_req} to enable GPU acceleration with RAPIDS are installed in a worker image.
+Additionally, all requirements mentioned in \Sec{subsec:04_rapids_req} to enable \hyperlink{abbr:gpu}{GPU} acceleration with RAPIDS are installed in a worker image.
 
 
 \subsection{Deploying an Application with spark-submit}
 \label{subsec:05_spark_spark-submit}
 % Intro
-Whenever the CI pipeline submits an application to the Apache Spark cluster, it deploys a \textit{spark-submit} Docker container.
+Whenever the \hyperlink{abbr:ci}{CI} pipeline submits an application to the Apache Spark cluster, it deploys a \textit{spark-submit} Docker container.
 % spark-submit purpose
 The \textit{spark-submit} container's purpose is to submit an application with the spark-submit executable (described in \Sec{subsubsec:04_spark_standalone_submit}) to the cluster.
 % Resources
@@ -190,7 +190,7 @@ Additionally, the \textit{spark-submit} container sets the number of resources f
 % No support for python in cluster mode
 Apache Spark cluster's standalone mode does not support submitting Python applications with the spark-submit executable from outside of the cluster. Therefore, the spark-submit executable must be executed on the host machine with access to the master node \cite{Apache2020Spark}.
 % Swarm
-To submit an application to the master node, the \textit{spark-submit} container needs to be in the same Docker swarm network. The node is deployed as a Docker container instead of a Docker service. Each spark-submit container is deployed with a different setting depending on the configuration and application of the CI pipeline.
+To submit an application to the master node, the \textit{spark-submit} container needs to be in the same Docker swarm network. The node is deployed as a Docker container instead of a Docker service. Each spark-submit container is deployed with a different setting depending on the configuration and application of the \hyperlink{abbr:ci}{CI} pipeline.
 % End
 After the application has been submitted, the spark-submit node automatically exits.
 
@@ -202,7 +202,7 @@ The autonomic manager is one of the main modules of the computing environment.
 % Responsibilites
 It is responsible for monitoring all Apache Spark worker node performance metrics and automatically scales the number of worker nodes to adapt to a specified performance goal.
 % MAPE
-The autonomic manager is implemented according to the MAPE architecture, as described in \Sec{subsec:02_ac_manager}. To create a complete control-loop, the autonomic manager comprises multiple components, as illustrated in \Fig{fig:05_am_concept}.
+The autonomic manager is implemented according to the \hyperlink{abbr:mape}{MAPE} architecture, as described in \Sec{subsec:02_ac_manager}. To create a complete control-loop, the autonomic manager comprises multiple components, as illustrated in \Fig{fig:05_am_concept}.
 % A figure explaining the concept
 \label{subsec:05_am}
 \begin{figure}[h]
@@ -216,7 +216,7 @@ It consists of a monitoring system (see \Sec{sec:02_monitoring}) and an \textit{
 % Docker
 Each component in the computing environment is deployed as a Docker service. Therefore, Docker swarm takes care of the health status of each component.
 % Monitor
-To monitor overall Docker container performance in the computing environment, the autonomic manager needs access to the overlaying Docker engine. Additionally, to monitor GPU performance, a monitoring agent is needed to scrape metrics from the GPUs.
+To monitor overall Docker container performance in the computing environment, the autonomic manager needs access to the overlaying Docker engine. Additionally, to monitor \hyperlink{abbr:gpu}{GPU} performance, a monitoring agent is needed to scrape metrics from the \hyperlink{abbr:gpu}{GPUs}.
 % Scaling
 Furthermore, the autonomic manager is responsible for scaling the replicas of Apache Spark worker nodes. As introduced in \Sec{sec:05_spark}, a worker service takes care of all worker nodes. Therefore, the autonomic manager needs access to the host machine's Docker Engine in order to send scaling instructions.
 
@@ -225,7 +225,7 @@ Furthermore, the autonomic manager is responsible for scaling the replicas of Ap
 % Short intro
 The monitoring system is responsible for performing the Monitor phase. Therefore it monitors the performance of components in the computing environment and makes them available to the \textit{Auto-Scaler}.
 % Responsibilites
-In this environment, the monitoring system collects worker container performance metrics, and the GPU performance. It is essential to mention that the number of worker nodes varies over time because the \textit{Auto-Scaler} scales the worker nodes' replicas according to the system performance.
+In this environment, the monitoring system collects worker container performance metrics, and the \hyperlink{abbr:gpu}{GPU} performance. It is essential to mention that the number of worker nodes varies over time because the \textit{Auto-Scaler} scales the worker nodes' replicas according to the system performance.
 % The figure
 \begin{figure}[h]
 \centering
@@ -237,7 +237,7 @@ In this environment, the monitoring system collects worker container performance
 \Fig{fig:05_am_monitoring_concept} illustrates the architecture of the monitoring system, which consists of three components:
 % The components
 \begin{itemize}
-\item dcgm-exporter: A monitoring agent that is responsible for collecting GPU performance metrics.
+\item DCGM-Exporter: A monitoring agent that is responsible for collecting \hyperlink{abbr:gpu}{GPU} performance metrics.
 
 \item cAdvisor: A monitoring agent that collects performance metrics of Docker containers in the environment.
 
@@ -249,24 +249,24 @@ In this environment, the monitoring system collects worker container performance
 % Short intro
 The \textit{Auto-Scaler} is the second module of the autonomic manager and responsible to dynamically adjust the replicas of Apache Spark worker nodes in the computing environment to accommodate specified performance goals. 
 % MAPE
-It implements the Analyse, Plan, and Execute phases of the MAPE architecture. Together with the monitoring system, it creates a complete autonomic manager implementing all phases of the MAPE architecture.
+It implements the Analyse, Plan, and Execute phases of the \hyperlink{abbr:mape}{MAPE} architecture. Together with the monitoring system, it creates a complete autonomic manager implementing all phases of the \hyperlink{abbr:mape}{MAPE} architecture.
 % Reactive threshold based 
 The \textit{Auto-Scaler} is designed as a reactive auto-scaler and uses a threshold-based algorithm to scale worker nodes. To define the thresholds, it can be configured using a configuration file.
 
 
 % Prom API
-As illustrated in \Fig{fig:05_am_concept}, the \textit{Auto-Scaler} fetches performance metrics from the Prometheus HTTP API.
+As illustrated in \Fig{fig:05_am_concept}, the \textit{Auto-Scaler} fetches performance metrics from the Prometheus \hyperlink{abbr:http}{HTTP} \hyperlink{abbr:api}{API}.
 % Phases
 After it received the performance metrics, the \textit{Auto-Scaler} analyses the metrics, plans scaling-actions to adjust the number of worker replicas, and sends instructions to the Docker engine.
 
 
 \subsubsection{MAPE Phases}
 % SHort intro
-Mentioned above, the \textit{Auto-Scaler} implements the Analyse, Plan, and Execute phases of the MAPE architecture. Each phase has a different workflow to accommodate its goal.
+Mentioned above, the \textit{Auto-Scaler} implements the Analyse, Plan, and Execute phases of the \hyperlink{abbr:mape}{MAPE} architecture. Each phase has a different workflow to accommodate its goal.
 
 \paragraph{Analyse:}
 % How to analyze
-During each period, the \textit{Auto-Scaler} fetches the performance metrics defined in the configuration file from the Prometheus HTTP API.
+During each period, the \textit{Auto-Scaler} fetches the performance metrics defined in the configuration file from the Prometheus \hyperlink{abbr:http}{HTTP} \hyperlink{abbr:api}{API}.
 % Determine if scaling is needed
 After the metrics are received, the \textit{Auto-Scaler} determines if a scaling action is needed using the Scaling Heat algorithm (introduced in \Sec{sec:04_background_scaling-heat}). If scaling is not necessary, the \textit{Auto-Scaler} continues to collect and analyse performance metrics.
 
@@ -298,7 +298,7 @@ The \textit{Auto-Scaler} needs specific configuration properties to collect the 
 
 \item Recurrence factor: To prevent too many scaling actions,  the autonomic manager should only execute a scaling action,  if the utilization thresholds are violated $n$ times.
 
-\item Prometheus URL: The URL of the Prometheus HTTP API.
+\item Prometheus \hyperlink{abbr:url}{URL}: The Uniform Resource Locator (\hyperlink{abbr:url}{URL}) of the Prometheus \hyperlink{abbr:http}{HTTP} \hyperlink{abbr:api}{API}.
 \end{itemize}
 
 \item Metrics:
@@ -317,7 +317,7 @@ It is possible to define a list of metrics, where each metric needs to have a va
 
 \item Worker thresholds: The maximum and the minimum number of concurrent Spark workers should be defined. To avoid the cold start effect, the minimum amount of workers should be at least 1. 
 
-\item Apache Spark master URI: To distribute the Spark Worker workload, all Spark Worker need to communicate with the Spark master.
+\item Apache Spark master \hyperlink{abbr:uri}{URI}: To distribute the Spark Worker workload, all Spark Worker need to communicate with the Spark master.
 \end{itemize}
 \end{itemize}
 
@@ -331,7 +331,7 @@ This thesis aims to train Machine Learning models by automatically submitting Ap
 %
 The application development lifecycle is automated using a deployment pipeline (introduced in \Sec{sec:02_depl-pipeline}).
 %
-In this conceptual design, a CI pipeline is used to automate the training phase of an application and submit the application to an Apache Spark cluster after the test stage was successful.
+In this conceptual design, a \hyperlink{abbr:ci}{CI} pipeline is used to automate the training phase of an application and submit the application to an Apache Spark cluster after the test stage was successful.
 
 
 % Conceptual figure
@@ -342,7 +342,7 @@ In this conceptual design, a CI pipeline is used to automate the training phase 
 \label{fig:05_deployment_concept}
 \end{figure}
 % Short intro
-\Fig{fig:05_deployment_concept} illustrates the conceptual design of the CI pipeline, which consists of two stages:
+\Fig{fig:05_deployment_concept} illustrates the conceptual design of the \hyperlink{abbr:ci}{CI} pipeline, which consists of two stages:
 \begin{enumerate}
 \item Test stage: Responsible for performing all tests to validate the application source code.
 \item Train stage: If the test stage is successful, the application is submitted to the Apache Spark cluster, in order to train the model.
