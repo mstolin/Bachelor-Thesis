@@ -460,7 +460,7 @@ The Prometheus ecosystem provides multiple components, which can be optional, de
 
 \subsubsection{Prometheus Server}
 % SHort intro
-The Prometheus server is the main component of a Prometheus system. It is responsible for collecting metrics as time-series data from targets and stores the collected data in the built-in TSDB \cite{Bastos2019Prom}. Prometheus uses the concept of scraping to collect metrics from a target. A target host has to expose an endpoint to make metrics available in the Prometheus data format \cite{Pandey2020Monitoring}. Additionally, the Prometheus server triggers alerts to the Alertmanager if a configured condition becomes true \cite{Prom2020Docs}.
+The Prometheus server is the main component of a Prometheus system. It is responsible for collecting metrics as time-series data from targets and stores the collected data in the built-in \hyperlink{abbr:tsdb}{TSDB} \cite{Bastos2019Prom}. Prometheus uses the concept of scraping to collect metrics from a target. A target host has to expose an endpoint to make metrics available in the Prometheus data format \cite{Pandey2020Monitoring}. Additionally, the Prometheus server triggers alerts to the Alertmanager if a configured condition becomes true \cite{Prom2020Docs}.
 % The figure
 The core components of the Prometheus server, as illustrated in \Fig{fig:prom_architecture}, are the following:
 
@@ -471,12 +471,12 @@ As being mentioned before, Prometheus follows a pull-based approach to fetch met
 
 % Retrieval
 \item Retrieval:
-Prometheus sends an HTTP request to each target to scrape metrics. The request is sent each interval, which can be set in the configuration \cite{Brazil2018Prom}.
+Prometheus sends an Hypertext Transfer Protocol (\hyperlink{abbr:http}{HTTP}) request to each target to scrape metrics. The request is sent each interval, which can be set in the configuration \cite{Brazil2018Prom}.
 
 % HTTP API
-\item HTTP API:
-Prometheus provides an HTTP API. This API can be used to request raw data and evaluate PromQL queries.
-A data visualization tool can use this API to create visualizations of the requested metrics \cite{Brazil2018Prom}.
+\item \hyperlink{abbr:http}{HTTP} \hyperlink{abbr:api}{API}:
+Prometheus provides an \hyperlink{abbr:http}{HTTP} \hyperlink{abbr:api}{API}. This \hyperlink{abbr:api}{API} can be used to request raw data and evaluate PromQL queries.
+A data visualization tool can use this \hyperlink{abbr:api}{API} to create visualizations of the requested metrics \cite{Brazil2018Prom}.
 
 % Recording rules and alerts
 \item Recording and alert rules:
@@ -516,7 +516,7 @@ Prometheus supports various visualization tools, such as its built-in visualizat
 \subsection{Prometheus Configuration}
 \label{sec:04_prom_config}
 % Short intro
-Prometheus scraping jobs and rules can be configured using external YAML files \cite{Prom2020Docs}.
+Prometheus scraping jobs and rules can be configured using external \hyperlink{abbr:yml}{YAML} files \cite{Prom2020Docs}.
 % Explain listing
 \Lst{lst:04_prom_config_example} shows a valid configuration file example.
 % global section
@@ -524,7 +524,7 @@ In the \texttt{global} configuration section, default values can be set.
 % scrape_configs
 Targets are defined in the \texttt{scrape\_configs} section. Each target is defined as a scrape job with a unique name.  A target can be defined statically using the \texttt{static\_configs} parameter or dynamically using the available service discovery mechanisms \cite{Prom2020Docs}.
 % rules
-Rules have to be configured in a separate YAML file. To load rules into Prometheus, the file path has to be set in the \texttt{rule\_files} parameter.
+Rules have to be configured in a separate \hyperlink{abbr:yml}{YAML} file. To load rules into Prometheus, the file path has to be set in the \texttt{rule\_files} parameter.
 
 % config file example
 \begin{lstlisting}[label=lst:04_prom_config_example, caption=Prometheus configuration file example]
@@ -577,9 +577,9 @@ cAdvisor collects metrics from the container daemon and Linux cgroups and expose
 % ===========================================
 \section{DCGM-Exporter}
 % Intro
-DCGM-Exporter is a monitoring agent for collecting health and performance metrics from NVIDIA GPUs. It exports collected metrics in the Prometheus format and makes them available using an HTTP endpoint \footnote{DCGM-Exporter - \url{https://ngc.nvidia.com/catalog/containers/nvidia:k8s:dcgm-exporter} (Accessed: 2021-02-12)}.
+DCGM-Exporter is a monitoring agent for collecting health and performance metrics from NVIDIA \hyperlink{abbr:gpu}{GPUs}. It exports collected metrics in the Prometheus format and makes them available using an \hyperlink{abbr:http}{HTTP} endpoint \footnote{DCGM-Exporter - \url{https://ngc.nvidia.com/catalog/containers/nvidia:k8s:dcgm-exporter} (Accessed: 2021-02-12)}.
 % DCGM
-The DCGM-Exporter is built on top of the NVIDIA Data Center GPU Manager (DCGM), a tool-suite for managing and monitoring NVIDIA GPUs in a cluster \footnote{NVIDIA DCGM - \url{https://developer.nvidia.com/dcgm} (Accessed: 2021-02-12)}.
+The DCGM-Exporter is built on top of the NVIDIA Data Center GPU Manager (\hyperlink{abbr:dcgm}{DCGM}), a tool-suite for managing and monitoring NVIDIA \hyperlink{abbr:gpu}{GPUs} in a cluster \footnote{NVIDIA DCGM - \url{https://developer.nvidia.com/dcgm} (Accessed: 2021-02-12)}.
 %
 It can be deployed to a cluster using a Docker container. \Lst{lst:04_dcgm_deploy} provides an example of deploying the DCGM-Exporter using a Docker container. As a requirement, the NVIDIA Container Toolkit\footnote{NVIDIA Cloud Native technologies documentation - \url{https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html} (Accessed: 2021-01-28)} has to be installed on the host.
 \begin{lstlisting}[label=lst:04_dcgm_deploy, caption=DCGM-Exporter deployment using a Docker container, language=bash, numbers=none]
@@ -597,17 +597,17 @@ $ docker run -d --rm \
 % ===========================================
 \section{GitLab CI/CD}
 \label{sec:04_background_gitlab}
-GitLab CI/CD is a tool integrated into the GitLab platform that enables Continuous Integration (CI) and Continuous Delivery/Deployment (CD) for software development.
+GitLab CI/CD is a tool integrated into the GitLab platform that enables Continuous Integration (\hyperlink{abbr:ci}{CI}) and Continuous Delivery/Deployment (\hyperlink{abbr:cd}{CD}) for software development.
 % Gitlab platform
-The GitLab platform integrates many development features like Git repository management and CI/CD.
+The GitLab platform integrates many development features like Git repository management and \hyperlink{abbr:ci}{CI}/\hyperlink{abbr:cd}{CD}.
 % How it works
-By pushing code changes to the codebase, GitLab CI/CD executes a pipeline of scripts to automate the software development cycle's CI and CD processes.
+By pushing code changes to the codebase, GitLab CI/CD executes a pipeline of scripts to automate the software development cycle's \hyperlink{abbr:ci}{CI} and \hyperlink{abbr:cd}{CD} processes.
 % CI
-A CI pipeline consists of scripts that build, test, and validate the updated codebase.
+A \hyperlink{abbr:ci}{CI} pipeline consists of scripts that build, test, and validate the updated codebase.
 % CD
-A CD pipeline is responsible for deploying the application for production after the CI pipeline was executed successfully.
+A \hyperlink{abbr:cd}{CD} pipeline is responsible for deploying the application for production after the \hyperlink{abbr:ci}{CI} pipeline was executed successfully.
 % Summary
-Adding CI/CD pipelines to the software development cycle of an application allows to catch bugs and errors early. This ensures that an application deployed to production will conform to established standards \cite{Gitlab2020Docs}.
+Adding \hyperlink{abbr:ci}{CI}/\hyperlink{abbr:cd}{CD} pipelines to the software development cycle of an application allows to catch bugs and errors early. This ensures that an application deployed to production will conform to established standards \cite{Gitlab2020Docs}.
 
 \subsection{CI/CD Pipeline}
 \label{subsec:04_background_gitlab_pipeline}
@@ -636,7 +636,7 @@ The configuration file will create a pipeline that performs after a push to the 
 \end{figure}
 
 % Explain figure
-\Fig{fig:04_gitlab_pipeline_basic_arch} illustrates an architecture of a basic CI/CD pipeline.
+\Fig{fig:04_gitlab_pipeline_basic_arch} illustrates an architecture of a basic \hyperlink{abbr:ci}{CI}/\hyperlink{abbr:cd}{CD} pipeline.
 % Two stages
 The pipeline consists of a build and a test stage, which are performed in order. The test stage will only be performed after the build stage was successful.
 % Build stage
@@ -789,9 +789,9 @@ After executing a scaling action, the heat value is reset to 0 \cite{Barna2017El
 \label{sec:04_background_khpa}
 \paragraph{}
 % Short intro
-Kubernetes Horizontal Pod Autoscaler (KHPA) is an auto-scaling algorithm used in Kubernetes, which is an orchestration tool that allows to create and deploy units called Pods. A Pod is a running process on a cluster that encapsulates an application.
+Kubernetes Horizontal Pod Autoscaler (\hyperlink{abbr:khpa}{KHPA}) is an auto-scaling algorithm used in Kubernetes, which is an orchestration tool that allows to create and deploy units called Pods. A Pod is a running process on a cluster that encapsulates an application.
 % What
-KHPA scales the number of replicas per Pod based on the utilization of performance metrics.
+\hyperlink{abbr:khpa}{KHPA} scales the number of replicas per Pod based on the utilization of performance metrics.
 % Interval
 The algorithm is based on a control loop. Each $n$ seconds, the algorithm gathers performance metrics and computes the target number of replicas to achieve the desired utilization of a performance metric \cite{Casalicchio2017AutoScaleCont}.
 
@@ -801,7 +801,7 @@ The algorithm computes the number of replicas for a single performance metric. I
 
 
 \paragraph{}
-KHPA takes as input the number of active replicas for a pod ($active\_replicas$), the utilization of the performance metric of each replica ($pod\_utilization$), and the target utilization of the performance metric ($target\_utilization$).
+\hyperlink{abbr:khpa}{KHPA} takes as input the number of active replicas for a pod ($active\_replicas$), the utilization of the performance metric of each replica ($pod\_utilization$), and the target utilization of the performance metric ($target\_utilization$).
 % Intro formula
 The formula to compute the target number of pods $P$ is defined by \cite{Kubernetes2021Docs}:
 % The formula
