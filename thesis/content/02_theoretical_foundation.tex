@@ -39,7 +39,7 @@ In an environment with different types of nodes, creating these strategies is mo
 \subsection{Vertical Scaling}
 \label{subsec:02_foundations_scalability_vertical-scaling}
 % Concept
-Vertical scaling refers to increasing the overall capacity by improving the computing power with additional hardware of individual nodes (e.g., adding memory, increasing number of CPU cores) \cite{Wilder2012CloudPatterns}.
+Vertical scaling refers to increasing the overall capacity by improving the computing power with additional hardware of individual nodes (e.g., adding memory, increasing number of \hyperlink{abbr:cpu}{CPU} cores) \cite{Wilder2012CloudPatterns}.
 
 
 % hardware capacity
@@ -57,7 +57,7 @@ Additionally, changing the physical hardware of a running system can require a d
 % Short Abstract
 A deployment pipeline is an implementation of the process of getting software from source code to production.
 % Based on CI
-It is based on the concept of Continuous Integration (CI).
+Furthermore, it is based on the concept of Continuous Integration (\hyperlink{abbr:ci}{CI}).
 % Involves what
 The process involves building, testing, and deploying software through automated scripts \cite{Farley2010CI}.
 
@@ -66,23 +66,23 @@ The process involves building, testing, and deploying software through automated
 % Abtract def
 Continuous Integration is a development practice where automated scripts validate each change on a primary codebase. This ensures that errors are detected and fixed in an early development stage \cite{Duvall2007CI}.
 % What its about
-The CI process is responsible for building and testing the software to guarantee that it is in a releasable state at all times \cite{Rossel2017CICD}.
+The \hyperlink{abbr:ci}{CI} process is responsible for building and testing the software to guarantee that it is in a releasable state at all times \cite{Rossel2017CICD}.
 % Advantages
-CI contributes with the following advantages to the development life cycle of an application:
+\hyperlink{abbr:ci}{CI} contributes with the following advantages to the development life cycle of an application:
 \begin{itemize}
 \item Reduce risks:
-The CI process runs tests and validates the software on each change. Errors are detected in an early stage and can be fixed immediately \cite{Duvall2007CI}.
+The \hyperlink{abbr:ci}{CI} process runs tests and validates the software on each change. Errors are detected in an early stage and can be fixed immediately \cite{Duvall2007CI}.
 
 \item Reduce manual processes:
 % Same time
-The CI process will perform every time a commit has been made to the code base.
+The \hyperlink{abbr:ci}{CI} process will perform every time a commit has been made to the code base.
 % Same process
 Each run is processed the same way every time.
 % No human
 Therefore, no human intervention is needed to start the process, which saves time and cost \cite{Duvall2007CI}.
 
 \item Generate deployable software:
-If an error occurs during a CI run, developers will be informed, and fixes can be applied immediately.
+If an error occurs during a \hyperlink{abbr:ci}{CI} run, developers will be informed, and fixes can be applied immediately.
 This ensures that the software is in a deployable state at all times \cite{Duvall2007CI}.
 \end{itemize}
 
@@ -90,18 +90,18 @@ This ensures that the software is in a deployable state at all times \cite{Duval
 \subsection{Requirements of a Continuous Integration Process}
 \label{sec:02_depl-pipeline_requirements}
 % Requirements
-The implementation of a CI process is based on several requirements:
+The implementation of a \hyperlink{abbr:ci}{CI} process is based on several requirements:
 % The list
 \begin{enumerate}
 \item Version control repository:
 To manage changes to the code base, the source code and all other assets like the build script should be hosted on a single version control repository.
 % Changes
-Each change on the code base triggers the CI process on the build server to run against the latest version available \cite{Duvall2007CI}.
+Each change on the code base triggers the \hyperlink{abbr:ci}{CI} process on the build server to run against the latest version available \cite{Duvall2007CI}.
 
 \item Build server:
 The build server is responsible for monitoring the code base for changes.
 % Execute
-If a change is committed, the build server automatically executes the CI scripts in order \cite{Rossel2017CICD, Duvall2007CI}.
+If a change is committed, the build server automatically executes the \hyperlink{abbr:ci}{CI} scripts in order \cite{Rossel2017CICD, Duvall2007CI}.
 
 \item Build scripts:
 This includes all automation scripts to validate the source code \cite{Duvall2007CI}. Typical examples are:
@@ -115,13 +115,13 @@ This includes all automation scripts to validate the source code \cite{Duvall200
 
 \subsection{Continuous Integration Process Implementation Example}
 % Explain workflow
-\paragraph{}\Fig{fig:02_foundation_deployment_ci_scenario} demonstrates the CI scenario.
+\paragraph{}\Fig{fig:02_foundation_deployment_ci_scenario} demonstrates the \hyperlink{abbr:ci}{CI} scenario.
 % Commit changes
 First, a developer commits changes to the version control repository.
 % CI
-The CI server monitors the repository for changes. After the change has been committed, the CI server pulls the latest version of the source code and executes all build scripts in sequence to integrate the software.
+The \hyperlink{abbr:ci}{CI} server monitors the repository for changes. After the change has been committed, the \hyperlink{abbr:ci}{CI} server pulls the latest version of the source code and executes all build scripts in sequence to integrate the software.
 % Feedback
-Finally, the CI server sends feedback to inform the developer about the build script status  \cite{Duvall2007CI}.
+Finally, the \hyperlink{abbr:ci}{CI} server sends feedback to inform the developer about the build script status  \cite{Duvall2007CI}.
 
 
 % The scenario figure
@@ -134,9 +134,9 @@ Finally, the CI server sends feedback to inform the developer about the build sc
 
 
 % Explain build script order
-\paragraph{}A CI run should be executed in a headless automated process. It is not feasible to rely on a manual process.
+\paragraph{}A \hyperlink{abbr:ci}{CI} run should be executed in a headless automated process. It is not feasible to rely on a manual process.
 % Automated scripts
-All assets to perform the CI run should be accessed from the repository. Therefore a machine can start the build script process by executing a command script in an automated fashion \cite{Duvall2007CI}.
+All assets to perform the \hyperlink{abbr:ci}{CI} run should be accessed from the repository. Therefore a machine can start the build script process by executing a command script in an automated fashion \cite{Duvall2007CI}.
 % The example
 An example of a logical build script order is illustrated in \Fig{fig:02_foundation_deployment_ci_script-order}.
 
@@ -240,7 +240,7 @@ The autonomic manager implements the control-loop to collect, aggregate, filter 
 % Knowledge
 In addition, the autonomic manager gains knowledge through analysing the managed resources \cite{Murch2004Autonomic}.
 % MAPE
-The autonomic computing concept digests the MAPE model to implement an autonomic manager, as illustrated in \Fig{fig:ac_manager} \cite{Goscinski2011CloudComputing}.
+The autonomic computing concept digests the \hyperlink{abbr:mape}{MAPE} model to implement an autonomic manager, as illustrated in \Fig{fig:ac_manager} \cite{Goscinski2011CloudComputing}.
 
 \begin{itemize}
 \item Monitor:
@@ -325,9 +325,9 @@ The requirements for a monitoring system that can monitor a dynamic changing env
 % Continuous data
 Continuous data needs to be stored in the most efficient way.
 % TSDB
-Time-series databases (TSDB) are optimized to store and retrieve time-series data.
+Time-series databases (\hyperlink{abbr:tsdb}{TSDBs}) are optimized to store and retrieve time-series data.
 % Format
-In a time-series database, metrics will be stored in a compact and optimized format. This allows the database to store a massive amount of time-series data on a single machine.
+In a \hyperlink{abbr:tsdb}{TSDB}, metrics are stored in a compact and optimized format. This allows the database to store a massive amount of time-series data on a single machine.
 
 
 \subsection{Push- and Pull-Based Monitoring Systems}

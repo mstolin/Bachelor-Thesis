@@ -19,17 +19,17 @@ To accommodate this thesis research objective, the literature research according
 \paragraph{}
 Lorido-Botrán et al. \cite{Lorido2014Review} reviewed state-of-the-art literature about auto-scaling and explain auto-scaling process proposals in a cloud environment.
 % SLA and costs
-It is mentioned that an \textit{Auto-Scaler} is responsible to find a trade-off between meeting the Service Level Agreement (SLA) and keeping the cost of renting resources low.
+It is mentioned that an \textit{Auto-Scaler} is responsible to find a trade-off between meeting the Service Level Agreement (\hyperlink{abbr:sla}{SLA}) and keeping the cost of renting resources low.
 % SLA
-Two types of SLA exists while maintaining an acceptable trade-off: The application SLA and the resource SLA. The former is a contract between the application owner and the end-users (e.g., a certain response time). The resource SLA is agreed upon by the infrastructure provider and the application owner (e.g., 99.9\% availability).
+Two types of \hyperlink{abbr:sla}{SLA} exists while maintaining an acceptable trade-off: The application \hyperlink{abbr:sla}{SLA} and the resource \hyperlink{abbr:sla}{SLA}. The former is a contract between the application owner and the end-users (e.g., a certain response time). The resource \hyperlink{abbr:sla}{SLA} is agreed upon by the infrastructure provider and the application owner (e.g., 99.9\% availability).
 % Auto-scaling problems
-They introduced three problems \textit{Auto-Scaler} faces while scaling an environment and meeting the SLA:
+They introduced three problems \textit{Auto-Scaler} faces while scaling an environment and meeting the \hyperlink{abbr:sla}{SLA}:
 % The problems
 \begin{enumerate}
 %1
 \item Under-provisioning:
 An application is under-provisioned if it needs more resources to process the incoming workload.
-To make resources available and return the application to its normal state may take some time, which causes SLA violations.
+To make resources available and return the application to its normal state may take some time, which causes \hyperlink{abbr:sla}{SLA} violations.
 % 2
 \item Over-provisioning:
 Applications with more resources available than needed will lead to unnecessary costs for the client.
@@ -39,11 +39,11 @@ If scaling-actions are executed too quickly before the impact is available, a co
 A cooldown period after a scaling-action allows preventing oscillation.
 \end{enumerate}
 % MAPE
-To prevent the mentioned problems from occurring, the authors introduced and explained the MAPE architecture (cf. \Sec{sec:02_ac}).
+To prevent the mentioned problems from occurring, the authors introduced and explained the \hyperlink{abbr:mape}{MAPE} architecture (cf. \Sec{sec:02_ac}).
 % MAPE phases
-MAPE consists of four different phases: Monitor, Analyse, Plan, and Execute.
+\hyperlink{abbr:mape}{MAPE} consists of four different phases: Monitor, Analyse, Plan, and Execute.
 % Only AP
-There exist \textit{Auto-Scaler} proposals which only focus on the Analyse, and Planning phase architecture of the MAPE architecture.
+There exist \textit{Auto-Scaler} proposals which only focus on the Analyse, and Planning phase architecture of the \hyperlink{abbr:mape}{MAPE} architecture.
 % Analysing and planning techniques
 Several techniques for the Analyse phase are being introduced: Queuing theory and time-series analysis.
 As well as for the planning phase: Threshold-based rules, reinforcement learning, and control theory.
@@ -56,12 +56,12 @@ Reactive \textit{Auto-Scalers} use techniques to respond to the environment's cu
 \paragraph{}
 Srirama et al. \cite{Srirama2020AppDeplyCont} designed a heuristic-based auto-scaling strategy for container-based microservices in a cloud environment. The purpose of the auto-scaling strategy is to balance the overall resource utilization across microservices in the environment.
 % Results
-The proposed auto-scaling strategy performed better than state-of-the-art algorithms in processing time, processing cost, and resource utilization. The processing cost of microservices was reduced by 12-20\%. The CPU and memory utilization of cloud-servers were maximized by 9-15\% and 10-18\%, respectively.
+The proposed auto-scaling strategy performed better than state-of-the-art algorithms in processing time, processing cost, and resource utilization. The processing cost of microservices was reduced by 12-20\%. The \hyperlink{abbr:cpu}{CPU} and memory utilization of cloud-servers were maximized by 9-15\% and 10-18\%, respectively.
 
 
 % Comparison of auto-scaling techniques for cloud environments
 \paragraph{}
-Lorido-Botrán et al.  \cite{Botran2013AutoScalingComp} compared different representative auto-scaling techniques in a simulation in terms of cost and SLO violations. They compared load balancing with static threshold-based rules, reactive and proactive techniques based on CPU load.
+Lorido-Botrán et al.  \cite{Botran2013AutoScalingComp} compared different representative auto-scaling techniques in a simulation in terms of cost and \hyperlink{abbr:sla}{SLA} violations. They compared load balancing with static threshold-based rules, reactive and proactive techniques based on \hyperlink{abbr:cpu}{CPU} load.
 Load balancing is based on static rules defining the upper and lower thresholds of a specific load (e.g., \textit{if CPU > 80\% then scale-out; if CPU < 20\% then scale-in}). The difficulty of this technique is to set the ideal rules. False rules can lead to bad performance. Proactive techniques try to predict the future values of performance metrics based on historical data. Reactive techniques are based on control theory to automate the system management. To overcome the difficulties of static thresholds, the authors proposed a new auto-scaling technique using rules with dynamic thresholds. The results showed that for auto-scaling techniques to scale well, it highly depends on parameter tuning. The best result was achieved with proactive results with a minimum threshold of 20\% and a maximum of 60\%.
 
 
@@ -73,18 +73,18 @@ The Scaling Heat algorithm will be used for decision making in this thesis and i
 
 
 % Auto-scaling of Containers: the Impact of Relative and Absolute Metrics
-\paragraph{}Casalicchio et al. \cite{Casalicchio2017AutoScaleCont} focused on the difference of absolute and relative metrics for container-based auto-scaling algorithms. They analysed the mechanism of the \textit{Kubernetes Horizontal Pod Auto-Scaling} (KHPA) algorithm and proposed a new auto-scaling algorithm based on KHPA using absolute metrics called \textit{KHPA-A}. The results showed that KHPA-A could reduce response time between 0.5x and 0.66x compared to KHPA. In addition, their work proposed an architecture using cAdvisor for collecting container performance metrics, Prometheus for monitoring, alerting, storing time-series data, and Grafana for visualizing metrics. 
+\paragraph{}Casalicchio et al. \cite{Casalicchio2017AutoScaleCont} focused on the difference of absolute and relative metrics for container-based auto-scaling algorithms. They analysed the mechanism of the \textit{Kubernetes Horizontal Pod Auto-Scaling} (\hyperlink{abbr:khpa}{KHPA}) algorithm and proposed a new auto-scaling algorithm based on \hyperlink{abbr:khpa}{KHPA} using absolute metrics called \textit{KHPA-A}. The results showed that KHPA-A could reduce response time between 0.5x and 0.66x compared to \hyperlink{abbr:khpa}{KHPA}. In addition, their work proposed an architecture using cAdvisor for collecting container performance metrics, Prometheus for monitoring, alerting, storing time-series data, and Grafana for visualizing metrics. 
 % KHPA
 Absolute metrics are more appropriate when it comes to efficient resource allocation. Therefore, the KHPA-A algorithm is more efficient in vertical scaling of resources.
 % This thesis
-In this thesis, the focus for scaling strategies is based on the horizontal scaling approach. Therefore, the KHPA algorithm will be used throughout this thesis and is explained in detail in \Sec{sec:04_background_khpa}.
+In this thesis, the focus for scaling strategies is based on the horizontal scaling approach. Therefore, the \hyperlink{abbr:khpa}{KHPA} algorithm will be used throughout this thesis and is explained in detail in \Sec{sec:04_background_khpa}.
 
 
 % ===========================================
 % ===========================================
 \section{GPU accelerated Apache Spark Cluster}
 % Short intro
-This thesis aims to enable GPU acceleration for Apache Spark.
+This thesis aims to enable \hyperlink{abbr:gpu}{GPU} acceleration for Apache Spark.
 % Research
 In research, many solutions have been proposed which try to solve the problem in similar ways.
 % Following
@@ -93,9 +93,9 @@ In the following, three different approaches are introduced.
 
 % HeteroSpark
 \paragraph{}
-Li et al. \cite{Li2015HeteroSpark} developed a middleware framework called \textit{HeteroSpark} to enable GPU acceleration on Apache Spark worker nodes. HeteroSpark listens for function calls in Apache Spark applications and invokes the GPU kernel for acceleration. For communication between CPU and GPU, HeteroSpark implements a CPU-GPU communication layer for each worker node using the Java Remote Method Invocation (RMI) API. To execute operations on the GPU, the CPU Java Virtual Machine (JVM) will send serialized data to the GPU JVM using the RMI communication interface. The GPU JVM will deserialize the received data for execution.
+Li et al. \cite{Li2015HeteroSpark} developed a middleware framework called \textit{HeteroSpark} to enable \hyperlink{abbr:gpu}{GPU} acceleration on Apache Spark worker nodes. HeteroSpark listens for function calls in Apache Spark applications and invokes the \hyperlink{abbr:gpu}{GPU} kernel for acceleration. For communication between \hyperlink{abbr:cpu}{CPU} and \hyperlink{abbr:gpu}{GPU}, HeteroSpark implements a \hyperlink{abbr:cpu}{CPU}-\hyperlink{abbr:gpu}{GPU} communication layer for each worker node using the Java Remote Method Invocation (\hyperlink{abbr:rmi}{RMI}) \hyperlink{abbr:api}{API}. To execute operations on the \hyperlink{abbr:gpu}{GPU}, the \hyperlink{abbr:cpu}{CPU} Java Virtual Machine (\hyperlink{abbr:jvm}{JVM}) will send serialized data to the \hyperlink{abbr:gpu}{GPU} JVM using the \hyperlink{abbr:rmi}{RMI} communication interface. The \hyperlink{abbr:gpu}{GPU} \hyperlink{abbr:jvm}{JVM} will deserialize the received data for execution.
 % Design
-The design provides a plug-n-play approach and an API for the user to call functions with GPU support.
+The design provides a plug-n-play approach and an \hyperlink{abbr:api}{API} for the user to call functions with \hyperlink{abbr:gpu}{GPU} support.
 % Results
 Overall, HeteroSpark is able to achieve an 18x speed-up for various Machine Learning applications running on Apache Spark.
 
@@ -104,69 +104,69 @@ Overall, HeteroSpark is able to achieve an 18x speed-up for various Machine Lear
 \paragraph{}
 Klodjan et al. \cite{Klodjan2018HetSpark} introduced \textit{HetSpark}, a modification of Apache Spark.
 % The goal
-HetSpark extends Apache Spark with two executors, a GPU accelerated executor and a commodity class. 
+HetSpark extends Apache Spark with two executors, a \hyperlink{abbr:gpu}{GPU} accelerated executor and a commodity class. 
 % accelerated
-The accelerated executor uses VineTalk\cite{Mavridis2017VineTalk} for GPU acceleration.
+The accelerated executor uses VineTalk\cite{Mavridis2017VineTalk} for \hyperlink{abbr:gpu}{GPU} acceleration.
 % VineTalk
-VineTalk contributes as a transport layer between the application and accelerator devices (CPU or GPU).
+VineTalk contributes as a transport layer between the application and accelerator devices (\hyperlink{abbr:cpu}{CPU} or \hyperlink{abbr:gpu}{GPU}).
 % Byte code analysis
-To detect suitable tasks for GPU acceleration, HetSpark uses the ASM\footnote{ASM - \url{https://asm.ow2.io/} (Accessed: 2021-01-11)} framework to analyse the byte code of Java binaries.
+To detect suitable tasks for \hyperlink{abbr:gpu}{GPU} acceleration, HetSpark uses the ASM\footnote{ASM - \url{https://asm.ow2.io/} (Accessed: 2021-01-11)} framework to analyse the byte code of Java binaries.
 % Results
-The authors observed that for compute-intensive tasks, GPU accelerated executers are preferable, while for linear tasks, CPU-only accelerators should be used.
+The authors observed that for compute-intensive tasks, \hyperlink{abbr:gpu}{GPU} accelerated executers are preferable, while for linear tasks, \hyperlink{abbr:cpu}{CPU}-only accelerators should be used.
 
 
 % Spark-GPU
 \paragraph{}
 % SHort intro
-Yuan et al. \cite{Yuan2016SparkGPU} proposed \textit{SparkGPU} a CPU-GPU hybrid system built on top of Apache Spark.
+Yuan et al. \cite{Yuan2016SparkGPU} proposed \textit{SparkGPU} a \hyperlink{abbr:cpu}{CPU}-\hyperlink{abbr:gpu}{GPU} hybrid system built on top of Apache Spark.
 % The goal
-The goal of SparkGPU is to utilize GPUs to achieve high performance and throughput.
+The goal of SparkGPU is to utilize \hyperlink{abbr:gpu}{GPUs} to achieve high performance and throughput.
 % Problems trying to solve
 SparkGPU tries to solve the following problems statements:
 % The problems
 \begin{enumerate}
 % Iterator
 \item The iterator model of Apache Spark executes one element at a time.
-This approach does not match the GPU architecture and underutilizes GPU resources.
+This approach does not match the \hyperlink{abbr:gpu}{GPU} architecture and underutilizes \hyperlink{abbr:gpu}{GPU} resources.
 
 % JVM
-\item Apache Spark runs on the JVM and therefore stores its data on the heap memory.
-GPU programs are usually implemented with GPU programming models like CUDA, which cannot access data on the heap.
+\item Apache Spark runs on the \hyperlink{abbr:jvm}{JVM} and therefore stores its data on the heap memory.
+\hyperlink{abbr:gpu}{GPU} programs are usually implemented with \hyperlink{abbr:gpu}{GPU} programming models like Compute Unified Device Architecture (\hyperlink{abbr:cuda}{CUDA}), which cannot access data on the heap.
 Therefore, data must be copied between the heap and native memory frequently. These copy operations are expensive.
 
 % Cluster manager
-\item Existing cluster manager of Apache Spark manage GPUs in a coarse-grained fashion.
-This can lead to crashes because of insufficient memory when multiple programs run on the GPU concurrently.
+\item Existing cluster manager of Apache Spark manage \hyperlink{abbr:gpu}{GPUs} in a coarse-grained fashion.
+This can lead to crashes because of insufficient memory when multiple programs run on the \hyperlink{abbr:gpu}{GPU} concurrently.
 \end{enumerate}
 % Extension
 To solve the mentioned problem statements, SparkGPU extends Apache Spark in the following ways:
 \begin{itemize}
-\item Enable block processing on GPUs by extending the Apache Sparks iterator model. Therefore Apache Spark can better utilize GPUs to accelerate application performance.
+\item Enable block processing on \hyperlink{abbr:gpu}{GPUs} by extending the Apache Sparks iterator model. Therefore Apache Spark can better utilize \hyperlink{abbr:gpu}{GPUs} to accelerate application performance.
 
-\item To offload queries to the GPU, SparkGPU extends the query optimizer. The query optimizer will create query plans with both CPU and GPU operators.
+\item To offload queries to the \hyperlink{abbr:gpu}{GPU}, SparkGPU extends the query optimizer. The query optimizer will create query plans with both \hyperlink{abbr:cpu}{CPU} and \hyperlink{abbr:gpu}{GPU} operators.
 
-\item To manage GPUs efficiently, SparkGPU extends the cluster manager and the task scheduler.
+\item To manage \hyperlink{abbr:gpu}{GPUs} efficiently, SparkGPU extends the cluster manager and the task scheduler.
 \end{itemize}
 % Intro GPU-RDD
-To extend the programming API, SparkGPU provides a new RDD type called GPU-RDD.
+To extend the programming \hyperlink{abbr:api}{API}, SparkGPU provides a new Resilient Distributed Dataset (\hyperlink{abbr:rdd}{RDD}) type called GPU-RDD.
 % OPtimized for GPU
-A GPU-RDD is optimized to utilize the GPU.
-SparkGPU utilizes native memory on the GPU instead of the Java heap to buffer data in GPU-RDDs.
+A GPU-RDD is optimized to utilize the \hyperlink{abbr:gpu}{GPU}.
+SparkGPU utilizes native memory on the \hyperlink{abbr:gpu}{GPU} instead of the Java heap to buffer data in GPU-RDDs.
 % Operations
-Operations performed on a GPU-RDD can be performed on the GPU. Several built-in operators on the GPU-RDD are provided, which support data-parallelism.
+Operations performed on a GPU-RDD can be performed on the \hyperlink{abbr:gpu}{GPU}. Several built-in operators on the GPU-RDD are provided, which support data-parallelism.
 
 
 % The query optimizer
-SparkGPU can execute SQL queries on both CPU and GPU.
-By adding a set of GPU rules and strategies, SparkGPU extends the query optimizer to find the best execution plan for GPU scheduling.
+SparkGPU can execute Structured Query Language (\hyperlink{abbr:sql}{SQL}) queries on both \hyperlink{abbr:cpu}{CPU} and \hyperlink{abbr:gpu}{GPU}.
+By adding a set of \hyperlink{abbr:gpu}{GPU} rules and strategies, SparkGPU extends the query optimizer to find the best execution plan for \hyperlink{abbr:gpu}{GPU} scheduling.
 
 % Cluster manager
-To manage GPU memory on shared GPUs, SparkGPU provides a user-level GPU-management library.
+To manage \hyperlink{abbr:gpu}{GPU} memory on shared \hyperlink{abbr:gpu}{GPUs}, SparkGPU provides a user-level \hyperlink{abbr:gpu}{GPU}-management library.
 % Mem contention
 When memory contention happens, the library will ensure that SparkGPU will stop scheduling new tasks to the Apache Spark cluster.
 
 % End
-SparkGPU accomplished to improve the performance of machine learning algorithms up to 16.13x and SQL query execution performance up to 4.83x.
+SparkGPU accomplished to improve the performance of machine learning algorithms up to 16.13x and \hyperlink{abbr:sql}{SQL} query execution performance up to 4.83x.
 
 
 % ===========================================
