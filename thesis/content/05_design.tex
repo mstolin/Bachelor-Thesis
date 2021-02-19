@@ -42,50 +42,6 @@ The DCGM-Exporter is used as a monitoring agent as well. It is used to monitor t
 
 % ===========================================
 % ===========================================
-\section{Identification of Suitable Metrics for Scaling}
-\label{sec:05_metrics}
-% SHort intro
-Suitable metrics are needed to measure the system performance while the Apache Spark cluster is actively performing work.
-% Rapids enabled GPU
-With the RAPIDS accelerator for Apache Spark, the cluster utilizes \hyperlink{abbr:cpu}{CPU} and \hyperlink{abbr:gpu}{GPU} computing power to enable parallelization.
-% SO?
-Therefore, suitable metrics to measure the system performance are the \hyperlink{abbr:cpu}{CPU} and \hyperlink{abbr:gpu}{GPU} utilization when the cluster is actively performing computations.
-
-
-\subsection{CPU Utilization}
-% Sharing CPU cores
-All Apache Spark workers run on the same machine. Therefore, all available \hyperlink{abbr:cpu}{CPU} cores on the machine are shared across each Apache Spark worker.
-%
-To get a value that indicates the \hyperlink{abbr:cpu}{CPU} utilization between 0\% and 100\%, a metric is needed that represents the percentage of time all performing applications occupy \hyperlink{abbr:cpu}{CPU} cycles.
-% cadvisor
-cAdvisor provides a performance metric called \texttt{container\_cpu\_usage\_seconds\_total}\footnote{Monitoring cAdvisor with Prometheus - \url{https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md} (Accessed: 2021-01-21)}. This metric provides the total amount of \hyperlink{abbr:cpu}{CPU} seconds consumed by core of a container. 
-% Overall utilization
-To calculate the overall \hyperlink{abbr:cpu}{CPU} utilization for all Apache Spark worker, the value of the performance metric for each worker container over a specific rate is summed up.
-%
-In this case, the \hyperlink{abbr:cpu}{CPU} utilization ($U_{CPU}$) is defined by \Eq{eq:05_metrics_cpu} with $n \in \mathbb{N}$ the number of active workers.
-
-\begin{equation}
-U_{CPU}=\sum_{n=1}^{\mathbb{N}}container\_cpu\_usage\_seconds\_total_{n}
-\label{eq:05_metrics_cpu}
-\end{equation}
-
-\subsection{GPU Utilization}
-%
-In addition to the \hyperlink{abbr:cpu}{CPU} utilization, Apache Spark workers can utilize \hyperlink{abbr:gpu}{GPUs} to accelerate the computation work.	
-% The metric
-The dcgm\_exporter agent provides the \texttt{dcgm\_fi\_dev\_gpu\_util} performance metric. This metric returns the percentual utilization per \hyperlink{abbr:gpu}{GPU}.
-% How to calculate
-Therefore, the \hyperlink{abbr:gpu}{GPU} utilization ($U_{GPU}$) is defined by \Eq{eq:05_metrics_gpu} with $n \in \mathbb{N}$ the number of available \hyperlink{abbr:gpu}{GPUs}.
-
-
-\begin{equation}
-U_{GPU} = \dfrac{\sum_{n=1}^{\mathbb{N}}dcgm\_fi\_dev\_gpu\_util_{n}}{\mathbb{N}}
-\label{eq:05_metrics_gpu}
-\end{equation}
-
-
-% ===========================================
-% ===========================================
 \section{Computing Environment Architecture}
 \label{sec:05_env}
 % Single machine
@@ -320,6 +276,50 @@ It is possible to define a list of metrics, where each metric needs to have a va
 \item Apache Spark master \hyperlink{abbr:uri}{URI}: To distribute the Spark Worker workload, all Spark Worker need to communicate with the Spark master.
 \end{itemize}
 \end{itemize}
+
+
+% ===========================================
+% ===========================================
+\section{Identification of Suitable Metrics for Scaling}
+\label{sec:05_metrics}
+% SHort intro
+Suitable metrics are needed to measure the system performance while the Apache Spark cluster is actively performing work.
+% Rapids enabled GPU
+With the RAPIDS accelerator for Apache Spark, the cluster utilizes \hyperlink{abbr:cpu}{CPU} and \hyperlink{abbr:gpu}{GPU} computing power to enable parallelization.
+% SO?
+Therefore, suitable metrics to measure the system performance are the \hyperlink{abbr:cpu}{CPU} and \hyperlink{abbr:gpu}{GPU} utilization when the cluster is actively performing computations.
+
+
+\subsection{CPU Utilization}
+% Sharing CPU cores
+All Apache Spark workers run on the same machine. Therefore, all available \hyperlink{abbr:cpu}{CPU} cores on the machine are shared across each Apache Spark worker.
+%
+To get a value that indicates the \hyperlink{abbr:cpu}{CPU} utilization between 0\% and 100\%, a metric is needed that represents the percentage of time all performing applications occupy \hyperlink{abbr:cpu}{CPU} cycles.
+% cadvisor
+cAdvisor provides a performance metric called \texttt{container\_cpu\_usage\_seconds\_total}\footnote{Monitoring cAdvisor with Prometheus - \url{https://github.com/google/cadvisor/blob/master/docs/storage/prometheus.md} (Accessed: 2021-01-21)}. This metric provides the total amount of \hyperlink{abbr:cpu}{CPU} seconds consumed by core of a container. 
+% Overall utilization
+To calculate the overall \hyperlink{abbr:cpu}{CPU} utilization for all Apache Spark worker, the value of the performance metric for each worker container over a specific rate is summed up.
+%
+In this case, the \hyperlink{abbr:cpu}{CPU} utilization ($U_{CPU}$) is defined by \Eq{eq:05_metrics_cpu} with $n \in \mathbb{N}$ the number of active workers.
+
+\begin{equation}
+U_{CPU}=\sum_{n=1}^{\mathbb{N}}container\_cpu\_usage\_seconds\_total_{n}
+\label{eq:05_metrics_cpu}
+\end{equation}
+
+\subsection{GPU Utilization}
+%
+In addition to the \hyperlink{abbr:cpu}{CPU} utilization, Apache Spark workers can utilize \hyperlink{abbr:gpu}{GPUs} to accelerate the computation work.	
+% The metric
+The dcgm\_exporter agent provides the \texttt{dcgm\_fi\_dev\_gpu\_util} performance metric. This metric returns the percentual utilization per \hyperlink{abbr:gpu}{GPU}.
+% How to calculate
+Therefore, the \hyperlink{abbr:gpu}{GPU} utilization ($U_{GPU}$) is defined by \Eq{eq:05_metrics_gpu} with $n \in \mathbb{N}$ the number of available \hyperlink{abbr:gpu}{GPUs}.
+
+
+\begin{equation}
+U_{GPU} = \dfrac{\sum_{n=1}^{\mathbb{N}}dcgm\_fi\_dev\_gpu\_util_{n}}{\mathbb{N}}
+\label{eq:05_metrics_gpu}
+\end{equation}
 
 
 % ===========================================

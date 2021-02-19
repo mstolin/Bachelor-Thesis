@@ -1,3 +1,13 @@
+\chapter{Attached CD}
+\label{chap:appendix_cd}
+The source code of this implementation is available to the CD attached to this thesis. It includes the following directories:
+\begin{itemize}
+\item auto-scaler: Source code of the Auto-Scaler implementation
+\item computing\_framework: Source code of the computing environment
+\item spark-images: Source code of the Apache Spark images
+\item ci-pipeline: Source code of the CI pipeline
+\end{itemize}
+
 \chapter{Implementation}
 
 \section{Computing Environment}
@@ -233,6 +243,61 @@ else
         --jars ${SPARK_CUDF_JAR},${LIBS_PATH}/xgboost4j-spark_3.0-1.3.0-0.1.0.jar,${LIBS_PATH}/xgboost4j_3.0-1.3.0-0.1.0.jar,${JAR_RAPIDS} \
         --py-files ${LIBS_PATH}/xgboost4j-spark_3.0-1.3.0-0.1.0.jar,/tank/data/users/chh-ms/spark-xgboost-examples/examples/apps/python/samples.zip \
         $@  
+fi
+\end{lstlisting}
+
+% Custom submit script
+\begin{lstlisting}[label=lst:appendix_spark-build-script, caption=Build script for all Apache Spark images, language=sh]
+#!/bin/bash
+ 
+if [ $# -ge 2 ]
+  then
+    SPARK_VERSION=$1
+    HADOOP_VERSION=$2
+ 
+    PWD=$(pwd)
+ 
+    IMAGE_TAG_PATH="local"
+ 
+    echo
+    echo "# Image tag-path: ${IMAGE_TAG_PATH}"
+    echo
+ 
+    echo "# STEP(1/4) - Building spark-base"
+    docker build \
+      -t $IMAGE_TAG_PATH/spark-base:$SPARK_VERSION-hadoop$HADOOP_VERSION \
+      --build-arg SPARK_VERSION=$SPARK_VERSION \
+      --build-arg HADOOP_VERSION=$HADOOP_VERSION \
+      $PWD/spark-base/
+ 
+    echo "# STEP(2/4) - Building spark-master"
+    docker build \
+      -t $IMAGE_TAG_PATH/spark-master:$SPARK_VERSION-hadoop$HADOOP_VERSION \
+      --build-arg IMAGE_TAG_PATH=$IMAGE_TAG_PATH \
+      --build-arg SPARK_VERSION=$SPARK_VERSION \
+      --build-arg HADOOP_VERSION=$HADOOP_VERSION \
+      $PWD/spark-master/
+ 
+    echo "# STEP(3/4) - Building spark-worker"
+    docker build \
+      -t $IMAGE_TAG_PATH/spark-worker:$SPARK_VERSION-hadoop$HADOOP_VERSION \
+      --build-arg IMAGE_TAG_PATH=$IMAGE_TAG_PATH \
+      --build-arg SPARK_VERSION=$SPARK_VERSION \
+      --build-arg HADOOP_VERSION=$HADOOP_VERSION \
+      $PWD/spark-worker/
+ 
+    echo "# STEP(4/4) - Building spark-submit"
+    docker build \
+      -t $IMAGE_TAG_PATH/spark-submit:$SPARK_VERSION-hadoop$HADOOP_VERSION \
+      --build-arg IMAGE_TAG_PATH=$IMAGE_TAG_PATH \
+      --build-arg SPARK_VERSION=$SPARK_VERSION \
+      --build-arg HADOOP_VERSION=$HADOOP_VERSION \
+      $PWD/spark-submit/
+  else
+    echo "No arguments supplied\n"
+    echo "Use the script as follows:"
+    echo "build-images.sh <SPARK_VERSION> <HADOOP_VERSION>"
+    exit 1
 fi
 \end{lstlisting}
 

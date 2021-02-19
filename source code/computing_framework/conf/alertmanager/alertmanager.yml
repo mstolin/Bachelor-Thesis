@@ -1,0 +1,14 @@
+global:
+    resolve_timeout: 10m
+
+route:
+    receiver: 'auto-scaler'
+    routes:
+        - match:
+            severity: 'critical'
+          receiver: 'auto-scaler'
+
+receivers:
+    - name: 'auto-scaler'
+      webhook_configs:
+        - url: "http://auto-scaler:5000/alert"

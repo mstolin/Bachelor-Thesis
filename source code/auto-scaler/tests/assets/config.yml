@@ -1,0 +1,31 @@
+general:
+  interval_seconds: 5
+  cooldown_period_seconds: 5
+  recurrence_factor: 3
+  prometheus_url: "http://localhost:9090"
+
+metrics:
+  gpu:
+    query: 'sum(rate(container_cpu_user_seconds_total{image="local/cci/distributed-computing-framework/spark-images/spark-worker:3.0.1-hadoop2.7"}[30s]))'
+    target_utilization: 0.1
+    thresholds:
+      min: 0.2
+      max: 0.4
+
+worker:
+  service_name: "computing_spark-worker"
+  container:
+    image: 'local/cci/distributed-computing-framework/spark-images/spark-worker:3.0.1-hadoop2.7'
+    name_prefix: 'computing.spark-worker'
+    network: 'computing_net'
+    environment:
+      - 'SPARK_MASTER_URI=spark://spark-master:7077'
+    volumes: {
+      '/home/marcel/workspace/k-means_example': {
+        'bind': '/tank',
+        'mode': 'rw'
+      }
+    }
+  thresholds:
+    min: 1
+    max: 30

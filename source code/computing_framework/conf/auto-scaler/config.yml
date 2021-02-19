@@ -1,0 +1,32 @@
+general:
+  interval_seconds: 5
+  cooldown_period_seconds: 60
+  recurrence_factor: 3
+  prometheus_url: "http://prometheus:9090"
+
+metrics:
+  cpu:
+    query: "instance:worker_nodes:cpu_usage:percent"
+    target_utilization: 20
+    thresholds:
+      min: 10
+      max: 40
+
+worker:
+  service_name: "computing_spark-worker"
+  container:
+    image: 'local/cci/distributed-computing-framework/spark-images/spark-worker:3.0.1-hadoop2.7'
+    name_prefix: 'computing.spark-worker'
+    network: 'computing_net'
+    runtime: 'nvidia'
+    environment:
+      - 'SPARK_MASTER_URI=spark://spark-master:7077'
+    volumes: {
+      '/tank': {
+        'bind': '/tank',
+        'mode': 'rw'
+      }
+    }
+  thresholds:
+    min: 2
+    max: 10

@@ -1,0 +1,1 @@
+#SPARK_WORKER_OPTS="-Dspark.worker.resource.gpu.amount=1 -Dspark.worker.resource.gpu.discoveryScript=/opt/resourceDiscovery/getGpusResources.sh"

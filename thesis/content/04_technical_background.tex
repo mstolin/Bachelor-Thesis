@@ -651,6 +651,7 @@ The test stage consists of two jobs called \textit{unit-test-job} and \textit{in
 \Lst{lst:04_gitlab_pipeline_basic_config-example} provides the configuration for the basic pipeline example.
 % Shell script
 Each job executes a shell script to perform the desired actions. The shell scripts have to be located in the source code repository.
+\newpage
 % The example
 \begin{lstlisting}[label=lst:04_gitlab_pipeline_basic_config-example, caption=Example of a \texttt{.gitlab-ci.yml} configuration file]
 stages:
@@ -691,6 +692,7 @@ GitLab runner can be set up for specific projects or be available to all project
 % Scaling heat
 % ===========================================
 % ===========================================
+\newpage
 \section{Scaling Heat}
 \label{sec:04_scal-heat}
 % Intro
@@ -719,6 +721,16 @@ With a recurrence factor ($n$), a scaling action is only performed until a perfo
 
 \subsection{Scaling Heat Algorithm Concept}
 \label{sec:04_background_scaling-heat}
+% Describe the concept
+\paragraph{}\Alg{alg:04_scal-heat_concept_algo} introduces the Scaling Heat algorithm.
+% The base
+The algorithm is based on a concept called \textit{heat}. The value of heat indicates if a scaling action of adding or removing components is necessary.
+% Violations
+If the given utilization of a performance metric violates the upper threshold, the heat value will increase. Violations of the lower threshold will cause a decrease, respectively.
+% Recurrence
+When the heat reaches the recurrence factor $n$, positive for adding and negative for removing nodes, a scaling action is executed.
+% Reset
+After executing a scaling action, the heat value is reset to 0 \cite{Barna2017ElasticContainerApps}.
 % The algorithm
 \begin{algorithm}[H]
 \SetKwInput{KwInput}{Input}
@@ -768,23 +780,12 @@ $heat \leftarrow 0$\;
 \end{algorithm}
 
 
-% Describe the concept
-\paragraph{}\Alg{alg:04_scal-heat_concept_algo} introduces the Scaling Heat algorithm.
-% The base
-The algorithm is based on a concept called \textit{heat}. The value of heat indicates if a scaling action of adding or removing components is necessary.
-% Violations
-If the given utilization of a performance metric violates the upper threshold, the heat value will increase. Violations of the lower threshold will cause a decrease, respectively.
-% Recurrence
-When the heat reaches the recurrence factor $n$, positive for adding and negative for removing nodes, a scaling action is executed.
-% Reset
-After executing a scaling action, the heat value is reset to 0 \cite{Barna2017ElasticContainerApps}.
-
-
 % ===========================================
 % ===========================================
 % KHP
 % ===========================================
 % ===========================================
+\newpage
 \section{Kubernetes Horizontal Pod Autoscaler}
 \label{sec:04_background_khpa}
 \paragraph{}

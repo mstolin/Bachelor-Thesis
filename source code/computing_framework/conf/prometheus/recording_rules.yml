@@ -1,0 +1,7 @@
+groups:
+    - name: performance_usage_percent
+      rules:
+        - record: instance:worker_nodes:cpu_usage:percent
+          expr: sum(rate(container_cpu_usage_seconds_total{image="local/cci/distributed-computing-framework/spark-images/spark-worker:3.0.1-hadoop2.7"}[30s])) by (image)
+        - record: instance:gpu_usage:percent
+          expr: sum(DCGM_FI_DEV_GPU_UTIL{device=~"(?:nvidia3|nvidia7)"}) / 2

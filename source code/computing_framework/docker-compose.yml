@@ -1,0 +1,74 @@
+version: "3.7"
+
+networks:
+    computing-net:
+        name: computing_net
+        attachable: true
+
+services:
+    spark-master:
+        image: local/spark-master:3.0.1-hadoop2.7
+        networks:
+            - computing-net
+        ports:
+            - 4040:4040
+            - 7077:7077
+        volumes:
+            - ./conf/spark-master/metrics.properties:/usr/bin/spark/conf/metrics.properties
+            - ./conf/spark-master/spark-defaults.conf:/usr/bin/spark/conf/spark-defaults.conf
+
+    spark-worker:
+        image: local/spark-worker:3.0.1-hadoop2.7
+        networks:
+            - computing-net
+        volumes:
+            - ./conf/spark-worker/spark-env.sh:/usr/bin/spark/conf/spark-env.sh
+        depends_on:
+            - spark-master
+        environment:
+            - "SPARK_MASTER_URI=spark://spark-master:7077"
+
+    prometheus:
+        image: prom/prometheus:v2.24.1
+        networks:
+            - computing-net
+        volumes:
+            - ./conf/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+            - ./conf/prometheus/recording_rules.yml:/etc/prometheus/recording_rules.yml
+        command:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+        ports:
+            - "9090:9090"
+        depends_on:
+            - cadvisor
+
+    cadvisor:
+        image: google/cadvisor:v0.33.0
+        networks:
+            - computing-net
+        ports:
+            - "8080:8080"
+        volumes:
+            - "/:/rootfs:ro"
+            - "/var/run:/var/run:ro"
+            - "/sys:/sys:ro"
+            - "/var/lib/docker/:/var/lib/docker:ro"
+            - "/dev/disk/:/dev/disk:ro"
+        command:
+            - "--docker_only=true"
+            - "--logtostderr=true"
+        depends_on:
+            - spark-master
+            - spark-worker
+
+    auto-scaler:
+        image: local/auto-scaler:latest
+        networks:
+            - computing-net
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
+            - ./conf/auto-scaler/config.yml:/etc/autoscaler/config.yml
+        command:
+            - '--config=/etc/autoscaler/config.yml'
+        depends_on:
+            - prometheus

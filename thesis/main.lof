@@ -20,43 +20,44 @@
 \contentsline {figure}{\numberline {\relax 4.6}{\ignorespaces Prometheus high-level architecture - Source: Authors own model, based on \cite {Prom2020Docs, Brazil2018Prom}.\relax }}{35}{figure.caption.58}% 
 \contentsline {figure}{\numberline {\relax 4.7}{\ignorespaces Basic architecture of a GitLab CI/CD pipeline - Source: Authors own model, based on \cite {Gitlab2020Docs}.\relax }}{39}{figure.caption.61}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Full MAPE control loop architecture\relax }}{45}{figure.caption.67}% 
-\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces UML activity model of the autonomic manager process\relax }}{46}{figure.caption.69}% 
-\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces Apache Spark cluster architecture\relax }}{47}{figure.caption.70}% 
-\contentsline {figure}{\numberline {\relax 5.4}{\ignorespaces Autonomic manager component design\relax }}{48}{figure.caption.71}% 
-\contentsline {figure}{\numberline {\relax 5.5}{\ignorespaces Monitoring system conceptual design\relax }}{49}{figure.caption.72}% 
-\contentsline {figure}{\numberline {\relax 5.6}{\ignorespaces Automated Deployment Pipeline concept\relax }}{52}{figure.caption.78}% 
-\contentsline {figure}{\numberline {\relax 5.7}{\ignorespaces Deployment of a spark-submit container\relax }}{53}{figure.caption.81}% 
+\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Full MAPE control loop architecture\relax }}{46}{figure.caption.67}% 
+\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces UML activity model of the autonomic manager process\relax }}{47}{figure.caption.69}% 
+\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces Apache Spark cluster architecture\relax }}{48}{figure.caption.70}% 
+\contentsline {figure}{\numberline {\relax 5.4}{\ignorespaces Autonomic manager component design\relax }}{50}{figure.caption.71}% 
+\contentsline {figure}{\numberline {\relax 5.5}{\ignorespaces Monitoring system conceptual design\relax }}{50}{figure.caption.72}% 
+\contentsline {figure}{\numberline {\relax 5.6}{\ignorespaces Automated Deployment Pipeline concept\relax }}{54}{figure.caption.78}% 
+\contentsline {figure}{\numberline {\relax 5.7}{\ignorespaces Deployment of a spark-submit container\relax }}{55}{figure.caption.81}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 7.1}{\ignorespaces Mean execution time using CPU-only worker nodes\relax }}{73}{figure.caption.102}% 
-\contentsline {figure}{\numberline {\relax 7.2}{\ignorespaces Mean execution time of GPU-accelerated worker nodes vs. Mean execution time of CPU-only worker nodes\relax }}{74}{figure.caption.104}% 
-\contentsline {figure}{\numberline {\relax 7.3}{\ignorespaces CPU utilization during all iterations of both benchmarks with 2 CPU-only workers\relax }}{76}{figure.caption.107}% 
-\contentsline {figure}{\numberline {\relax 7.4}{\ignorespaces \textit {Auto-Scaler} experiment mean execution time of both benchmarks\relax }}{78}{figure.caption.109}% 
+\contentsline {figure}{\numberline {\relax 7.1}{\ignorespaces Mean execution time using CPU-only worker nodes\relax }}{77}{figure.caption.102}% 
+\contentsline {figure}{\numberline {\relax 7.2}{\ignorespaces Mean execution time of GPU-accelerated worker nodes vs. Mean execution time of CPU-only worker nodes\relax }}{78}{figure.caption.104}% 
+\contentsline {figure}{\numberline {\relax 7.3}{\ignorespaces CPU utilization during all iterations of both benchmarks with 2 CPU-only workers\relax }}{80}{figure.caption.107}% 
+\contentsline {figure}{\numberline {\relax 7.4}{\ignorespaces \textit {Auto-Scaler} experiment mean execution time of both benchmarks\relax }}{82}{figure.caption.109}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax B.1}{\ignorespaces Performance data of all iterations with 1 worker\relax }}{96}{figure.caption.115}% 
-\contentsline {figure}{\numberline {\relax B.2}{\ignorespaces Performance data of all iterations with 2 worker\relax }}{97}{figure.caption.116}% 
-\contentsline {figure}{\numberline {\relax B.3}{\ignorespaces Performance data of all iterations with 5 worker\relax }}{98}{figure.caption.117}% 
-\contentsline {figure}{\numberline {\relax B.4}{\ignorespaces Performance data of all iterations with 10 worker\relax }}{99}{figure.caption.118}% 
-\contentsline {figure}{\numberline {\relax B.5}{\ignorespaces Performance data of all iterations with 15 worker\relax }}{100}{figure.caption.119}% 
-\contentsline {figure}{\numberline {\relax B.6}{\ignorespaces Performance data of all iterations with 20 worker\relax }}{101}{figure.caption.120}% 
-\contentsline {figure}{\numberline {\relax B.7}{\ignorespaces Performance data of all iterations with 25 worker\relax }}{102}{figure.caption.121}% 
-\contentsline {figure}{\numberline {\relax B.8}{\ignorespaces Performance data of all iterations with 30 worker\relax }}{103}{figure.caption.122}% 
-\contentsline {figure}{\numberline {\relax B.9}{\ignorespaces Performance data of all iterations with 35 worker\relax }}{104}{figure.caption.123}% 
-\contentsline {figure}{\numberline {\relax B.10}{\ignorespaces Performance data of all iterations with 1 GPU-accelerated worker\relax }}{105}{figure.caption.125}% 
-\contentsline {figure}{\numberline {\relax B.11}{\ignorespaces Performance data of all iterations with 2 GPU-accelerated workers\relax }}{106}{figure.caption.126}% 
-\contentsline {figure}{\numberline {\relax B.12}{\ignorespaces Performance data of all iterations with the \textit {Auto-Scaler} enabled\relax }}{107}{figure.caption.128}% 
-\contentsline {figure}{\numberline {\relax B.13}{\ignorespaces Performance data of all iterations with 1 worker\relax }}{108}{figure.caption.130}% 
-\contentsline {figure}{\numberline {\relax B.14}{\ignorespaces Performance data of all iterations with 2 worker\relax }}{109}{figure.caption.131}% 
-\contentsline {figure}{\numberline {\relax B.15}{\ignorespaces Performance data of all iterations with 5 worker\relax }}{110}{figure.caption.132}% 
-\contentsline {figure}{\numberline {\relax B.16}{\ignorespaces Performance data of all iterations with 10 worker\relax }}{111}{figure.caption.133}% 
-\contentsline {figure}{\numberline {\relax B.17}{\ignorespaces Performance data of all iterations with 15 worker\relax }}{112}{figure.caption.134}% 
-\contentsline {figure}{\numberline {\relax B.18}{\ignorespaces Performance data of all iterations with 20 worker\relax }}{113}{figure.caption.135}% 
-\contentsline {figure}{\numberline {\relax B.19}{\ignorespaces Performance data of all iterations with 25 worker\relax }}{114}{figure.caption.136}% 
-\contentsline {figure}{\numberline {\relax B.20}{\ignorespaces Performance data of all iterations with 30 worker\relax }}{115}{figure.caption.137}% 
-\contentsline {figure}{\numberline {\relax B.21}{\ignorespaces Performance data of all iterations with 35 worker\relax }}{116}{figure.caption.138}% 
-\contentsline {figure}{\numberline {\relax B.22}{\ignorespaces Performance data of all iterations with 1 GPU-accelerated worker\relax }}{117}{figure.caption.140}% 
-\contentsline {figure}{\numberline {\relax B.23}{\ignorespaces Performance data of all iterations with 2 GPU-accelerated workers\relax }}{118}{figure.caption.141}% 
-\contentsline {figure}{\numberline {\relax B.24}{\ignorespaces Performance data of all iterations with the \textit {Auto-Scaler} enabled\relax }}{119}{figure.caption.143}% 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax C.1}{\ignorespaces Performance data of all iterations with 1 worker\relax }}{103}{figure.caption.115}% 
+\contentsline {figure}{\numberline {\relax C.2}{\ignorespaces Performance data of all iterations with 2 worker\relax }}{104}{figure.caption.116}% 
+\contentsline {figure}{\numberline {\relax C.3}{\ignorespaces Performance data of all iterations with 5 worker\relax }}{105}{figure.caption.117}% 
+\contentsline {figure}{\numberline {\relax C.4}{\ignorespaces Performance data of all iterations with 10 worker\relax }}{106}{figure.caption.118}% 
+\contentsline {figure}{\numberline {\relax C.5}{\ignorespaces Performance data of all iterations with 15 worker\relax }}{107}{figure.caption.119}% 
+\contentsline {figure}{\numberline {\relax C.6}{\ignorespaces Performance data of all iterations with 20 worker\relax }}{108}{figure.caption.120}% 
+\contentsline {figure}{\numberline {\relax C.7}{\ignorespaces Performance data of all iterations with 25 worker\relax }}{109}{figure.caption.121}% 
+\contentsline {figure}{\numberline {\relax C.8}{\ignorespaces Performance data of all iterations with 30 worker\relax }}{110}{figure.caption.122}% 
+\contentsline {figure}{\numberline {\relax C.9}{\ignorespaces Performance data of all iterations with 35 worker\relax }}{111}{figure.caption.123}% 
+\contentsline {figure}{\numberline {\relax C.10}{\ignorespaces Performance data of all iterations with 1 GPU-accelerated worker\relax }}{112}{figure.caption.125}% 
+\contentsline {figure}{\numberline {\relax C.11}{\ignorespaces Performance data of all iterations with 2 GPU-accelerated workers\relax }}{113}{figure.caption.126}% 
+\contentsline {figure}{\numberline {\relax C.12}{\ignorespaces Performance data of all iterations with the \textit {Auto-Scaler} enabled\relax }}{114}{figure.caption.128}% 
+\contentsline {figure}{\numberline {\relax C.13}{\ignorespaces Performance data of all iterations with 1 worker\relax }}{115}{figure.caption.130}% 
+\contentsline {figure}{\numberline {\relax C.14}{\ignorespaces Performance data of all iterations with 2 worker\relax }}{116}{figure.caption.131}% 
+\contentsline {figure}{\numberline {\relax C.15}{\ignorespaces Performance data of all iterations with 5 worker\relax }}{117}{figure.caption.132}% 
+\contentsline {figure}{\numberline {\relax C.16}{\ignorespaces Performance data of all iterations with 10 worker\relax }}{118}{figure.caption.133}% 
+\contentsline {figure}{\numberline {\relax C.17}{\ignorespaces Performance data of all iterations with 15 worker\relax }}{119}{figure.caption.134}% 
+\contentsline {figure}{\numberline {\relax C.18}{\ignorespaces Performance data of all iterations with 20 worker\relax }}{120}{figure.caption.135}% 
+\contentsline {figure}{\numberline {\relax C.19}{\ignorespaces Performance data of all iterations with 25 worker\relax }}{121}{figure.caption.136}% 
+\contentsline {figure}{\numberline {\relax C.20}{\ignorespaces Performance data of all iterations with 30 worker\relax }}{122}{figure.caption.137}% 
+\contentsline {figure}{\numberline {\relax C.21}{\ignorespaces Performance data of all iterations with 35 worker\relax }}{123}{figure.caption.138}% 
+\contentsline {figure}{\numberline {\relax C.22}{\ignorespaces Performance data of all iterations with 1 GPU-accelerated worker\relax }}{124}{figure.caption.140}% 
+\contentsline {figure}{\numberline {\relax C.23}{\ignorespaces Performance data of all iterations with 2 GPU-accelerated workers\relax }}{125}{figure.caption.141}% 
+\contentsline {figure}{\numberline {\relax C.24}{\ignorespaces Performance data of all iterations with the \textit {Auto-Scaler} enabled\relax }}{126}{figure.caption.143}% 

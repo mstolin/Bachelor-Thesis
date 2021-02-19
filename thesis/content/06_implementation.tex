@@ -169,6 +169,7 @@ In this configuration, the following targets are defined:
 
 \item spark-master: The spark-master target provides metrics about the Apache Spark master service. This target is essential for the \textit{Auto-Scaler} to get information about running worker nodes and the number of running applications.
 \end{itemize}
+\newpage
 % Target config
 \begin{lstlisting}[label=lst:06_computing_am_prom-config, caption=Prometheus target configuration in YAML syntax]
 global:
@@ -383,6 +384,7 @@ ENTRYPOINT [ "python3", "src/run.py" ]
 To build the \textit{Auto-Scaler} Docker image, a build script was implemented. \Lst{lst:06_auto-scaler_build} shows the build script implementation.
 The script takes the version of the \textit{Auto-Scaler} module as an input attribute. It uses the version to tag the Docker image.
 It builds two versions of the \textit{Auto-Scaler}, one tagged with the current \textit{Auto-Scaler} version (e.g., \textit{auto-scaler:1.0}) and one tagged as \textit{latest} (e.g., \textit{auto-scaler:latest}).
+\newpage
 \begin{lstlisting}[label=lst:06_auto-scaler_build, caption=Auto-Scaler build script, language=sh]
 #!/bin/bash
  
@@ -543,7 +545,7 @@ $ docker run \
 % Intro
 A script is used to automate the build process of all images.
 % source
-The source code of the build script is provided at ANHANG AB.
+The source code of the build script is provided at \Lst{lst:appendix_spark-build-script}.
 % params
 To specify which Apache Spark version is installed on all images, the script takes the Apache Spark and Hadoop version as input arguments which are required by the \textit{spark-base} image.
 % Taging
@@ -596,6 +598,7 @@ Next, the \texttt{gitlab-runner register} command is performed in the context of
 To enable Docker access for the GitLab Runner, various settings have to be set. First, the docker executor has to be activated. This enables the runner to perform jobs with access to user defined Docker images, which is required to deploy a \textit{spark-submit} Docker container from a \hyperlink{abbr:ci}{CI}/\hyperlink{abbr:cd}{CD} job. Second, the \texttt{docker:latest} image is set as Docker image for \hyperlink{abbr:ci}{CI}/\hyperlink{abbr:cd}{CD} job containers which enables to perform Docker \hyperlink{abbr:cli}{CLI} commands from \hyperlink{abbr:ci}{CI}/\hyperlink{abbr:cd}{CD} job containers.
 %
 The support of the Docker \hyperlink{abbr:cli}{CLI} within \hyperlink{abbr:ci}{CI}/\hyperlink{abbr:cd}{CD} jobs is required to deploy a \textit{spark-submit} container.
+\newpage
 % the example
 \begin{lstlisting}[label=lst:06_ci_runner_container_cmd, caption=CLI command to start a GitLab runner in a Docker container, language=bash, numbers=none]
 $ docker run -d \

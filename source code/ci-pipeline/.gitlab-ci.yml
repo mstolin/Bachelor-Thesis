@@ -1,0 +1,38 @@
+stages:
+    - test
+    - train
+
+unit-tests:
+    stage: test
+    image: python:3.8-slim
+    tags:
+        - spark-submit
+    script:
+        - pip3 install -e .
+        - cd tests
+        - pytest
+
+train-model:
+    stage: train
+    tags:
+        - spark-submit
+    variables:
+        TMP_MOUNT_POINT: /tmp/_mnt
+        NETWORK: "computing_net"
+        CPU_ONLY: "true"
+        DRIVER_MEMORY: "4g"
+        EXECUTOR_MEMORY: "8g"
+        SPARK_MASTER_URI: "spark://spark-master:7077"
+    script:
+        - pwd
+        - mkdir -p "$TMP_MOUNT_POINT"
+        - mv -v * $TMP_MOUNT_POINT
+        - 'export MOUNT_POINT="$(dirname $CI_PROJECT_DIR)/shared"'
+        - rm -rf $MOUNT_POINT
+        - mkdir -p "$MOUNT_POINT"
+        - cp -R $TMP_MOUNT_POINT/* $MOUNT_POINT/
+        - rm -rf $TMP_MOUNT_POINT
+        - chmod -R 777 $MOUNT_POINT
+        - sh $MOUNT_POINT/submit.sh /mnt/app.py 1000
+    only:
+        - master
