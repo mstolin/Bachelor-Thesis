@@ -1,6 +1,6 @@
 \chapter{Attached CD}
 \label{chap:appendix_cd}
-The source code of this implementation is available to the CD attached to this thesis. It includes the following directories:
+The source code of this implementation is available on the CD attached to this thesis. It includes the following directories:
 \begin{itemize}
 \item auto-scaler: Source code of the Auto-Scaler implementation
 \item computing\_framework: Source code of the computing environment
@@ -163,7 +163,7 @@ ENTRYPOINT ./sbin/start-slave.sh ${SPARK_MASTER_URI}
 \end{lstlisting}
 
 % GPU discovery script
-\begin{lstlisting}[label=lst:appendix_spark_gpu-discovery, caption=GPU discovery script - Source: \url{https://github.com/apache/spark/blob/v3.0.1/examples/src/main/scripts/getGpusResources.sh} (Accessed: 2021-01-03), language=bash]
+\begin{lstlisting}[label=lst:appendix_spark_gpu-discovery, caption=GPU discovery script, language=bash]
 #!/usr/bin/env bash
 
 #
@@ -350,189 +350,170 @@ train-model:
 \section{Evaluation Data}
 \label{sec:appendix_eval}
 
-\subsection{Classification Benchmark}
-\label{sec:appendix_eval_classification}
-
-\subsubsection{Static CPU-only Workers}
-
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/classification/1_worker_cpu_performance}
-\caption{Performance data of all iterations with 1 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/classification_benchmark/classification_1_worker_cpu_performance}
+\caption{Classification benchmark - Performance data of all iterations with 1 worker}
 \label{fig:appendix_eval_classification_static1}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/classification/2_worker_cpu_performance}
-\caption{Performance data of all iterations with 2 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/classification_benchmark/classification_2_worker_cpu_performance}
+\caption{Classification benchmark - Performance data of all iterations with 2 worker}
 \label{fig:appendix_eval_classification_static2}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/classification/5_worker_cpu_performance}
-\caption{Performance data of all iterations with 5 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/classification_benchmark/classification_5_worker_cpu_performance}
+\caption{Classification benchmark - Performance data of all iterations with 5 worker}
 \label{fig:appendix_eval_classification_static5}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/classification/10_worker_cpu_performance}
-\caption{Performance data of all iterations with 10 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/classification_benchmark/classification_10_worker_cpu_performance}
+\caption{Classification benchmark - Performance data of all iterations with 10 worker}
 \label{fig:appendix_eval_classification_static10}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/classification/15_worker_cpu_performance}
-\caption{Performance data of all iterations with 15 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/classification_benchmark/classification_15_worker_cpu_performance}
+\caption{Classification benchmark - Performance data of all iterations with 15 worker}
 \label{fig:appendix_eval_classification_static15}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/classification/20_worker_cpu_performance}
-\caption{Performance data of all iterations with 20 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/classification_benchmark/classification_20_worker_cpu_performance}
+\caption{Classification benchmark - Performance data of all iterations with 20 worker}
 \label{fig:appendix_eval_classification_static20}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/classification/25_worker_cpu_performance}
-\caption{Performance data of all iterations with 25 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/classification_benchmark/classification_25_worker_cpu_performance}
+\caption{Classification benchmark - Performance data of all iterations with 25 worker}
 \label{fig:appendix_eval_classification_static25}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/classification/30_worker_cpu_performance}
-\caption{Performance data of all iterations with 30 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/classification_benchmark/classification_30_worker_cpu_performance}
+\caption{Classification benchmark - Performance data of all iterations with 30 worker}
 \label{fig:appendix_eval_classification_static30}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/classification/35_worker_cpu_performance}
-\caption{Performance data of all iterations with 35 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/classification_benchmark/classification_35_worker_cpu_performance}
+\caption{Classification benchmark - Performance data of all iterations with 35 worker}
 \label{fig:appendix_eval_classification_static35}
 \end{figure}
 
-\subsubsection{GPU-Accelerated Workers}
-
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/classification/gpu1_performance}
-\caption{Performance data of all iterations with 1 GPU-accelerated worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/classification_benchmark/classification_gpu1_performance}
+\caption{Classification benchmark - Performance data of all iterations with 1 GPU-accelerated worker}
 \label{fig:appendix_eval_classification_gpu1}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/classification/gpu2_performance}
-\caption{Performance data of all iterations with 2 GPU-accelerated workers}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/classification_benchmark/classification_gpu2_performance}
+\caption{Classification benchmark - Performance data of all iterations with 2 GPU-accelerated workers}
 \label{fig:appendix_eval_classification_gpu2}
 \end{figure}
 
-\subsubsection{Auto-Scaler}
-
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/classification/auto-scaler_performance}
-\caption{Performance data of all iterations with the \textit{Auto-Scaler} enabled}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/classification_benchmark/classification_auto-scaler_performance}
+\caption{Classification benchmark - Performance data of all iterations with the \textit{Auto-Scaler} enabled}
 \label{fig:appendix_eval_classification_auto-scaler}
 \end{figure}
 
-
-\subsection{Regression Benchmark}
-\label{sec:appendix_eval_regression}
-
-\subsubsection{Static CPU-only Workers}
-
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/regression/1_worker_cpu_performance}
-\caption{Performance data of all iterations with 1 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/regression_benchmark/regression_1_worker_cpu_performance}
+\caption{Regression benchmark - Performance data of all iterations with 1 worker}
 \label{fig:appendix_eval_regression_static1}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/regression/2_worker_cpu_performance}
-\caption{Performance data of all iterations with 2 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/regression_benchmark/regression_2_worker_cpu_performance}
+\caption{Regression benchmark - Performance data of all iterations with 2 worker}
 \label{fig:appendix_eval_regression_static2}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/regression/5_worker_cpu_performance}
-\caption{Performance data of all iterations with 5 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/regression_benchmark/regression_5_worker_cpu_performance}
+\caption{Regression benchmark - Performance data of all iterations with 5 worker}
 \label{fig:appendix_eval_regression_static5}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/regression/10_worker_cpu_performance}
-\caption{Performance data of all iterations with 10 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/regression_benchmark/regression_10_worker_cpu_performance}
+\caption{Regression benchmark - Performance data of all iterations with 10 worker}
 \label{fig:appendix_eval_regression_static10}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/regression/15_worker_cpu_performance}
-\caption{Performance data of all iterations with 15 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/regression_benchmark/regression_15_worker_cpu_performance}
+\caption{Regression benchmark - Performance data of all iterations with 15 worker}
 \label{fig:appendix_eval_regression_static15}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/regression/20_worker_cpu_performance}
-\caption{Performance data of all iterations with 20 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/regression_benchmark/regression_20_worker_cpu_performance}
+\caption{Regression benchmark - Performance data of all iterations with 20 worker}
 \label{fig:appendix_eval_regression_static20}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/regression/25_worker_cpu_performance}
-\caption{Performance data of all iterations with 25 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/regression_benchmark/regression_25_worker_cpu_performance}
+\caption{Regression benchmark - Performance data of all iterations with 25 worker}
 \label{fig:appendix_eval_regression_static25}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/regression/30_worker_cpu_performance}
-\caption{Performance data of all iterations with 30 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/regression_benchmark/regression_30_worker_cpu_performance}
+\caption{Regression benchmark - Performance data of all iterations with 30 worker}
 \label{fig:appendix_eval_regression_static30}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/regression/35_worker_cpu_performance}
-\caption{Performance data of all iterations with 35 worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/regression_benchmark/regression_35_worker_cpu_performance}
+\caption{Regression benchmark - Performance data of all iterations with 35 worker}
 \label{fig:appendix_eval_regression_static35}
 \end{figure}
 
-\subsubsection{GPU-Accelerated Workers}
-
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/regression/gpu1_performance}
-\caption{Performance data of all iterations with 1 GPU-accelerated worker}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/regression_benchmark/regression_gpu1_performance}
+\caption{Regression benchmark - Performance data of all iterations with 1 GPU-accelerated worker}
 \label{fig:appendix_eval_regression_gpu1}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/regression/gpu2_performance}
-\caption{Performance data of all iterations with 2 GPU-accelerated workers}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/regression_benchmark/regression_gpu2_performance}
+\caption{Regression benchmark - Performance data of all iterations with 2 GPU-accelerated workers}
 \label{fig:appendix_eval_regression_gpu2}
 \end{figure}
 
-\subsubsection{Auto-Scaler}
-
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{images/07_evaluation/regression/auto-scaler_performance}
-\caption{Performance data of all iterations with the \textit{Auto-Scaler} enabled}
+\includegraphics[scale=0.5]{images/appendix/evaluation_data/regression_benchmark/regression_auto-scaler_performance}
+\caption{Regression benchmark - Performance data of all iterations with the \textit{Auto-Scaler} enabled}
 \label{fig:appendix_eval_regression_auto-scaler}
 \end{figure}

@@ -20,7 +20,7 @@ In both experiments, a machine learning model is trained on the computing enviro
 \begin{enumerate}
 \item Using a static number of \hyperlink{abbr:cpu}{CPU}-only Apache Spark workers (\Sec{sec:07_static})
 \item Using a static number of \hyperlink{abbr:gpu}{GPU}-accelerated Apache Spark workers (\Sec{sec:07_gpu})
-\item Dynamically scaling the replicas of CPU-only Apache Spark workers using the \textit{Auto-Scaler} (\Sec{sec:07_auto-scaler})
+\item Dynamically scaling the replicas of \hyperlink{abbr:cpu}{CPU}-only Apache Spark workers using the \textit{Auto-Scaler} (\Sec{sec:07_auto-scaler})
 \end{enumerate}
 % 10 times
 For each configuration, the experiment is conducted ten times. The spark-job execution time mean value over all ten iterations per experiment is used as the result.
@@ -37,9 +37,9 @@ However, the host machine is a live system. It is not possible to allocate a ran
 % The algorithm
 The two benchmarks to evaluate the performance are:
 \begin{itemize}
-\item XGBoost classification model using the \textit{Fannie Mae's Single-Family Historical Loan Performance Dataset}\footnote{Downloaded from: \url{https://docs.rapids.ai/datasets/mortgage-data} (Accessed: 2021-02-06)}\cite{Fannie2021Mortgage}
+\item \hyperlink{abbr:xgboost}{XGBoost} classification model using the \textit{Fannie Mae's Single-Family Historical Loan Performance Dataset}\footnote{Downloaded from: \url{https://docs.rapids.ai/datasets/mortgage-data} (Accessed: 2021-02-06)}\cite{Fannie2021Mortgage}
 
-\item XGBoost regression model using a Taxi fare dataset\footnote{The Taxi dataset is available at: \url{https://github.com/NVIDIA/spark-xgboost-examples/tree/spark-3} (Accessed: 2021-02-06)}
+\item \hyperlink{abbr:xgboost}{XGBoost} regression model using a Taxi fare dataset\footnote{The Taxi dataset is available at: \url{https://github.com/NVIDIA/spark-xgboost-examples/tree/spark-3} (Accessed: 2021-02-06)}
 \end{itemize}
 % Source
 The source code and the dataset used in these experiments are available on Github on the \textit{spark-xgboost-examples}\footnote{spark-xgboost-examples - \url{https://github.com/NVIDIA/spark-xgboost-examples/tree/spark-3} (Accessed: 2021-02-06)} repository from NVIDIA.
@@ -63,7 +63,7 @@ The goal of supervised machine learning algorithms is to train a model by findin
 % Intro
 The first experiment is conducted using a fixed number of \hyperlink{abbr:cpu}{CPU}-only Apache Spark workers to evaluate both benchmarks' performance.
 % Appendix
-The performance data of each iteration for the classification benchmark is available at \Sec{sec:appendix_eval_classification}, and for the regression benchmark at \Sec{sec:appendix_eval_regression}.
+The performance data of each iteration for both benchmarks is available at \Sec{sec:appendix_eval}.
 
 
 % results
@@ -98,7 +98,7 @@ This result shows that over-provisioning the Apache Spark cluster by simply addi
 % Intro
 The impact of \hyperlink{abbr:gpu}{GPU}-accelerated Apache Spark worker nodes for both benchmarks have been evaluated using 2 configurations: Using one and two \hyperlink{abbr:gpu}{GPU}-accelerated worker nodes respectively.
 %
-The GPU-experiment performance data for the classification benchmark is available in \Fig{fig:appendix_eval_classification_gpu1}, and \Fig{fig:appendix_eval_classification_gpu2}., for the regression benchmark at \Fig{fig:appendix_eval_regression_gpu1}, and \Fig{fig:appendix_eval_regression_gpu2}.
+The performance data of this experiment is available at \Sec{sec:appendix_eval}.
 
 
 % vs figure
@@ -146,6 +146,7 @@ Number of workers & \multicolumn{1}{c}{CPU} & \multicolumn{1}{c|}{GPU} & \multic
 \caption{Mean execution time of all CPU-only and GPU-accelerated experiments for both benchmarks}
 \label{table:07_gpu_overall_results}
 \end{table}
+\newpage
 
 
 % ===========================================
@@ -155,7 +156,7 @@ Number of workers & \multicolumn{1}{c}{CPU} & \multicolumn{1}{c|}{GPU} & \multic
 % Intro
 To test the impact of the \textit{Auto-Scaler} while training machine learning applications, both benchmarks have been tested with different \textit{Auto-Scaler} configurations.
 % Performance metric
-The performance data for the classification benchmark is available in \Fig{fig:appendix_eval_classification_auto-scaler}, and for the regression benchmark in \Fig{fig:appendix_eval_regression_auto-scaler}.
+The performance data of both benchmarks is available at \Sec{sec:appendix_eval}.
 
 
 \subsection{Auto-Scaler Benchmark Configurations}
@@ -193,7 +194,7 @@ Maximum worker nodes    & 15             & 10         \\ \bottomrule
 \label{table:07_auto-scaler_config_parameter}
 \end{table}
 
-\newpage
+
 \subsection{Execution Time Evaluation}
 % Figure
 \Fig{fig:07_auto-scaler_results} illustrates the results of the \textit{Auto-Scaler} experiment. The mean execution time of 2 \hyperlink{abbr:cpu}{CPU}-only worker nodes is plotted against the mean execution with the \textit{Auto-Scaler} enabled.

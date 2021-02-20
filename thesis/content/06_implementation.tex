@@ -1,7 +1,7 @@
 \chapter{Implementation}
 \label{chap:06_implementation}
 
-This chapter explains the implementation process of the conceptual detail introduced in \Chap{chap:05_design}.
+This chapter explains the implementation details of the conceptual design introduced in \Chap{chap:05_design}.
 
 
 % ===========================================
@@ -240,7 +240,7 @@ The \textit{Auto-Scaler} runs as a background service that periodically performs
 It can be configured with a configuration in the \hyperlink{abbr:yaml}{YAML} file format. The path to the configuration file has to be set as an argument.
 % Start the sclaer
 The \textit{Auto-Scaler} can be started with the following command:
-\begin{lstlisting}[label=lst:06_auto-scaler_start, caption=Auto-Scaler start command, language=sh, numbers=none]
+\begin{lstlisting}[label=lst:06_auto-scaler_start, caption=\textit{Auto-Scaler} start command, language=sh, numbers=none]
 $ python3 run.py --config=config.yml
 \end{lstlisting}
 
@@ -364,7 +364,7 @@ A Docker image is needed to deploy the \textit{Auto-Scaler} as a Docker service 
 \Lst{lst:06_auto-scaler_dockerfile} shows the \textit{Auto-Scaler} Dockerfile implementation. The \texttt{python:3} Docker image is set as the parent image. 
 Next, the \textit{Auto-Scaler} source code is copied to the image. Then, a Python virtual environment is created with all dependencies installed.
 As entrypoint, the Docker image starts the \textit{Auto-Scaler} process.
-\begin{lstlisting}[label=lst:06_auto-scaler_dockerfile, caption=Auto-Scaler Dockerfile]
+\begin{lstlisting}[label=lst:06_auto-scaler_dockerfile, caption=\textit{Auto-Scaler} Dockerfile]
 FROM python:3
  
 WORKDIR /usr/src/auto_scaler
@@ -383,9 +383,14 @@ ENTRYPOINT [ "python3", "src/run.py" ]
 % Building the Docker image
 To build the \textit{Auto-Scaler} Docker image, a build script was implemented. \Lst{lst:06_auto-scaler_build} shows the build script implementation.
 The script takes the version of the \textit{Auto-Scaler} module as an input attribute. It uses the version to tag the Docker image.
-It builds two versions of the \textit{Auto-Scaler}, one tagged with the current \textit{Auto-Scaler} version (e.g., \textit{auto-scaler:1.0}) and one tagged as \textit{latest} (e.g., \textit{auto-scaler:latest}).
+It builds two versions of the \textit{Auto-Scaler}, one tagged with the current \textit{Auto-Scaler} version (e.g., \textit{auto-scaler:1.0}) and one tagged as \textit{latest} (e.g., \textit{auto-scaler:latest}). 
+% How to use the script
+The script can be used from the command line as demonstrated in \Lst{lst:06_auto-scaler_build-use}.
+\begin{lstlisting}[label=lst:06_auto-scaler_build-use, caption=\textit{Auto-Scaler} build-script usage, language=sh, numbers=none]
+$ sh build-image.sh "1.0"
+\end{lstlisting}
 \newpage
-\begin{lstlisting}[label=lst:06_auto-scaler_build, caption=Auto-Scaler build script, language=sh]
+\begin{lstlisting}[label=lst:06_auto-scaler_build, caption=\textit{Auto-Scaler} build script, language=sh]
 #!/bin/bash
  
 if [ $# -ge 1 ]
@@ -411,8 +416,7 @@ if [ $# -ge 1 ]
       exit 1
 fi
 \end{lstlisting}
-% How to use the script
-The script can be used from the command line as \texttt{sh build-image.sh "1.0"}.
+
 
 
 % ===========================================

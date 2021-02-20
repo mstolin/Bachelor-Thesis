@@ -99,15 +99,6 @@ Lastly, in the Execute phase, the \textit{Auto-Scaler} scales the Apache Spark w
 \label{sec:05_spark}
 % Short intro
 The Apache Spark cluster is the computing unit of the environment. It is responsible for distributing the workload of training machine learning models.
-% Figure
-\begin{figure}[h]
-\centering
-\includegraphics[scale=1]{images/05_conceptual_design/apache_spark/apache_spark_cluster}
-\caption{Apache Spark cluster architecture}
-\label{fig:05_spark_arch}
-\end{figure}
-% FIgure intro
-\Fig{fig:05_spark_arch} illustrates the architecture of the Apache Spark cluster. It consists of a master node, multiple worker nodes, and spark-submit nodes.
 
 \begin{itemize}
 % Master
@@ -118,6 +109,15 @@ The Apache Spark cluster is the computing unit of the environment. It is respons
 
 \item Spark-Submit: A \textit{spark-submit} node is deployed whenever an application is submitted to the cluster.
 \end{itemize}
+% Figure
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{images/05_conceptual_design/apache_spark/apache_spark_cluster}
+\caption{Apache Spark cluster architecture}
+\label{fig:05_spark_arch}
+\end{figure}
+% FIgure intro
+\Fig{fig:05_spark_arch} illustrates the architecture of the Apache Spark cluster. It consists of a master node, multiple worker nodes, and spark-submit nodes.
 % Standalone mode
 The cluster is deployed in standalone mode (\Sec{subsec:04_spark_standalone}). Because Docker Swarm is used as the orchestration tool that controls nodes' state, there is no need to use another orchestration tool like Apache Mesos or Kubernetes as the cluster manager.
 % Docker
