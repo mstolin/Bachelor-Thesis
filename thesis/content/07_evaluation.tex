@@ -14,9 +14,9 @@ As for the implementation, 2 \hyperlink{abbr:gpu}{GPUs} have been available for 
 % ===========================================
 \section{Experiments}
 % Intro
-The performance of the computing environment is measured on two widely used machine learning algorithms.
+The performance of the computing environment is measured on two widely used Machine Learning algorithms.
 % Explain
-In both experiments, a machine learning model is trained on the computing environment using Apache Spark. Furthermore, each benchmark is evaluated using three different configurations:
+In both experiments, a Machine Learning model is trained on the computing environment using Apache Spark. Furthermore, each benchmark is evaluated using three different configurations:
 \begin{enumerate}
 \item Using a static number of \hyperlink{abbr:cpu}{CPU}-only Apache Spark workers (\Sec{sec:07_static})
 \item Using a static number of \hyperlink{abbr:gpu}{GPU}-accelerated Apache Spark workers (\Sec{sec:07_gpu})
@@ -47,13 +47,13 @@ The source code and the dataset used in these experiments are available on Githu
 The repository provides a \textit{mortgage} and a \textit{taxi} application. Both applications provide a \hyperlink{abbr:cpu}{CPU} and a \hyperlink{abbr:gpu}{GPU} configuration.
 
 % supervised
-Classification and regression algorithms are supervised machine learning algorithms.
+Classification and regression algorithms are supervised Machine Learning algorithms.
 % Classification
 The classification algorithm identifies the category of a label.
 % Regression
 A regression algorithm predicts a continuous numeric value.
 % whats supervised
-The goal of supervised machine learning algorithms is to train a model by finding patterns in labeled data. The trained model is then used to predict labels on newly observed data based on the learned labels \cite{Mcdonald2020SparkRapids}.
+The goal of supervised Machine Learning algorithms is to train a model by finding patterns in labeled data. The trained model is then used to predict labels on newly observed data based on the learned labels \cite{Mcdonald2020SparkRapids}.
 
 
 % ===========================================
@@ -154,7 +154,7 @@ Number of workers & \multicolumn{1}{c}{CPU} & \multicolumn{1}{c|}{GPU} & \multic
 \section{Auto-Scaler}
 \label{sec:07_auto-scaler}
 % Intro
-To test the impact of the \textit{Auto-Scaler} while training machine learning applications, both benchmarks have been tested with different \textit{Auto-Scaler} configurations.
+To test the impact of the \textit{Auto-Scaler} while training Machine Learning applications, both benchmarks have been tested with different \textit{Auto-Scaler} configurations.
 % Performance metric
 The performance data of both benchmarks is available at \Sec{sec:appendix_eval}.
 
@@ -174,7 +174,7 @@ The \textit{Auto-Scaler} configuration parameters for each benchmark are shown i
 % Max worker
 To prevent cluster over-provisioning, the maximum number of worker nodes for the classification benchmark is set to 15, and 10 for the regression benchmark respectively.
 % recurrence
-\Fig{fig:07_auto-scaler_iterations_results} shows all 10 iterations of the \hyperlink{abbr:cpu}{CPU}-only experiment for both benchmarks. It shows that, while the machine learning model is trained, only 2 performance spikes occurred at the beginning and at the end during a short period. To scale while these performance spikes occur, the recurrence factor is set to 1. Additionally, the maximum \hyperlink{abbr:cpu}{CPU} utilization for both benchmarks is set according to the maximum \hyperlink{abbr:cpu}{CPU} utilization during the performance spikes.
+\Fig{fig:07_auto-scaler_iterations_results} shows all 10 iterations of the \hyperlink{abbr:cpu}{CPU}-only experiment for both benchmarks. It shows that, while the Machine Learning model is trained, only 2 performance spikes occurred at the beginning and at the end during a short period. To scale while these performance spikes occur, the recurrence factor is set to 1. Additionally, the maximum \hyperlink{abbr:cpu}{CPU} utilization for both benchmarks is set according to the maximum \hyperlink{abbr:cpu}{CPU} utilization during the performance spikes.
 % The configurations
 \begin{table}[ht]
 \centering
@@ -251,4 +251,4 @@ The results of the first experiment show that over-provisioning the Apache Spark
 %  Second
 The second experiment shows that \hyperlink{abbr:gpu}{GPU}-accelerated worker nodes significantly outperformed \hyperlink{abbr:cpu}{CPU}-only worker nodes. However, \hyperlink{abbr:cpu}{CPU}-only workers achieved a better performance in the classification benchmark than \hyperlink{abbr:gpu}{GPU}-accelerated workers with 5x the amount.
 % Third
-For the last experiment, the results show that enabling the \textit{Auto-Scaler} during the training of machine learning models increases the execution time compared with a fixed number of worker nodes.
+For the last experiment, the results show that enabling the \textit{Auto-Scaler} during the training of Machine Learning models increases the execution time compared with a fixed number of worker nodes.

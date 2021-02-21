@@ -21,7 +21,7 @@ The following technologies are used to create the conceptual design of the imple
 \item GitLab: The source code repository is hosted on the GitLab platform. Furthermore, the automated deployment pipeline is designed using the CI/CD feature of GitLab. Therefore, using GitLab fulfils the version control and build server requirements mentioned in \Sec{sec:02_depl-pipeline_requirements}.
 
 % Spark
-\item Apache Spark: Apache Spark is used to distribute the workload of training machine learning applications across multiple workers. The goal is to scale the replicas of Apache Spark workers to increase the performance of the cluster.
+\item Apache Spark: Apache Spark is used to distribute the workload of training Machine Learning applications across multiple workers. The goal is to scale the replicas of Apache Spark workers to increase the performance of the cluster.
 
 % RAPIDS
 \item NVIDIA RAPIDS: In addition to scaling Apache Spark worker node replicas, the NVIDIA RAPIDS plugin suite is used to enable \hyperlink{abbr:gpu}{GPU} acceleration on the Apache Spark cluster. Enabling Apache Spark to leverage \hyperlink{abbr:gpu}{GPUs} increases the computational power as well.
@@ -98,7 +98,7 @@ Lastly, in the Execute phase, the \textit{Auto-Scaler} scales the Apache Spark w
 \section{Apache Spark Cluster}
 \label{sec:05_spark}
 % Short intro
-The Apache Spark cluster is the computing unit of the environment. It is responsible for distributing the workload of training machine learning models.
+The Apache Spark cluster is the computing unit of the environment. It is responsible for distributing the workload of training Machine Learning models.
 
 \begin{itemize}
 % Master
@@ -213,7 +213,7 @@ The \textit{Auto-Scaler} is designed as a reactive auto-scaler and uses a thresh
 % Prom API
 As illustrated in \Fig{fig:05_am_concept}, the \textit{Auto-Scaler} fetches performance metrics from the Prometheus \hyperlink{abbr:http}{HTTP} \hyperlink{abbr:api}{API}.
 % Phases
-After it received the performance metrics, the \textit{Auto-Scaler} analyses the metrics, plans scaling-actions to adjust the number of worker replicas, and sends instructions to the Docker engine.
+After it received the performance metrics, the \textit{Auto-Scaler} analyses the metrics, plans scaling actions to adjust the number of worker replicas, and sends instructions to the Docker engine.
 
 
 \subsubsection{MAPE Phases}
@@ -355,7 +355,7 @@ Python is an interpreted language and does not need to be compiled for execution
 
 \subsection{Test Stage}
 % short intro
-Before training the machine learning model, the application source must be validated by a series of tests, which can include:
+Before training the Machine Learning model, the application source must be validated by a series of tests, which can include:
 % Tests
 \begin{itemize}
 \item Unit tests

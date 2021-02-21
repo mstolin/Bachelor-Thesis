@@ -295,7 +295,7 @@ worker:
 
 \subsection{Scaling Apache Worker Nodes}
 % Periodically performing
-The \textit{Auto-Scaler} performs periodically. Each period fetches performance metrics, analyses the metrics, plans scaling-actions, and executes them if necessary.
+The \textit{Auto-Scaler} performs periodically. Each period fetches performance metrics, analyses the metrics, plans scaling actions, and executes them if necessary.
 % AP jobs
 It uses the \textit{APScheduler}\footnote{\url{https://pypi.org/project/APScheduler/} (Accessed: 2021-01-26)} Python library that provides an \hyperlink{abbr:api}{API} to schedule jobs periodically.
 
@@ -307,7 +307,7 @@ The algorithm uses the utilization given by a performance metric, the lower- and
 % utilization
 The utilization is received from the Prometheus \hyperlink{abbr:http}{HTTP} \hyperlink{abbr:api}{API}. Furthermore, the \textit{Auto-Scaler} fetches the all given performance metrics in each iteration. It calculates the heat value for each single performance metric.
 % the limit
-If a performance metrics' heat value is equal to the recurrence factor $n$ ($+n$ or $-n$), a scaling-action is executed.
+If a performance metrics' heat value is equal to the recurrence factor $n$ ($+n$ or $-n$), a scaling action is executed.
 % cooldown
 This phase is not performed if a cooldown period of a previous iteration is active.
 

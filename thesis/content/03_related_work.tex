@@ -35,8 +35,8 @@ To make resources available and return the application to its normal state may t
 Applications with more resources available than needed will lead to unnecessary costs for the client.
 % 3
 \item Oscillation:
-If scaling-actions are executed too quickly before the impact is available, a combination of over-provisioned and under-provisioned applications can occur.
-A cooldown period after a scaling-action allows preventing oscillation.
+If scaling actions are executed too quickly before the impact is available, a combination of over-provisioned and under-provisioned applications can occur.
+A cooldown period after a scaling action allows preventing oscillation.
 \end{enumerate}
 % MAPE
 To prevent the mentioned problems from occurring, the authors introduced and explained the \hyperlink{abbr:mape}{MAPE} architecture (cf. \Sec{sec:02_ac}).
@@ -166,7 +166,7 @@ To manage \hyperlink{abbr:gpu}{GPU} memory on shared \hyperlink{abbr:gpu}{GPUs},
 When memory contention happens, the library will ensure that SparkGPU will stop scheduling new tasks to the Apache Spark cluster.
 
 % End
-SparkGPU accomplished to improve the performance of machine learning algorithms up to 16.13x and \hyperlink{abbr:sql}{SQL} query execution performance up to 4.83x.
+SparkGPU accomplished to improve the performance of Machine Learning algorithms up to 16.13x and \hyperlink{abbr:sql}{SQL} query execution performance up to 4.83x.
 
 
 % ===========================================
