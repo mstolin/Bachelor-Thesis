@@ -131,7 +131,7 @@
 \contentsline {paragraph}{}{58}{paragraph*.84}% 
 \contentsline {section}{\numberline {6.2}Computing Environment}{58}{section.6.2}% 
 \contentsline {subsection}{\numberline {6.2.1}Deployment of the Computing Environment}{59}{subsection.6.2.1}% 
-\contentsline {subsection}{\numberline {6.2.2}Autonomic Manager}{60}{subsection.6.2.2}% 
+\contentsline {subsection}{\numberline {6.2.2}Autonomic Manager}{59}{subsection.6.2.2}% 
 \contentsline {subsubsection}{Prometheus Target Configuration}{60}{subsubsection*.86}% 
 \contentsline {subsubsection}{Prometheus Recording Rules Configuration}{61}{subsubsection*.87}% 
 \contentsline {section}{\numberline {6.3}Auto-Scaler}{62}{section.6.3}% 
@@ -151,7 +151,7 @@
 \contentsline {subsubsection}{Custom Submit Script}{67}{subsubsection*.93}% 
 \contentsline {subsubsection}{Environment Variables}{68}{subsubsection*.94}% 
 \contentsline {subsubsection}{Executing an Application with the spark-submit Image}{68}{subsubsection*.96}% 
-\contentsline {subsection}{\numberline {6.4.5}Building the Apache Spark Docker Images}{69}{subsection.6.4.5}% 
+\contentsline {subsection}{\numberline {6.4.5}Building Apache Spark Docker Images}{69}{subsection.6.4.5}% 
 \contentsline {section}{\numberline {6.5}GitLab CI/CD Pipeline for Automated Deployment of Machine Learning Applications}{69}{section.6.5}% 
 \contentsline {subsection}{\numberline {6.5.1}GitLab Runner}{70}{subsection.6.5.1}% 
 \contentsline {subsubsection}{Create a GitLab Runner Instance}{70}{subsubsection*.97}% 
