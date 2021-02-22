@@ -2,9 +2,37 @@
 \label{chap:02_foundation}
 
 
-This chapter provides the theoretical foundation to understand concepts that are used in this thesis. First, the concept of Scalability is described. Second, the theory of deployment pipelines is explained. Third, the concept of autonomic computing is introduced. Fourth, the theory of measuring system performance is explained. Lastly, the concept of monitoring is described.
+This chapter provides the theoretical foundation to understand concepts that are used in this thesis. It explains the concept of distributed computing, scalability, deployment pipelines, autonomic computing, the theory of measuring system performance, and monitoring.
 
 
+% ===========================================
+% ===========================================
+\section{Distributed Computing}
+% Short intro to distributed computing
+Distributed computing is achieved by forming a cluster of multiple machines with commodity hardware to utilize their resources to solve highly complex problems \cite{Ganelin2016Spark}.
+% Parallel processing
+To process Big Data in parallel, it follows a divide-and-conquer principle, where a larger task is divided into smaller sub-tasks that run concurrently \cite{Khattak2016BigData}.
+% Intro to data and pask parallelism
+In general, one of the two following approaches can be used to achieve parallel processing \cite{Khattak2016BigData}:
+\begin{itemize}
+\item Task Parallelism:
+This approach refers to enabling parallelization by dividing a task into multiple sub-tasks.
+% Each sub-tasks.
+Each sub-task performs a different algorithm with its copy of the same data in parallel.
+% The results
+The result is created by joining the output of all sub-tasks together \cite{Khattak2016BigData}.
+
+\item Data Parallelism:
+This approach is achieved by dividing a dataset into a series of smaller sub-datasets to process each sub-dataset in parallel.
+% Spread
+The sub-datasets are processed using the same algorithm across different nodes.
+%
+The final output is joined together from each sub-dataset \cite{Khattak2016BigData}.
+\end{itemize}
+
+
+% ===========================================
+% ===========================================
 \section{Scalability}
 \label{sec:02_foundations_scalability}
 % What is scalability

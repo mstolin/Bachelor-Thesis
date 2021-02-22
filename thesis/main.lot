@@ -5,12 +5,12 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {\relax 6.1}{\ignorespaces The name and Docker image of each Docker service in the computing environment\relax }}{60}{table.caption.85}% 
-\contentsline {table}{\numberline {\relax 6.2}{\ignorespaces \textit {spark-submit} image environment variables\relax }}{68}{table.caption.95}% 
+\contentsline {table}{\numberline {\relax 6.1}{\ignorespaces The name and Docker image of each Docker service in the computing environment\relax }}{58}{table.caption.85}% 
+\contentsline {table}{\numberline {\relax 6.2}{\ignorespaces \textit {spark-submit} image environment variables\relax }}{66}{table.caption.95}% 
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {\relax 7.1}{\ignorespaces Mean execution time of all CPU-only and GPU-accelerated experiments for both benchmarks\relax }}{79}{table.caption.108}% 
-\contentsline {table}{\numberline {\relax 7.2}{\ignorespaces \textit {Auto-Scaler} configuration parameters for both benchmarks\relax }}{81}{table.caption.110}% 
-\contentsline {table}{\numberline {\relax 7.3}{\ignorespaces Results of each iteration during the \textit {Auto-Scaler} experiment for both benchmarks\relax }}{83}{table.caption.113}% 
+\contentsline {table}{\numberline {\relax 7.1}{\ignorespaces Mean execution time of all CPU-only and GPU-accelerated experiments for both benchmarks\relax }}{77}{table.caption.108}% 
+\contentsline {table}{\numberline {\relax 7.2}{\ignorespaces \textit {Auto-Scaler} configuration parameters for both benchmarks\relax }}{79}{table.caption.110}% 
+\contentsline {table}{\numberline {\relax 7.3}{\ignorespaces Results of each iteration during the \textit {Auto-Scaler} experiment for both benchmarks\relax }}{81}{table.caption.113}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
