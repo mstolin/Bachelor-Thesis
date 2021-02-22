@@ -129,7 +129,7 @@
 \contentsline {paragraph}{}{56}{paragraph*.84}% 
 \contentsline {section}{\numberline {6.2}Computing Environment}{56}{section.6.2}% 
 \contentsline {subsection}{\numberline {6.2.1}Deployment of the Computing Environment}{57}{subsection.6.2.1}% 
-\contentsline {subsection}{\numberline {6.2.2}Autonomic Manager}{57}{subsection.6.2.2}% 
+\contentsline {subsection}{\numberline {6.2.2}Autonomic Manager}{58}{subsection.6.2.2}% 
 \contentsline {subsubsection}{Prometheus Target Configuration}{58}{subsubsection*.86}% 
 \contentsline {subsubsection}{Prometheus Recording Rules Configuration}{59}{subsubsection*.87}% 
 \contentsline {section}{\numberline {6.3}Auto-Scaler}{60}{section.6.3}% 

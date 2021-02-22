@@ -234,6 +234,7 @@ In an autonomic computing environment, all components have to communicate with e
 The core element of the autonomic architecture is the control-loop. \Fig{fig:ac_control_loop} illustrates the concept of a control-loop. The control-loop collects details about resources through monitoring and makes decisions based on analysis of the collected details to adjust the system if needed \cite{Murch2004Autonomic}.
 
 
+\newpage
 \subsection{Managed Resources}
 \label{subsec:02_ac_resources}
 % Figure
@@ -364,9 +365,9 @@ The approach, how the monitoring systems gather metrics to store in the database
 % There are push and pull based systems
 Push- and pull-based systems are the two primary approaches to gather metrics from services.
 % About push
-Push-based monitoring systems expect services to push metrics to their storage.
+Push-based monitoring systems expect services to push metrics to their storage (illustrated in \Fig{fig:mon_push-based}).
 % About pull
-Pull-based monitoring systems scrape metrics from all defined targets. Targets do not know about the monitoring system's existence and only need to collect and expose metrics \cite{Farcic2017Toolkit21}.
+Pull-based monitoring systems scrape metrics from all defined targets (illustrated in \Fig{fig:mon_pull-based}). Targets do not know about the monitoring system's existence and only need to collect and expose metrics \cite{Farcic2017Toolkit21}.
 
 
 % When to choose what (Discovery)
