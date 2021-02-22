@@ -5,7 +5,7 @@
 \contentsline {section}{\numberline {1.2}Problem Statement}{2}{section.1.2}% 
 \contentsline {section}{\numberline {1.3}Research Objective and Research Questions}{3}{section.1.3}% 
 \contentsline {paragraph}{}{3}{paragraph*.10}% 
-\contentsline {paragraph}{}{4}{paragraph*.11}% 
+\contentsline {paragraph}{}{3}{paragraph*.11}% 
 \contentsline {paragraph}{}{4}{paragraph*.12}% 
 \contentsline {section}{\numberline {1.4}Thesis Structure}{4}{section.1.4}% 
 \contentsline {chapter}{\numberline {2}Theoretical Foundation}{5}{chapter.2}% 

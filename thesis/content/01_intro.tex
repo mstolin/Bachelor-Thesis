@@ -37,7 +37,7 @@ To handle the complexity of Big Data applications, from executing Machine Learni
 % What about GPUs
 Graphical Process Units (\hyperlink{abbr:gpu}{GPUs}) have become first class citizens in modern data centers to perform computationally complex applications with better performance. A \hyperlink{abbr:gpu}{GPU} architecture consists of many smaller and more efficient cores, which are suitable for data-parallel processing (handling multiple tasks simultaneously) \cite{Yuan2016SparkGPU}. In general, \hyperlink{abbr:gpu}{GPUs} process data at a much faster rate than \hyperlink{abbr:cpu}{CPUs} are capable.
 % How can apps be accelerated with GPUs
-Apache Spark applications have a data-parallel nature. Therefore, enabling Apache Spark to leverage \hyperlink{abbr:gpu}{GPUs} to perform complex ML algorithms on big datasets positively impacts the performance \cite{Yuan2016SparkGPU}.
+Apache Spark applications have a data-parallel nature. Therefore, enabling Apache Spark to leverage \hyperlink{abbr:gpu}{GPUs} to perform complex \hyperlink{abbr:ml}{ML} algorithms on big datasets positively impacts the performance \cite{Yuan2016SparkGPU}.
 
 
 % Short intro to auto-scaling
@@ -63,19 +63,19 @@ This thesis provides a solution to the following three problem statements:
 
 \begin{enumerate}
 % Problem 1
-\item Developers at the Fraunhofer IPA perform \hyperlink{abbr:ml}{ML} model training on several Docker containers running on a DGX with limited usage of available \hyperlink{abbr:gpu}{GPUs}.
-% Add Apache Spark
-Apache Spark can be used to optimize the model training by distributing the workload.
-% GPU
-Additionally, the Apache Cluster should be aware of available \hyperlink{abbr:gpu}{GPUs} to accelerate the model training process.
+\item
+The performance of Apache Spark can be optimized using \hyperlink{abbr:gpu}{GPUs}.
+However, Apache Spark has no built-in support to enable \hyperlink{abbr:gpu}{GPU}-acceleration.
 
- % Problem 2
-\item To enable \hyperlink{abbr:gpu}{GPU} acceleration for Apache Spark alone is not sufficient to increase the performance.
-At some point, an Apache Spark Worker can reach the limit of its available computing resources.
-If this point is reached, the environment should automatically scale the number of Apache Spark worker to distribute the workload.
+% Problem 2
+\item
+To enable \hyperlink{abbr:gpu}{GPU} acceleration for Apache Spark alone is not sufficient to increase the performance.
+At some point, an Apache Spark cluster can reach the limit of its available computing resources.
+If this point is reached, the environment should automatically scale the number of Apache Spark workers to increase the computing capacity.
 
 % Problem 3
-\item To perform an Apache Spark application to the cluster, developers must submit the application manually.
+\item
+To execute an Apache Spark application on the cluster, developers must submit the application manually.
 With an automated deployment pipeline, developers can submit an application by pushing changes to the code base.
 Additionally, a deployment pipeline will contribute to the reliability of executing applications and reduces the development time.
 \end{enumerate}
@@ -84,12 +84,10 @@ Additionally, a deployment pipeline will contribute to the reliability of execut
 % ===========================================
 % ===========================================
 \section{Research Objective and Research Questions}
-% Fraunhofer
-The thesis is implemented at the Center for Cyber Cognitive Intelligence at the Fraunhofer IPA\footnote{Fraunhofer Institute for Manufacturing Engineering and Automation IPA - \url{https://www.ipa.fraunhofer.de/} (Accessed: 2021-01-07)}.
-% CPU GPU
-At the IPA, \hyperlink{abbr:cpu}{CPU} and \hyperlink{abbr:gpu}{GPU} resources have only been combined to a limited extent in order to optimize Machine Learning model training.
-% Prototype
-Therefore, an Apache Spark cluster prototype is created, which automatically allocates resources depending on the load and thus scales itself.
+% 1.
+\hyperlink{abbr:cpu}{CPUs} and \hyperlink{abbr:gpu}{GPU} resources have only been combined to a limited extent in order to optimize Machine Learning model training. Therefore, a Spark cluster prototype is created, which automatically allocates resources depending on the load and thus scales itself. Furthermore, the Apache Spark cluster can leverage \hyperlink{abbr:gpu}{GPUs} in order to increase its performance.
+% 2.
+Additionally, the Machine Learning model training process is further simplified with an automated deployment pipeline.
 % RQs
 This results in the following research questions:
 %RQs
